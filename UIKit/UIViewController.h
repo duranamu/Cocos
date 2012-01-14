@@ -31,7 +31,7 @@ public:
 	{
 		view = new UIView();
 		followView = new UIView();
-		trackerManager =  NITrackerManager::defaultTrackerManager();m
+		trackerManager =  NITrackerManager::defaultTrackerManager();
 
 		torsoTracker =	NITracker::trackerWithTarget_action_joint(this,ccSelector   (UIViewController::predo_controller_torsoData),XN_SKEL_TORSO);
 
