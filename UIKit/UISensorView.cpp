@@ -18,19 +18,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef _CCFOUNDATION_H
-#define _CCFOUNDATION_H
-#include <cocos2d.h>
-#include <libxml\xpath.h>
-#include <libxml\parser.h>
-#define forCCArray( __array__)  do { CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
-#define eachCCObject(__VAR__ ,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
-#define fetchCCObject(__VAR__ ,__INST__)  CCWrapper* __wrapper__ = (CCWrapper*)__object__; \
-	__VAR__ __INST__ =  __wrapper__->data.__VAR__##Val
-#define synthesizecc(varType, varName)  CC_SYNTHESIZE(varType, varName, varName)  
-#define forCCEnd  }}while(0);
-#define CCS(__STR__) new CCString(__STR__)
-#define nil NULL
-#define ccSelector(__FUNC__) (SEL_CallFuncND)(&__FUNC__)
-#define ccCast(__VAR__,__INST__) __VAR__ c##__INST__ = (__VAR__) __INST__;
-#endif
+
+#include "UISensorView.h"
+UISensorView::UISensorView()
+{
+	this->device =  NIDevice::sharedDevice();
+	
+	UIImage* image =  
+		UIImage::imageWithData_format_pixel_size(
+		device->rawRGBData(),CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,CCSizeMake(640,480));
+	this->sprite = CCSprite::spriteWithTexture(image);
+	this->sprite->setPosition(ccp(320,240));
+}
+void 
+	UISensorView::updateFromDevice()
+{
+	this->device->update();
+	this->sprite->getTexture()->release();
+	CCTextureCache::sharedTextureCache()->removeUnusedTextures();
+	UIImage* image =  
+		UIImage::imageWithData_format_pixel_size(
+		device->rawRGBData(),CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,CCSizeMake(640,480));
+	this->sprite->setTexture(image);
+}

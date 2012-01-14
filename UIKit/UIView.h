@@ -18,19 +18,58 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef _CCFOUNDATION_H
-#define _CCFOUNDATION_H
-#include <cocos2d.h>
-#include <libxml\xpath.h>
-#include <libxml\parser.h>
-#define forCCArray( __array__)  do { CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
-#define eachCCObject(__VAR__ ,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
-#define fetchCCObject(__VAR__ ,__INST__)  CCWrapper* __wrapper__ = (CCWrapper*)__object__; \
-	__VAR__ __INST__ =  __wrapper__->data.__VAR__##Val
-#define synthesizecc(varType, varName)  CC_SYNTHESIZE(varType, varName, varName)  
-#define forCCEnd  }}while(0);
-#define CCS(__STR__) new CCString(__STR__)
-#define nil NULL
-#define ccSelector(__FUNC__) (SEL_CallFuncND)(&__FUNC__)
-#define ccCast(__VAR__,__INST__) __VAR__ c##__INST__ = (__VAR__) __INST__;
+#ifndef UIVIEW_H
+#define UIVIEW_H
+#include "..\Cocos\Cocos.h"
+#include "UIResponder.h"
+class UIView :public UIResponder
+{
+public:
+	CCArray* membersheet;
+	CCSprite* sprite;
+	UIView()
+	{
+		membersheet =  CCArray::arrayWithCapacity(8);
+		membersheet->retain();
+	}
+	~UIView()
+	{
+//		membersheet->release();
+	}
+UIView*
+	anyView()
+	{
+		if(membersheet)
+		{
+			return (UIView*) membersheet->objectAtIndex(0);
+		}
+		return nil;
+	}
+void
+	addSubView(UIView* view)
+	{
+		membersheet->addObject(view);
+	}
+virtual void 
+	viewDidRender(CCLayer* hostLayer);
+virtual CCSprite*
+	getSprite()
+	{
+		return sprite;
+	}
+virtual void 
+	setSprite(CCSprite* i_sprite)
+	{
+		sprite = i_sprite;
+	}
+ virtual void 
+	 reloadData(CCArray* toShow) {};
+ void 
+	followPlayer(CCPoint3D*);
+ void 
+	touchesBegin_withEvent(CCSet* touches ,UIEvent* events) 
+ {
+	 
+ };
+};
 #endif

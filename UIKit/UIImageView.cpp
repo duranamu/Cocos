@@ -18,19 +18,51 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef _CCFOUNDATION_H
-#define _CCFOUNDATION_H
-#include <cocos2d.h>
-#include <libxml\xpath.h>
-#include <libxml\parser.h>
-#define forCCArray( __array__)  do { CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
-#define eachCCObject(__VAR__ ,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
-#define fetchCCObject(__VAR__ ,__INST__)  CCWrapper* __wrapper__ = (CCWrapper*)__object__; \
-	__VAR__ __INST__ =  __wrapper__->data.__VAR__##Val
-#define synthesizecc(varType, varName)  CC_SYNTHESIZE(varType, varName, varName)  
-#define forCCEnd  }}while(0);
-#define CCS(__STR__) new CCString(__STR__)
-#define nil NULL
-#define ccSelector(__FUNC__) (SEL_CallFuncND)(&__FUNC__)
-#define ccCast(__VAR__,__INST__) __VAR__ c##__INST__ = (__VAR__) __INST__;
-#endif
+#include "UIImageView.h"
+UIImageView*
+	UIImageView::viewWithImage(UIImage* image)
+{
+	UIImageView* pimageView = new UIImageView(image);
+
+	if(!pimageView)
+	{
+		CC_SAFE_DELETE(pimageView);
+	}
+
+	return pimageView;
+}
+UIImageView::UIImageView(UIImage* image)
+{
+	sprite = CCSprite::spriteWithTexture(image);
+};
+UIImageView*
+	UIImageView::viewWithTexture(CCTexture2D* image)
+{
+	UIImageView* pimageView = new UIImageView(image);
+
+	if(!pimageView)
+	{
+		CC_SAFE_DELETE(pimageView);
+	}
+
+	return pimageView;
+}
+UIImageView::UIImageView(CCTexture2D* image)
+{
+	sprite = CCSprite::spriteWithTexture(image);
+};
+UIImageView*	
+	UIImageView::viewWithFile(const char* path )
+{
+	UIImageView* pimageView = new UIImageView();
+
+	if(!pimageView)
+	{
+		CC_SAFE_DELETE(pimageView);
+	}else{
+		pimageView->sprite =CCSprite::spriteWithFile(path);
+		pimageView->sprite->retain();
+	}
+
+	return pimageView;
+}
