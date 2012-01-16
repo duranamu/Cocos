@@ -47,7 +47,7 @@ void
 	ccCast(CCPoint3D*,data);
 
 	m_torsox = cdata->x;
-	m_torsoy = cdata->y;
+	m_torsoy = 480 - cdata->y;
 
 	forCCArray(followView->membersheet)
 		eachCCObject(UIView*,m_view)
@@ -67,14 +67,14 @@ void
 
 	m_handz = cdata->z;
 	m_handx = cdata->x;
-	m_handy = cdata->y;
+	m_handy = 480 - cdata->y;
 
 	controller_righthandData(sender,cdata);
 
 	cdata->autorelease();
 } 
-bool 
-	UIViewController::clickableforTime_handz(cocos2d::ccTime time, float handz)
+UITouchPhase 
+	UIViewController::touchPhaseforTime_handz(cocos2d::ccTime time, float handz)
 {
 	float deltahandz ;
 	deltahandz = g_lasthandz - handz   ;
@@ -90,23 +90,44 @@ bool
 
 	if(velocity > 30 & acceleration < 2)
 	{		
-		return true;
+		if( menuTouchPhase ==  UITouchPhasePending)
+		{
+			return menuTouchPhase = UITouchPhaseBegin;
+		}else{
+			return menuTouchPhase;
+		}
+	}else if (velocity < -5 & acceleration < 3){
+		if(menuTouchPhase == UITouchPhaseMoved)
+		{
+			return menuTouchPhase = UITouchPhaseEnded;
+		}else{
+			return menuTouchPhase;
+		}
 	}else{
-		return false;
+		if( menuTouchPhase ==  UITouchPhasePending)
+		{
+			return UITouchPhasePending;
+		}else if (menuTouchPhase ==  UITouchPhaseBegin){
+			return menuTouchPhase =  UITouchPhaseMoved;
+		}else if (menuTouchPhase ==  UITouchPhaseMoved){
+			return menuTouchPhase ;
+		}else{
+			return menuTouchPhase =  UITouchPhasePending;
+		}
 	}
 }
 void
 	UIViewController::controllerDidUpdate(cocos2d::ccTime time)
 {
 	if(isRighthandTracked)
-	if(clickableforTime_handz(time,m_handz))
 	{
-		touchforHandpoint_view(m_handx - m_torsox ,m_handy - m_torsoy,view);
+		UITouchPhase ability; ;
+		if(ability = touchPhaseforTime_handz(time,m_handz))
+			touchforHandpoint_view(m_handx  ,  m_handy  , view , ability);
 	}
-
 }
-void 
-	UIViewController::touchforHandpoint_view(int hpx, int hpy,UIView* uiview)
+void
+	UIViewController::touchforHandpoint_view(int hpx, int hpy , UIView* uiview ,UITouchPhase phase)
 {
 	CCArray* toShow = uiview->membersheet;
 	forCCArray(toShow)
@@ -120,19 +141,47 @@ void
 	 {
 		 int spy = sp->getPosition().y;
 		 int offy = hpy - spy;
-		 if(abs(offy) < halfSpriteHeight)
+		 if(abs(offy) < halfSpriteHeight )
 		 {
 			 UITouch* occurredTouch;
-			 occurredTouch = UITouch::touchWithView_OnPhase(view,UITouchPhaseBegin);
+			 occurredTouch = UITouch::touchWithPhase(phase);
 			 occurredTouch->locationInView = ccp(hpx,hpy);
 			 CCSet* set = new CCSet();
 			 set->addObject(occurredTouch);
 			 UIEvent* events = new UIEvent(set);
-			 view->touchesBegin_withEvent(set,events);
-			// g_ViewController->touchesBegin_withEvent(set,events);
-			 return;
+			 if(phase == UITouchPhaseBegin)
+				 this->touchesBegin_withEvent(set,events);
+			 else if (phase == UITouchPhaseEnded )
+				 this->touchesEnded_withEvent(set,events);
+			 else if (phase == UITouchPhaseMoved )
+				 this->touchesMoved_withEvent(set,events);
+			 return ;
 		 }
 	 }
-	 sp->setScale(1.0f);
+	// sp->setScale(1.0f);
+	forCCEnd
+}
+void 
+	UIViewController::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
+{
+	forCCArray(this->view->membersheet)
+		eachCCObject(UIView*,uiview);
+		uiview->touchesBegin_withEvent(touches,events);
+	forCCEnd
+}
+void 
+	UIViewController::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+{
+	forCCArray(this->view->membersheet)
+		eachCCObject(UIView*,uiview);
+		uiview->touchesEnded_withEvent(touches,events);
+	forCCEnd
+}
+void 
+	UIViewController::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
+{
+	forCCArray(this->movableView->membersheet)
+		eachCCObject(UIView*,uiview);
+		uiview->touchesMoved_withEvent(touches,events);
 	forCCEnd
 }

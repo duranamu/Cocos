@@ -25,21 +25,26 @@ THE SOFTWARE.
 typedef enum UITableViewStyle{
 	UITableViewSylePlain = 0
 };
-class UITableViewCell :public UIView
+class UITableViewCell :public UIView 
 {
 	UITableViewStyle style ;
-	CCString* id;
+	CCString* uid;
 public :
 	CCLabelTTF* textLabel;
 	UITableViewCell();
 	static UITableViewCell* 
-		initWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* id);
+		initWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* uid);
+	static UITableViewCell* 
+		initWithStyle_reuseIdentifier_target_selector(UITableViewStyle ,CCString*,SelectorProtocol*,SEL_CallFuncND);
 	UITableViewCell* 
-		doInitWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* id);
-/*	virtual CCObject*	
-		autorelease();
-	*///virtual void 
-	//	setSprite(CCSprite* csprite);
-	
+		doInitWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* uid);	
+	void
+		touchesBegin_withEvent(CCSet* touches ,UIEvent* events);
+	void
+		touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
+	void
+		touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
+	UITableViewCell* 
+		doInitWithStyle_reuseIdentifier_target_selector(UITableViewStyle  ,CCString* ,SelectorProtocol*,SEL_CallFuncND);	
 };
 #endif

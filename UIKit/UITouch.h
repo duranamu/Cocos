@@ -20,7 +20,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UITOUCH_H
 #define UITOUCH_H
-#include "UIView.h"
+#include "..\Cocos\Cocos.h"
 typedef enum UITouchPhase{
 	UITouchPhasePending,
 	UITouchPhaseBegin ,
@@ -31,11 +31,10 @@ typedef enum UITouchPhase{
 class UITouch : public CCObject
 {
 public :
-	UIView * view;
 	CCPoint locationInView;
 	float timestamp ;
 	UITouchPhase phase;
 	
-	static UITouch* touchWithView_OnPhase(UIView* view , UITouchPhase phase);
+	static UITouch* touchWithPhase(UITouchPhase phase);
 };
 #endif

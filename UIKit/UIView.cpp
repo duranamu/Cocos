@@ -27,5 +27,50 @@ void
 void 
 	UIView::followPlayer(CCPoint3D* data)
 {
-	sprite->setPosition(ccp(data->x,480-data->y));
+	sprite->setPosition(ccp(data->x,480 - data->y));
+}
+bool 
+	UIView::triggerableforTouch(UITouch* touch)
+{
+	if(!sprite->getParent())
+	{
+	 int touchx = touch->locationInView.x ;
+	 int touchy = touch->locationInView.y;
+	 int spritex =  sprite->getPosition().x ;
+	 int offx = touchx - spritex;
+	 int halfSpriteWidth = sprite->getTexture()->getPixelsWide()/2;
+	 int halfSpriteHeight = sprite->getTexture()->getPixelsHigh()/2;
+	 if(abs(offx) < halfSpriteWidth)
+	 {
+		 int spritey = sprite->getPosition().y;
+		 int offy = touchy - spritey;
+		 if(abs(offy) < halfSpriteHeight )
+		 {
+			 return true;
+		 }
+	 }
+	return false;
+	}else{
+		return triggerableforTouch_parentSprite(touch,(CCSprite*)sprite->getParent());
+	}
+}
+bool
+	UIView::triggerableforTouch_parentSprite(UITouch* touch , CCSprite* parent)
+{
+	int touchx = touch->locationInView.x  ;
+	 int touchy = touch->locationInView.y;
+	 int spritex =  sprite->getPosition().x + parent->getPosition().x;
+	 int offx = touchx - spritex;
+	 int halfSpriteWidth = sprite->getTexture()->getPixelsWide()/2;
+	 int halfSpriteHeight = sprite->getTexture()->getPixelsHigh()/2;
+	 if(abs(offx) < halfSpriteWidth)
+	 {
+		 int spritey = sprite->getPosition().y + parent->getPosition().y;
+		 int offy = touchy - spritey;
+		 if(abs(offy) < halfSpriteHeight )
+		 {
+			 return true;
+		 }
+	 }
+	return false;
 }

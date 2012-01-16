@@ -24,6 +24,10 @@ THE SOFTWARE.
 #include "UIView.h"
 #include "UIResponder.h"
 #include "NIKit\NIKit.h"
+#ifndef TOUCH_FUNC
+#define TOUCH_FUNC
+
+#endif
 class UIViewController :public CCNode ,UIResponder
 {
 public:
@@ -31,6 +35,7 @@ public:
 	{
 		view = new UIView();
 		followView = new UIView();
+		movableView = new UIView();
 		trackerManager =  NITrackerManager::defaultTrackerManager();
 
 		torsoTracker =	NITracker::trackerWithTarget_action_joint(this,ccSelector   (UIViewController::predo_controller_torsoData),XN_SKEL_TORSO);
@@ -41,6 +46,7 @@ public:
 		trackerManager->addTracker(righthandTracker);
 
 		isRighthandTracked = false;
+		menuTouchPhase = UITouchPhasePending;
 	}
 void 
 	viewDidLoad(void){}
@@ -53,11 +59,11 @@ void
 CCSprite*  
 	renderTargetforHost();
 virtual void 
-	touchesBegin_withEvent(CCSet* touches ,UIEvent* events) {};
+	touchesBegin_withEvent(CCSet* touches ,UIEvent* events);
 virtual void 
-	touchesMoved_withEvent(CCSet* touches ,UIEvent* events) {};
+	touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
 virtual void 
-	touchesEnded_withEvent(CCSet* touches ,UIEvent* events) {};
+	touchesEnded_withEvent(CCSet* touches ,UIEvent* events) ;
 virtual void 
 	controller_torsoData(CCNode* ,CCPoint3D*){};
 virtual void 
@@ -66,16 +72,17 @@ void
 	predo_controller_torsoData(CCNode* ,void*);
 void 
 	predo_controller_righthandData(CCNode* ,void*);
-bool 
-	clickableforTime_handz(cocos2d::ccTime time, float handz);
+UITouchPhase 
+	touchPhaseforTime_handz(cocos2d::ccTime time, float handz);
 void 
 	controllerDidUpdate(cocos2d::ccTime time);
 void 
-	UIViewController::touchforHandpoint_view(int , int ,UIView* );
+	UIViewController::touchforHandpoint_view(int , int ,UIView*,UITouchPhase );
 public:
 	UIView* view;
 	UIView* followView;
 	UIView* clickView;
+	UIView* movableView;
 	NITrackerManager* trackerManager;
 	NITracker* torsoTracker;
 	NITracker* righthandTracker;
@@ -88,5 +95,6 @@ protected:
 	float m_torsox;
 	float m_torsoy;
 	bool isRighthandTracked;
+	UITouchPhase menuTouchPhase;
 };
 #endif

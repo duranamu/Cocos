@@ -23,12 +23,12 @@ THE SOFTWARE.
 
 #include <cocos2d.h>
 using namespace cocos2d;
-class CCIndexPath :public CCObject
+class UIIndexPath :public CCObject
 {
 public:
 	int section;
 	int row;
-	CCIndexPath(int i_section,int i_row)
+	UIIndexPath(int i_section,int i_row)
 	{
 		section = i_section;
 		row = i_row;

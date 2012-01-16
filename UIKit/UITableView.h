@@ -31,14 +31,18 @@ public:
 	UITableView();
 	~UITableView();
 	bool 
-		isEqual(UITableView* toCompare);
+		isEqual(UITableView* );
 	CCArray* 
 		m_indexPath;
 	UITableViewCell*
-		dequeueReusableCellWithIdentifier(CCString* id);
+		dequeueReusableCellWithIdentifier(CCString* );
 	virtual void 
-		reloadData(CCArray* toShow);
+		reloadData(CCArray* );
 	void 
-		touchesBegin_withEvent(CCSet* touches ,CCEvent* events) {};
+		touchesBegin_withEvent(CCSet*  ,UIEvent* );
+	void 
+		 touchesEnded_withEvent(CCSet*  ,UIEvent* );
+	void
+		touchesMoved_withEvent(CCSet*  ,UIEvent* );
 };
 #endif

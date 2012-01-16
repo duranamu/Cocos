@@ -40,32 +40,29 @@ void
 		sprite = CCLabelTTF::labelWithString("","Arial",38);
 
 	int offsetsum = 0;
-	for(int section=0; section< numberOfSection ;section++)
+	for(int section=0; section< numberOfSection ;section++ )
 	{
 		int numberOfRow = datasource->tableView_numberOfRowsInSection(this,section);
 
 		for(int row = 0; row < numberOfRow ; row++)
 		{
-		CCIndexPath* path = new CCIndexPath(section,row);
-		UITableViewCell* member =datasource->tableView_cellForRowAtIndexPath(this,path);
+		UIIndexPath* path = new UIIndexPath(section,row);
+		UITableViewCell* member = datasource->tableView_cellForRowAtIndexPath(this,path);
 		member->retain();
 		membersheet->addObject(member);
 		CCSprite* cellsprite = member->getSprite();
-		cellsprite ->setPosition(ccp(220,-30+offsetsum));
+		cellsprite ->setPosition(ccp( 220 ,-80 + offsetsum));
 		sprite->addChild(cellsprite);
-		offsetsum += 48;
-		//toShow->addObject(cellsprite);
+		offsetsum += 68;
 		toShow->addObject(member);
 		}
 	}
-	//sprite->setPosition(ccp(200,0));
+	membersheet->retain();
 }
-//TODO implememtation
 UITableViewCell* 
-	UITableView::dequeueReusableCellWithIdentifier(CCString* id)
+	UITableView::dequeueReusableCellWithIdentifier(CCString* uid)
 {
 	UITableViewCell* cell = nil;
-	
 	return cell;
 }
 bool
@@ -77,3 +74,27 @@ bool
 	}
 		return false;
 }
+void 
+	UITableView::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
+{
+	forCCArray(this->membersheet)
+		eachCCObject(UITableViewCell*,uiview);
+		uiview->touchesBegin_withEvent(touches,events);
+	forCCEnd
+}
+void 
+	UITableView::touchesEnded_withEvent(CCSet* touches ,UIEvent* events) 
+{
+	forCCArray(this->membersheet)
+		eachCCObject(UITableViewCell*,uiview);
+		uiview->touchesEnded_withEvent(touches,events);
+	forCCEnd
+};
+void 
+	UITableView::touchesMoved_withEvent(CCSet* touches ,UIEvent* events) 
+{
+	forCCArray(this->membersheet)
+		eachCCObject(UITableViewCell*,uiview);
+		uiview->touchesMoved_withEvent(touches,events);
+	forCCEnd
+};

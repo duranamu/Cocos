@@ -22,14 +22,14 @@ THE SOFTWARE.
 #define UIVIEW_H
 #include "..\Cocos\Cocos.h"
 #include "UIResponder.h"
-class UIView :public UIResponder
+#include "UITouch.h"
+#include  "UIIndexPath.h"
+class UIView :public UIResponder 
 {
 public:
-	CCArray* membersheet;
-	CCSprite* sprite;
 	UIView()
 	{
-		membersheet =  CCArray::arrayWithCapacity(8);
+		membersheet =  CCArray::arrayWithCapacity(32);
 		membersheet->retain();
 	}
 	~UIView()
@@ -62,14 +62,22 @@ virtual void
 	{
 		sprite = i_sprite;
 	}
- virtual void 
+virtual void 
 	 reloadData(CCArray* toShow) {};
  void 
 	followPlayer(CCPoint3D*);
  void 
-	touchesBegin_withEvent(CCSet* touches ,UIEvent* events) 
- {
-	 
- };
+	touchesBegin_withEvent(CCSet* touches ,UIEvent* events) { };
+ bool 
+	 triggerableforTouch(UITouch* );
+ bool
+	 triggerableforTouch_parentSprite(UITouch* touch,CCSprite* parent);
+
+ 	CCArray* membersheet;
+	CCSprite* sprite;
+	SelectorProtocol* listener;
+	SEL_CallFuncND  selector;
+	ccSynthesize( UIIndexPath* , indexPath);
+	
 };
 #endif

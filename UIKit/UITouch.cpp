@@ -21,14 +21,15 @@ THE SOFTWARE.
 #include "UITouch.h"
 #include "..\Cocos\Cocos.h"
 UITouch*
-	UITouch::touchWithView_OnPhase(UIView* view ,UITouchPhase phase)
+	UITouch::touchWithPhase(UITouchPhase phase)
 {
 	UITouch* touch = new UITouch();
-
 	if(touch)
 	{
-		touch->view = view;
 		touch->phase = phase;
+	}else
+	{
+		CC_SAFE_DELETE(touch);
 	}
 		return touch;
 }

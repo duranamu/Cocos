@@ -18,18 +18,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIRESPONDER_H
-#define UIRESPONDER_H
-#include "..\Cocos\Cocos.h"
-#include "UIEvent.h"
-class UIResponder : public CCObject
+#ifndef CCCALLBACK_H
+#define CCCALLBACK_H
+class CCCallBack
 {
-public:
-	 virtual void 
-		 touchesBegin_withEvent(CCSet* touches ,UIEvent* events) {};
-	 virtual void 
-		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events) {};
-	 virtual void 
-		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events) {};
-};
+	virtual void 
+	 touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
+	{}
+}
 #endif
