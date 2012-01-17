@@ -51,6 +51,14 @@ void
 		member->retain();
 		membersheet->addObject(member);
 		CCSprite* cellsprite = member->getSprite();
+
+		if(member->imageView->getimage())
+		{
+			member->imageView->sprite->setPosition(ccp(0,0));
+			cellsprite->addChild(member->imageView->sprite);
+
+		}
+
 		cellsprite ->setPosition(ccp( 220 ,-80 + offsetsum));
 		sprite->addChild(cellsprite);
 		offsetsum += 68;

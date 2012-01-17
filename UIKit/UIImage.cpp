@@ -31,4 +31,22 @@ UIImage*
 	}
 	return pimage; 
 }
+UIImage*
+	UIImage::imageNamed(const char* file)
+{
+	UIImage* pimage = new UIImage(file);
+	if(pimage)
+	{
+
+	}else{
+		CC_SAFE_DELETE(pimage);
+	}
+	return pimage;
+}
+UIImage::UIImage(const char* file)
+{
+	CCImage* ccimage = new CCImage();
+	ccimage->initWithImageFile(file);
+	self->initWithImage(ccimage);
+}
 

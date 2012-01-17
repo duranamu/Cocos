@@ -34,6 +34,7 @@ public :
 	CCPoint locationInView;
 	float timestamp ;
 	UITouchPhase phase;
+	CCPoint deltaMove;
 	
 	static UITouch* touchWithPhase(UITouchPhase phase);
 };

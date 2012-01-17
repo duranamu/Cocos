@@ -31,6 +31,9 @@ public:
 	};
 static UIImage*
 	imageWithData_format_pixel_size(const void* ,CCTexture2DPixelFormat,CCSize);
+static UIImage*
+	imageNamed(const char*);
+	UIImage(const char *);
 
 };
 #endif

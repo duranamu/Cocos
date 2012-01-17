@@ -37,7 +37,6 @@ public:
 		followView = new UIView();
 		movableView = new UIView();
 		trackerManager =  NITrackerManager::defaultTrackerManager();
-
 		torsoTracker =	NITracker::trackerWithTarget_action_joint(this,ccSelector   (UIViewController::predo_controller_torsoData),XN_SKEL_TORSO);
 
 		righthandTracker =	NITracker::trackerWithTarget_action_joint(this,ccSelector   (UIViewController::predo_controller_righthandData),XN_SKEL_RIGHT_HAND);
@@ -47,6 +46,11 @@ public:
 
 		isRighthandTracked = false;
 		menuTouchPhase = UITouchPhasePending;
+		touchStartx = 0;
+		touchStarty = 0;
+		touchStartTime = 0;
+		t_lasthandx = 0;
+		t_lasthandy = 0;
 	}
 void 
 	viewDidLoad(void){}
@@ -76,13 +80,13 @@ UITouchPhase
 	touchPhaseforTime_handz(cocos2d::ccTime time, float handz);
 void 
 	controllerDidUpdate(cocos2d::ccTime time);
-void 
-	UIViewController::touchforHandpoint_view(int , int ,UIView*,UITouchPhase );
 public:
 	UIView* view;
 	UIView* followView;
 	UIView* clickView;
 	UIView* movableView;
+	UIView* watchVariableView;
+
 	NITrackerManager* trackerManager;
 	NITracker* torsoTracker;
 	NITracker* righthandTracker;
@@ -96,5 +100,12 @@ protected:
 	float m_torsoy;
 	bool isRighthandTracked;
 	UITouchPhase menuTouchPhase;
+	float touchStartx;
+	float touchStarty;
+	ccTime touchStartTime;
+
+	float t_lasthandx;
+	float t_lasthandy;
+	bool newTouchSession;
 };
 #endif

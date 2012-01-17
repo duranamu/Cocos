@@ -63,7 +63,7 @@ virtual void
 		sprite = i_sprite;
 	}
 virtual void 
-	 reloadData(CCArray* toShow) {};
+	reloadData(CCArray* toShow) { /*if(sprite) toShow->addObject(sprite);*/};
  void 
 	followPlayer(CCPoint3D*);
  void 
@@ -72,6 +72,7 @@ virtual void
 	 triggerableforTouch(UITouch* );
  bool
 	 triggerableforTouch_parentSprite(UITouch* touch,CCSprite* parent);
+ void moveByPoint(CCPoint );
 
  	CCArray* membersheet;
 	CCSprite* sprite;

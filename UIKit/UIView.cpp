@@ -49,7 +49,7 @@ bool
 			 return true;
 		 }
 	 }
-	return false;
+		return false;
 	}else{
 		return triggerableforTouch_parentSprite(touch,(CCSprite*)sprite->getParent());
 	}
@@ -73,4 +73,13 @@ bool
 		 }
 	 }
 	return false;
+}
+void
+	UIView::moveByPoint(CCPoint point)
+{
+	/*CCAction* action = CCMoveBy::actionWithDuration(0.01f,point);
+	this->sprite->runAction(action);*/
+	CCPoint position = this->sprite->getPosition();
+	position.y += point.y;
+	this->sprite->setPosition(position);
 }

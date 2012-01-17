@@ -25,7 +25,7 @@ THE SOFTWARE.
 #include "UIImage.h"
 class UIImageView : public UIView
 {
-	ccSynthesize(CCPoint,center);
+	ccProperty( UIImage* ,image);
 public :
 	static 
 		UIImageView* viewWithImage(UIImage* image);

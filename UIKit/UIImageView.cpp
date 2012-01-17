@@ -66,3 +66,14 @@ UIImageView*
 
 	return pimageView;
 }
+void
+	UIImageView::setimage(UIImage* cimage)
+{		
+	sprite = CCSprite::spriteWithTexture(cimage);
+	self->image = cimage;
+}
+UIImage*
+	UIImageView::getimage()
+{
+	return image;
+}

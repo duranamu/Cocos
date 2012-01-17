@@ -122,45 +122,34 @@ void
 	if(isRighthandTracked)
 	{
 		UITouchPhase ability; ;
-		if(ability = touchPhaseforTime_handz(time,m_handz))
-			touchforHandpoint_view(m_handx  ,  m_handy  , view , ability);
+		ability = touchPhaseforTime_handz(time,m_handz);
+		if(ability == UITouchPhaseBegin | ability == UITouchPhaseEnded )
+		{
+			 UITouch* touch = UITouch::touchWithPhase(ability);
+			 touch->locationInView = ccp(m_handx , m_handy);
+			 CCSet* set = new CCSet();
+			 set->addObject(touch);
+			 UIEvent* events = new UIEvent(set);
+			 if(ability == UITouchPhaseBegin)
+			 {
+				 touchStartx = m_handx;
+				 touchStarty = m_handy;
+				touchStartTime = time;
+				 this->touchesBegin_withEvent(set,events);
+			 }else if (ability == UITouchPhaseEnded )
+				 this->touchesEnded_withEvent(set,events);
+		}else if (ability == UITouchPhaseMoved )
+	    {
+			 UITouch* touch = UITouch::touchWithPhase(ability);
+			 touch->locationInView = ccp(m_handx , m_handy);
+			 CCSet* set = new CCSet();
+			 set->addObject(touch);
+			 UIEvent* events = new UIEvent(set);
+			 this->touchesMoved_withEvent( set , events );
+		}
 	}
 }
-void
-	UIViewController::touchforHandpoint_view(int hpx, int hpy , UIView* uiview ,UITouchPhase phase)
-{
-	CCArray* toShow = uiview->membersheet;
-	forCCArray(toShow)
-		eachCCObject(UIView*,view);
-	 CCSprite* sp = view->getSprite();
-	 int spx =  sp->getPosition().x;
-	 int offx = hpx - spx;
-	 int halfSpriteWidth = sp->getTexture()->getPixelsWide()/2;
-	 int halfSpriteHeight = sp->getTexture()->getPixelsHigh()/2;
-	 if(abs(offx) < halfSpriteWidth)
-	 {
-		 int spy = sp->getPosition().y;
-		 int offy = hpy - spy;
-		 if(abs(offy) < halfSpriteHeight )
-		 {
-			 UITouch* occurredTouch;
-			 occurredTouch = UITouch::touchWithPhase(phase);
-			 occurredTouch->locationInView = ccp(hpx,hpy);
-			 CCSet* set = new CCSet();
-			 set->addObject(occurredTouch);
-			 UIEvent* events = new UIEvent(set);
-			 if(phase == UITouchPhaseBegin)
-				 this->touchesBegin_withEvent(set,events);
-			 else if (phase == UITouchPhaseEnded )
-				 this->touchesEnded_withEvent(set,events);
-			 else if (phase == UITouchPhaseMoved )
-				 this->touchesMoved_withEvent(set,events);
-			 return ;
-		 }
-	 }
-	// sp->setScale(1.0f);
-	forCCEnd
-}
+
 void 
 	UIViewController::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
 {
@@ -172,14 +161,36 @@ void
 void 
 	UIViewController::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
 {
+	newTouchSession = true;
 	forCCArray(this->view->membersheet)
 		eachCCObject(UIView*,uiview);
 		uiview->touchesEnded_withEvent(touches,events);
 	forCCEnd
 }
 void 
-	UIViewController::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
+	UIViewController::touchesMoved_withEvent(CCSet* touches ,UIEvent* events )
 {
+	UITouch* touch = (UITouch*) touches->anyObject();
+	if(touchStartx && touchStarty)
+	{
+	float x = touch->locationInView.x;
+	float y =  touch->locationInView.y;
+	float moveSinceTouchX = fabsf( x - t_lasthandx );
+	float moveSinceTouchY = 2.5*( y - t_lasthandy);
+	t_lasthandx = x;
+	t_lasthandy = y;
+	char var[120];
+	sprintf(var,"%3.0f %3.0f",moveSinceTouchX,moveSinceTouchY);
+	CCLabelTTF* ttf =(CCLabelTTF*)watchVariableView->sprite;
+	ttf->setString(var);
+	if(newTouchSession)
+	{
+		newTouchSession = false;
+	}else{
+		touch->deltaMove = ccp (0 , moveSinceTouchY);
+	}
+	}
+
 	forCCArray(this->movableView->membersheet)
 		eachCCObject(UIView*,uiview);
 		uiview->touchesMoved_withEvent(touches,events);

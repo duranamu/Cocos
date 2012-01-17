@@ -58,6 +58,7 @@ THE SOFTWARE.
 		else
 			textLabel = CCLabelTTF::labelWithString("","Arial",38);
 		setSprite(textLabel);
+		self->imageView = new UIImageView();
 	}
 void 
 	UITableViewCell::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
@@ -79,10 +80,8 @@ void
 void 
 	UITableViewCell::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
 {
-	//if(this->triggerableforTouch((UITouch*)touches->anyObject()))
-	//{
-	//	//this->sprite->setScale(1.0f);
-	//}
+	UITouch* touch = (UITouch*) touches->anyObject();
+	this->moveByPoint(touch->deltaMove);
 }
 UITableViewCell* 
 	UITableViewCell::doInitWithStyle_reuseIdentifier_target_selector(UITableViewStyle cstyle ,CCString* cid,SelectorProtocol* clistener,SEL_CallFuncND cselector )

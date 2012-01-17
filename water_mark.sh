@@ -1,4 +1,3 @@
-
 foreach()
 {
 	for file in $1/*
@@ -15,7 +14,6 @@ foreach()
 }
 addInfo()
 {
-echo "add info"
 cp $1 tmpfile
 cat legal_information tmpfile > $1
 rm tmpfile

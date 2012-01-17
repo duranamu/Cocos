@@ -22,8 +22,10 @@ THE SOFTWARE.
 #define UITABLEVIEWCELL_H
 #include "..\Cocos\Cocos.h"
 #include "UIView.h"
+#include "UIImageView.h"
 typedef enum UITableViewStyle{
 	UITableViewSylePlain = 0
+	,UITableViewSyleDefault
 };
 class UITableViewCell :public UIView 
 {
@@ -31,6 +33,8 @@ class UITableViewCell :public UIView
 	CCString* uid;
 public :
 	CCLabelTTF* textLabel;
+	UIImageView* imageView;
+
 	UITableViewCell();
 	static UITableViewCell* 
 		initWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* uid);
