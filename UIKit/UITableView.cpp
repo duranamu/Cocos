@@ -54,12 +54,12 @@ void
 
 		if(member->imageView->getimage())
 		{
-			member->imageView->sprite->setPosition(ccp(0,0));
+			member->imageView->sprite->setPosition(ccp(-30,0));
 			cellsprite->addChild(member->imageView->sprite);
 
 		}
 
-		cellsprite ->setPosition(ccp( 220 ,-80 + offsetsum));
+		cellsprite ->setPosition(ccp( 240 ,-80 + offsetsum));
 		sprite->addChild(cellsprite);
 		offsetsum += 68;
 		toShow->addObject(member);

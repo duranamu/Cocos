@@ -18,60 +18,60 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef CCNUMBER_H
-#define CCNUMBER_H
-#endif
-#include <cocos2d.h>
-#include <CCObject.h>
-using namespace cocos2d;
-class CCNumber : public CCObject
+#include "NSArray.h"
+#include "Foundation.h"
+NSArray*
+	NSArray::alloc()
 {
-public :
-	 union {
-		int intVal;
-		char charVal;
-		float floatVal;
-		bool boolVal;
-	}data;
+	NSArray* parray =  new NSArray();
+	if(!parray )
+	{
+		CC_SAFE_DELETE(parray);
+	}
+	return parray;
+}
+NSArray*
+	NSArray::initWithObjects(NSObject* msg , ...)
+{
+	if(msg)
+		self->ref->addObject(msg);
 
-	 CCNumber(char inVal)
-	 {
-		 data.charVal = inVal;
-	 }
-  static CCNumber* numberWithChar(char inVal)
-  {
-	  CCNumber* newVal = new CCNumber(inVal);
-	  newVal->autorelease();
-	  return newVal;
-  }
-  	 CCNumber(int inVal)
-	 {
-		 data.intVal = inVal;
-	 }
-  static CCNumber* numberWithInt(int inVal)
-  {
-	  CCNumber* newVal = new CCNumber(inVal);
-	  newVal->autorelease();
-	  return newVal;
-  }
-  	 CCNumber(float inVal)
-	 {
-		 data.floatVal = inVal;
-	 }
-  static CCNumber* numberWithFloat(float inVal)
-  {
-	  CCNumber* newVal = new CCNumber(inVal);
-	  newVal->autorelease();
-	  return newVal;
-  }
-  	 CCNumber(bool inVal)
-	 {
-		 data.boolVal = inVal;
-	 }
-  static CCNumber* numberWithBool(bool inVal)
-  {
-	  CCNumber* newVal = new CCNumber(inVal);
-	  newVal->autorelease();
-	  return newVal;
-  }
-};
+	va_list argp;
+	int argno = 0;
+	NSObject* para;
+
+	va_start(argp , msg);
+	while(1)
+	{
+		para = va_arg( argp , NSObject * );
+		if( para != nil)
+		{
+			argno++;
+			self->ref->addObject(para);
+		}else{
+			break;
+		}
+	}
+	va_end ( argp);
+	return self;
+}
+
+NSArray::NSArray()
+{
+	ref = CCArray::array();
+}
+NSObject* NSArray::objectAtIndex(unsigned int index)
+{
+	return (NSObject*) ref->objectAtIndex(index);
+}
+NSObject* 
+	NSArray::lastObject()
+{
+	return (NSObject*) ref->lastObject();
+}
+NSObject* 
+	NSArray::randomObject()
+{
+	return (NSObject*) ref->randomObject();
+}
+

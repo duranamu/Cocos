@@ -176,7 +176,7 @@ void
 	float x = touch->locationInView.x;
 	float y =  touch->locationInView.y;
 	float moveSinceTouchX = fabsf( x - t_lasthandx );
-	float moveSinceTouchY = 2.5*( y - t_lasthandy);
+	float moveSinceTouchY = 1.5*( y - t_lasthandy);
 	t_lasthandx = x;
 	t_lasthandy = y;
 	char var[120];

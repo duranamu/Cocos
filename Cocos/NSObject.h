@@ -18,16 +18,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef COCOS_H
-#define COCOS_H
+#ifndef NSOBJECT_H
+#define NSOBJECT_H
 #include <cocos2d.h>
 #include "Foundation.h"
-#include "NSNumber.h"
-#include "CCWrapper.h"
-#include "CCPoint3D.h"
-#include "NSArray.h"
-#include "NSObject.h"
-#include "NSString.h"
-#include "NSDictionary.h"
 using namespace cocos2d;
+class NSObject : public CCObject
+{
+public:
+	static NSObject*
+		alloc();
+};
 #endif

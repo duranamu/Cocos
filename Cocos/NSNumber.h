@@ -18,16 +18,61 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef COCOS_H
-#define COCOS_H
-#include <cocos2d.h>
-#include "Foundation.h"
-#include "NSNumber.h"
-#include "CCWrapper.h"
-#include "CCPoint3D.h"
-#include "NSArray.h"
-#include "NSObject.h"
-#include "NSString.h"
-#include "NSDictionary.h"
-using namespace cocos2d;
+#ifndef NSNUMBER_H
+#define NSNUMBER_H
 #endif
+#include <cocos2d.h>
+#include <CCObject.h>
+#include "NSObject.h"
+using namespace cocos2d;
+class NSNumber : public NSObject
+{
+public :
+	 union {
+		int intVal;
+		char charVal;
+		float floatVal;
+		bool boolVal;
+	}data;
+
+	 NSNumber(char inVal)
+	 {
+		 data.charVal = inVal;
+	 }
+  static NSNumber* numberWithChar(char inVal)
+  {
+	  NSNumber* newVal = new NSNumber(inVal);
+	  newVal->autorelease();
+	  return newVal;
+  }
+  	 NSNumber(int inVal)
+	 {
+		 data.intVal = inVal;
+	 }
+  static NSNumber* numberWithInt(int inVal)
+  {
+	  NSNumber* newVal = new NSNumber(inVal);
+	  newVal->autorelease();
+	  return newVal;
+  }
+  	 NSNumber(float inVal)
+	 {
+		 data.floatVal = inVal;
+	 }
+  static NSNumber* numberWithFloat(float inVal)
+  {
+	  NSNumber* newVal = new NSNumber(inVal);
+	  newVal->autorelease();
+	  return newVal;
+  }
+  	 NSNumber(bool inVal)
+	 {
+		 data.boolVal = inVal;
+	 }
+  static NSNumber* numberWithBool(bool inVal)
+  {
+	  NSNumber* newVal = new NSNumber(inVal);
+	  newVal->autorelease();
+	  return newVal;
+  }
+};

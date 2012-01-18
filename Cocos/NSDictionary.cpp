@@ -18,22 +18,41 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef _CCFOUNDATION_H
-#define _CCFOUNDATION_H
-#include <cocos2d.h>
-#include <libxml\xpath.h>
-#include <libxml\parser.h>
-#define forCCArray( __array__)  do { CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
-#define eachCCObject(__VAR__ ,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
-#define fetchCCObject(__VAR__ ,__INST__)  CCWrapper* __wrapper__ = (CCWrapper*)__object__; \
-	__VAR__ __INST__ =  __wrapper__->data.__VAR__##Val
-#define ccSynthesize(varType, varName)  CC_SYNTHESIZE(varType, varName, varName)  
-#define ccProperty(varType, varName)  CC_PROPERTY(varType, varName, varName)  
-#define forCCEnd  }}while(0);
-#define CCS(__STR__) new CCString(__STR__)
-#define nil NULL
-#define ccSelector(__FUNC__) (SEL_CallFuncND)(&__FUNC__)
-#define ccCast(__VAR__,__INST__) __VAR__ c##__INST__ = (__VAR__) __INST__;
-#define vid void* 
-#define self this
-#endif
+#include "NSDictionary.h"
+#include <stdarg.h>
+NSDictionary*
+	NSDictionary::alloc()
+{
+	NSDictionary* mem = new NSDictionary();
+	if(!mem)
+	{
+		CC_SAFE_DELETE(mem);
+	}else{
+		mem->autorelease();
+	}
+	return mem;
+}
+NSDictionary*
+	NSDictionary::initWithObjectsAndKeys(NSObject* obj,NSString* str,...)
+{
+	if(obj && str)
+		self->ref->setObject(obj,str->description());
+	NSObject* para_obj;
+	NSString* para_str;
+
+	va_list argp;
+	va_start(argp , str);
+	while(1)
+	{
+		para_obj = va_arg( argp , NSObject * );
+		para_str = va_arg( argp , NSString * );
+		if( para_obj != nil)
+		{
+			self->ref->setObject(para_obj,para_str->description());
+		}else{
+			break;
+		}
+	}
+	va_end ( argp);
+	return self;
+}
