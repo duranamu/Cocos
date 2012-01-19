@@ -42,7 +42,12 @@ public :
   static NSNumber* numberWithChar(char inVal)
   {
 	  NSNumber* newVal = new NSNumber(inVal);
+	  if(newVal)
+	  {
 	  newVal->autorelease();
+	  }else{
+		  CC_SAFE_DELETE(newVal);
+	  }
 	  return newVal;
   }
   	 NSNumber(int inVal)
@@ -52,7 +57,12 @@ public :
   static NSNumber* numberWithInt(int inVal)
   {
 	  NSNumber* newVal = new NSNumber(inVal);
+	   if(newVal)
+	  {
 	  newVal->autorelease();
+	  }else{
+		  CC_SAFE_DELETE(newVal);
+	  }
 	  return newVal;
   }
   	 NSNumber(float inVal)
@@ -62,7 +72,12 @@ public :
   static NSNumber* numberWithFloat(float inVal)
   {
 	  NSNumber* newVal = new NSNumber(inVal);
+	   if(newVal)
+	  {
 	  newVal->autorelease();
+	  }else{
+		  CC_SAFE_DELETE(newVal);
+	  }
 	  return newVal;
   }
   	 NSNumber(bool inVal)
@@ -72,7 +87,12 @@ public :
   static NSNumber* numberWithBool(bool inVal)
   {
 	  NSNumber* newVal = new NSNumber(inVal);
+	   if(newVal)
+	  {
 	  newVal->autorelease();
+	  }else{
+		  CC_SAFE_DELETE(newVal);
+	  }
 	  return newVal;
   }
 };

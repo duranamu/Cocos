@@ -59,6 +59,8 @@ THE SOFTWARE.
 			textLabel = CCLabelTTF::labelWithString("","Arial",38);
 		setSprite(textLabel);
 		self->imageView = new UIImageView();
+		self->contentView = new UIView();
+		self->retain();
 	}
 void 
 	UITableViewCell::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)

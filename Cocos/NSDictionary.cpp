@@ -33,6 +33,44 @@ NSDictionary*
 	return mem;
 }
 NSDictionary*
+	NSDictionary::init()
+{
+	return self;
+}
+NSDictionary*
+	NSDictionary::dictionary()
+{
+	return alloc()->init();
+}
+NSDictionary*
+	NSDictionary::dictionaryWithObjectAndKeys(NSObject* obj,NSString* str,...)
+{
+	NSDictionary* dict; ;
+	if(dict = alloc())
+	{
+		if(obj && str)
+		dict->ref->setObject(obj,str->description());
+		NSObject* para_obj;
+		NSString* para_str;
+
+		va_list argp;
+		va_start(argp , str);
+		while(1)
+		{
+			para_obj = va_arg( argp , NSObject * );
+			para_str = va_arg( argp , NSString * );
+		if( para_obj != nil)
+		{
+			dict->ref->setObject(para_obj,para_str->description());
+		}else{
+			break;
+		}
+		}
+	va_end ( argp);
+	}
+	return dict;
+}
+NSDictionary*
 	NSDictionary::initWithObjectsAndKeys(NSObject* obj,NSString* str,...)
 {
 	if(obj && str)

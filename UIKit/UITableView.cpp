@@ -23,7 +23,6 @@ THE SOFTWARE.
 #include "..\Cocos\Cocos.h"
 UITableView::UITableView()
 {
-	membersheet = CCArray::array();
 	m_indexPath = CCArray::array();
 }
 UITableView::~UITableView()
@@ -32,7 +31,7 @@ UITableView::~UITableView()
 	//m_indexPath->release();
 }
 void 
-	UITableView::reloadData(CCArray* toShow)
+	UITableView::reloadData(NSArray* toShow)
 {
 	int numberOfSection = datasource->numberOfSectionInTableView(this);
 
@@ -52,11 +51,15 @@ void
 		membersheet->addObject(member);
 		CCSprite* cellsprite = member->getSprite();
 
-		if(member->imageView->getimage())
+		if(member->imageView)
 		{
 			member->imageView->sprite->setPosition(ccp(-30,0));
 			cellsprite->addChild(member->imageView->sprite);
 
+		}
+		if(member->contentView)
+		{
+			//member->contentView->membersheet
 		}
 
 		cellsprite ->setPosition(ccp( 240 ,-80 + offsetsum));
@@ -85,24 +88,21 @@ bool
 void 
 	UITableView::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
 {
-	forCCArray(this->membersheet)
-		eachCCObject(UITableViewCell*,uiview);
+	For(UITableViewCell*,uiview,this->membersheet)
 		uiview->touchesBegin_withEvent(touches,events);
 	forCCEnd
 }
 void 
 	UITableView::touchesEnded_withEvent(CCSet* touches ,UIEvent* events) 
 {
-	forCCArray(this->membersheet)
-		eachCCObject(UITableViewCell*,uiview);
+	For(UITableViewCell*,uiview,this->membersheet)
 		uiview->touchesEnded_withEvent(touches,events);
 	forCCEnd
 };
 void 
 	UITableView::touchesMoved_withEvent(CCSet* touches ,UIEvent* events) 
 {
-	forCCArray(this->membersheet)
-		eachCCObject(UITableViewCell*,uiview);
+	For(UITableViewCell*,uiview,this->membersheet)
 		uiview->touchesMoved_withEvent(touches,events);
 	forCCEnd
 };

@@ -23,17 +23,15 @@ THE SOFTWARE.
 void 
 	UIViewController::viewDidRender(CCLayer* host)
 {
-	forCCArray(view->membersheet)
-		eachCCObject(UIView*,pView);
+	For(UIView*,pView,view->membersheet)
 		pView->viewDidRender(host);
 	forCCEnd
 }
 void 
-	UIViewController::viewReloadData(CCArray* toShow)
+	UIViewController::viewReloadData(NSArray* toShow)
 {
-	forCCArray(view->membersheet)
-		eachCCObject(UIView*,pView);
-	pView->reloadData(toShow);
+	For(UIView*,pView,view->membersheet)
+		pView->reloadData(toShow);
 	forCCEnd
 }
 CCSprite*  
@@ -49,8 +47,7 @@ void
 	m_torsox = cdata->x;
 	m_torsoy = 480 - cdata->y;
 
-	forCCArray(followView->membersheet)
-		eachCCObject(UIView*,m_view)
+	For(UIView*,m_view,followView->membersheet)
 		m_view->followPlayer(cdata);
 	forCCEnd
 
@@ -153,8 +150,7 @@ void
 void 
 	UIViewController::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
 {
-	forCCArray(this->view->membersheet)
-		eachCCObject(UIView*,uiview);
+	For(UIView*,uiview,this->view->membersheet)
 		uiview->touchesBegin_withEvent(touches,events);
 	forCCEnd
 }
@@ -162,8 +158,7 @@ void
 	UIViewController::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
 {
 	newTouchSession = true;
-	forCCArray(this->view->membersheet)
-		eachCCObject(UIView*,uiview);
+	For(UIView*,uiview,this->view->membersheet)
 		uiview->touchesEnded_withEvent(touches,events);
 	forCCEnd
 }
@@ -191,8 +186,7 @@ void
 	}
 	}
 
-	forCCArray(this->movableView->membersheet)
-		eachCCObject(UIView*,uiview);
+	For(UIView*,uiview,this->movableView->membersheet)
 		uiview->touchesMoved_withEvent(touches,events);
 	forCCEnd
 }

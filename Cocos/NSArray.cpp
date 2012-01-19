@@ -55,7 +55,30 @@ NSArray*
 	va_end ( argp);
 	return self;
 }
-
+NSArray*
+NSArray::initWithObject(NSObject* obj)
+{
+	if(obj)
+	{
+		self->ref->addObject(obj);
+	}
+	
+	return self;
+}
+NSArray*
+	NSArray::arrayWithCapacity(unsigned int num)
+{
+	NSArray* mem =  new NSArray(num);
+	if(!mem )
+	{
+		CC_SAFE_DELETE(mem);
+	}
+	return mem;
+}
+NSArray::NSArray(unsigned int num)
+{
+	ref = CCArray::arrayWithCapacity(num);
+}
 NSArray::NSArray()
 {
 	ref = CCArray::array();
@@ -65,13 +88,7 @@ NSObject* NSArray::objectAtIndex(unsigned int index)
 	return (NSObject*) ref->objectAtIndex(index);
 }
 NSObject* 
-	NSArray::lastObject()
-{
-	return (NSObject*) ref->lastObject();
-}
-NSObject* 
 	NSArray::randomObject()
 {
 	return (NSObject*) ref->randomObject();
 }
-

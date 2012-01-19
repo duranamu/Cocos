@@ -37,7 +37,7 @@ public:
 	UITableViewCell*
 		dequeueReusableCellWithIdentifier(CCString* );
 	virtual void 
-		reloadData(CCArray* );
+		reloadData(NSArray* );
 	void 
 		touchesBegin_withEvent(CCSet*  ,UIEvent* );
 	void 

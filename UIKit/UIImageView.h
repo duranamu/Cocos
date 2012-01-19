@@ -35,6 +35,6 @@ public :
 		UIImageView* viewWithTexture(CCTexture2D* texture);
 		UIImageView(CCTexture2D* texture);
 	static
-		UIImageView* viewWithFile(const char* path);
+		UIImageView* viewWithFile(NSString* str);
 };
 #endif

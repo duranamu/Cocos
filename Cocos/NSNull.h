@@ -18,62 +18,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIImageView.h"
-UIImageView*
-	UIImageView::viewWithImage(UIImage* image)
+#ifndef NSNULL_H
+#define NSNULL_H
+#include <cocos2d.h>
+#include "NSObject.h"
+#include "Foundation.h"
+using namespace cocos2d;
+class NSNull :public NSObject
 {
-	UIImageView* pimageView = new UIImageView(image);
-
-	if(!pimageView)
-	{
-		CC_SAFE_DELETE(pimageView);
-	}
-
-	return pimageView;
-}
-UIImageView::UIImageView(UIImage* image)
-{
-	sprite = CCSprite::spriteWithTexture(image);
+private:
+	NSNull(){};
+public:
+	static NSNull* singleton;
+	 static NSNull
+		 null ()
+	 {
+		 if(singleton == nil)
+		 {
+			 singleton = new NSNull();
+		 }
+		 return singleton;
+	 }
 };
-UIImageView*
-	UIImageView::viewWithTexture(CCTexture2D* image)
-{
-	UIImageView* pimageView = new UIImageView(image);
-
-	if(!pimageView)
-	{
-		CC_SAFE_DELETE(pimageView);
-	}
-
-	return pimageView;
-}
-UIImageView::UIImageView(CCTexture2D* image)
-{
-	sprite = CCSprite::spriteWithTexture(image);
-};
-UIImageView*	
-	UIImageView::viewWithFile(NSString* str )
-{
-	UIImageView* pimageView = new UIImageView();
-
-	if(!pimageView)
-	{
-		CC_SAFE_DELETE(pimageView);
-	}else{
-		pimageView->sprite =CCSprite::spriteWithFile(str->description().c_str());
-		pimageView->sprite->retain();
-	}
-
-	return pimageView;
-}
-void
-	UIImageView::setimage(UIImage* cimage)
-{		
-	sprite = CCSprite::spriteWithTexture(cimage);
-	self->image = cimage;
-}
-UIImage*
-	UIImageView::getimage()
-{
-	return image;
-}
+#endif

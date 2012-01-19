@@ -59,7 +59,7 @@ void
 virtual void 
 	viewDidUpdate(cocos2d::ccTime ){};
 void 
-	viewReloadData(CCArray* toShow);
+	viewReloadData(NSArray* toShow);
 CCSprite*  
 	renderTargetforHost();
 virtual void 

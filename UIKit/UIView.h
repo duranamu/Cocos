@@ -29,12 +29,11 @@ class UIView :public UIResponder
 public:
 	UIView()
 	{
-		membersheet =  CCArray::arrayWithCapacity(32);
+		membersheet =  NSArray::arrayWithCapacity(4);
 		membersheet->retain();
 	}
 	~UIView()
 	{
-//		membersheet->release();
 	}
 UIView*
 	anyView()
@@ -63,7 +62,7 @@ virtual void
 		sprite = i_sprite;
 	}
 virtual void 
-	reloadData(CCArray* toShow) { /*if(sprite) toShow->addObject(sprite);*/};
+	reloadData(NSArray* toShow) { /*if(sprite) toShow->addObject(sprite);*/};
  void 
 	followPlayer(CCPoint3D*);
  void 
@@ -74,11 +73,12 @@ virtual void
 	 triggerableforTouch_parentSprite(UITouch* touch,CCSprite* parent);
  void moveByPoint(CCPoint );
 
- 	CCArray* membersheet;
+ 	NSArray* membersheet;
 	CCSprite* sprite;
 	SelectorProtocol* listener;
 	SEL_CallFuncND  selector;
 	ccSynthesize( UIIndexPath* , indexPath);
+	UIView* contentView;
 	
 };
 #endif

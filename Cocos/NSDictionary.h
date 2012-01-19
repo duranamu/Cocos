@@ -26,12 +26,64 @@ THE SOFTWARE.
 using namespace cocos2d;
 class NSDictionary :public NSObject
 {
-	CCDictionary<std::string,NSObject*>* ref;
 public:
+	CCDictionary<std::string,NSObject*>* ref;
 	static NSDictionary*
 		alloc();
+	static NSDictionary*
+		dictionary();
+	NSDictionary*
+		init();
+	static NSDictionary*
+		dictionaryWithObjectAndKeys(NSObject*,NSString*,...);
 	NSDictionary* 
 		initWithObjectsAndKeys(NSObject*,NSString*,...);
-	NSDictionary(){ref = new CCDictionary<std::string,NSObject*>();}
+
+		NSDictionary()
+	{ref = new CCDictionary<std::string,NSObject*>();}
+	inline bool
+		setObject_forKey(NSObject* obj  ,NSString* str)
+	{	
+		if(obj && str)
+			return ref->setObject(obj,str->description());
+		else
+			return false;
+	}
+	inline void
+		removeObjectForKey(NSString* str)
+	{
+		ref->removeObjectForKey(str->description());
+	}
+	inline void 
+		removeAllObjects()
+	{
+		ref->removeAllObjects();
+	}
+	inline NSObject*
+		objectForKey(NSString* str)
+	{
+		return ref->objectForKey(str->description());
+	}
+	inline void
+		autorelease()
+	{
+		ref->autorelease();
+	}
+	inline void
+		retain()
+	{
+		ref->retain();
+	}
+	inline void
+		release()
+	{
+		ref->release();
+	}
+
+	~NSDictionary()
+	{
+		ref->release();
+	}
+
 };
 #endif

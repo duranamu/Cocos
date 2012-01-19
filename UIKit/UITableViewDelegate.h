@@ -23,7 +23,5 @@ THE SOFTWARE.
 #include "..\Cocos\Cocos.h"
 class UITableViewDelegate :public CCObject
 {
-public:
-	CCArray* m_membersheet;
 };
 #endif

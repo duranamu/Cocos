@@ -40,10 +40,15 @@ THE SOFTWARE.
 #define eachObject(__VAR__,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
 #define forEnd   }}while(0);
 
-#define nsFor(__VAR__,__INST__,__NSARR__) forArray(__NSARR__) eachObject(__VAR__,__INST__)
-//#define ccFor(__VAR__,__INST__,__NSARR__) forCCArray(__NSARR__) eachObject(__VAR__,__INST__)
+#define For(__VAR__,__INST__,__NSARR__) forArray(__NSARR__) eachObject(__VAR__,__INST__)
+#define ccFor(__VAR__,__INST__,__NSARR__) forCCArray(__NSARR__) eachObject(__VAR__,__INST__)
+
+#define fordict(__VAR__,__INST__,__DICT__) \
+	do{  __DICT__->ref->begin();__VAR__ __INST__;while(__INST__ = (__VAR__) __DICT__->ref->next()){	 
 
 #define nss(__STR__) new NSString(__STR__)
 #define vid void* 
 #define self this
+
+#define NSNotFound UINT_MAX;
 #endif

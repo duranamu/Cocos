@@ -27,19 +27,35 @@ using namespace cocos2d;
 class NSArray : public NSObject
 {
 public:
+	CCArray* ref;
 	static NSArray*
 		alloc ();
 	NSArray* 
 		initWithObjects (NSObject* , ...);
-	NSArray();
+	NSArray*
+		initWithObject(NSObject* );
+	static NSArray*
+		arrayWithCapacity(unsigned int );
+
+		NSArray();
+		 
+		NSArray(unsigned int num);
 	NSObject* 
 		objectAtIndex(unsigned int index);
-    NSObject* 
-		lastObject();
+ 
     NSObject* 
 		randomObject();
-
-	CCArray* ref;
-
+	inline bool
+		containsObject(NSObject* obj){ return ref->containsObject(obj);}
+	inline void
+		addObject(NSObject* obj){ ref->addObject(obj);}
+	inline void 
+		retain(){ ref->retain();}
+	inline unsigned int 
+		count() { ref->count();}
+	inline NSObject* 
+		lastObject(){ return (NSObject* )ref->lastObject();}
+	inline unsigned int
+		indexOfObject(NSObject* obj){return ref->indexOfObject(obj);}
 };
 #endif

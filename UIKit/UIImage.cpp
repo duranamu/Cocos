@@ -32,9 +32,9 @@ UIImage*
 	return pimage; 
 }
 UIImage*
-	UIImage::imageNamed(const char* file)
+	UIImage::imageNamed(NSString* file)
 {
-	UIImage* pimage = new UIImage(file);
+	UIImage* pimage = new UIImage(file->description().c_str());
 	if(pimage)
 	{
 

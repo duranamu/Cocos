@@ -22,7 +22,7 @@ THE SOFTWARE.
 #define UIRESPONDER_H
 #include "..\Cocos\Cocos.h"
 #include "UIEvent.h"
-class UIResponder : public CCObject
+class UIResponder : public NSObject
 {
 public:
 	 virtual void 
