@@ -23,6 +23,7 @@ THE SOFTWARE.
 #include "..\Cocos\Cocos.h"
 #include "UIView.h"
 #include "UIResponder.h"
+#include "UIImageView.h"
 #include "NIKit\NIKit.h"
 #ifndef TOUCH_FUNC
 #define TOUCH_FUNC
@@ -36,13 +37,18 @@ public:
 		view = new UIView();
 		followView = new UIView();
 		movableView = new UIView();
+		righthand_clicked_marker = UIImageView::viewWithFile(nss("stars.png"));
+
 		trackerManager =  NITrackerManager::defaultTrackerManager();
 		torsoTracker =	NITracker::trackerWithTarget_action_joint(this,ccSelector   (UIViewController::predo_controller_torsoData),XN_SKEL_TORSO);
 
 		righthandTracker =	NITracker::trackerWithTarget_action_joint(this,ccSelector   (UIViewController::predo_controller_righthandData),XN_SKEL_RIGHT_HAND);
 
+		lefthandTracker =	NITracker::trackerWithTarget_action_joint(this,ccSelector   (UIViewController::predo_controller_lefthandData),XN_SKEL_LEFT_HAND);
+
 		trackerManager->addTracker(torsoTracker);
 		trackerManager->addTracker(righthandTracker);
+		trackerManager->addTracker(lefthandTracker);
 
 		isRighthandTracked = false;
 		menuTouchPhase = UITouchPhasePending;
@@ -54,6 +60,8 @@ public:
 	}
 void 
 	viewDidLoad(void){}
+void 
+	viewDidUnload(void){}
 void 
 	viewDidRender(CCLayer* host );
 virtual void 
@@ -76,6 +84,8 @@ void
 	predo_controller_torsoData(CCNode* ,void*);
 void 
 	predo_controller_righthandData(CCNode* ,void*);
+void 
+	predo_controller_lefthandData(CCNode* ,void*);
 UITouchPhase 
 	touchPhaseforTime_handz(cocos2d::ccTime time, float handz);
 void 
@@ -87,15 +97,23 @@ public:
 	UIView* movableView;
 	UIView* watchVariableView;
 
+	UIView* righthand_clicked_marker;
+
 	NITrackerManager* trackerManager;
 	NITracker* torsoTracker;
 	NITracker* righthandTracker;
+	NITracker* lefthandTracker;
 protected:
 	float g_lasthandz;
 	float g_lasthandzVelocity;
 	float m_handz;
 	float m_handx;
 	float m_handy;
+	float gl_lasthandz;
+	float gl_lasthandzVelocity;
+	float ml_handz;
+	float ml_handx;
+	float ml_handy;
 	float m_torsox;
 	float m_torsoy;
 	bool isRighthandTracked;

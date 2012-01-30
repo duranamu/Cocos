@@ -21,7 +21,7 @@ THE SOFTWARE.
 #ifndef UITABLEVIEWDELEGATE_H
 #define UITABLEVIEWDELEGATE_H
 #include "..\Cocos\Cocos.h"
-class UITableViewDelegate :public CCObject
+class UITableViewDelegate :public NSObject
 {
 };
 #endif

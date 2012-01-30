@@ -18,46 +18,45 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef NSARRAY_H
-#define NSARRAY_H
-#include "NSObject.h"
-#include "Foundation.h"
-#include <stdarg.h>
-#include <cocos2d.h>
-using namespace cocos2d;
-class NSArray : public NSObject
+#include "UIPinchGestureRecognizer.h"
+#include "UITouch.h"
+UIPinchGestureRecognizer*
+	UIPinchGestureRecognizer::alloc()
 {
-public:
-	CCArray* ref;
-	static NSArray*
-		alloc ();
-	NSArray* 
-		initWithObjects (NSObject* , ...);
-	NSArray*
-		initWithObject(NSObject* );
-	static NSArray*
-		array();
-	static NSArray*
-		arrayWithCapacity(NSUInteger );
-	    NSArray();
-		 
-		NSArray(NSUInteger num);
-	NSObject* 
-		objectAtIndex(NSUInteger index);
- 
-    NSObject* 
-		randomObject();
-	inline bool
-		containsObject(NSObject* obj){ return ref->containsObject(obj);}
-	inline void
-		addObject(NSObject* obj){ ref->addObject(obj);}
-	inline void 
-		retain(){ ref->retain();}
-	inline NSUInteger 
-		count() { ref->count();}
-	inline NSObject* 
-		lastObject(){ return (NSObject* )ref->lastObject();}
-	inline NSUInteger
-		indexOfObject(NSObject* obj){return ref->indexOfObject(obj);}
-};
-#endif
+	UIPinchGestureRecognizer* mem = new UIPinchGestureRecognizer();
+
+	if(mem)
+	{
+		mem->autorelease();
+	}else{
+		NS_SAFE_DELETE(mem);
+	}
+	return mem;
+}
+UIPinchGestureRecognizer*
+	UIPinchGestureRecognizer::initWithTarget_action(SelectorProtocol* ctarget,SEL_CallFuncND cselector)
+{
+	self->m_pListener = ctarget;
+	self->m_pSelector = cselector;
+	return self;
+}
+void
+	UIPinchGestureRecognizer::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
+{
+	self->state = UIGestureRecognizeStateBegan;
+	
+	forSet(UITouch* ,touch ,touches)
+//		touch->location;
+	forEnd
+}
+void
+	UIPinchGestureRecognizer::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
+{
+	forSet(UITouch* ,touch ,touches)
+	//	printf("");
+	forEnd
+}
+void
+	UIPinchGestureRecognizer::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+{
+}

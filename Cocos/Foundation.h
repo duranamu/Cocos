@@ -34,6 +34,8 @@ THE SOFTWARE.
 #define nil NULL
 #define ccSelector(__FUNC__) (SEL_CallFuncND)(&__FUNC__)
 #define ccCast(__VAR__,__INST__) __VAR__ c##__INST__ = (__VAR__) __INST__;
+#define nsSuper(__VAR__)  __VAR__ super = (__VAR__) self;
+#define super(__VAR__) ((__VAR__)self)
 
 #define forArray( __nsArray__ ) do { CCArray* __array__ = __nsArray__->ref ; \
 	CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
@@ -41,14 +43,39 @@ THE SOFTWARE.
 #define forEnd   }}while(0);
 
 #define For(__VAR__,__INST__,__NSARR__) forArray(__NSARR__) eachObject(__VAR__,__INST__)
-#define ccFor(__VAR__,__INST__,__NSARR__) forCCArray(__NSARR__) eachObject(__VAR__,__INST__)
+#define ccFor( __VAR__,__INST__,__NSARR__) forCCArray(__NSARR__) eachObject(__VAR__,__INST__)
+#define ccForEnd  }}while(0);
 
 #define fordict(__VAR__,__INST__,__DICT__) \
 	do{  __DICT__->ref->begin();__VAR__ __INST__;while(__INST__ = (__VAR__) __DICT__->ref->next()){	 
+#define fordictEnd }}while(0);
+
+#define forSet(__var__ , __inst__ , __set__) \
+	do { CCSetIterator __it__ = __set__->begin(); \
+	while( (__it__) != __set__->end()){          \
+			__var__ __inst__ = (__var__ ) (*__it__); __it__++; if(!__inst__) break;
 
 #define nss(__STR__) new NSString(__STR__)
 #define vid void* 
 #define self this
 
+#define NS_SAFE_DELETE(__PTR__) CC_SAFE_DELETE(__PTR__)
 #define NSNotFound UINT_MAX;
+
+#ifdef __AMD64__
+	typedef long NSInteger;
+#else
+	typedef int NSInteger;
+#endif
+
+#ifdef __AMD64__
+	typedef unsigned long NSUInteger;
+#else
+	typedef unsigned int NSUInteger;
+#endif
+typedef struct _NSRange {
+    NSUInteger location;
+    NSUInteger length;
+} NSRange;
+typedef double NSTimeInterval ;
 #endif

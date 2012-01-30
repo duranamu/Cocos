@@ -24,6 +24,7 @@ THE SOFTWARE.
 #include "UIResponder.h"
 #include "UITouch.h"
 #include  "UIIndexPath.h"
+#include "UITapGestureRecognizer.h"
 class UIView :public UIResponder 
 {
 public:
@@ -31,6 +32,7 @@ public:
 	{
 		membersheet =  NSArray::arrayWithCapacity(4);
 		membersheet->retain();
+		self->recognizerSheet = nil;
 	}
 	~UIView()
 	{
@@ -66,19 +68,27 @@ virtual void
  void 
 	followPlayer(CCPoint3D*);
  void 
-	touchesBegin_withEvent(CCSet* touches ,UIEvent* events) { };
+	touchesBegin_withEvent(CCSet*  ,UIEvent* );
+ void
+	 touchesMoved_withEvent(CCSet*  ,UIEvent* );
+ void
+	 touchesEnded_withEvent(CCSet*  ,UIEvent* ) ;
  bool 
 	 triggerableforTouch(UITouch* );
  bool
 	 triggerableforTouch_parentSprite(UITouch* touch,CCSprite* parent);
- void moveByPoint(CCPoint );
+ void
+	 moveByPoint(CCPoint );
 
+ virtual void
+	 addGestureRecognizer(UIGestureRecognizer*);
  	NSArray* membersheet;
 	CCSprite* sprite;
 	SelectorProtocol* listener;
 	SEL_CallFuncND  selector;
 	ccSynthesize( UIIndexPath* , indexPath);
 	UIView* contentView;
-	
+	UIGestureRecognizer* m_pRecognizer;
+	NSArray* recognizerSheet;
 };
 #endif

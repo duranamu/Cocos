@@ -20,16 +20,16 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef NSNUMBER_H
 #define NSNUMBER_H
-#endif
 #include <cocos2d.h>
 #include <CCObject.h>
+#include "Foundation.h"
 #include "NSObject.h"
 using namespace cocos2d;
 class NSNumber : public NSObject
 {
 public :
 	 union {
-		int intVal;
+	   NSInteger intVal;
 		char charVal;
 		float floatVal;
 		bool boolVal;
@@ -96,3 +96,4 @@ public :
 	  return newVal;
   }
 };
+#endif

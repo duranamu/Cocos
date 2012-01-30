@@ -27,10 +27,17 @@ typedef enum UITableViewStyle{
 	UITableViewSylePlain = 0
 	,UITableViewSyleDefault
 };
+typedef enum UITableViewCellAccessory{
+	UITableViewCellAccessoryDefault = 0,
+	UITableViewCellAccessoryDisclosureIndicator ,
+	UITableViewCellAccessoryDetailDisclosureButton
+};
 class UITableViewCell :public UIView 
 {
 	UITableViewStyle style ;
+	ccProperty ( UITableViewCellAccessory ,accessoryType  );
 	CCString* uid;
+	CCSprite* accessory ;
 public :
 	CCLabelTTF* textLabel;
 	UIImageView* imageView;

@@ -20,22 +20,26 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UITOUCH_H
 #define UITOUCH_H
-#include "..\Cocos\Cocos.h"
-typedef enum UITouchPhase{
+#include "..\Quartz\Quartz.h"
+typedef enum {
+    UITouchPhaseBegan,
+    UITouchPhaseMoved,
+    UITouchPhaseStationary,
+    UITouchPhaseEnded,
+    UITouchPhaseCancelled,
 	UITouchPhasePending,
-	UITouchPhaseBegin ,
-	UITouchPhaseMoved ,
-	UITouchPhaseEnded ,
-
-};
+} UITouchPhase;
 class UITouch : public CCObject
 {
 public :
-	CCPoint locationInView;
-	float timestamp ;
+	ccSynthesize(CGPoint, location);
+	ccSynthesize(CGFloat , timestamp );
 	UITouchPhase phase;
-	CCPoint deltaMove;
-	
+	CGPoint deltaMove;
+	NSArray* gestureRecognizers;
+
 	static UITouch* touchWithPhase(UITouchPhase phase);
+	UITouch();
+	~UITouch();
 };
 #endif

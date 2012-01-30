@@ -33,3 +33,11 @@ UITouch*
 	}
 		return touch;
 }
+	UITouch::UITouch()
+{
+	self->gestureRecognizers = NSArray::array();
+}
+	UITouch::~UITouch()
+{
+	self->gestureRecognizers->release();
+}

@@ -18,46 +18,30 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef NSARRAY_H
-#define NSARRAY_H
-#include "NSObject.h"
-#include "Foundation.h"
-#include <stdarg.h>
-#include <cocos2d.h>
-using namespace cocos2d;
-class NSArray : public NSObject
+#ifndef UITAPGESTURERECOGNIZER_H
+#define UITAPGESTURERECOGNIZER_H
+#include "..\Cocos\Cocos.h"
+#include "UIEvent.h"
+#include "UIGestureRecognizer.h"
+class UITapGestureRecognizer :public UIGestureRecognizer 
 {
+protected:
+	ccSynthesize (NSUInteger ,numberOfTapsRequired );
+	ccSynthesize (NSUInteger ,numberOfTapsAcquired );
+	ccSynthesize (float ,tapStartTime );
+	ccSynthesize (float ,tapStartX );
+	ccSynthesize (float ,tapStartY );
 public:
-	CCArray* ref;
-	static NSArray*
-		alloc ();
-	NSArray* 
-		initWithObjects (NSObject* , ...);
-	NSArray*
-		initWithObject(NSObject* );
-	static NSArray*
-		array();
-	static NSArray*
-		arrayWithCapacity(NSUInteger );
-	    NSArray();
-		 
-		NSArray(NSUInteger num);
-	NSObject* 
-		objectAtIndex(NSUInteger index);
- 
-    NSObject* 
-		randomObject();
-	inline bool
-		containsObject(NSObject* obj){ return ref->containsObject(obj);}
-	inline void
-		addObject(NSObject* obj){ ref->addObject(obj);}
-	inline void 
-		retain(){ ref->retain();}
-	inline NSUInteger 
-		count() { ref->count();}
-	inline NSObject* 
-		lastObject(){ return (NSObject* )ref->lastObject();}
-	inline NSUInteger
-		indexOfObject(NSObject* obj){return ref->indexOfObject(obj);}
+	static UITapGestureRecognizer*
+		alloc();
+	UITapGestureRecognizer*
+		initWithTarget_action(SelectorProtocol* ,SEL_CallFuncND);
+	UITapGestureRecognizer();
+	virtual void 
+		 touchesBegin_withEvent(CCSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
 };
 #endif

@@ -37,7 +37,7 @@ NSArray*
 		self->ref->addObject(msg);
 
 	va_list argp;
-	int argno = 0;
+	NSInteger argno = 0;
 	NSObject* para;
 
 	va_start(argp , msg);
@@ -66,7 +66,7 @@ NSArray::initWithObject(NSObject* obj)
 	return self;
 }
 NSArray*
-	NSArray::arrayWithCapacity(unsigned int num)
+	NSArray::arrayWithCapacity(NSUInteger num)
 {
 	NSArray* mem =  new NSArray(num);
 	if(!mem )
@@ -75,7 +75,7 @@ NSArray*
 	}
 	return mem;
 }
-NSArray::NSArray(unsigned int num)
+NSArray::NSArray(NSUInteger num)
 {
 	ref = CCArray::arrayWithCapacity(num);
 }
@@ -83,7 +83,7 @@ NSArray::NSArray()
 {
 	ref = CCArray::array();
 }
-NSObject* NSArray::objectAtIndex(unsigned int index)
+NSObject* NSArray::objectAtIndex(NSUInteger index)
 {
 	return (NSObject*) ref->objectAtIndex(index);
 }
@@ -91,4 +91,9 @@ NSObject*
 	NSArray::randomObject()
 {
 	return (NSObject*) ref->randomObject();
+}
+NSArray*
+	NSArray::array()
+{
+	return alloc();
 }

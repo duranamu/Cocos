@@ -21,10 +21,15 @@ THE SOFTWARE.
 #ifndef UIEVENT_H
 #define UIEVENT_H
 #include "..\Cocos\Cocos.h"
-//#include "UITouch.h"
+typedef enum {
+    UIEventTypeTouches,
+    UIEventTypeMotion,
+    UIEventTypeRemoteControl,
+} UIEventType;
 class UIEvent : public CCObject
 {
 	CCSet*  m_set;
+	UIEventType type;
 public:
 	UIEvent(CCSet* set)
 	{

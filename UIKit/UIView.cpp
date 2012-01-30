@@ -34,16 +34,16 @@ bool
 {
 	if(!sprite->getParent())
 	{
-	 int touchx = touch->locationInView.x ;
-	 int touchy = touch->locationInView.y;
-	 int spritex =  sprite->getPosition().x ;
-	 int offx = touchx - spritex;
-	 int halfSpriteWidth = sprite->getTexture()->getPixelsWide()/2;
-	 int halfSpriteHeight = sprite->getTexture()->getPixelsHigh()/2;
+	NSInteger touchx = touch->getlocation().x ;
+	NSInteger touchy = touch->getlocation().y;
+	NSInteger spritex =  sprite->getPosition().x ;
+	NSInteger offx = touchx - spritex;
+	NSInteger halfSpriteWidth = sprite->getTexture()->getPixelsWide()/2;
+	NSInteger halfSpriteHeight = sprite->getTexture()->getPixelsHigh()/2;
 	 if(abs(offx) < halfSpriteWidth)
 	 {
-		 int spritey = sprite->getPosition().y;
-		 int offy = touchy - spritey;
+		NSInteger spritey = sprite->getPosition().y;
+		NSInteger offy = touchy - spritey;
 		 if(abs(offy) < halfSpriteHeight )
 		 {
 			 return true;
@@ -57,16 +57,16 @@ bool
 bool
 	UIView::triggerableforTouch_parentSprite(UITouch* touch , CCSprite* parent)
 {
-	int touchx = touch->locationInView.x  ;
-	 int touchy = touch->locationInView.y;
-	 int spritex =  sprite->getPosition().x + parent->getPosition().x;
-	 int offx = touchx - spritex;
-	 int halfSpriteWidth = sprite->getTexture()->getPixelsWide()/2;
-	 int halfSpriteHeight = sprite->getTexture()->getPixelsHigh()/2;
+	NSInteger touchx = touch->getlocation().x  ;
+	NSInteger touchy = touch->getlocation().y;
+	NSInteger spritex =  sprite->getPosition().x + parent->getPosition().x;
+	NSInteger offx = touchx - spritex;
+	NSInteger halfSpriteWidth = sprite->getTexture()->getPixelsWide()/2;
+	NSInteger halfSpriteHeight = sprite->getTexture()->getPixelsHigh()/2;
 	 if(abs(offx) < halfSpriteWidth)
 	 {
-		 int spritey = sprite->getPosition().y + parent->getPosition().y;
-		 int offy = touchy - spritey;
+		NSInteger spritey = sprite->getPosition().y + parent->getPosition().y;
+		NSInteger offy = touchy - spritey;
 		 if(abs(offy) < halfSpriteHeight )
 		 {
 			 return true;
@@ -82,4 +82,38 @@ void
 	CCPoint position = this->sprite->getPosition();
 	position.y += point.y;
 	this->sprite->setPosition(position);
+}
+void 
+	UIView::addGestureRecognizer(UIGestureRecognizer* gesture)
+{
+	if(!self->recognizerSheet)
+	{
+		self->recognizerSheet = NSArray::arrayWithCapacity(2);
+		self->recognizerSheet->retain();
+	}
+	self->recognizerSheet->addObject(gesture);
+}
+void
+	UIView::touchesBegin_withEvent(CCSet* touches ,UIEvent* events) 
+{
+	if(self->recognizerSheet)
+	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
+		recognizer->touchesBegin_withEvent(touches,events);
+	forCCEnd
+}
+void
+	UIView::touchesMoved_withEvent(CCSet* touches ,UIEvent* events) 
+{
+	if(self->recognizerSheet)
+	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
+		recognizer->touchesMoved_withEvent(touches,events);
+	forCCEnd	
+}
+void
+	UIView::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+{
+	if(self->recognizerSheet)
+	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
+		recognizer->touchesEnded_withEvent(touches,events);
+	forCCEnd
 }

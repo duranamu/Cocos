@@ -20,7 +20,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIKIT_H
 #define UIKIT_H
-#include "..\Cocos\Cocos.h"
+#include "..\Quartz\Quartz.h"
 #include "UITableView.h"
 #include "UITableViewCell.h"
 #include "UITableViewDataSource.h"
@@ -33,4 +33,6 @@ THE SOFTWARE.
 #include "UIImage.h"
 #include "UIImageView.h"
 #include "UISensorView.h"
+#include "UITapGestureRecognizer.h"
+#include "UIPinchGestureRecognizer.h"
 #endif

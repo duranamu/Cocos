@@ -21,6 +21,7 @@ THE SOFTWARE.
 #include "UITableView.h"
 #include "UIIndexPath.h"
 #include "..\Cocos\Cocos.h"
+#include "UIGestureRecognizer.h"
 UITableView::UITableView()
 {
 	m_indexPath = CCArray::array();
@@ -33,15 +34,15 @@ UITableView::~UITableView()
 void 
 	UITableView::reloadData(NSArray* toShow)
 {
-	int numberOfSection = datasource->numberOfSectionInTableView(this);
+	NSInteger numberOfSection = datasource->numberOfSectionInTableView(this);
 
 	if(sprite)
 		sprite = CCLabelTTF::labelWithString("","Arial",38);
 
-	int offsetsum = 0;
+	NSInteger offsetsum = 0;
 	for(int section=0; section< numberOfSection ;section++ )
 	{
-		int numberOfRow = datasource->tableView_numberOfRowsInSection(this,section);
+	NSInteger numberOfRow = datasource->tableView_numberOfRowsInSection(this,section);
 
 		for(int row = 0; row < numberOfRow ; row++)
 		{
@@ -55,14 +56,12 @@ void
 		{
 			member->imageView->sprite->setPosition(ccp(-30,0));
 			cellsprite->addChild(member->imageView->sprite);
-
 		}
 		if(member->contentView)
 		{
 			//member->contentView->membersheet
 		}
-
-		cellsprite ->setPosition(ccp( 240 ,-80 + offsetsum));
+		cellsprite ->setPosition(ccp( 260 ,-60 + offsetsum));
 		sprite->addChild(cellsprite);
 		offsetsum += 68;
 		toShow->addObject(member);
@@ -91,6 +90,7 @@ void
 	For(UITableViewCell*,uiview,this->membersheet)
 		uiview->touchesBegin_withEvent(touches,events);
 	forCCEnd
+
 }
 void 
 	UITableView::touchesEnded_withEvent(CCSet* touches ,UIEvent* events) 
@@ -98,6 +98,7 @@ void
 	For(UITableViewCell*,uiview,this->membersheet)
 		uiview->touchesEnded_withEvent(touches,events);
 	forCCEnd
+	
 };
 void 
 	UITableView::touchesMoved_withEvent(CCSet* touches ,UIEvent* events) 

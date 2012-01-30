@@ -31,7 +31,7 @@ UIImageView*
 
 	return pimageView;
 }
-UIImageView::UIImageView(UIImage* image)
+	UIImageView::UIImageView(UIImage* image)
 {
 	sprite = CCSprite::spriteWithTexture(image);
 };
@@ -55,15 +55,13 @@ UIImageView*
 	UIImageView::viewWithFile(NSString* str )
 {
 	UIImageView* pimageView = new UIImageView();
-
 	if(!pimageView)
 	{
 		CC_SAFE_DELETE(pimageView);
 	}else{
-		pimageView->sprite =CCSprite::spriteWithFile(str->description().c_str());
+		pimageView->sprite = CCSprite::spriteWithFile(str->description().c_str());
 		pimageView->sprite->retain();
 	}
-
 	return pimageView;
 }
 void

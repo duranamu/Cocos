@@ -61,13 +61,24 @@ THE SOFTWARE.
 		self->imageView = new UIImageView();
 		self->contentView = new UIView();
 		self->retain();
+		self->accessoryType = UITableViewCellAccessoryDefault;
 	}
 void 
 	UITableViewCell::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
 {
-	if(this->triggerableforTouch((UITouch*)touches->anyObject()))
+	UITouch* touch = (UITouch*)touches->anyObject();
+
+	bool isCildTrigger = false;
+	For(UIView* , child , self->membersheet )
+		if(child->triggerableforTouch(touch))
+			isCildTrigger = true;
+	forEnd
+		if(imageView->triggerableforTouch(touch))
+			isCildTrigger = true;
+
+	if(this->triggerableforTouch(touch) | isCildTrigger)
 	{
-		this->sprite->setScale(1.3f);
+		//this->sprite->setScale(1.3f);
 		(listener->*selector)( (CCNode*)listener , this);
 	}
 }
@@ -93,4 +104,35 @@ UITableViewCell*
 		listener = clistener;
 		selector = cselector;
 		return this;
+}
+void 
+	UITableViewCell::setaccessoryType(UITableViewCellAccessory var)
+{
+	switch(var)
+	{
+		case UITableViewCellAccessoryDisclosureIndicator:
+		{
+			self->accessory = CCSprite::spriteWithFile("disclosure_indicator.png");
+			self->sprite->addChild(self->accessory);
+			self->accessory->setPosition(ccp(240,20));
+			break;
+		}
+		case UITableViewCellAccessoryDetailDisclosureButton:
+		{
+			self->accessory = CCSprite::spriteWithFile("detail_disclosure_button.png");
+			self->sprite->addChild(self->accessory);
+			self->accessory->setPosition(ccp(240,20));
+			break;
+		}
+		default:
+		{
+			break;
+		}
+	}
+
+}
+UITableViewCellAccessory
+	UITableViewCell::getaccessoryType()
+{
+	return self->accessoryType;
 }

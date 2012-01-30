@@ -61,13 +61,14 @@ void
 	if(!isRighthandTracked) 
 		isRighthandTracked = true;
 	ccCast(CCPoint3D*,data);
-
 	m_handz = cdata->z;
 	m_handx = cdata->x;
 	m_handy = 480 - cdata->y;
 
-	controller_righthandData(sender,cdata);
+	if(self->righthand_clicked_marker )
+		self->righthand_clicked_marker->followPlayer(cdata);
 
+	controller_righthandData(sender,cdata);
 	cdata->autorelease();
 } 
 UITouchPhase 
@@ -76,24 +77,24 @@ UITouchPhase
 	float deltahandz ;
 	deltahandz = g_lasthandz - handz   ;
 	g_lasthandz = handz;
-	int velocity = deltahandz / time;
+	NSInteger velocity = deltahandz / time;
 	velocity = (velocity >> 5);
 
 	float deltahandzVelocity;
 	deltahandzVelocity = g_lasthandzVelocity - velocity  ;
 	g_lasthandzVelocity = velocity;	
-	int acceleration = deltahandzVelocity /time;
+	NSInteger acceleration = deltahandzVelocity /time;
 	acceleration = (acceleration >>6);
 
-	if(velocity > 30 & acceleration < 2)
+	if(velocity > 40 & acceleration < 0)
 	{		
-		if( menuTouchPhase ==  UITouchPhasePending)
+		if( menuTouchPhase ==  UITouchPhasePending )
 		{
-			return menuTouchPhase = UITouchPhaseBegin;
+			return menuTouchPhase = UITouchPhaseBegan;
 		}else{
 			return menuTouchPhase;
 		}
-	}else if (velocity < -5 & acceleration < 3){
+	}else if (velocity < 0 & acceleration < 5){
 		if(menuTouchPhase == UITouchPhaseMoved)
 		{
 			return menuTouchPhase = UITouchPhaseEnded;
@@ -104,7 +105,7 @@ UITouchPhase
 		if( menuTouchPhase ==  UITouchPhasePending)
 		{
 			return UITouchPhasePending;
-		}else if (menuTouchPhase ==  UITouchPhaseBegin){
+		}else if (menuTouchPhase ==  UITouchPhaseBegan){
 			return menuTouchPhase =  UITouchPhaseMoved;
 		}else if (menuTouchPhase ==  UITouchPhaseMoved){
 			return menuTouchPhase ;
@@ -120,36 +121,47 @@ void
 	{
 		UITouchPhase ability; ;
 		ability = touchPhaseforTime_handz(time,m_handz);
-		if(ability == UITouchPhaseBegin | ability == UITouchPhaseEnded )
+		if(ability == UITouchPhaseBegan | ability == UITouchPhaseEnded )
 		{
 			 UITouch* touch = UITouch::touchWithPhase(ability);
-			 touch->locationInView = ccp(m_handx , m_handy);
+			 touch->settimestamp(time);
+			 touch->setlocation ( ccp( m_handx , m_handy ));
+			 UITouch* lefthand_touch = UITouch::touchWithPhase(ability);
+			 lefthand_touch->settimestamp(time);
+			 lefthand_touch->setlocation ( ccp( ml_handx , ml_handy ));
 			 CCSet* set = new CCSet();
+			 set->addObject(lefthand_touch);
 			 set->addObject(touch);
-			 UIEvent* events = new UIEvent(set);
-			 if(ability == UITouchPhaseBegin)
+			 UIEvent* events = new UIEvent( set );
+			 if( ability == UITouchPhaseBegan)
 			 {
 				 touchStartx = m_handx;
 				 touchStarty = m_handy;
-				touchStartTime = time;
+				 touchStartTime = time;
 				 this->touchesBegin_withEvent(set,events);
-			 }else if (ability == UITouchPhaseEnded )
+			 }else if (ability == UITouchPhaseEnded)
 				 this->touchesEnded_withEvent(set,events);
+			 events->release();
+			 set->release();
 		}else if (ability == UITouchPhaseMoved )
 	    {
 			 UITouch* touch = UITouch::touchWithPhase(ability);
-			 touch->locationInView = ccp(m_handx , m_handy);
+			 touch->settimestamp(time);
+			 touch->setlocation (ccp(m_handx , m_handy ));
 			 CCSet* set = new CCSet();
 			 set->addObject(touch);
 			 UIEvent* events = new UIEvent(set);
 			 this->touchesMoved_withEvent( set , events );
+			 events->release();
+			 set->release();
 		}
 	}
 }
-
 void 
 	UIViewController::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
 {
+	self->view->touchesBegin_withEvent(touches,events);
+
 	For(UIView*,uiview,this->view->membersheet)
 		uiview->touchesBegin_withEvent(touches,events);
 	forCCEnd
@@ -158,6 +170,7 @@ void
 	UIViewController::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
 {
 	newTouchSession = true;
+	self->view->touchesEnded_withEvent(touches,events);
 	For(UIView*,uiview,this->view->membersheet)
 		uiview->touchesEnded_withEvent(touches,events);
 	forCCEnd
@@ -165,19 +178,21 @@ void
 void 
 	UIViewController::touchesMoved_withEvent(CCSet* touches ,UIEvent* events )
 {
+	self->view->touchesMoved_withEvent(touches,events);
+
 	UITouch* touch = (UITouch*) touches->anyObject();
 	if(touchStartx && touchStarty)
 	{
-	float x = touch->locationInView.x;
-	float y =  touch->locationInView.y;
+	float x = touch->getlocation().x;
+	float y =  touch->getlocation().y;
 	float moveSinceTouchX = fabsf( x - t_lasthandx );
 	float moveSinceTouchY = 1.5*( y - t_lasthandy);
 	t_lasthandx = x;
 	t_lasthandy = y;
-	char var[120];
+	/*char var[120];
 	sprintf(var,"%3.0f %3.0f",moveSinceTouchX,moveSinceTouchY);
 	CCLabelTTF* ttf =(CCLabelTTF*)watchVariableView->sprite;
-	ttf->setString(var);
+	ttf->setString(var);*/
 	if(newTouchSession)
 	{
 		newTouchSession = false;
@@ -189,4 +204,12 @@ void
 	For(UIView*,uiview,this->movableView->membersheet)
 		uiview->touchesMoved_withEvent(touches,events);
 	forCCEnd
+}
+void
+	UIViewController::predo_controller_lefthandData(CCNode* sender , vid data)
+{
+	ccCast(CCPoint3D*,data);
+	ml_handz = cdata->z;
+	ml_handx = cdata->x;
+	ml_handy = 480 - cdata->y;
 }

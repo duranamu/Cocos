@@ -20,15 +20,13 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIINDEXPATH_H
 #define UIINDEXPATH_H
-
-#include <cocos2d.h>
-using namespace cocos2d;
+#include "../Cocos/Cocos.h"
 class UIIndexPath :public CCObject
 {
 public:
-	int section;
-	int row;
-	UIIndexPath(int i_section,int i_row)
+NSInteger section;
+NSInteger row;
+	UIIndexPath(NSInteger i_section,NSInteger i_row)
 	{
 		section = i_section;
 		row = i_row;
