@@ -25,21 +25,20 @@ THE SOFTWARE.
 class UIPinchGestureRecognizer : public UIGestureRecognizer
 {
 	ccSynthesize(UIGestureRecognizeState,state);
-	ccSynthesize(float ,scale);
+	ccSynthesize(CGFloat ,scale);
+	ccSynthesize(CGFloat , velocity);
 public:
 	static UIPinchGestureRecognizer* 
 		alloc();
 	UIPinchGestureRecognizer*
 		initWithTarget_action(SelectorProtocol* ,SEL_CallFuncND);
 	virtual void 
-		 touchesBegin_withEvent(CCSet* touches ,UIEvent* events);
+		 touchesBegin_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 
-		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
+		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 
-		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
+		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
 
-	 CGFloat startScaleOfHands;
-	 
-	 CGPoint gestureStartPoint;
+	 CGFloat gestureStartDistance;
 };
 #endif

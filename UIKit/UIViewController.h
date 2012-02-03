@@ -29,7 +29,7 @@ THE SOFTWARE.
 #define TOUCH_FUNC
 
 #endif
-class UIViewController :public CCNode ,UIResponder
+class UIViewController :public CCNode , public UIResponder ,public UIView
 {
 public:
 	UIViewController()
@@ -71,11 +71,11 @@ void
 CCSprite*  
 	renderTargetforHost();
 virtual void 
-	touchesBegin_withEvent(CCSet* touches ,UIEvent* events);
+	touchesBegin_withEvent(NSSet* touches ,UIEvent* events);
 virtual void 
-	touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
+	touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
 virtual void 
-	touchesEnded_withEvent(CCSet* touches ,UIEvent* events) ;
+	touchesEnded_withEvent(NSSet* touches ,UIEvent* events) ;
 virtual void 
 	controller_torsoData(CCNode* ,CCPoint3D*){};
 virtual void 
@@ -125,5 +125,7 @@ protected:
 	float t_lasthandx;
 	float t_lasthandy;
 	bool newTouchSession;
+	ccSynthesize
+		(NSString*,title);
 };
 #endif

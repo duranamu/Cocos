@@ -28,7 +28,7 @@ UITableView::UITableView()
 }
 UITableView::~UITableView()
 {
-	//membersheet->release();
+	//subviews->release();
 	//m_indexPath->release();
 }
 void 
@@ -49,7 +49,7 @@ void
 		UIIndexPath* path = new UIIndexPath(section,row);
 		UITableViewCell* member = datasource->tableView_cellForRowAtIndexPath(this,path);
 		member->retain();
-		membersheet->addObject(member);
+		subviews->addObject(member);
 		CCSprite* cellsprite = member->getSprite();
 
 		if(member->imageView)
@@ -59,7 +59,7 @@ void
 		}
 		if(member->contentView)
 		{
-			//member->contentView->membersheet
+			//member->contentView->subviews
 		}
 		cellsprite ->setPosition(ccp( 260 ,-60 + offsetsum));
 		sprite->addChild(cellsprite);
@@ -67,7 +67,7 @@ void
 		toShow->addObject(member);
 		}
 	}
-	membersheet->retain();
+	subviews->retain();
 }
 UITableViewCell* 
 	UITableView::dequeueReusableCellWithIdentifier(CCString* uid)
@@ -85,25 +85,31 @@ bool
 		return false;
 }
 void 
-	UITableView::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
+	UITableView::touchesBegin_withEvent(NSSet* touches ,UIEvent* events)
 {
-	For(UITableViewCell*,uiview,this->membersheet)
+	For(UITableViewCell*,uiview,this->subviews)
 		uiview->touchesBegin_withEvent(touches,events);
 	forCCEnd
 
 }
 void 
-	UITableView::touchesEnded_withEvent(CCSet* touches ,UIEvent* events) 
+	UITableView::touchesEnded_withEvent(NSSet* touches ,UIEvent* events) 
 {
-	For(UITableViewCell*,uiview,this->membersheet)
+	For(UITableViewCell*,uiview,this->subviews)
 		uiview->touchesEnded_withEvent(touches,events);
 	forCCEnd
 	
 };
 void 
-	UITableView::touchesMoved_withEvent(CCSet* touches ,UIEvent* events) 
+	UITableView::touchesMoved_withEvent(NSSet* touches ,UIEvent* events) 
 {
-	For(UITableViewCell*,uiview,this->membersheet)
+	For(UITableViewCell*,uiview,this->subviews)
 		uiview->touchesMoved_withEvent(touches,events);
 	forCCEnd
 };
+//todo tableview needs sprite while blanck image itself ,but not yet has any ;
+BOOL
+	UITableView::pointInside_withEvent(CGPoint point,UIEvent* evt)
+{
+	return YES;
+}

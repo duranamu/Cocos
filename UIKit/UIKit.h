@@ -35,4 +35,6 @@ THE SOFTWARE.
 #include "UISensorView.h"
 #include "UITapGestureRecognizer.h"
 #include "UIPinchGestureRecognizer.h"
+#include "UIApplication.h"
+#include "UIWindow.h"
 #endif

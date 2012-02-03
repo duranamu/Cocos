@@ -26,10 +26,12 @@ class UIResponder : public NSObject
 {
 public:
 	 virtual void 
-		 touchesBegin_withEvent(CCSet* touches ,UIEvent* events) {};
+		 touchesBegin_withEvent(NSSet* touches ,UIEvent* events) {};
 	 virtual void 
-		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events) {};
+		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events) {};
 	 virtual void 
-		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events) {};
+		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events) {};
+	 virtual BOOL
+		 becomeFirstResponder(void){ return YES;};
 };
 #endif

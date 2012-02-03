@@ -18,30 +18,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UITAPGESTURERECOGNIZER_H
-#define UITAPGESTURERECOGNIZER_H
-#include "..\Cocos\Cocos.h"
-#include "UIEvent.h"
-#include "UIGestureRecognizer.h"
-class UITapGestureRecognizer :public UIGestureRecognizer 
+#include "UIWindow.h"
+void
+	UIWindow::becomeKeyWindow()
 {
-protected:
-	ccSynthesize (NSUInteger ,numberOfTapsRequired );
-	ccSynthesize (NSUInteger ,numberOfTapsAcquired );
-	ccSynthesize (float ,tapStartTime );
-	ccSynthesize (float ,tapStartX );
-	ccSynthesize (float ,tapStartY );
-public:
-	static UITapGestureRecognizer*
-		alloc();
-	UITapGestureRecognizer*
-		initWithTarget_action(SelectorProtocol* ,SEL_CallFuncND);
-	UITapGestureRecognizer();
-	virtual void 
-		 touchesBegin_withEvent(NSSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
-};
-#endif
+	self->keyWindow = YES;
+}

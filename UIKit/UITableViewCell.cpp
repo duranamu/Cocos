@@ -64,34 +64,34 @@ THE SOFTWARE.
 		self->accessoryType = UITableViewCellAccessoryDefault;
 	}
 void 
-	UITableViewCell::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
+	UITableViewCell::touchesBegin_withEvent(NSSet* touches ,UIEvent* events)
 {
 	UITouch* touch = (UITouch*)touches->anyObject();
 
 	bool isCildTrigger = false;
-	For(UIView* , child , self->membersheet )
-		if(child->triggerableforTouch(touch))
+	For(UIView* , child , self->subviews )
+		if(child->canTriggerforTouch(touch))
 			isCildTrigger = true;
 	forEnd
-		if(imageView->triggerableforTouch(touch))
+		if(imageView->canTriggerforTouch(touch))
 			isCildTrigger = true;
 
-	if(this->triggerableforTouch(touch) | isCildTrigger)
+	if(this->canTriggerforTouch(touch) | isCildTrigger)
 	{
 		//this->sprite->setScale(1.3f);
 		(listener->*selector)( (CCNode*)listener , this);
 	}
 }
 void 
-	UITableViewCell::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+	UITableViewCell::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
-	if(this->triggerableforTouch((UITouch*)touches->anyObject()))
+	if(this->canTriggerforTouch((UITouch*)touches->anyObject()))
 	{
 		this->sprite->setScale(1.0f);
 	}
 }
 void 
-	UITableViewCell::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
+	UITableViewCell::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
 	UITouch* touch = (UITouch*) touches->anyObject();
 	this->moveByPoint(touch->deltaMove);

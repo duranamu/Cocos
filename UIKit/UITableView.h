@@ -39,10 +39,12 @@ public:
 	virtual void 
 		reloadData(NSArray* );
 	void 
-		touchesBegin_withEvent(CCSet*  ,UIEvent* );
+		touchesBegin_withEvent(NSSet*  ,UIEvent* );
 	void 
-		 touchesEnded_withEvent(CCSet*  ,UIEvent* );
+		touchesEnded_withEvent(NSSet*  ,UIEvent* );
 	void
-		touchesMoved_withEvent(CCSet*  ,UIEvent* );
+		touchesMoved_withEvent(NSSet*  ,UIEvent* );
+	BOOL
+		pointInside_withEvent(CGPoint point,UIEvent* evt);
 };
 #endif

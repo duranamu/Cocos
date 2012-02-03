@@ -30,8 +30,8 @@ class UIView :public UIResponder
 public:
 	UIView()
 	{
-		membersheet =  NSArray::arrayWithCapacity(4);
-		membersheet->retain();
+		subviews =  NSArray::array();
+		subviews->retain();
 		self->recognizerSheet = nil;
 	}
 	~UIView()
@@ -40,16 +40,17 @@ public:
 UIView*
 	anyView()
 	{
-		if(membersheet)
+		if(subviews)
 		{
-			return (UIView*) membersheet->objectAtIndex(0);
+			return (UIView*) subviews->objectAtIndex(0);
 		}
 		return nil;
 	}
 void
 	addSubView(UIView* view)
 	{
-		membersheet->addObject(view);
+		subviews->addObject(view);
+		view->setsuperview(self);
 	}
 virtual void 
 	viewDidRender(CCLayer* hostLayer);
@@ -68,21 +69,24 @@ virtual void
  void 
 	followPlayer(CCPoint3D*);
  void 
-	touchesBegin_withEvent(CCSet*  ,UIEvent* );
+	touchesBegin_withEvent(NSSet*  ,UIEvent* );
  void
-	 touchesMoved_withEvent(CCSet*  ,UIEvent* );
+	 touchesMoved_withEvent(NSSet*  ,UIEvent* );
  void
-	 touchesEnded_withEvent(CCSet*  ,UIEvent* ) ;
+	 touchesEnded_withEvent(NSSet*  ,UIEvent* ) ;
  bool 
-	 triggerableforTouch(UITouch* );
+	 canTriggerforTouch(UITouch* );
  bool
-	 triggerableforTouch_parentSprite(UITouch* touch,CCSprite* parent);
+	 canTriggerforTouch_parentSprite(UITouch* touch,CCSprite* parent);
  void
 	 moveByPoint(CCPoint );
-
+ virtual BOOL 
+	 pointInside_withEvent(CGPoint,UIEvent*);
+ UIView *
+	hitTest_withEvent(CGPoint, UIEvent *);
  virtual void
-	 addGestureRecognizer(UIGestureRecognizer*);
- 	NSArray* membersheet;
+	addGestureRecognizer(UIGestureRecognizer*);
+ 	NSArray* subviews;
 	CCSprite* sprite;
 	SelectorProtocol* listener;
 	SEL_CallFuncND  selector;
@@ -90,5 +94,7 @@ virtual void
 	UIView* contentView;
 	UIGestureRecognizer* m_pRecognizer;
 	NSArray* recognizerSheet;
+	BOOL hidden;
+	ccSynthesize(UIView*,superview);
 };
 #endif

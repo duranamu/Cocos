@@ -23,14 +23,14 @@ THE SOFTWARE.
 void 
 	UIViewController::viewDidRender(CCLayer* host)
 {
-	For(UIView*,pView,view->membersheet)
+	For(UIView*,pView,view->subviews)
 		pView->viewDidRender(host);
 	forCCEnd
 }
 void 
 	UIViewController::viewReloadData(NSArray* toShow)
 {
-	For(UIView*,pView,view->membersheet)
+	For(UIView*,pView,view->subviews)
 		pView->reloadData(toShow);
 	forCCEnd
 }
@@ -40,14 +40,14 @@ CCSprite*
 	return view->anyView()->getSprite();
 }
 void 
-	UIViewController::predo_controller_torsoData(CCNode* sender,void* data)
+	UIViewController::predo_controller_torsoData(CCNode* sender,vid data)
 {
 	ccCast(CCPoint3D*,data);
 
 	m_torsox = cdata->x;
 	m_torsoy = 480 - cdata->y;
 
-	For(UIView*,m_view,followView->membersheet)
+	For(UIView*,m_view,followView->subviews)
 		m_view->followPlayer(cdata);
 	forCCEnd
 
@@ -56,7 +56,7 @@ void
 	cdata->autorelease();
 }
 void 
-	UIViewController::predo_controller_righthandData(CCNode* sender,void* data)
+	UIViewController::predo_controller_righthandData(CCNode* sender,vid data)
 {
 	if(!isRighthandTracked) 
 		isRighthandTracked = true;
@@ -129,7 +129,7 @@ void
 			 UITouch* lefthand_touch = UITouch::touchWithPhase(ability);
 			 lefthand_touch->settimestamp(time);
 			 lefthand_touch->setlocation ( ccp( ml_handx , ml_handy ));
-			 CCSet* set = new CCSet();
+			 NSSet* set = new NSSet();
 			 set->addObject(lefthand_touch);
 			 set->addObject(touch);
 			 UIEvent* events = new UIEvent( set );
@@ -140,7 +140,7 @@ void
 				 touchStartTime = time;
 				 this->touchesBegin_withEvent(set,events);
 			 }else if (ability == UITouchPhaseEnded)
-				 this->touchesEnded_withEvent(set,events);
+				 self->touchesEnded_withEvent(set,events);
 			 events->release();
 			 set->release();
 		}else if (ability == UITouchPhaseMoved )
@@ -148,35 +148,40 @@ void
 			 UITouch* touch = UITouch::touchWithPhase(ability);
 			 touch->settimestamp(time);
 			 touch->setlocation (ccp(m_handx , m_handy ));
-			 CCSet* set = new CCSet();
+			 UITouch* lefthand_touch = UITouch::touchWithPhase(ability);
+			 lefthand_touch->settimestamp(time);
+			 lefthand_touch->setlocation ( ccp( ml_handx , ml_handy ));
+			 NSSet* set = new NSSet();
 			 set->addObject(touch);
+			 set->addObject(lefthand_touch);
 			 UIEvent* events = new UIEvent(set);
-			 this->touchesMoved_withEvent( set , events );
+			 self->touchesMoved_withEvent( set , events );
 			 events->release();
 			 set->release();
 		}
 	}
 }
 void 
-	UIViewController::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
+	UIViewController::touchesBegin_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->view->touchesBegin_withEvent(touches,events);
 
-	For(UIView*,uiview,this->view->membersheet)
-		uiview->touchesBegin_withEvent(touches,events);
-	forCCEnd
+	UITouch* touch = (UITouch*)touches->anyObject();
+	UIView* receiver = self->view->hitTest_withEvent(touch->getlocation(),events);
+	if(receiver)
+		receiver->touchesBegin_withEvent(touches,events);
 }
 void 
-	UIViewController::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+	UIViewController::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
 	newTouchSession = true;
 	self->view->touchesEnded_withEvent(touches,events);
-	For(UIView*,uiview,this->view->membersheet)
+	For(UIView*,uiview,this->view->subviews)
 		uiview->touchesEnded_withEvent(touches,events);
 	forCCEnd
 }
 void 
-	UIViewController::touchesMoved_withEvent(CCSet* touches ,UIEvent* events )
+	UIViewController::touchesMoved_withEvent(NSSet* touches ,UIEvent* events )
 {
 	self->view->touchesMoved_withEvent(touches,events);
 
@@ -201,7 +206,7 @@ void
 	}
 	}
 
-	For(UIView*,uiview,this->movableView->membersheet)
+	For(UIView*,uiview,this->movableView->subviews)
 		uiview->touchesMoved_withEvent(touches,events);
 	forCCEnd
 }

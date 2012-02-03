@@ -28,12 +28,14 @@ typedef enum {
 } UIEventType;
 class UIEvent : public CCObject
 {
-	CCSet*  m_set;
+	NSSet*  touches;
 	UIEventType type;
 public:
-	UIEvent(CCSet* set)
+	UIEvent(NSSet* set)
 	{
-		m_set = set;
+		self->touches = set;
 	}
+	NSSet *
+		allTouches();
 };
 #endif

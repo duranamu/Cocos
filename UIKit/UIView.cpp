@@ -30,7 +30,7 @@ void
 	sprite->setPosition(ccp(data->x,480 - data->y));
 }
 bool 
-	UIView::triggerableforTouch(UITouch* touch)
+	UIView::canTriggerforTouch(UITouch* touch)
 {
 	if(!sprite->getParent())
 	{
@@ -51,11 +51,11 @@ bool
 	 }
 		return false;
 	}else{
-		return triggerableforTouch_parentSprite(touch,(CCSprite*)sprite->getParent());
+		return canTriggerforTouch_parentSprite(touch,(CCSprite*)sprite->getParent());
 	}
 }
 bool
-	UIView::triggerableforTouch_parentSprite(UITouch* touch , CCSprite* parent)
+	UIView::canTriggerforTouch_parentSprite(UITouch* touch , CCSprite* parent)
 {
 	NSInteger touchx = touch->getlocation().x  ;
 	NSInteger touchy = touch->getlocation().y;
@@ -94,7 +94,7 @@ void
 	self->recognizerSheet->addObject(gesture);
 }
 void
-	UIView::touchesBegin_withEvent(CCSet* touches ,UIEvent* events) 
+	UIView::touchesBegin_withEvent(NSSet* touches ,UIEvent* events) 
 {
 	if(self->recognizerSheet)
 	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
@@ -102,7 +102,7 @@ void
 	forCCEnd
 }
 void
-	UIView::touchesMoved_withEvent(CCSet* touches ,UIEvent* events) 
+	UIView::touchesMoved_withEvent(NSSet* touches ,UIEvent* events) 
 {
 	if(self->recognizerSheet)
 	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
@@ -110,10 +110,41 @@ void
 	forCCEnd	
 }
 void
-	UIView::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+	UIView::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
 	if(self->recognizerSheet)
 	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
 		recognizer->touchesEnded_withEvent(touches,events);
 	forCCEnd
+}
+BOOL
+	UIView::pointInside_withEvent(CGPoint point,UIEvent* evt)
+{
+	UITouch* touch = (UITouch*) evt->allTouches()->anyObject();
+
+	return self->canTriggerforTouch(touch);
+}
+UIView*
+	UIView::hitTest_withEvent(CGPoint point ,UIEvent* evt)
+{
+	UIView* view = self;
+	NSArray* match_stack = NSArray::array();
+
+	if(view->subviews->count())
+	{
+		For(UIView*,dscendant,view->subviews)
+			if(dscendant->pointInside_withEvent(point,evt))
+			{
+				if(dscendant->subviews->count())
+				{
+					UIView* object = dscendant->hitTest_withEvent(point,evt);
+					if(object)
+						match_stack->addObject(object);
+				}else{
+					match_stack->addObject(dscendant);
+				}
+			}
+		forEnd
+	};
+	return (UIView*) match_stack->lastObject();
 }

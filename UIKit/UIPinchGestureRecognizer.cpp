@@ -41,22 +41,40 @@ UIPinchGestureRecognizer*
 	return self;
 }
 void
-	UIPinchGestureRecognizer::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
+	UIPinchGestureRecognizer::touchesBegin_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateBegan;
-	
+	bool fistTouch = true;
+	CGPoint touchLoaction;
 	forSet(UITouch* ,touch ,touches)
-//		touch->location;
+		if(fistTouch)
+		{
+			touchLoaction = touch->getlocation();
+			fistTouch= false;
+		}else{
+			self->gestureStartDistance = CGDistanceMake(touchLoaction,touch->getlocation());
+		}
 	forEnd
 }
 void
-	UIPinchGestureRecognizer::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
+	UIPinchGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
+	self->state = UIGestureRecognizeStateChanged;
+	bool fistTouch = true;
+	CGPoint touchLoaction;
 	forSet(UITouch* ,touch ,touches)
-	//	printf("");
+		if(fistTouch)
+	 	{
+			touchLoaction = touch->getlocation();
+			fistTouch= false;
+		}else{
+			CGFloat distance = CGDistanceMake(touchLoaction,touch->getlocation());
+			self->scale = distance / self->gestureStartDistance;
+		}
 	forEnd
 }
 void
-	UIPinchGestureRecognizer::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+	UIPinchGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
+	self->state = UIGestureRecognizeStateEnded;
 }

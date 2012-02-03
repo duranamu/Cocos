@@ -20,7 +20,6 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef COCOS_H
 #define COCOS_H
-#include <cocos2d.h>
 #include "Foundation.h"
 #include "NSNumber.h"
 #include "CCWrapper.h"
@@ -29,5 +28,4 @@ THE SOFTWARE.
 #include "NSObject.h"
 #include "NSString.h"
 #include "NSDictionary.h"
-using namespace cocos2d;
 #endif

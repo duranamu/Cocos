@@ -50,11 +50,11 @@ public :
 	UITableViewCell* 
 		doInitWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* uid);	
 	void
-		touchesBegin_withEvent(CCSet* touches ,UIEvent* events);
+		touchesBegin_withEvent(NSSet* touches ,UIEvent* events);
 	void
-		touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
+		touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
 	void
-		touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
+		touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
 	UITableViewCell* 
 		doInitWithStyle_reuseIdentifier_target_selector(UITableViewStyle  ,CCString* ,SelectorProtocol*,SEL_CallFuncND);	
 };

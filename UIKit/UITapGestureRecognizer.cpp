@@ -49,7 +49,7 @@ UITapGestureRecognizer*
 	self->m_pSelector = nil;
 }
 void
-	UITapGestureRecognizer::touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
+	UITapGestureRecognizer::touchesBegin_withEvent(NSSet* touches ,UIEvent* events)
 {
 	float newStartTime = ((UITouch*) touches->anyObject())->gettimestamp();
 	if( newStartTime - self->tapStartTime  > 0.005f)
@@ -59,12 +59,12 @@ void
 	self->tapStartTime = newStartTime;
 }
 void
-	UITapGestureRecognizer::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
+	UITapGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
 
 }
 void
-	UITapGestureRecognizer::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+	UITapGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
 	float endTime = ((UITouch*) touches->anyObject())->gettimestamp();
 	float timediff = endTime -  self->tapStartTime ;

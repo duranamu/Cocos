@@ -33,7 +33,7 @@ class UIGestureRecognizer :public UIResponder
 public:
 	SelectorProtocol* m_pListener;
 	SEL_CallFuncND  m_pSelector;
-	ccSynthesize( CCSet* ,touches );
+	ccSynthesize( NSSet* ,touches );
 	ccSynthesize(UIEvent* ,events );
 };
 #endif

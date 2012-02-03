@@ -54,7 +54,7 @@ public:
 	inline void 
 		retain(){ ref->retain();}
 	inline NSUInteger 
-		count() { ref->count();}
+		count() { return ref->count();}
 	inline NSObject* 
 		lastObject(){ return (NSObject* )ref->lastObject();}
 	inline NSUInteger

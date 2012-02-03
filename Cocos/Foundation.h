@@ -21,6 +21,7 @@ THE SOFTWARE.
 #ifndef _FOUNDATION_H
 #define _FOUNDATION_H
 #include <cocos2d.h>
+using namespace cocos2d;
 #include <libxml\xpath.h>
 #include <libxml\parser.h>
 #define forCCArray( __array__)  do { CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
@@ -36,7 +37,7 @@ THE SOFTWARE.
 #define ccCast(__VAR__,__INST__) __VAR__ c##__INST__ = (__VAR__) __INST__;
 #define nsSuper(__VAR__)  __VAR__ super = (__VAR__) self;
 #define super(__VAR__) ((__VAR__)self)
-
+#define vid void*
 #define forArray( __nsArray__ ) do { CCArray* __array__ = __nsArray__->ref ; \
 	CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
 #define eachObject(__VAR__,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
@@ -56,7 +57,6 @@ THE SOFTWARE.
 			__var__ __inst__ = (__var__ ) (*__it__); __it__++; if(!__inst__) break;
 
 #define nss(__STR__) new NSString(__STR__)
-#define vid void* 
 #define self this
 
 #define NS_SAFE_DELETE(__PTR__) CC_SAFE_DELETE(__PTR__)
@@ -78,4 +78,8 @@ typedef struct _NSRange {
     NSUInteger length;
 } NSRange;
 typedef double NSTimeInterval ;
+#define YES 1
+#define NO  0
+//typedef int BOOL
+typedef CCSet NSSet;
 #endif
