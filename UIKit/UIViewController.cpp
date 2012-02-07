@@ -45,24 +45,35 @@ void
 	self->view->touchesBegan_withEvent(touches,events);
 
 	UITouch* touch = (UITouch*)touches->anyObject();
-	UIView* receiver = self->view->hitTest_withEvent(touch->getlocation(),events);
+	receiver = self->view->hitTest_withEvent(touch->getlocation(),events);
 	if(receiver)
+	{
+		if(receiver->recognizerSheet)
+		{
+			For(UIGestureRecognizer* , gr ,receiver->recognizerSheet)
+				gr->touchesBegan_withEvent(touches , events);
+			forCCEnd
+		}
 		receiver->touchesBegan_withEvent(touches,events);
+	}
 }
 void 
 	UIViewController::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
 	newTouchSession = true;
+
 	self->view->touchesEnded_withEvent(touches,events);
 
-	UITouch* touch = (UITouch*)touches->anyObject();
-	UIView* receiver = self->view->hitTest_withEvent(touch->getlocation(),events);
 	if(receiver)
+	{
+		if(receiver->recognizerSheet)
+		{
+			For(UIGestureRecognizer* , gr ,receiver->recognizerSheet)
+				gr->touchesEnded_withEvent(touches , events);
+			forCCEnd
+		}
 		receiver->touchesEnded_withEvent(touches,events);
-
-	/*For(UIView*,uiview,this->view->subviews)
-		uiview->touchesEnded_withEvent(touches,events);
-	forCCEnd*/
+	}
 }
 void 
 	UIViewController::predo_controller_torsoData(CCNode* sender,vid data)
@@ -108,8 +119,14 @@ void
 		uiview->touchesMoved_withEvent(touches,events);
 	forCCEnd
 
-	//UITouch* touch = (UITouch*)touches->anyObject();
-	/*UIView* receiver = self->view->hitTest_withEvent(touch->getlocation(),events);
 	if(receiver)
-		receiver->touchesMoved_withEvent(touches,events);*/
+	{
+		if(receiver->recognizerSheet)
+		{
+			For(UIGestureRecognizer* , gr ,receiver->recognizerSheet)
+				gr->touchesMoved_withEvent(touches , events);
+			forCCEnd
+		}
+		//receiver->touchesMoved_withEvent(touches,events);
+	}
 }

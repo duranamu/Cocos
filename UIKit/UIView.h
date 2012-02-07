@@ -33,11 +33,8 @@ public:
 		subviews =  NSArray::array();
 		subviews->retain();
 		self->recognizerSheet = nil;
-	//	self->sprite = nil;
 	}
-	~UIView()
-	{
-	}
+
 UIView*
 	anyView()
 	{

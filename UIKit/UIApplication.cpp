@@ -56,7 +56,7 @@ void
 			 lefthand_touch->setlocation ( ccp( ml_handx , ml_handy ));
 			 set->addObject(lefthand_touch);
 			 set->addObject(touch);
-			 if( ability == UITouchPhaseBegan)
+			 if( ability == UITouchPhaseBegan )
 			 {
 				 touchStartx = m_handx;
 				 touchStarty = m_handy;

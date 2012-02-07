@@ -72,6 +72,7 @@ void
 			self->scale = distance / self->gestureStartDistance;
 		}
 	forEnd
+		(m_pListener->*m_pSelector)(nil,self);
 }
 void
 	UIPinchGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)

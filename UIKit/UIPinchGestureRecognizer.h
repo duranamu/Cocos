@@ -24,7 +24,6 @@ THE SOFTWARE.
 #include "..\Quartz\Quartz.h"
 class UIPinchGestureRecognizer : public UIGestureRecognizer
 {
-	ccSynthesize(UIGestureRecognizeState,state);
 	ccSynthesize(CGFloat ,scale);
 	ccSynthesize(CGFloat , velocity);
 public:
@@ -32,7 +31,7 @@ public:
 		alloc();
 	UIPinchGestureRecognizer*
 		initWithTarget_action(SelectorProtocol* ,SEL_CallFuncND);
-	virtual void 
+	virtual void
 		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 
 		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);

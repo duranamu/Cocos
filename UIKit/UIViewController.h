@@ -38,7 +38,6 @@ public:
 		followView = new UIView();
 		movableView = new UIView();
 	//	righthand_clicked_marker = UIImageView::viewWithFile(nss("stars.png"));
-
 	}
 virtual void 
 	viewDidLoad(void){}
@@ -89,6 +88,7 @@ protected:
 	float t_lasthandy;
 	bool newTouchSession;
 
+	UIView* receiver ;
 	ccSynthesize
 		(NSString*,title);
 };

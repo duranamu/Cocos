@@ -30,7 +30,15 @@ typedef enum UIGestureRecognizeState
 };
 class UIGestureRecognizer :public UIResponder
 {
+	ccSynthesize(UIGestureRecognizeState,state);
 public:
+    virtual void
+		touchesBegan_withEvent(NSSet* touches ,UIEvent* events){};
+	 virtual void 
+		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events){};
+	 virtual void 
+		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events){};
+
 	SelectorProtocol* m_pListener;
 	SEL_CallFuncND  m_pSelector;
 	ccSynthesize( NSSet* ,touches );

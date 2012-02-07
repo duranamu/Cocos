@@ -35,13 +35,14 @@ public :
 	ccSynthesize
 		(CGPoint, location);
 	ccSynthesize
-		(NSTimeInterval , timestamp );
+		(NSTimeInterval , timestamp);
 	ccSynthesize
 		(UITouchPhase , phase);
 	CGPoint deltaMove;
 	NSArray* gestureRecognizers;
 
-	static UITouch* touchWithPhase(UITouchPhase phase);
+	static UITouch* 
+		touchWithPhase(UITouchPhase phase);
 	UITouch();
 	~UITouch();
 };

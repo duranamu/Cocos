@@ -97,9 +97,9 @@ void
 	UIView::touchesBegan_withEvent(NSSet* touches ,UIEvent* events) 
 {
 	if(self->recognizerSheet)
-	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
-		recognizer->touchesBegan_withEvent(touches,events);
-	forCCEnd
+		For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
+			recognizer->touchesBegan_withEvent(touches,events);
+		forCCEnd
 }
 void
 	UIView::touchesMoved_withEvent(NSSet* touches ,UIEvent* events) 
