@@ -39,7 +39,7 @@ public:
 	virtual void 
 		reloadData(NSArray* );
 	void 
-		touchesBegin_withEvent(NSSet*  ,UIEvent* );
+		touchesBegan_withEvent(NSSet*  ,UIEvent* );
 	void 
 		touchesEnded_withEvent(NSSet*  ,UIEvent* );
 	void

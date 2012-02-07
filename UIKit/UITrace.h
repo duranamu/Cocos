@@ -18,20 +18,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIRESPONDER_H
-#define UIRESPONDER_H
-#include "..\Cocos\Cocos.h"
-#include "UIEvent.h"
-class UIResponder : public NSObject
+#ifndef UISENSE_H
+#define UISENSE_H
+#include "../Cocos/Cocos.h"
+class UITrace : public NSObject
 {
-public:
-	 virtual void 
-		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events) {};
-	 virtual void 
-		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events) {};
-	 virtual void 
-		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events) {};
-	 virtual BOOL
-		 becomeFirstResponder(void){ return YES;};
-};
+	
+}
 #endif

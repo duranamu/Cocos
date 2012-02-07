@@ -22,14 +22,91 @@ THE SOFTWARE.
 #define UIAPPLICATION_H
 #include "../Cocos/Cocos.h"
 #include "UIWindow.h"
-class UIApplication : public NSObject
+#include "UIEvent.h"
+class UIApplication : public CCLayerColor ,public UIView
 {
 public:
+	void 
+		predo_controller_torsoData(CCNode*,vid);
+	void 
+		predo_controller_righthandData(CCNode* ,vid);
+	void
+		predo_controller_lefthandData(CCNode*, vid);
+	UITouchPhase 
+		touchPhaseforTime_handz(ccTime,CGFloat);
+	void 
+		addWindow(UIWindow*);
+	void
+		selectKeyWindow();
+
 	static UIApplication*
 		sharedApplication();
-	UIApplication(){};
-	UIWindow* keyWindow;
-	NSArray* windows;
+	static UIApplication*
+		alloc();
+	UIApplication*
+		init();
+	UIApplication();
+	void
+		senEvent(UIEvent*);
+	void
+		applicationDidUpdate(ccTime);
+
+	NITrackerManager* trackerManager;
+	NITracker* torsoTracker;
+	NITracker* righthandTracker;
+	NITracker* lefthandTracker;
+	ccSynthesize
+		(CGFloat ,g_lasthandz);
+	ccSynthesize
+		(CGFloat ,g_lasthandzVelocity);
+	ccSynthesize
+		(CGFloat ,m_handz);
+	ccSynthesize
+		(CGFloat ,m_handx);
+	ccSynthesize
+		(CGFloat ,m_handy);
+	ccSynthesize
+		(CGFloat ,gl_lasthandz);
+	ccSynthesize
+		(CGFloat ,gl_lasthandzVelocity);
+	ccSynthesize
+		(CGFloat ,ml_handz);
+	ccSynthesize
+		(CGFloat ,ml_handx);
+	ccSynthesize
+		(CGFloat ,ml_handy);
+	ccSynthesize
+		(CGFloat ,m_torsox);
+	ccSynthesize
+		(CGFloat ,m_torsoy);
+	ccSynthesize
+		(BOOL ,isRighthandTracked);
+		
+	UITouchPhase menuTouchPhase;
+	ccSynthesize
+		(CGFloat ,touchStartx);
+	ccSynthesize
+		(CGFloat ,touchStarty);
+	ccTime touchStartTime;
+	ccSynthesize
+		(CGFloat ,t_lasthandx);
+	ccSynthesize
+		(CGFloat ,t_lasthandy);
+	bool newTouchSession;
+	ccSynthesize
+		(UIWindow* , keyWindow);
+	ccSynthesize
+		(NSArray* , windows);
+	ccSynthesize
+		(vid , scene);
+	/*ccSynthesize
+	 (NITrackerManager* , trackerManager);
+	ccSynthesize
+	 (NITracker* ,torsoTracker);
+	ccSynthesize
+	 (NITracker* ,righthandTracker);
+	ccSynthesize
+	  (NITracker* ,lefthandTracker);*/
 };
 int UIApplicationMain (
    int argc,

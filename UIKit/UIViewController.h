@@ -34,31 +34,13 @@ class UIViewController :public CCNode , public UIResponder ,public UIView
 public:
 	UIViewController()
 	{
-		view = new UIView();
+		self->view = new UIView();
 		followView = new UIView();
 		movableView = new UIView();
-		righthand_clicked_marker = UIImageView::viewWithFile(nss("stars.png"));
+	//	righthand_clicked_marker = UIImageView::viewWithFile(nss("stars.png"));
 
-		trackerManager =  NITrackerManager::defaultTrackerManager();
-		torsoTracker =	NITracker::trackerWithTarget_action_joint(this,ccSelector   (UIViewController::predo_controller_torsoData),XN_SKEL_TORSO);
-
-		righthandTracker =	NITracker::trackerWithTarget_action_joint(this,ccSelector   (UIViewController::predo_controller_righthandData),XN_SKEL_RIGHT_HAND);
-
-		lefthandTracker =	NITracker::trackerWithTarget_action_joint(this,ccSelector   (UIViewController::predo_controller_lefthandData),XN_SKEL_LEFT_HAND);
-
-		trackerManager->addTracker(torsoTracker);
-		trackerManager->addTracker(righthandTracker);
-		trackerManager->addTracker(lefthandTracker);
-
-		isRighthandTracked = false;
-		menuTouchPhase = UITouchPhasePending;
-		touchStartx = 0;
-		touchStarty = 0;
-		touchStartTime = 0;
-		t_lasthandx = 0;
-		t_lasthandy = 0;
 	}
-void 
+virtual void 
 	viewDidLoad(void){}
 void 
 	viewDidUnload(void){}
@@ -71,7 +53,7 @@ void
 CCSprite*  
 	renderTargetforHost();
 virtual void 
-	touchesBegin_withEvent(NSSet* touches ,UIEvent* events);
+	touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
 virtual void 
 	touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
 virtual void 
@@ -82,14 +64,6 @@ virtual void
 	controller_righthandData(CCNode* ,CCPoint3D*){};
 void 
 	predo_controller_torsoData(CCNode* ,void*);
-void 
-	predo_controller_righthandData(CCNode* ,void*);
-void 
-	predo_controller_lefthandData(CCNode* ,void*);
-UITouchPhase 
-	touchPhaseforTime_handz(cocos2d::ccTime time, float handz);
-void 
-	controllerDidUpdate(cocos2d::ccTime time);
 public:
 	UIView* view;
 	UIView* followView;
@@ -98,26 +72,15 @@ public:
 	UIView* watchVariableView;
 
 	UIView* righthand_clicked_marker;
-
-	NITrackerManager* trackerManager;
-	NITracker* torsoTracker;
-	NITracker* righthandTracker;
-	NITracker* lefthandTracker;
 protected:
-	float g_lasthandz;
-	float g_lasthandzVelocity;
-	float m_handz;
-	float m_handx;
-	float m_handy;
-	float gl_lasthandz;
-	float gl_lasthandzVelocity;
-	float ml_handz;
-	float ml_handx;
-	float ml_handy;
-	float m_torsox;
-	float m_torsoy;
+	
 	bool isRighthandTracked;
 	UITouchPhase menuTouchPhase;
+
+	ccSynthesize
+		(CGFloat ,m_torsox);
+	ccSynthesize
+		(CGFloat ,m_torsoy);
 	float touchStartx;
 	float touchStarty;
 	ccTime touchStartTime;
@@ -125,6 +88,7 @@ protected:
 	float t_lasthandx;
 	float t_lasthandy;
 	bool newTouchSession;
+
 	ccSynthesize
 		(NSString*,title);
 };

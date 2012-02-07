@@ -32,9 +32,12 @@ typedef enum {
 class UITouch : public CCObject
 {
 public :
-	ccSynthesize(CGPoint, location);
-	ccSynthesize(CGFloat , timestamp );
-	UITouchPhase phase;
+	ccSynthesize
+		(CGPoint, location);
+	ccSynthesize
+		(NSTimeInterval , timestamp );
+	ccSynthesize
+		(UITouchPhase , phase);
 	CGPoint deltaMove;
 	NSArray* gestureRecognizers;
 

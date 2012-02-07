@@ -27,7 +27,16 @@ class UIWindow : public UIView
 	ccSynthesize(UIViewController*,rootViewController);
 	BOOL keyWindow;
 	public:
+		static UIWindow*
+			alloc();
+		UIWindow*
+			init();
+		UIWindow(){ keyWindow = NO;}
 	void
 		becomeKeyWindow();
+	void
+		makeKeyAndVisible();
+	void
+		sendEvent(UIEvent*);
 };
 #endif

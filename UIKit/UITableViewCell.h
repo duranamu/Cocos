@@ -50,7 +50,7 @@ public :
 	UITableViewCell* 
 		doInitWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* uid);	
 	void
-		touchesBegin_withEvent(NSSet* touches ,UIEvent* events);
+		touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
 	void
 		touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
 	void

@@ -64,7 +64,7 @@ THE SOFTWARE.
 		self->accessoryType = UITableViewCellAccessoryDefault;
 	}
 void 
-	UITableViewCell::touchesBegin_withEvent(NSSet* touches ,UIEvent* events)
+	UITableViewCell::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 	UITouch* touch = (UITouch*)touches->anyObject();
 

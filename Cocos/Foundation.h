@@ -82,4 +82,11 @@ typedef double NSTimeInterval ;
 #define NO  0
 //typedef int BOOL
 typedef CCSet NSSet;
+#define NS_STATIC_ALLOC(__var__) \
+__var__*  __var__::alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(mem);}return mem;}
+#define NS_INSTANCE_INIT(__var__) __var__* __var__::init(){return self;}
+#define NS_SINGLETON(__var__ ,__method__) \
+static __var__* sharedInstance; __var__* __var__::__method__() \
+{if(sharedInstance == nil){sharedInstance =  __var__::alloc()->init();}return sharedInstance;}
+
 #endif

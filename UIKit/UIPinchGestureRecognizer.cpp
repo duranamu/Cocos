@@ -41,7 +41,7 @@ UIPinchGestureRecognizer*
 	return self;
 }
 void
-	UIPinchGestureRecognizer::touchesBegin_withEvent(NSSet* touches ,UIEvent* events)
+	UIPinchGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateBegan;
 	bool fistTouch = true;

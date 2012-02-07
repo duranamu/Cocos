@@ -38,7 +38,7 @@ public:
 		initWithTarget_action(SelectorProtocol* ,SEL_CallFuncND);
 	UITapGestureRecognizer();
 	virtual void 
-		 touchesBegin_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 
 		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 

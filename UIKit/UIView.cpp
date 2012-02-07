@@ -94,11 +94,11 @@ void
 	self->recognizerSheet->addObject(gesture);
 }
 void
-	UIView::touchesBegin_withEvent(NSSet* touches ,UIEvent* events) 
+	UIView::touchesBegan_withEvent(NSSet* touches ,UIEvent* events) 
 {
 	if(self->recognizerSheet)
 	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
-		recognizer->touchesBegin_withEvent(touches,events);
+		recognizer->touchesBegan_withEvent(touches,events);
 	forCCEnd
 }
 void

@@ -49,7 +49,7 @@ UITapGestureRecognizer*
 	self->m_pSelector = nil;
 }
 void
-	UITapGestureRecognizer::touchesBegin_withEvent(NSSet* touches ,UIEvent* events)
+	UITapGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 	float newStartTime = ((UITouch*) touches->anyObject())->gettimestamp();
 	if( newStartTime - self->tapStartTime  > 0.005f)

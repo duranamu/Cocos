@@ -24,3 +24,30 @@ NSSet*
 {
 	return touches;
 }
+NS_STATIC_ALLOC(UIEvent);
+UIEvent*
+	UIEvent::initWithTouches(NSSet* set)
+{
+	self->touches = set;
+	return self;
+}
+UIEvent*
+	UIEvent::eventWithTouches(NSSet* set)
+{
+	UIEvent* mem = alloc();
+	if(mem && mem->initWithTouches(set))
+	{
+
+	}else{
+		NS_SAFE_DELETE(mem);
+	}
+	return mem;
+}
+UIEvent*
+	UIEvent::eventWithTouches_type(NSSet* set ,UIEventType type)
+{
+	UIEvent* mem ;
+	mem = eventWithTouches(set);
+	mem->settype(type);
+	return mem;
+}

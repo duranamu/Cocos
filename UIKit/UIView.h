@@ -33,6 +33,7 @@ public:
 		subviews =  NSArray::array();
 		subviews->retain();
 		self->recognizerSheet = nil;
+	//	self->sprite = nil;
 	}
 	~UIView()
 	{
@@ -69,7 +70,7 @@ virtual void
  void 
 	followPlayer(CCPoint3D*);
  void 
-	touchesBegin_withEvent(NSSet*  ,UIEvent* );
+	touchesBegan_withEvent(NSSet*  ,UIEvent* );
  void
 	 touchesMoved_withEvent(NSSet*  ,UIEvent* );
  void

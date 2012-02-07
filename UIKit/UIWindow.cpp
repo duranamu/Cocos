@@ -19,8 +19,46 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include "UIWindow.h"
+#include "UIApplication.h"
 void
 	UIWindow::becomeKeyWindow()
 {
 	self->keyWindow = YES;
 }
+void
+	UIWindow::makeKeyAndVisible()
+{
+	UIApplication::sharedApplication()->addWindow(self);
+	self->becomeKeyWindow();
+	self->hidden = NO;
+}
+void
+	UIWindow::sendEvent(UIEvent* evt)
+{
+	UIEventType type = evt->gettype();
+	if(type == UIEventTypeTouches)
+	{
+		UITouch* touch = (UITouch*)evt->gettouches()->anyObject();
+		UITouchPhase phase = touch->getphase();
+		switch(phase)
+		{
+		case UITouchPhaseBegan:
+			{
+				self->rootViewController->touchesBegan_withEvent(evt->gettouches(),evt);
+				break;
+			}
+		case UITouchPhaseMoved:
+			{
+				self->rootViewController->touchesMoved_withEvent(evt->gettouches(),evt);
+				break;
+			}
+		case UITouchPhaseEnded:
+			{
+				self->rootViewController->touchesEnded_withEvent(evt->gettouches(),evt);
+				break;
+			}
+		}
+	}
+}
+NS_STATIC_ALLOC(UIWindow)
+NS_INSTANCE_INIT(UIWindow)

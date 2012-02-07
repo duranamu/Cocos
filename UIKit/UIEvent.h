@@ -25,17 +25,29 @@ typedef enum {
     UIEventTypeTouches,
     UIEventTypeMotion,
     UIEventTypeRemoteControl,
+	UIEventTypeTraces
 } UIEventType;
 class UIEvent : public CCObject
 {
-	NSSet*  touches;
-	UIEventType type;
 public:
 	UIEvent(NSSet* set)
 	{
 		self->touches = set;
 	}
-	NSSet *
+	UIEvent(){};
+	static UIEvent*
+		alloc();
+	UIEvent*
+		initWithTouches(NSSet* set);
+	static UIEvent*
+		eventWithTouches(NSSet* set);
+	static UIEvent*
+		eventWithTouches_type(NSSet* ,UIEventType);
+	NSSet*
 		allTouches();
+	ccSynthesize
+		( NSSet* , touches );
+	ccSynthesize
+		( UIEventType , type);
 };
 #endif

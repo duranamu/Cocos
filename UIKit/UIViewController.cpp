@@ -40,6 +40,31 @@ CCSprite*
 	return view->anyView()->getSprite();
 }
 void 
+	UIViewController::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
+{
+	self->view->touchesBegan_withEvent(touches,events);
+
+	UITouch* touch = (UITouch*)touches->anyObject();
+	UIView* receiver = self->view->hitTest_withEvent(touch->getlocation(),events);
+	if(receiver)
+		receiver->touchesBegan_withEvent(touches,events);
+}
+void 
+	UIViewController::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
+{
+	newTouchSession = true;
+	self->view->touchesEnded_withEvent(touches,events);
+
+	UITouch* touch = (UITouch*)touches->anyObject();
+	UIView* receiver = self->view->hitTest_withEvent(touch->getlocation(),events);
+	if(receiver)
+		receiver->touchesEnded_withEvent(touches,events);
+
+	/*For(UIView*,uiview,this->view->subviews)
+		uiview->touchesEnded_withEvent(touches,events);
+	forCCEnd*/
+}
+void 
 	UIViewController::predo_controller_torsoData(CCNode* sender,vid data)
 {
 	ccCast(CCPoint3D*,data);
@@ -47,138 +72,12 @@ void
 	m_torsox = cdata->x;
 	m_torsoy = 480 - cdata->y;
 
-	For(UIView*,m_view,followView->subviews)
+	For(UIView* , m_view , followView->subviews)
 		m_view->followPlayer(cdata);
 	forCCEnd
 
-	controller_torsoData(sender,cdata);
-
+	//controller_torsoData(sender,cdata);
 	cdata->autorelease();
-}
-void 
-	UIViewController::predo_controller_righthandData(CCNode* sender,vid data)
-{
-	if(!isRighthandTracked) 
-		isRighthandTracked = true;
-	ccCast(CCPoint3D*,data);
-	m_handz = cdata->z;
-	m_handx = cdata->x;
-	m_handy = 480 - cdata->y;
-
-	if(self->righthand_clicked_marker )
-		self->righthand_clicked_marker->followPlayer(cdata);
-
-	controller_righthandData(sender,cdata);
-	cdata->autorelease();
-} 
-UITouchPhase 
-	UIViewController::touchPhaseforTime_handz(cocos2d::ccTime time, float handz)
-{
-	float deltahandz ;
-	deltahandz = g_lasthandz - handz   ;
-	g_lasthandz = handz;
-	NSInteger velocity = deltahandz / time;
-	velocity = (velocity >> 5);
-
-	float deltahandzVelocity;
-	deltahandzVelocity = g_lasthandzVelocity - velocity  ;
-	g_lasthandzVelocity = velocity;	
-	NSInteger acceleration = deltahandzVelocity /time;
-	acceleration = (acceleration >>6);
-
-	if(velocity > 40 & acceleration < 0)
-	{		
-		if( menuTouchPhase ==  UITouchPhasePending )
-		{
-			return menuTouchPhase = UITouchPhaseBegan;
-		}else{
-			return menuTouchPhase;
-		}
-	}else if (velocity < 0 & acceleration < 5){
-		if(menuTouchPhase == UITouchPhaseMoved)
-		{
-			return menuTouchPhase = UITouchPhaseEnded;
-		}else{
-			return menuTouchPhase;
-		}
-	}else{
-		if( menuTouchPhase ==  UITouchPhasePending)
-		{
-			return UITouchPhasePending;
-		}else if (menuTouchPhase ==  UITouchPhaseBegan){
-			return menuTouchPhase =  UITouchPhaseMoved;
-		}else if (menuTouchPhase ==  UITouchPhaseMoved){
-			return menuTouchPhase ;
-		}else{
-			return menuTouchPhase =  UITouchPhasePending;
-		}
-	}
-}
-void
-	UIViewController::controllerDidUpdate(cocos2d::ccTime time)
-{
-	if(isRighthandTracked)
-	{
-		UITouchPhase ability; ;
-		ability = touchPhaseforTime_handz(time,m_handz);
-		if(ability == UITouchPhaseBegan | ability == UITouchPhaseEnded )
-		{
-			 UITouch* touch = UITouch::touchWithPhase(ability);
-			 touch->settimestamp(time);
-			 touch->setlocation ( ccp( m_handx , m_handy ));
-			 UITouch* lefthand_touch = UITouch::touchWithPhase(ability);
-			 lefthand_touch->settimestamp(time);
-			 lefthand_touch->setlocation ( ccp( ml_handx , ml_handy ));
-			 NSSet* set = new NSSet();
-			 set->addObject(lefthand_touch);
-			 set->addObject(touch);
-			 UIEvent* events = new UIEvent( set );
-			 if( ability == UITouchPhaseBegan)
-			 {
-				 touchStartx = m_handx;
-				 touchStarty = m_handy;
-				 touchStartTime = time;
-				 this->touchesBegin_withEvent(set,events);
-			 }else if (ability == UITouchPhaseEnded)
-				 self->touchesEnded_withEvent(set,events);
-			 events->release();
-			 set->release();
-		}else if (ability == UITouchPhaseMoved )
-	    {
-			 UITouch* touch = UITouch::touchWithPhase(ability);
-			 touch->settimestamp(time);
-			 touch->setlocation (ccp(m_handx , m_handy ));
-			 UITouch* lefthand_touch = UITouch::touchWithPhase(ability);
-			 lefthand_touch->settimestamp(time);
-			 lefthand_touch->setlocation ( ccp( ml_handx , ml_handy ));
-			 NSSet* set = new NSSet();
-			 set->addObject(touch);
-			 set->addObject(lefthand_touch);
-			 UIEvent* events = new UIEvent(set);
-			 self->touchesMoved_withEvent( set , events );
-			 events->release();
-			 set->release();
-		}
-	}
-}
-void 
-	UIViewController::touchesBegin_withEvent(NSSet* touches ,UIEvent* events)
-{
-	self->view->touchesBegin_withEvent(touches,events);
-
-	UITouch* touch = (UITouch*)touches->anyObject();
-	UIView* receiver = self->view->hitTest_withEvent(touch->getlocation(),events);
-	if(receiver)
-		receiver->touchesBegin_withEvent(touches,events);
-}
-void 
-	UIViewController::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
-{
-	newTouchSession = true;
-	self->view->touchesEnded_withEvent(touches,events);
-	For(UIView*,uiview,this->view->subviews)
-		uiview->touchesEnded_withEvent(touches,events);
-	forCCEnd
 }
 void 
 	UIViewController::touchesMoved_withEvent(NSSet* touches ,UIEvent* events )
@@ -198,23 +97,19 @@ void
 	sprintf(var,"%3.0f %3.0f",moveSinceTouchX,moveSinceTouchY);
 	CCLabelTTF* ttf =(CCLabelTTF*)watchVariableView->sprite;
 	ttf->setString(var);*/
-	if(newTouchSession)
-	{
-		newTouchSession = false;
-	}else{
-		touch->deltaMove = ccp (0 , moveSinceTouchY);
+		if(newTouchSession)
+		{
+			newTouchSession = false;
+		}else{
+			touch->deltaMove = ccp (0 , moveSinceTouchY);
+		}
 	}
-	}
-
 	For(UIView*,uiview,this->movableView->subviews)
 		uiview->touchesMoved_withEvent(touches,events);
 	forCCEnd
-}
-void
-	UIViewController::predo_controller_lefthandData(CCNode* sender , vid data)
-{
-	ccCast(CCPoint3D*,data);
-	ml_handz = cdata->z;
-	ml_handx = cdata->x;
-	ml_handy = 480 - cdata->y;
+
+	//UITouch* touch = (UITouch*)touches->anyObject();
+	/*UIView* receiver = self->view->hitTest_withEvent(touch->getlocation(),events);
+	if(receiver)
+		receiver->touchesMoved_withEvent(touches,events);*/
 }

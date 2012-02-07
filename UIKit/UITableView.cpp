@@ -85,10 +85,10 @@ bool
 		return false;
 }
 void 
-	UITableView::touchesBegin_withEvent(NSSet* touches ,UIEvent* events)
+	UITableView::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 	For(UITableViewCell*,uiview,this->subviews)
-		uiview->touchesBegin_withEvent(touches,events);
+		uiview->touchesBegan_withEvent(touches,events);
 	forCCEnd
 
 }
