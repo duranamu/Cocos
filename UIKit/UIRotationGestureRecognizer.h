@@ -19,22 +19,27 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "Quartz.h"
-#include <math.h>
-CGFloat 
-	CGDistanceMake(CGPoint pa ,CGPoint pb)
+#ifndef UIROTATIONESTURERECOGNIZER_H
+#define UIROTATIONGESTURERECOGNIZER_H
+#include "UIGestureRecognizer.h"
+#include "..\Quartz\Quartz.h"
+class UIRotationGestureRecognizer : public UIGestureRecognizer
 {
-	CGFloat x = fabsf(pa.x-pb.x);
-	CGFloat y = fabsf(pa.y-pb.y);
-	return sqrt(x*x+y*y);
-}
-CGFloat 
-	CGAngleMake(CIVector* va , CIVector* vb)
-{
-	return acos (  (CGDotProduct2D (va , vb) / ( va->normOfVector2D() * vb->normOfVector2D() ) ) ) ;
-}
-CGFloat
-	CGDotProduct2D(CIVector* va ,CIVector* vb)
-{
-	return va->getX() * vb->getX() +  va->getY() * vb->getY();
-}
+	ccSynthesize(CGFloat ,rotation);
+	ccSynthesize(CGFloat ,deltaRotation);
+	ccSynthesize(CGFloat , velocity);
+public:
+	static UIRotationGestureRecognizer* 
+		alloc();
+	UIRotationGestureRecognizer*
+		initWithTarget_action(SelectorProtocol* ,SEL_CallFuncND);
+	virtual void
+		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
+	 CIVector* gestureStartOrentaion;
+	 long touchMovedEventCount ;
+};
+#endif

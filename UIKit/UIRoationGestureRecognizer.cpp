@@ -19,31 +19,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIPinchGestureRecognizer.h"
+#include "UIRotationGestureRecognizer.h"
 #include "UITouch.h"
-UIPinchGestureRecognizer*
-	UIPinchGestureRecognizer::alloc()
-{
-	UIPinchGestureRecognizer* mem = new UIPinchGestureRecognizer();
-
-	if(mem)
-	{
-		mem->autorelease();
-	}else{
-		NS_SAFE_DELETE(mem);
-	}
-	return mem;
-}
-UIPinchGestureRecognizer*
-	UIPinchGestureRecognizer::initWithTarget_action(SelectorProtocol* ctarget,SEL_CallFuncND cselector)
+CIVector* lastOrentaionOfHands;
+CGFloat baseRotaion;
+NS_STATIC_ALLOC(UIRotationGestureRecognizer);
+UIRotationGestureRecognizer*
+	UIRotationGestureRecognizer::initWithTarget_action(SelectorProtocol* ctarget,SEL_CallFuncND cselector)
 {
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;
-	self->scale = 1;
+	self->deltaRotation = 0;
+	self->touchMovedEventCount = 0;
+	lastOrentaionOfHands = nil;
 	return self;
 }
 void
-	UIPinchGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
+	UIRotationGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateBegan;
 	bool fistTouch = true;
@@ -54,12 +46,14 @@ void
 			touchLoaction = touch->getlocation();
 			fistTouch= false;
 		}else{
-			self->gestureStartDistance = CGDistanceMake(touchLoaction,touch->getlocation());
+				self->gestureStartOrentaion = CIVector::vectorFrom_to( touchLoaction ,touch->getlocation());
 		}
 	forEnd
+	if(lastOrentaionOfHands)
+		baseRotaion = CGAngleMake ( self->gestureStartOrentaion ,lastOrentaionOfHands );
 }
 void
-	UIPinchGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
+	UIRotationGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateChanged;
 	bool fistTouch = true;
@@ -70,14 +64,31 @@ void
 			touchLoaction = touch->getlocation();
 			fistTouch= false;
 		}else{
-			CGFloat distance = CGDistanceMake(touchLoaction,touch->getlocation());
-			self->scale = distance / self->gestureStartDistance;
+			CIVector* newVector = CIVector::vectorFrom_to(touchLoaction ,touch->getlocation());
+			CGFloat newRotation = CGAngleMake ( self->gestureStartOrentaion ,newVector);
+			if(lastOrentaionOfHands == nil)
+			{
+				self->rotation = newRotation * 0.25f;
+			}else{
+				self->rotation = newRotation * 0.25f + baseRotaion;
+			}
 		}
 	forEnd
-		(m_pListener->*m_pSelector)(nil,self);
+	(m_pListener->*m_pSelector)(nil,self);
 }
 void
-	UIPinchGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
+	UIRotationGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateEnded;
+	bool fistTouch = true;
+	CGPoint touchLoaction;
+	forSet(UITouch* ,touch ,touches)
+		if(fistTouch)
+		{
+			touchLoaction = touch->getlocation();
+			fistTouch= false;
+		}else{
+			lastOrentaionOfHands = CIVector::vectorFrom_to(touchLoaction ,touch->getlocation());
+		}
+	forEnd
 }

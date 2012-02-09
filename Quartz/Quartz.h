@@ -22,8 +22,11 @@ THE SOFTWARE.
 #ifndef QUARTZ_H
 #define QUARTZ_H
 #include "..\Cocos\Cocos.h"
-typedef CCPoint CGPoint;
-typedef CCSize CGSize ;
-typedef CCRect CGRect;
+#include "TypeDefinition.h"
+#include "CIVector.h"
 CGFloat CGDistanceMake(CGPoint ,CGPoint);
+CGFloat
+	CGDotProduct2D(CIVector* va ,CIVector* vb);
+CGFloat 
+	CGAngleMake(CIVector* va , CIVector* vb);
 #endif

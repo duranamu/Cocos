@@ -19,22 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "Quartz.h"
-#include <math.h>
-CGFloat 
-	CGDistanceMake(CGPoint pa ,CGPoint pb)
-{
-	CGFloat x = fabsf(pa.x-pb.x);
-	CGFloat y = fabsf(pa.y-pb.y);
-	return sqrt(x*x+y*y);
-}
-CGFloat 
-	CGAngleMake(CIVector* va , CIVector* vb)
-{
-	return acos (  (CGDotProduct2D (va , vb) / ( va->normOfVector2D() * vb->normOfVector2D() ) ) ) ;
-}
-CGFloat
-	CGDotProduct2D(CIVector* va ,CIVector* vb)
-{
-	return va->getX() * vb->getX() +  va->getY() * vb->getY();
-}
+#ifndef TYPEDEFINITION_H
+#define TYPEDEFINITION_H
+#include "..\Cocos\Cocos.h"
+typedef CCPoint CGPoint;
+typedef CCSize CGSize ;
+typedef CCRect CGRect;
+#endif

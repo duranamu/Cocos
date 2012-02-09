@@ -19,22 +19,32 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "Quartz.h"
-#include <math.h>
-CGFloat 
-	CGDistanceMake(CGPoint pa ,CGPoint pb)
+#ifndef CIVECTOR_H
+#define CIVECTOR_H
+#include "../Cocos/Cocos.h"
+#include "TypeDefinition.h"
+class CIVector :public NSObject
 {
-	CGFloat x = fabsf(pa.x-pb.x);
-	CGFloat y = fabsf(pa.y-pb.y);
-	return sqrt(x*x+y*y);
-}
-CGFloat 
-	CGAngleMake(CIVector* va , CIVector* vb)
-{
-	return acos (  (CGDotProduct2D (va , vb) / ( va->normOfVector2D() * vb->normOfVector2D() ) ) ) ;
-}
-CGFloat
-	CGDotProduct2D(CIVector* va ,CIVector* vb)
-{
-	return va->getX() * vb->getX() +  va->getY() * vb->getY();
-}
+	ccSynthesize
+		(CGFloat , X);
+	ccSynthesize
+		(CGFloat  ,Y);
+	ccSynthesize
+		(CGFloat , Z);
+public:
+	static CIVector*
+		alloc();
+	static CIVector*
+		vectorWithCGPoint(CGPoint );
+	static CIVector*
+		vectorFrom_to(CGPoint ,CGPoint);
+	CIVector*
+		initFrom_to(CGPoint ,CGPoint);
+	CIVector*
+		initWithCGPoint(CGPoint);
+	CGFloat
+		normOfVector2D();
+	CIVector*
+		addVector(CIVector*);
+};
+#endif
