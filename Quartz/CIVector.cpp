@@ -49,11 +49,6 @@ CIVector*
 	self->Y = pa.y;
 	return self;
 }
-CGFloat
-	CIVector::normOfVector2D()
-{
-	return (CGFloat) sqrt(X * X + Y*Y);
-}
 CIVector*
 	CIVector::addVector(CIVector * vec)
 {

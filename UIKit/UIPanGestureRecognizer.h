@@ -19,27 +19,32 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIKIT_H
-#define UIKIT_H
-#include "..\Quartz\Quartz.h"
-#include "UITableView.h"
-#include "UITableViewCell.h"
-#include "UITableViewDataSource.h"
-#include "UIViewController.h"
-#include "UIIndexPath.h"
-#include "UIResponder.h"
+#ifndef UIPANGESTURERECOGNIZER_H
+#define UIPANGESTURERECOGNIZER_H
+#include "../Quartz/Quartz.h"
+#include "UIGestureRecognizer.h"
 #include "UIView.h"
-#include "UITouch.h"
-#include "UIEvent.h"
-#include "UIImage.h"
-#include "UIImageView.h"
-#include "UISensorView.h"
-#include "UITapGestureRecognizer.h"
-#include "UIPinchGestureRecognizer.h"
-#include "UIRotationGestureRecognizer.h"
-#include "UILongPressGestureRecognizer.h"
-#include "UIPanGestureRecognizer.h"
-#include "UISwipeGestureRecognizer.h"
-#include "UIApplication.h"
-#include "UIWindow.h"
+class UIPanGestureRecognizer : public UIGestureRecognizer
+{
+	CGPoint touchStartLocation ;
+	NSTimeInterval lastTouchTime;
+	CGPoint velocity;
+public:
+	static UIPanGestureRecognizer*
+		alloc();
+	UIPanGestureRecognizer*
+		initWithTarget_action(SelectorProtocol* ,SEL_CallFuncND);
+	UIPanGestureRecognizer();
+	virtual void 
+		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
+	 CGPoint 
+		 translationInView(UIView* );
+	 CGPoint
+		 velocityInView(UIView* );
+
+};
 #endif

@@ -43,7 +43,7 @@ public:
 	CIVector*
 		initWithCGPoint(CGPoint);
 	inline CGFloat
-		normOfVector2D();
+		normOfVector2D(){return (CGFloat) sqrt(X * X + Y*Y);}
 	CIVector*
 		addVector(CIVector*);
 };
