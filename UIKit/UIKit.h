@@ -37,6 +37,8 @@ THE SOFTWARE.
 #include "UITapGestureRecognizer.h"
 #include "UIPinchGestureRecognizer.h"
 #include "UIRotationGestureRecognizer.h"
+#include "UILongPressGestureRecognizer.h"
+#include "UISwipeGestureRecognizer.h"
 #include "UIApplication.h"
 #include "UIWindow.h"
 #endif

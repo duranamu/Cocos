@@ -31,9 +31,12 @@ CGFloat
 CGFloat 
 	CGAngleMake(CIVector* va , CIVector* vb)
 {
-	return acos (  (CGDotProduct2D (va , vb) / ( va->normOfVector2D() * vb->normOfVector2D() ) ) ) ;
+	CGFloat dimension3 = va->getX()* vb->getY() - va->getY() * vb->getX();
+	CGFloat sign =  dimension3 > 0 ? -1 : 1; 
+	CGFloat angle = acos ((CGDotProduct2D (va , vb) / ( va->normOfVector2D() * vb->normOfVector2D() ) ) ) * sign;
+	return angle;
 }
-CGFloat
+inline CGFloat
 	CGDotProduct2D(CIVector* va ,CIVector* vb)
 {
 	return va->getX() * vb->getX() +  va->getY() * vb->getY();

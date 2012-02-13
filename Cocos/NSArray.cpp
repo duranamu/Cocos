@@ -98,3 +98,24 @@ NSArray*
 {
 	return alloc();
 }
+BOOL
+	NSArray::removeObject(NSObject* obj)
+{
+		if(ref->containsObject(obj))
+		{ 
+			ref->removeObject(obj); 
+			return YES;
+		}else{ 
+			return NO;
+		}
+}
+void
+	NSArray::removeLastObject()
+{
+	self->ref->removeLastObject();
+}
+void
+	NSArray::removeAllObjects()
+{
+	self->ref->removeAllObjects();
+}

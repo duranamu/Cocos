@@ -92,7 +92,7 @@ void
 	cdata->autorelease();
 }
 void 
-	UIViewController::touchesMoved_withEvent(NSSet* touches ,UIEvent* events )
+	UIViewController::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->view->touchesMoved_withEvent(touches,events);
 

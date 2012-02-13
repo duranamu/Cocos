@@ -19,32 +19,37 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef CIVECTOR_H
-#define CIVECTOR_H
-#include "../Cocos/Cocos.h"
-#include "TypeDefinition.h"
-class CIVector :public NSObject
+#ifndef UISWIPEGESTURERECOGNIZER_H
+#define UISWIPEGESTURERECOGNIZER_H
+#include "../Quartz/Quartz.h"
+#include "UIGestureRecognizer.h"
+typedef enum {
+	UISwipeGestureRecognizerDirectionZero  = 0 ,
+    UISwipeGestureRecognizerDirectionRight = 1 << 0,
+    UISwipeGestureRecognizerDirectionLeft  = 1 << 1,
+    UISwipeGestureRecognizerDirectionUp    = 1 << 2,
+    UISwipeGestureRecognizerDirectionDown  = 1 << 3
+} UISwipeGestureRecognizerDirection;
+class UISwipeGestureRecognizer : public UIGestureRecognizer
 {
 	ccSynthesize
-		(CGFloat , X);
+		(UISwipeGestureRecognizerDirection ,direction);
 	ccSynthesize
-		(CGFloat  ,Y);
-	ccSynthesize
-		(CGFloat , Z);
+		(NSUInteger ,numberOfTouchesRequired);
 public:
-	static CIVector*
+	static UISwipeGestureRecognizer* 
 		alloc();
-	static CIVector*
-		vectorWithCGPoint(CGPoint );
-	static CIVector*
-		vectorFrom_to(CGPoint ,CGPoint);
-	CIVector*
-		initFrom_to(CGPoint ,CGPoint);
-	CIVector*
-		initWithCGPoint(CGPoint);
-	inline CGFloat
-		normOfVector2D();
-	CIVector*
-		addVector(CIVector*);
+	UISwipeGestureRecognizer*
+		initWithTarget_action(SelectorProtocol* ,SEL_CallFuncND);
+	virtual void
+		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
+	 UISwipeGestureRecognizerDirection
+		 directionFrom_to(CGPoint ,CGPoint);
+
+	 CGPoint gestureStartPoint;
 };
 #endif

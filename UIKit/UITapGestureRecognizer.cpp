@@ -21,26 +21,14 @@ THE SOFTWARE.
 ****************************************************************************/
 #include "UITapGestureRecognizer.h"
 #include "UITouch.h"
-UITapGestureRecognizer*
-	UITapGestureRecognizer::alloc()
-{
-	UITapGestureRecognizer* mem = new UITapGestureRecognizer();
-	if(mem)
-	{
-	}else{
-		NS_SAFE_DELETE(mem);
-	}
-	return mem;
-}
+NS_STATIC_ALLOC( UITapGestureRecognizer );
 UITapGestureRecognizer*
 	UITapGestureRecognizer::initWithTarget_action(SelectorProtocol* ctarget ,SEL_CallFuncND cselector)
 {
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;
-
 	return self;
 }
-
 	UITapGestureRecognizer::UITapGestureRecognizer()
 {
 	self->numberOfTapsRequired = 1;
@@ -52,7 +40,7 @@ UITapGestureRecognizer*
 void
 	UITapGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
-	float newStartTime = ((UITouch*) touches->anyObject())->gettimestamp();
+	CGFloat newStartTime = ((UITouch*) touches->anyObject())->gettimestamp();
 	if( newStartTime - self->tapStartTime  > 0.005f)
 	{
 		self->numberOfTapsAcquired = 0;
@@ -67,8 +55,8 @@ void
 void
 	UITapGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
-	float endTime = ((UITouch*) touches->anyObject())->gettimestamp();
-	float timediff = endTime -  self->tapStartTime ;
+	CGFloat endTime = ((UITouch*) touches->anyObject())->gettimestamp();
+	CGFloat timediff = endTime -  self->tapStartTime ;
 	if( timediff < 0.1f && timediff > 0.002f)
 	{
 		self->numberOfTapsAcquired++;

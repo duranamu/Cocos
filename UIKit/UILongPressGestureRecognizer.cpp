@@ -19,32 +19,40 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef CIVECTOR_H
-#define CIVECTOR_H
-#include "../Cocos/Cocos.h"
-#include "TypeDefinition.h"
-class CIVector :public NSObject
+#include "UILongPressGestureRecognizer.h"
+#include "UITouch.h"
+NS_STATIC_ALLOC( UILongPressGestureRecognizer );
+UILongPressGestureRecognizer*
+	UILongPressGestureRecognizer::initWithTarget_action(SelectorProtocol* ctarget ,SEL_CallFuncND cselector)
 {
-	ccSynthesize
-		(CGFloat , X);
-	ccSynthesize
-		(CGFloat  ,Y);
-	ccSynthesize
-		(CGFloat , Z);
-public:
-	static CIVector*
-		alloc();
-	static CIVector*
-		vectorWithCGPoint(CGPoint );
-	static CIVector*
-		vectorFrom_to(CGPoint ,CGPoint);
-	CIVector*
-		initFrom_to(CGPoint ,CGPoint);
-	CIVector*
-		initWithCGPoint(CGPoint);
-	inline CGFloat
-		normOfVector2D();
-	CIVector*
-		addVector(CIVector*);
-};
-#endif
+	self->m_pListener = ctarget;
+	self->m_pSelector = cselector;
+	return self;
+}
+	UILongPressGestureRecognizer::UILongPressGestureRecognizer()
+{
+	self->tapStartTime = 0;
+	self->m_pListener = nil;
+	self->m_pSelector = nil;
+}
+void
+	UILongPressGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
+{
+	CGFloat newStartTime = ((UITouch*) touches->anyObject())->gettimestamp();
+	self->tapStartTime = newStartTime;
+}
+void
+	UILongPressGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
+{
+
+}
+void
+	UILongPressGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
+{
+	CGFloat endTime = ((UITouch*) touches->anyObject())->gettimestamp();
+	CGFloat timediff = endTime -  self->tapStartTime ;
+	if( timediff > 0.003f && timediff < 5.0f)
+	{
+		(self->m_pListener->*m_pSelector)(nil,self);
+	}
+}

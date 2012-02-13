@@ -27,7 +27,13 @@ typedef enum UIGestureRecognizeState
 {
 	UIGestureRecognizeStateBegan = 0,
 	UIGestureRecognizeStateChanged ,
-	UIGestureRecognizeStateEnded
+	UIGestureRecognizeStateEnded  ,
+	UIGestureRecognizerStatePossible ,
+	UIGestureRecognizerStateCancelled,
+ 
+    UIGestureRecognizerStateFailed,
+ 
+    UIGestureRecognizerStateRecognized 
 };
 class UIGestureRecognizer :public UIResponder
 {

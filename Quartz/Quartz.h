@@ -24,6 +24,7 @@ THE SOFTWARE.
 #include "..\Cocos\Cocos.h"
 #include "TypeDefinition.h"
 #include "CIVector.h"
+#define PI 3.14159265
 CGFloat CGDistanceMake(CGPoint ,CGPoint);
 CGFloat
 	CGDotProduct2D(CIVector* va ,CIVector* vb);

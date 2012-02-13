@@ -31,6 +31,7 @@ class UIView :public UIResponder
 public:
 	UIView()
 	{
+		self->becomeFirstResponder = NO;
 		subviews =  NSArray::array();
 		subviews->retain();
 		self->recognizerSheet = nil;

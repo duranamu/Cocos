@@ -29,9 +29,9 @@ class UITapGestureRecognizer :public UIGestureRecognizer
 protected:
 	ccSynthesize (NSUInteger ,numberOfTapsRequired );
 	ccSynthesize (NSUInteger ,numberOfTapsAcquired );
-	ccSynthesize (float ,tapStartTime );
-	ccSynthesize (float ,tapStartX );
-	ccSynthesize (float ,tapStartY );
+	ccSynthesize (CGFloat ,tapStartTime );
+	ccSynthesize (CGFloat ,tapStartX );
+	ccSynthesize (CGFloat ,tapStartY );
 public:
 	static UITapGestureRecognizer*
 		alloc();

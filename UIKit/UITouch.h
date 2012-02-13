@@ -44,6 +44,8 @@ public :
 
 	static UITouch* 
 		touchWithPhase(UITouchPhase phase);
+	inline CGPoint
+		locationInView(){return location;};
 	UITouch();
 	~UITouch();
 };

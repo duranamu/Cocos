@@ -19,32 +19,29 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef CIVECTOR_H
-#define CIVECTOR_H
-#include "../Cocos/Cocos.h"
-#include "TypeDefinition.h"
-class CIVector :public NSObject
+#ifndef UILONGPRESSGESTURERECOGNIZER_H
+#define UILONGPRESSGESTURERECOGNIZER_H
+#include "../Quartz/Quartz.h"
+#include "UIGestureRecognizer.h"
+#include "UIEvent.h"
+class UILongPressGestureRecognizer : public UIGestureRecognizer
 {
-	ccSynthesize
-		(CGFloat , X);
-	ccSynthesize
-		(CGFloat  ,Y);
-	ccSynthesize
-		(CGFloat , Z);
+	ccSynthesize (NSUInteger ,numberOfTapsRequired );
+	ccSynthesize (NSUInteger ,numberOfTapsAcquired );
+	ccSynthesize (CGFloat ,tapStartTime );
+	ccSynthesize (CGFloat ,tapStartX );
+	ccSynthesize (CGFloat ,tapStartY );
 public:
-	static CIVector*
+	static UILongPressGestureRecognizer*
 		alloc();
-	static CIVector*
-		vectorWithCGPoint(CGPoint );
-	static CIVector*
-		vectorFrom_to(CGPoint ,CGPoint);
-	CIVector*
-		initFrom_to(CGPoint ,CGPoint);
-	CIVector*
-		initWithCGPoint(CGPoint);
-	inline CGFloat
-		normOfVector2D();
-	CIVector*
-		addVector(CIVector*);
+	UILongPressGestureRecognizer*
+		initWithTarget_action(SelectorProtocol* ,SEL_CallFuncND);
+	UILongPressGestureRecognizer();
+	virtual void 
+		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
 };
 #endif

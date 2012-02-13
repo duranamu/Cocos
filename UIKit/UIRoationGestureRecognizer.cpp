@@ -46,7 +46,7 @@ void
 			touchLoaction = touch->getlocation();
 			fistTouch= false;
 		}else{
-				self->gestureStartOrentaion = CIVector::vectorFrom_to( touchLoaction ,touch->getlocation());
+				self->gestureStartOrentaion = CIVector::vectorFrom_to( touch->getlocation() ,touchLoaction);
 		}
 	forEnd
 	if(lastOrentaionOfHands)
@@ -64,14 +64,15 @@ void
 			touchLoaction = touch->getlocation();
 			fistTouch= false;
 		}else{
-			CIVector* newVector = CIVector::vectorFrom_to(touchLoaction ,touch->getlocation());
+			CIVector* newVector = CIVector::vectorFrom_to( touch->getlocation() , touchLoaction);
 			CGFloat newRotation = CGAngleMake ( self->gestureStartOrentaion ,newVector);
 			if(lastOrentaionOfHands == nil)
 			{
 				self->rotation = newRotation * 0.25f;
 			}else{
-				self->rotation = newRotation * 0.25f + baseRotaion;
+				self->rotation = (newRotation * 0.25f + baseRotaion) ;
 			}
+			newVector->release();
 		}
 	forEnd
 	(m_pListener->*m_pSelector)(nil,self);
@@ -88,7 +89,7 @@ void
 			touchLoaction = touch->getlocation();
 			fistTouch= false;
 		}else{
-			lastOrentaionOfHands = CIVector::vectorFrom_to(touchLoaction ,touch->getlocation());
+			lastOrentaionOfHands = CIVector::vectorFrom_to(touch->getlocation(),touchLoaction);
 		}
 	forEnd
 }

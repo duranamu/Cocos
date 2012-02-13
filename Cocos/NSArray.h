@@ -60,5 +60,11 @@ public:
 		lastObject(){ return (NSObject* )ref->lastObject();}
 	inline NSUInteger
 		indexOfObject(NSObject* obj){return ref->indexOfObject(obj);}
+	inline BOOL
+		removeObject(NSObject* );
+	inline void
+		removeLastObject();
+	inline void
+		removeAllObjects();
 };
 #endif

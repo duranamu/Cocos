@@ -79,7 +79,6 @@ void
 
 	if(this->canTriggerforTouch(touch) | isCildTrigger)
 	{
-		//this->sprite->setScale(1.3f);
 		(listener->*selector)( (CCNode*)listener , this);
 	}
 }

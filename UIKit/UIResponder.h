@@ -25,6 +25,8 @@ THE SOFTWARE.
 #include "UIEvent.h"
 class UIResponder : public NSObject
 {
+	ccSynthesize
+		(BOOL ,becomeFirstResponder );
 public:
 	 virtual void 
 		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events) {};
@@ -33,6 +35,6 @@ public:
 	 virtual void 
 		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events) {};
 	 virtual BOOL
-		 becomeFirstResponder(void){ return YES;};
+		 canBecomeFirstResponder(void){ return becomeFirstResponder;};
 };
 #endif

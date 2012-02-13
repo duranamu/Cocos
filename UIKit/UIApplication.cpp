@@ -137,8 +137,8 @@ void
 UITouchPhase 
 	UIApplication::touchPhaseforTime_handz(cocos2d::ccTime time, CGFloat handz)
 {
-	float deltahandz ;
-	deltahandz = g_lasthandz - handz   ;
+	float deltahandz;
+	deltahandz = g_lasthandz - handz;
 	g_lasthandz = handz;
 	NSInteger velocity = deltahandz / time;
 	velocity = (velocity >> 5);
@@ -149,7 +149,7 @@ UITouchPhase
 	NSInteger acceleration = deltahandzVelocity /time;
 	acceleration = (acceleration >>6);
 
-	if(velocity > 40 & acceleration < 0)
+	if(velocity > 30 & acceleration < 0)
 	{		
 		if( menuTouchPhase ==  UITouchPhasePending )
 		{
@@ -157,7 +157,7 @@ UITouchPhase
 		}else{
 			return menuTouchPhase;
 		}
-	}else if (velocity < 0 & acceleration < 5){
+	}else if (velocity < -10 & acceleration < 5){
 		if(menuTouchPhase == UITouchPhaseMoved)
 		{
 			return menuTouchPhase = UITouchPhaseEnded;

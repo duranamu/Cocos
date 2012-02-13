@@ -97,26 +97,26 @@ void
 void
 	UIView::touchesBegan_withEvent(NSSet* touches ,UIEvent* events) 
 {
-	if(self->recognizerSheet)
+	/*if(self->recognizerSheet)
 		For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
 			recognizer->touchesBegan_withEvent(touches,events);
-		forCCEnd
+		forCCEnd*/
 }
 void
 	UIView::touchesMoved_withEvent(NSSet* touches ,UIEvent* events) 
 {
-	if(self->recognizerSheet)
+	/*if(self->recognizerSheet)
 	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
 		recognizer->touchesMoved_withEvent(touches,events);
-	forCCEnd	
+	forCCEnd	*/
 }
 void
 	UIView::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
-	if(self->recognizerSheet)
+	/*if(self->recognizerSheet)
 	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
 		recognizer->touchesEnded_withEvent(touches,events);
-	forCCEnd
+	forCCEnd*/
 }
 BOOL
 	UIView::pointInside_withEvent(CGPoint point,UIEvent* evt)
@@ -140,9 +140,11 @@ UIView*
 				{
 					UIView* object = dscendant->hitTest_withEvent(point,evt);
 					if(object)
-						match_stack->addObject(object);
+						if(object->canBecomeFirstResponder())
+							match_stack->addObject(object);
 				}else{
-					match_stack->addObject(dscendant);
+					
+						match_stack->addObject(dscendant);
 				}
 			}
 		forEnd
