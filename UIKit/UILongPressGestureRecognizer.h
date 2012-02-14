@@ -35,7 +35,7 @@ public:
 	static UILongPressGestureRecognizer*
 		alloc();
 	UILongPressGestureRecognizer*
-		initWithTarget_action(SelectorProtocol* ,SEL_CallFuncND);
+		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
 	UILongPressGestureRecognizer();
 	virtual void 
 		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);

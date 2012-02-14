@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "UITouch.h"
 NS_STATIC_ALLOC( UITapGestureRecognizer );
 UITapGestureRecognizer*
-	UITapGestureRecognizer::initWithTarget_action(SelectorProtocol* ctarget ,SEL_CallFuncND cselector)
+	UITapGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget ,SEL_CallFuncND cselector)
 {
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;

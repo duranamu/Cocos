@@ -19,32 +19,43 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIPANGESTURERECOGNIZER_H
-#define UIPANGESTURERECOGNIZER_H
+#ifndef UIColor_H
+#define UIColor_H
 #include "../Quartz/Quartz.h"
-#include "UIGestureRecognizer.h"
-#include "UIView.h"
-class UIPanGestureRecognizer : public UIGestureRecognizer
+class UIColor : public NSObject
 {
-	CGPoint touchStartLocation ;
-	NSTimeInterval lastTouchTime;
-	CGPoint velocity;
+	ccSynthesize
+		(ccColor4F , color4f );
+	ccSynthesize
+		(ccColor3B , color3b );
+	ccSynthesize
+		(CGFloat , alpha );
 public:
-	static UIPanGestureRecognizer*
+	static UIColor*
 		alloc();
-	UIPanGestureRecognizer*
-		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
-	UIPanGestureRecognizer();
-	virtual void 
-		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
-	 CGPoint 
-		 translationInView(UIView* );
-	 CGPoint
-		 velocityInView(UIView* );
-
+	UIColor*
+		initWithRed_blue_green_alpha(CGFloat ,CGFloat, CGFloat,CGFloat);
+	static UIColor*
+		colorWithRed_blue_green_alpha(CGFloat ,CGFloat, CGFloat,CGFloat);
+	static const UIColor*
+		redColor();
+	static const UIColor*
+		yellowColor();
+	static const UIColor*
+		cyanColor();
+	static const UIColor*
+		purpleColor();
+	static const UIColor*
+		blackColor();
+	static const UIColor*
+		brownColor();
+	static const UIColor*
+		greenColor();
+	static const UIColor*
+		magentaColor();
+	static const UIColor*
+		orangeColor();
+	static const UIColor*
+		whiteColor();
 };
 #endif

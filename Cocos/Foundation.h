@@ -90,4 +90,13 @@ __var__*  __var__::alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(
 static __var__* sharedInstance; __var__* __var__::__method__() \
 {if(sharedInstance == nil){sharedInstance =  __var__::alloc()->init();}return sharedInstance;}
 
+#ifdef __AMD64__
+	#define ULONG_MAX -1L
+#else
+	#define ULONG_MAX 0xFFFFFFFF
+#endif
+#define NSUIntegerMax   ULONG_MAX
+
+#define SEL SEL_CallFuncND
+#define NSActionTarget SelectorProtocol
 #endif

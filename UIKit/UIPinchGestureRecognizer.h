@@ -31,7 +31,7 @@ public:
 	static UIPinchGestureRecognizer* 
 		alloc();
 	UIPinchGestureRecognizer*
-		initWithTarget_action(SelectorProtocol* ,SEL_CallFuncND);
+		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
 	virtual void
 		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 

@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "UITouch.h"
 NS_STATIC_ALLOC (UISwipeGestureRecognizer);
 UISwipeGestureRecognizer*
-	UISwipeGestureRecognizer::initWithTarget_action(SelectorProtocol* ctarget,SEL_CallFuncND cselector)
+	UISwipeGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget,SEL_CallFuncND cselector)
 {
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;

@@ -46,7 +46,7 @@ public:
 	 virtual void 
 		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events){};
 
-	SelectorProtocol* m_pListener;
+	NSActionTarget* m_pListener;
 	SEL_CallFuncND  m_pSelector;
 	ccSynthesize( NSSet* ,touches );
 	ccSynthesize(UIEvent* ,events );

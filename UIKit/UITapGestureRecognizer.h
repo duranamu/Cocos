@@ -36,7 +36,7 @@ public:
 	static UITapGestureRecognizer*
 		alloc();
 	UITapGestureRecognizer*
-		initWithTarget_action(SelectorProtocol* ,SEL_CallFuncND);
+		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
 	UITapGestureRecognizer();
 	virtual void 
 		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);

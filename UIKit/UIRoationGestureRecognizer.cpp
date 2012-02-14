@@ -25,7 +25,7 @@ CIVector* lastOrentaionOfHands;
 CGFloat baseRotaion;
 NS_STATIC_ALLOC(UIRotationGestureRecognizer);
 UIRotationGestureRecognizer*
-	UIRotationGestureRecognizer::initWithTarget_action(SelectorProtocol* ctarget,SEL_CallFuncND cselector)
+	UIRotationGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget,SEL_CallFuncND cselector)
 {
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;

@@ -35,7 +35,7 @@ UIPinchGestureRecognizer*
 	return mem;
 }
 UIPinchGestureRecognizer*
-	UIPinchGestureRecognizer::initWithTarget_action(SelectorProtocol* ctarget,SEL_CallFuncND cselector)
+	UIPinchGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget,SEL_CallFuncND cselector)
 {
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;

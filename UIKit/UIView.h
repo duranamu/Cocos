@@ -88,7 +88,7 @@ virtual void
 	addGestureRecognizer(UIGestureRecognizer*);
  	NSArray* subviews;
 	CCSprite* sprite;
-	SelectorProtocol* listener;
+	NSActionTarget* listener;
 	SEL_CallFuncND  selector;
 	ccSynthesize( UIIndexPath* , indexPath);
 	UIView* contentView;

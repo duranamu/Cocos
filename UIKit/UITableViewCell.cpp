@@ -34,7 +34,7 @@ THE SOFTWARE.
 		return NULL;
 	}
   UITableViewCell* 
-		UITableViewCell::initWithStyle_reuseIdentifier_target_selector(UITableViewStyle style ,CCString* uid,SelectorProtocol* ctarget,SEL_CallFuncND cselector)
+		UITableViewCell::initWithStyle_reuseIdentifier_target_selector(UITableViewStyle style ,CCString* uid,NSActionTarget* ctarget,SEL_CallFuncND cselector)
 	{
 		UITableViewCell* probe = new UITableViewCell();
 		if(probe && probe->doInitWithStyle_reuseIdentifier_target_selector(style,uid,ctarget,cselector))
@@ -63,6 +63,8 @@ THE SOFTWARE.
 		self->contentView = new UIView();
 		self->retain();
 		self->accessoryType = UITableViewCellAccessoryDefault;
+		self->indentationLevel = 0;
+		self->indentationWidth = 10;
 	}
 void 
 	UITableViewCell::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
@@ -97,7 +99,7 @@ void
 	this->moveByPoint(touch->deltaMove);
 }
 UITableViewCell* 
-	UITableViewCell::doInitWithStyle_reuseIdentifier_target_selector(UITableViewStyle cstyle ,CCString* cid,SelectorProtocol* clistener,SEL_CallFuncND cselector )
+	UITableViewCell::doInitWithStyle_reuseIdentifier_target_selector(UITableViewStyle cstyle ,CCString* cid,NSActionTarget* clistener,SEL_CallFuncND cselector )
 {
 		style = cstyle;
 		uid = new CCString(cid->m_sString.c_str());
@@ -136,3 +138,4 @@ UITableViewCellAccessory
 {
 	return self->accessoryType;
 }
+

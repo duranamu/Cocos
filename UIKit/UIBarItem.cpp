@@ -19,32 +19,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIPANGESTURERECOGNIZER_H
-#define UIPANGESTURERECOGNIZER_H
-#include "../Quartz/Quartz.h"
-#include "UIGestureRecognizer.h"
-#include "UIView.h"
-class UIPanGestureRecognizer : public UIGestureRecognizer
+#include "UIBarItem.h"
+#include "UIKitAddition.h"
+#include "UIColor.h"
+void
+	UIBarItem::setTitleTextAttributes_forState(NSDictionary* dict, UIControlState state)
 {
-	CGPoint touchStartLocation ;
-	NSTimeInterval lastTouchTime;
-	CGPoint velocity;
-public:
-	static UIPanGestureRecognizer*
-		alloc();
-	UIPanGestureRecognizer*
-		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
-	UIPanGestureRecognizer();
-	virtual void 
-		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
-	 CGPoint 
-		 translationInView(UIView* );
-	 CGPoint
-		 velocityInView(UIView* );
+	UIFont* font ;
+	font = (UIFont*) dict->objectForKey(UITextAttributeFont);
+	if(font)
+		self->barFont = font;
 
-};
-#endif
+	UIColor * color;
+	color = (UIColor*) dict->objectForKey(UITextAttributeTextColor);
+	if(color)
+		self->barColor = color;
+
+}

@@ -19,32 +19,30 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIPANGESTURERECOGNIZER_H
-#define UIPANGESTURERECOGNIZER_H
+#ifndef UIKITDATA_H
+#define UIKITDATA_H
 #include "../Quartz/Quartz.h"
-#include "UIGestureRecognizer.h"
-#include "UIView.h"
-class UIPanGestureRecognizer : public UIGestureRecognizer
-{
-	CGPoint touchStartLocation ;
-	NSTimeInterval lastTouchTime;
-	CGPoint velocity;
-public:
-	static UIPanGestureRecognizer*
-		alloc();
-	UIPanGestureRecognizer*
-		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
-	UIPanGestureRecognizer();
-	virtual void 
-		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
-	 CGPoint 
-		 translationInView(UIView* );
-	 CGPoint
-		 velocityInView(UIView* );
-
+typedef enum {
+    UIBarStyleDefault          = 0,
+    UIBarStyleBlack            = 1,
+} UIBarStyle;
+enum {
+    UIDataDetectorTypePhoneNumber   = 1 << 0,
+    UIDataDetectorTypeLink          = 1 << 1,
+    UIDataDetectorTypeAddress       = 1 << 2,
+    UIDataDetectorTypeCalendarEvent = 1 << 3,
+    UIDataDetectorTypeNone          = 0,
+    UIDataDetectorTypeAll           = NSUIntegerMax
 };
+typedef NSUInteger UIDataDetectorTypes;
+typedef struct {
+    CGFloat top ; 
+	CGFloat left ;
+	CGFloat bottom ;
+	CGFloat right ;
+} UIEdgeInsets;
+typedef struct UIOffset {
+    CGFloat horizontal ;
+	CGFloat vertical;
+}UIOffset;
 #endif

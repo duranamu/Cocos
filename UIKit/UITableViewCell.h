@@ -36,7 +36,12 @@ typedef enum UITableViewCellAccessory{
 class UITableViewCell :public UIView 
 {
 	UITableViewStyle style ;
-	ccProperty ( UITableViewCellAccessory ,accessoryType  );
+	ccProperty 
+		( UITableViewCellAccessory ,accessoryType  );
+	ccSynthesize 
+		( NSInteger , indentationLevel );
+	ccSynthesize
+		( NSInteger , indentationWidth );
 	CCString* uid;
 	CCSprite* accessory ;
 public :
@@ -47,7 +52,7 @@ public :
 	static UITableViewCell* 
 		initWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* uid);
 	static UITableViewCell* 
-		initWithStyle_reuseIdentifier_target_selector(UITableViewStyle ,CCString*,SelectorProtocol*,SEL_CallFuncND);
+		initWithStyle_reuseIdentifier_target_selector(UITableViewStyle ,CCString*,NSActionTarget*,SEL_CallFuncND);
 	UITableViewCell* 
 		doInitWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* uid);	
 	void
@@ -57,6 +62,6 @@ public :
 	void
 		touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
 	UITableViewCell* 
-		doInitWithStyle_reuseIdentifier_target_selector(UITableViewStyle  ,CCString* ,SelectorProtocol*,SEL_CallFuncND);	
+		doInitWithStyle_reuseIdentifier_target_selector(UITableViewStyle  ,CCString* ,NSActionTarget*,SEL_CallFuncND);	
 };
 #endif

@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "UITouch.h"
 NS_STATIC_ALLOC( UILongPressGestureRecognizer );
 UILongPressGestureRecognizer*
-	UILongPressGestureRecognizer::initWithTarget_action(SelectorProtocol* ctarget ,SEL_CallFuncND cselector)
+	UILongPressGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget ,SEL_CallFuncND cselector)
 {
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;

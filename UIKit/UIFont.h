@@ -19,32 +19,21 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIPANGESTURERECOGNIZER_H
-#define UIPANGESTURERECOGNIZER_H
-#include "../Quartz/Quartz.h"
-#include "UIGestureRecognizer.h"
-#include "UIView.h"
-class UIPanGestureRecognizer : public UIGestureRecognizer
+#ifndef UIFONT_H
+#define UIFONT_H
+#include "../Cocos/Cocos.h"
+class UIFont : public NSObject
 {
-	CGPoint touchStartLocation ;
-	NSTimeInterval lastTouchTime;
-	CGPoint velocity;
+	ccSynthesize
+		(NSString* , fontName );
+	ccSynthesize
+		(CGFloat , pointSize );
 public:
-	static UIPanGestureRecognizer*
+	static UIFont*
 		alloc();
-	UIPanGestureRecognizer*
-		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
-	UIPanGestureRecognizer();
-	virtual void 
-		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
-	 CGPoint 
-		 translationInView(UIView* );
-	 CGPoint
-		 velocityInView(UIView* );
-
+	static UIFont*
+		fontWithName_size(NSString* , CGFloat);
+	UIFont*
+		initWithName_size(NSString* , CGFloat);
 };
 #endif

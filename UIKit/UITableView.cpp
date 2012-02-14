@@ -23,6 +23,7 @@ THE SOFTWARE.
 #include "UIIndexPath.h"
 #include "..\Cocos\Cocos.h"
 #include "UIGestureRecognizer.h"
+#include "UIColor.h"
 UITableView::UITableView()
 {
 	m_indexPath = CCArray::array();
@@ -35,34 +36,34 @@ UITableView::~UITableView()
 void 
 	UITableView::reloadData(NSArray* toShow)
 {
-	NSInteger numberOfSection = datasource->numberOfSectionInTableView(this);
+	NSInteger numberOfSection = datasource->numberOfSectionInTableView(self);
 
 	if(sprite)
 		sprite = CCLabelTTF::labelWithString("","Arial",38);
 
+
 	NSInteger offsetsum = 0;
 	for(int section=0; section< numberOfSection ;section++ )
 	{
-	NSInteger numberOfRow = datasource->tableView_numberOfRowsInSection(this,section);
+	NSInteger numberOfRow = datasource->tableView_numberOfRowsInSection(self,section);
 
 		for(int row = 0; row < numberOfRow ; row++)
 		{
 		UIIndexPath* path = new UIIndexPath(section,row);
-		UITableViewCell* member = datasource->tableView_cellForRowAtIndexPath(this,path);
+		UITableViewCell* member = datasource->tableView_cellForRowAtIndexPath(self,path);
 		member->retain();
 		subviews->addObject(member);
 		CCSprite* cellsprite = member->getSprite();
+
+		cellsprite->setColor(UIColor::redColor()->getcolor3b());
 
 		if(member->imageView)
 		{
 			member->imageView->sprite->setPosition(ccp(-30,0));
 			cellsprite->addChild(member->imageView->sprite);
 		}
-		if(member->contentView)
-		{
-			//member->contentView->subviews
-		}
-		cellsprite ->setPosition(ccp( 260 ,-60 + offsetsum));
+		
+		cellsprite ->setPosition(ccp( 260+ member->getindentationLevel()*member->getindentationWidth() ,-60 + offsetsum));
 		sprite->addChild(cellsprite);
 		offsetsum += 68;
 		toShow->addObject(member);
@@ -79,7 +80,7 @@ UITableViewCell*
 bool
 	UITableView::isEqual(UITableView* toCompare)
 {
-	if( this->m_uID == toCompare->m_uID)
+	if( self->m_uID == toCompare->m_uID)
 	{
 		return true;
 	}
@@ -88,7 +89,7 @@ bool
 void 
 	UITableView::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
-	For(UITableViewCell*,uiview,this->subviews)
+	For(UITableViewCell*,uiview,self->subviews)
 		uiview->touchesBegan_withEvent(touches,events);
 	forCCEnd
 
@@ -96,7 +97,7 @@ void
 void 
 	UITableView::touchesEnded_withEvent(NSSet* touches ,UIEvent* events) 
 {
-	For(UITableViewCell*,uiview,this->subviews)
+	For(UITableViewCell*,uiview,self->subviews)
 		uiview->touchesEnded_withEvent(touches,events);
 	forCCEnd
 	
@@ -104,7 +105,7 @@ void
 void 
 	UITableView::touchesMoved_withEvent(NSSet* touches ,UIEvent* events) 
 {
-	For(UITableViewCell*,uiview,this->subviews)
+	For(UITableViewCell*,uiview,self->subviews)
 		uiview->touchesMoved_withEvent(touches,events);
 	forCCEnd
 };
