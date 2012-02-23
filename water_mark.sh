@@ -9,7 +9,7 @@ foreach()
 	   else
 		addInfo $file
 	fi
-	echo $file
+#echo $file
 	done
 }
 addInfo()
