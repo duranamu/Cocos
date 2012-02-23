@@ -214,3 +214,30 @@ UIKit/UIViewController.cpp
 UIKit/UIViewController.h
 UIKit/UIWindow.cpp
 UIKit/UIWindow.h
+warning: LF will be replaced by CRLF in all_in_one.sh.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in log.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in Foundation/NSArray.cpp.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in Foundation/NSArray.h.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in Foundation/NSNumber.h.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in Foundation/NSObjCRuntime.h.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in QuartzCore/QuartzCore.h.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in do_all_in_one.sh.
+The file will have its original line endings in your working directory.
+[master 51b427a] 23
+ 3 files changed, 220 insertions(+), 3 deletions(-)
+ create mode 100644 do_all_in_one.sh
+warning: LF will be replaced by CRLF in all_in_one.sh.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in all_in_one.sh.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in do_all_in_one.sh.
+The file will have its original line endings in your working directory.
+To git@github.com:duranamu/Cocos.git
+   1c410a7..51b427a  master -> master
