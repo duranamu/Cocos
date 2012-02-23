@@ -34,7 +34,7 @@ UIImageView*
 }
 	UIImageView::UIImageView(UIImage* image)
 {
-	sprite = CCSprite::spriteWithTexture(image);
+	sprite = CCSprite::spriteWithTexture(image->getCCTexture2D());
 };
 UIImageView*
 	UIImageView::viewWithTexture(CCTexture2D* image)
@@ -68,7 +68,7 @@ UIImageView*
 void
 	UIImageView::setimage(UIImage* cimage)
 {		
-	sprite = CCSprite::spriteWithTexture(cimage);
+	sprite = CCSprite::spriteWithTexture(cimage->getCCTexture2D());
 	self->image = cimage;
 }
 UIImage*

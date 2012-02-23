@@ -23,7 +23,7 @@ THE SOFTWARE.
 #define UITABLEVIEW_H
 #include "UITableViewDataSource.h"
 #include "UIView.h"
-#include "..\Cocos\Cocos.h"
+#include <Cocos\Cocos.h>
 class UITableView :public UIView 
 {
 	CCString* identifier;
@@ -40,11 +40,11 @@ public:
 	virtual void 
 		reloadData(NSArray* );
 	void 
-		touchesBegan_withEvent(NSSet*  ,UIEvent* );
+		touchesBegan_withEvent(_set*  ,UIEvent* );
 	void 
-		touchesEnded_withEvent(NSSet*  ,UIEvent* );
+		touchesEnded_withEvent(_set*  ,UIEvent* );
 	void
-		touchesMoved_withEvent(NSSet*  ,UIEvent* );
+		touchesMoved_withEvent(_set*  ,UIEvent* );
 	BOOL
 		pointInside_withEvent(CGPoint point,UIEvent* evt);
 };

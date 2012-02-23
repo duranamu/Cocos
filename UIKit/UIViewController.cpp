@@ -41,7 +41,7 @@ CCSprite*
 	return view->anyView()->getSprite();
 }
 void 
-	UIViewController::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
+	UIViewController::touchesBegan_withEvent(_set* touches ,UIEvent* events)
 {
 	self->view->touchesBegan_withEvent(touches,events);
 
@@ -59,7 +59,7 @@ void
 	}
 }
 void 
-	UIViewController::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
+	UIViewController::touchesEnded_withEvent(_set* touches ,UIEvent* events)
 {
 	newTouchSession = true;
 
@@ -79,7 +79,7 @@ void
 void 
 	UIViewController::predo_controller_torsoData(CCNode* sender,vid data)
 {
-	ccCast(CCPoint3D*,data);
+	_cast(CCPoint3D*,data);
 
 	m_torsox = cdata->x;
 	m_torsoy = 480 - cdata->y;
@@ -92,7 +92,7 @@ void
 	cdata->autorelease();
 }
 void 
-	UIViewController::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
+	UIViewController::touchesMoved_withEvent(_set* touches ,UIEvent* events)
 {
 	self->view->touchesMoved_withEvent(touches,events);
 

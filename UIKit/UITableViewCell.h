@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UITABLEVIEWCELL_H
 #define UITABLEVIEWCELL_H
-#include "..\Cocos\Cocos.h"
+#include <Cocos\Cocos.h>
 #include "UIView.h"
 #include "UIImageView.h"
 typedef enum UITableViewStyle{
@@ -56,11 +56,11 @@ public :
 	UITableViewCell* 
 		doInitWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* uid);	
 	void
-		touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+		touchesBegan_withEvent(_set* touches ,UIEvent* events);
 	void
-		touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
+		touchesEnded_withEvent(_set* touches ,UIEvent* events);
 	void
-		touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+		touchesMoved_withEvent(_set* touches ,UIEvent* events);
 	UITableViewCell* 
 		doInitWithStyle_reuseIdentifier_target_selector(UITableViewStyle  ,CCString* ,NSActionTarget*,SEL_CallFuncND);	
 };

@@ -22,7 +22,7 @@ THE SOFTWARE.
 #ifndef UIROTATIONESTURERECOGNIZER_H
 #define UIROTATIONGESTURERECOGNIZER_H
 #include "UIGestureRecognizer.h"
-#include "..\Quartz\Quartz.h"
+#include <QuartzCore\QuartzCore.h>
 class UIRotationGestureRecognizer : public UIGestureRecognizer
 {
 	ccSynthesize(CGFloat ,rotation);
@@ -34,11 +34,11 @@ public:
 	UIRotationGestureRecognizer*
 		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
 	virtual void
-		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesBegan_withEvent(_set* touches ,UIEvent* events);
 	 virtual void 
-		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesMoved_withEvent(_set* touches ,UIEvent* events);
 	 virtual void 
-		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesEnded_withEvent(_set* touches ,UIEvent* events);
 	 CIVector* gestureStartOrentaion;
 	 long touchMovedEventCount ;
 };

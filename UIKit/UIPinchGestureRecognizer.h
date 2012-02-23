@@ -22,7 +22,7 @@ THE SOFTWARE.
 #ifndef UIPINCHGESTURERECOGNIZER_H
 #define UIPINCHGESTURERECOGNIZER_H
 #include "UIGestureRecognizer.h"
-#include "..\Quartz\Quartz.h"
+#include <QuartzCore\QuartzCore.h>
 class UIPinchGestureRecognizer : public UIGestureRecognizer
 {
 	ccSynthesize(CGFloat ,scale);
@@ -33,11 +33,11 @@ public:
 	UIPinchGestureRecognizer*
 		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
 	virtual void
-		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesBegan_withEvent(_set* touches ,UIEvent* events);
 	 virtual void 
-		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesMoved_withEvent(_set* touches ,UIEvent* events);
 	 virtual void 
-		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesEnded_withEvent(_set* touches ,UIEvent* events);
 
 	 CGFloat gestureStartDistance;
 };

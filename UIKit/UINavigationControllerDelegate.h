@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UINavigationControllerDelegate_h
 #define UINavigationControllerDelegate_h
-#include "../Quartz/Quartz.h"
+#include <QuartzCore\QuartzCore.h>
 #include "UINavigationController.h"
 class UINavigationControllerDelegate : public NSObject
 {

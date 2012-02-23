@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UINavigationItem_h
 #define UINavigationItem_h
-#include "../Quartz/Quartz.h"
+#include <QuartzCore\QuartzCore.h>
 #include "UIBarButtonItem.h"
 class UINavigationItem : public NSObject
 {
@@ -34,17 +34,24 @@ class UINavigationItem : public NSObject
 	ccSynthesize
 		( BOOL , hidesBackButton);
 	ccSynthesize
-		(NSArray *,leftBarButtonItems);
+		(NSArray * ,leftBarButtonItems);
 	ccSynthesize
-		(NSArray *,rightBarButtonItems);
+		(NSArray * ,rightBarButtonItems);
+	ccSynthesize
+		(NSString * ,title);
 public:
-	static UINavigationItem* 
+	static UINavigationItem*
+		alloc();
+	UINavigationItem* 
 		initWithTitle(NSString *);
 	void 
-		setHidesBackButton_animated(BOOL ,BOOL);
+		setHidesBackButton_animated(UIBarButtonItem*  ,BOOL);
 	void 
-		setLeftBackButtonItem_animated(BOOL,BOOL);
+		setLeftBackButtonItem_animated(UIBarButtonItem* ,BOOL);
 	void 
-		setRightBackButtonItem_animated(BOOL,BOOL);
+		setRightBackButtonItem_animated(UIBarButtonItem* ,BOOL);
+	BOOL animatedForLeftBar;
+	BOOL animatedForRightBar;
+	BOOL animatedForBackBar;
 };
 #endif

@@ -34,7 +34,7 @@ public:
 	void
 		predo_controller_lefthandData(CCNode*, vid);
 	UITouchPhase 
-		touchPhaseforTime_handz(ccTime,CGFloat);
+		touchPhaseforTime_handz(CGFloat,CGFloat);
 	void 
 		addWindow(UIWindow*);
 	void
@@ -50,7 +50,7 @@ public:
 	void
 		senEvent(UIEvent*);
 	void
-		applicationDidUpdate(ccTime);
+		applicationDidUpdate(CGFloat);
 
 	NITrackerManager* trackerManager;
 	NITracker* torsoTracker;
@@ -88,7 +88,7 @@ public:
 		(CGFloat ,touchStartx);
 	ccSynthesize
 		(CGFloat ,touchStarty);
-	ccTime touchStartTime;
+	CGFloat touchStartTime;
 	ccSynthesize
 		(CGFloat ,t_lasthandx);
 	ccSynthesize

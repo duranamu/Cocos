@@ -19,12 +19,32 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef CCCALLBACK_H
-#define CCCALLBACK_H
-class CCCallBack
+#include "UINavigationItem.h"
+NS_STATIC_ALLOC(UINavigationItem);
+UINavigationItem*
+	UINavigationItem::initWithTitle(NSString* str)
 {
-	virtual void 
-	 touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
-	{}
+	self->title = str;
+	self->leftBarButtonItem = nil;
+	self->rightBarButtonItem = nil;
+	self->backBarButtonItem = nil;
+	return nil;
 }
-#endif
+void
+	UINavigationItem::setLeftBackButtonItem_animated(UIBarButtonItem* item  ,BOOL animated )
+{
+	self->leftBarButtonItem = item;
+	self->animatedForLeftBar = animated;
+}
+void
+	UINavigationItem::setRightBackButtonItem_animated(UIBarButtonItem* item  ,BOOL animated )
+{
+	self->rightBarButtonItem = item;
+	self->animatedForRightBar = animated;
+}
+void
+	UINavigationItem::setHidesBackButton_animated(UIBarButtonItem* item  ,BOOL animated )
+{
+	self->backBarButtonItem = item;
+	self->animatedForBackBar = animated;
+}

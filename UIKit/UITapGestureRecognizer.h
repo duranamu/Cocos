@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UITAPGESTURERECOGNIZER_H
 #define UITAPGESTURERECOGNIZER_H
-#include "..\Cocos\Cocos.h"
+#include <Cocos\Cocos.h>
 #include "UIEvent.h"
 #include "UIGestureRecognizer.h"
 class UITapGestureRecognizer :public UIGestureRecognizer 
@@ -39,10 +39,10 @@ public:
 		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
 	UITapGestureRecognizer();
 	virtual void 
-		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesBegan_withEvent(_set* touches ,UIEvent* events);
 	 virtual void 
-		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesMoved_withEvent(_set* touches ,UIEvent* events);
 	 virtual void 
-		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesEnded_withEvent(_set* touches ,UIEvent* events);
 };
 #endif

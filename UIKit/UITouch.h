@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UITOUCH_H
 #define UITOUCH_H
-#include "..\Quartz\Quartz.h"
+#include <QuartzCore\QuartzCore.h>
 typedef enum {
     UITouchPhaseBegan,
     UITouchPhaseMoved,

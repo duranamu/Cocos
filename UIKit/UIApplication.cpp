@@ -40,14 +40,14 @@ NS_STATIC_ALLOC
 NS_INSTANCE_INIT 
 	(UIApplication);
 void
-	UIApplication::applicationDidUpdate(ccTime time)
+	UIApplication::applicationDidUpdate(CGFloat time)
 {
 	if(isRighthandTracked)
 	{
 		UITouchPhase ability; 
 		ability = touchPhaseforTime_handz(time,m_handz);
 		UITouch* touch = UITouch::touchWithPhase(ability);
-		NSSet* set = new NSSet();
+		_set* set = new _set();
 		if(ability == UITouchPhaseBegan | ability == UITouchPhaseEnded )
 		{
 			 touch->settimestamp(time);
@@ -119,7 +119,7 @@ void
 {
 	if(!isRighthandTracked) 
 		isRighthandTracked = true;
-	ccCast(CCPoint3D*,data);
+	_cast(CCPoint3D*,data);
 	m_handz = cdata->z;
 	m_handx = cdata->x;
 	m_handy = 480 - cdata->y;
@@ -128,14 +128,14 @@ void
 void
 	UIApplication::predo_controller_lefthandData(CCNode* sender , vid data)
 {
-	ccCast(CCPoint3D*,data);
+	_cast(CCPoint3D*,data);
 	ml_handz = cdata->z;
 	ml_handx = cdata->x;
 	ml_handy = 480 - cdata->y;
 	cdata->release();
 }
 UITouchPhase 
-	UIApplication::touchPhaseforTime_handz(cocos2d::ccTime time, CGFloat handz)
+	UIApplication::touchPhaseforTime_handz(cocos2d::CGFloat time, CGFloat handz)
 {
 	float deltahandz;
 	deltahandz = g_lasthandz - handz;
@@ -149,7 +149,7 @@ UITouchPhase
 	NSInteger acceleration = deltahandzVelocity /time;
 	acceleration = (acceleration >>6);
 
-	if(velocity > 30 & acceleration < 0)
+	if(velocity > 30 & acceleration < 5)
 	{		
 		if( menuTouchPhase ==  UITouchPhasePending )
 		{
@@ -157,7 +157,7 @@ UITouchPhase
 		}else{
 			return menuTouchPhase;
 		}
-	}else if (velocity < -10 & acceleration < 5){
+	}else if (velocity < -10 & acceleration > 5){
 		if(menuTouchPhase == UITouchPhaseMoved)
 		{
 			return menuTouchPhase = UITouchPhaseEnded;

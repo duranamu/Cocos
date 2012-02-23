@@ -19,22 +19,27 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIIMAGE_H
-#define UIIMAGE_H
-#include "..\Cocos\Cocos.h"
-class UIImage : public CCTexture2D
-{
-public:
+#pragma once
+#include <QuartzCore/QuartzCore.h>
+_interface(UIImage,NSObject)
+	UIImage(){};
 	UIImage(const void* data ,CCTexture2DPixelFormat format ,CCSize size)
 	{
-		this->initWithData(data ,CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,
+		ref = new CCTexture2D();
+		ref->initWithData(data ,CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,
 		size.width,size.height,size);
 	};
-static UIImage*
-	imageWithData_format_pixel_size(const void* ,CCTexture2DPixelFormat,CCSize);
-static UIImage*
-	imageNamed(NSString*);
-	UIImage(const char *);
-
-};
-#endif
+	static UIImage*
+		imageWithData_format_pixel_size(const void* ,CCTexture2DPixelFormat,CCSize);
+	static UIImage*
+		imageNamed(NSString*);
+		UIImage(const char *);
+	CCTexture2D*
+		getCCTexture2D(){return ref;}
+	UIImage*
+		initWithData(NSData* );
+	static UIImage*
+		imageWithData(NSData* );
+	protected:
+		CCTexture2D* ref;
+_end

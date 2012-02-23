@@ -46,8 +46,27 @@ UIImage*
 }
 UIImage::UIImage(const char* file)
 {
+	ref = new CCTexture2D();
 	CCImage* ccimage = new CCImage();
 	ccimage->initWithImageFile(file);
-	self->initWithImage(ccimage);
+	ref->initWithImage(ccimage);
 }
-
+void
+	UIImage::dealloc()
+{
+	ref->release();
+}
+UIImage*
+	UIImage::imageWithData(NSData* data)
+{
+	return alloc()->initWithData(data);
+}
+UIImage*
+	UIImage::initWithData(NSData* data)
+{
+	ref = new CCTexture2D();
+	CCImage* ccimage = new CCImage();
+	ccimage->initWithImageFile(data->getdataPath()->description().c_str());
+	ref->initWithImage(ccimage);
+	return self;
+}

@@ -19,19 +19,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef NSSTRING_H
-#define NSSTRING_H
-#include <cocos2d.h>
-#include "NSObject.h"
-#include "Foundation.h"
-using namespace cocos2d;
-class NSString : public NSObject  
+#include "UIBarButtonItem.h"
+#include "UIKitAddition.h"
+NS_STATIC_ALLOC( UIBarButtonItem );
+UIBarButtonItem*
+	UIBarButtonItem::initWithTitle_style_target_action(NSString* ctitle ,UIBarButtonItemStyle cstyle, NSActionTarget* ctarget,SEL caction)
 {
-	CCString* ref;
-public:
-	NSString(const char*);
-	~NSString();
-	std::string
-		description();
-};
-#endif
+	self->action = caction;
+	self->target = ctarget;
+	self->style = cstyle;
+	self->title = ctitle;
+
+	NSDictionary* dict = NSDictionary::dictionaryWithObjectAndKeys(
+		UIFont::fontWithName_size(_s("Arial"),1.0f),UITextAttributeFont,
+		UIColor::whiteColor(),UITextAttributeTextColor);
+	//nil to be fixed
+	self->setTitleTextAttributes_forState(dict,nil);
+
+	return self;
+}

@@ -21,11 +21,12 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UINavigationBar_h
 #define UINavigationBar_h
-#include "../Quartz/Quartz.h"
+#include <QuartzCore\QuartzCore.h>
 #include "UIView.h"
 #include "UIResponder.h"
 class UINavigationBar : public UIView , public UIResponder
 {
-
+	ccSynthesize
+		(NSDictionary * , titleTextAttributes);
 };
 #endif

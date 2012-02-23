@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIGESTURERECOGNIZER_H
 #define UIGESTURERECOGNIZER_H
-#include "..\Cocos\Cocos.h"
+#include <Cocos\Cocos.h>
 #include "UIResponder.h"
 typedef enum UIGestureRecognizeState
 {
@@ -40,15 +40,15 @@ class UIGestureRecognizer :public UIResponder
 	ccSynthesize(UIGestureRecognizeState,state);
 public:
     virtual void
-		touchesBegan_withEvent(NSSet* touches ,UIEvent* events){};
+		touchesBegan_withEvent(_set* touches ,UIEvent* events){};
 	 virtual void 
-		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events){};
+		 touchesMoved_withEvent(_set* touches ,UIEvent* events){};
 	 virtual void 
-		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events){};
+		 touchesEnded_withEvent(_set* touches ,UIEvent* events){};
 
 	NSActionTarget* m_pListener;
 	SEL_CallFuncND  m_pSelector;
-	ccSynthesize( NSSet* ,touches );
+	ccSynthesize( _set* ,touches );
 	ccSynthesize(UIEvent* ,events );
 };
 #endif

@@ -19,40 +19,42 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "CIVector.h"
-NS_STATIC_ALLOC(CIVector);
-CIVector*
-	CIVector::vectorFrom_to(CGPoint pa , CGPoint pb)
+#include "UINavigationController.h"
+NS_STATIC_ALLOC(UINavigationController);
+UINavigationController*
+	UINavigationController::initWithRootViewController
+	(UIViewController* rootViewController)
 {
-	CIVector* mem = alloc();
-	mem->initFrom_to(pa,pb);
-	return mem;
-}
-CIVector*
-	CIVector::initFrom_to(CGPoint pa , CGPoint pb)
-{
-	self->X = pb.x - pa.x ;
-	self->Y = pb.y - pa.y ;
+	self->rootViewController = rootViewController;
+	self->pushViewController_viewController_animated(rootViewController,YES);
 	return self;
 }
-CIVector*
-	CIVector::vectorWithCGPoint(CGPoint pa)
+	UINavigationController::UINavigationController()
 {
-	CIVector* mem = alloc();
-	mem->initWithCGPoint(pa);
-	return mem;
+	self->stackPointer = 0;
+	self->viewControllers =NSArray::array();
 }
-CIVector*
-	CIVector::initWithCGPoint(CGPoint pa )
+void 
+	UINavigationController::pushViewController_viewController_animated
+	(UIViewController* p_rootViewController , BOOL animated)
 {
-	self->X = pa.x;
-	self->Y = pa.y;
-	return self;
+	self->viewControllers->addObject(p_rootViewController);
+	self->stackPointer++;
+	self->view = p_rootViewController->view;
+	self->topViewController = p_rootViewController;
 }
-CIVector*
-	CIVector::addVector(CIVector * vec)
+void
+	UINavigationController::viewDidLoad()
 {
-	self->X += vec->getX();
-	self->Y += vec->getY();
-	return self;
+	self->topViewController->viewDidLoad();
+}
+void
+	UINavigationController::viewDidUpdate(CGFloat time)
+{
+	self->topViewController->viewDidUpdate(time);
+}
+void
+	UINavigationController::predo_controller_torsoData(CCNode * node , vid sender)
+{
+	self->topViewController->predo_controller_torsoData(node ,sender);
 }

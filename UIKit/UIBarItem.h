@@ -21,12 +21,12 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIBARITEM_H
 #define UIBARITEM_H
-#include "../Quartz/Quartz.h"
+#include <QuartzCore\QuartzCore.h>
 #include "UIKitData.h"
 #include "UIControl.h"
 #include "UIFont.h"
 #include "UIImage.h"
-#include "UIColor.h'
+#include "UIColor.h"
 class UIBarItem : public NSObject
 {
 	ccSynthesize

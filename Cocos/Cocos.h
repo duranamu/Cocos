@@ -21,12 +21,5 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef COCOS_H
 #define COCOS_H
-#include "Foundation.h"
-#include "NSNumber.h"
-#include "CCWrapper.h"
-#include "CCPoint3D.h"
-#include "NSArray.h"
-#include "NSObject.h"
-#include "NSString.h"
-#include "NSDictionary.h"
+#include <Foundation/Foundation.h>
 #endif

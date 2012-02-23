@@ -21,14 +21,54 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIBarButtonItem_h
 #define UIBarButtonItem_h
-#include "../Quartz/Quartz.h"
+#include <QuartzCore\QuartzCore.h>
 #include "UIImage.h"
 #include "UIBarItem.h"
+typedef enum {
+    UIBarButtonSystemItemDone,
+    UIBarButtonSystemItemCancel,
+    UIBarButtonSystemItemEdit,
+    UIBarButtonSystemItemSave,
+    UIBarButtonSystemItemAdd,
+    UIBarButtonSystemItemFlexibleSpace,
+    UIBarButtonSystemItemFixedSpace,
+    UIBarButtonSystemItemCompose,
+    UIBarButtonSystemItemReply,
+    UIBarButtonSystemItemAction,
+    UIBarButtonSystemItemOrganize,
+    UIBarButtonSystemItemBookmarks,
+    UIBarButtonSystemItemSearch,
+    UIBarButtonSystemItemRefresh,
+    UIBarButtonSystemItemStop,
+    UIBarButtonSystemItemCamera,
+    UIBarButtonSystemItemTrash,
+    UIBarButtonSystemItemPlay,
+    UIBarButtonSystemItemPause,
+    UIBarButtonSystemItemRewind,
+    UIBarButtonSystemItemFastForward,
+    UIBarButtonSystemItemUndo,        // iOS 3.0 and later
+    UIBarButtonSystemItemRedo,        // iOS 3.0 and later
+    UIBarButtonSystemItemPageCurl,    // iOS 4.0 and later
+} UIBarButtonSystemItem;
+typedef enum {
+    UIBarButtonItemStylePlain,
+    UIBarButtonItemStyleBordered,
+    UIBarButtonItemStyleDone,
+} UIBarButtonItemStyle;
 class UIBarButtonItem : public UIBarItem
 {
 	ccSynthesize
 		(SEL , action);
 	ccSynthesize
 		(NSActionTarget* , target);
+	ccSynthesize
+		(UIBarButtonItemStyle ,style);
+	ccSynthesize
+		(NSString* , title);
+public:
+	static UIBarButtonItem*
+		alloc();
+	UIBarButtonItem*
+		initWithTitle_style_target_action(NSString* ,UIBarButtonItemStyle, NSActionTarget* ,SEL );
 };
 #endif

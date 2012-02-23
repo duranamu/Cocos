@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UISWIPEGESTURERECOGNIZER_H
 #define UISWIPEGESTURERECOGNIZER_H
-#include "../Quartz/Quartz.h"
+#include <QuartzCore\QuartzCore.h>
 #include "UIGestureRecognizer.h"
 typedef enum {
 	UISwipeGestureRecognizerDirectionZero  = 0 ,
@@ -42,11 +42,11 @@ public:
 	UISwipeGestureRecognizer*
 		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
 	virtual void
-		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesBegan_withEvent(_set* touches ,UIEvent* events);
 	 virtual void 
-		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesMoved_withEvent(_set* touches ,UIEvent* events);
 	 virtual void 
-		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesEnded_withEvent(_set* touches ,UIEvent* events);
 	 UISwipeGestureRecognizerDirection
 		 directionFrom_to(CGPoint ,CGPoint);
 

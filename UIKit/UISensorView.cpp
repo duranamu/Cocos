@@ -28,7 +28,7 @@ UISensorView::UISensorView()
 	UIImage* image =  
 		UIImage::imageWithData_format_pixel_size(
 		device->rawRGBData(),CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,CCSizeMake(640,480));
-	this->sprite = CCSprite::spriteWithTexture(image);
+	this->sprite = CCSprite::spriteWithTexture(image->getCCTexture2D());
 	this->sprite->setPosition(ccp(320,240));
 }
 void 
@@ -40,5 +40,5 @@ void
 	UIImage* image =  
 		UIImage::imageWithData_format_pixel_size(
 		device->rawRGBData(),CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,CCSizeMake(640,480));
-	this->sprite->setTexture(image);
+	this->sprite->setTexture(image->getCCTexture2D());
 }

@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UITABLEVIEWDATASOURCE_H
 #define UITABLEVIEWDATASOURCE_H
-#include "..\Cocos\Cocos.h"
+#include <Cocos\Cocos.h>
 #include "UIView.h"
 #include "UITableViewCell.h"
 #include "UIIndexPath.h"

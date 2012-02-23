@@ -21,13 +21,12 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIVIEW_H
 #define UIVIEW_H
-#include "..\Cocos\Cocos.h"
+#include <Cocos\Cocos.h>
 #include "UIResponder.h"
 #include "UITouch.h"
 #include  "UIIndexPath.h"
 #include "UITapGestureRecognizer.h"
-class UIView :public UIResponder 
-{
+_interface( UIView , UIResponder )
 public:
 	UIView()
 	{
@@ -69,11 +68,11 @@ virtual void
  void 
 	followPlayer(CCPoint3D*);
  void 
-	touchesBegan_withEvent(NSSet*  ,UIEvent* );
+	touchesBegan_withEvent(_set*  ,UIEvent* );
  void
-	 touchesMoved_withEvent(NSSet*  ,UIEvent* );
+	 touchesMoved_withEvent(_set*  ,UIEvent* );
  void
-	 touchesEnded_withEvent(NSSet*  ,UIEvent* ) ;
+	 touchesEnded_withEvent(_set*  ,UIEvent* ) ;
  bool 
 	 canTriggerforTouch(UITouch* );
  bool

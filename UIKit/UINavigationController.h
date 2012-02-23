@@ -21,11 +21,44 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UINAVIGATIONCONTROLLER_H
 #define UINAVIGATIONCONTROLLER_H
-#include "../Quartz/Quartz.h"
+#include <QuartzCore\QuartzCore.h>
 #include "UIViewController.h"
 #include "UIResponder.h"
+#include "UINavigationBar.h"
 class UINavigationController : public UIViewController , public UIResponder
 {
+public:
+
+	UINavigationController();
+	static UINavigationController*
+		alloc();
+	UINavigationController* 
+		initWithRootViewController(UIViewController*);
+	void 
+		pushViewController_viewController_animated(UIViewController * , BOOL);
+	void 
+		popViewController_viewController_animated(UIViewController * , BOOL);
+	NSArray *
+		popToRootViewControllerAnimated(BOOL );
+	NSArray *
+		popToViewController_viewController_animated(UIViewController *,BOOL);
 	vid delegate ;
+	ccSynthesize
+		(UINavigationBar* , navigationBar);
+	ccSynthesize
+		(BOOL , navigationBarHidden);
+	ccSynthesize
+		(UIViewController* , topViewController);
+	ccSynthesize
+		(NSArray* , viewControllers);
+	virtual void 
+		viewDidLoad(void );
+	virtual void
+		viewDidUpdate(CGFloat);
+	virtual void 
+		predo_controller_torsoData(CCNode* ,vid );
+protected:
+	UIViewController* rootViewController;
+	NSUInteger stackPointer;
 };
 #endif

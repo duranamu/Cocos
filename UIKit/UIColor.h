@@ -19,9 +19,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIColor_H
-#define UIColor_H
-#include "../Quartz/Quartz.h"
+#ifndef UICOLOR_H
+#define UICOLOR_H
+#include <QuartzCore\QuartzCore.h>
 class UIColor : public NSObject
 {
 	ccSynthesize

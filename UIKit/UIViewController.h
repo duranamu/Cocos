@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIVIEWCONTROLLER_H
 #define UIVIEWCONTROLLER_H
-#include "..\Cocos\Cocos.h"
+#include <Cocos\Cocos.h>
 #include "UIView.h"
 #include "UIResponder.h"
 #include "UIImageView.h"
@@ -30,7 +30,7 @@ THE SOFTWARE.
 #define TOUCH_FUNC
 
 #endif
-class UIViewController :public CCNode , public UIResponder ,public UIView
+class UIViewController :public CCNode , public UIResponder ,public UIView ,public NSObject
 {
 public:
 	UIViewController()
@@ -38,7 +38,7 @@ public:
 		self->view = new UIView();
 		followView = new UIView();
 		movableView = new UIView();
-	//	righthand_clicked_marker = UIImageView::viewWithFile(nss("stars.png"));
+	//	righthand_clicked_marker = UIImageView::viewWithFile(_s("stars.png"));
 	}
 virtual void 
 	viewDidLoad(void){}
@@ -47,22 +47,22 @@ void
 void 
 	viewDidRender(CCLayer* host );
 virtual void 
-	viewDidUpdate(cocos2d::ccTime ){};
+	viewDidUpdate(cocos2d::CGFloat ){};
 void 
 	viewReloadData(NSArray* toShow);
 CCSprite*  
 	renderTargetforHost();
 virtual void 
-	touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+	touchesBegan_withEvent(_set* touches ,UIEvent* events);
 virtual void 
-	touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+	touchesMoved_withEvent(_set* touches ,UIEvent* events);
 virtual void 
-	touchesEnded_withEvent(NSSet* touches ,UIEvent* events) ;
+	touchesEnded_withEvent(_set* touches ,UIEvent* events) ;
 virtual void 
 	controller_torsoData(CCNode* ,CCPoint3D*){};
 virtual void 
 	controller_righthandData(CCNode* ,CCPoint3D*){};
-void 
+virtual void 
 	predo_controller_torsoData(CCNode* ,void*);
 public:
 	UIView* view;
@@ -83,7 +83,7 @@ protected:
 		(CGFloat ,m_torsoy);
 	float touchStartx;
 	float touchStarty;
-	ccTime touchStartTime;
+	CGFloat touchStartTime;
 
 	float t_lasthandx;
 	float t_lasthandy;

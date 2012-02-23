@@ -37,14 +37,14 @@ UIPanGestureRecognizer*
 	self->m_pSelector = nil;
 }
 void
-	UIPanGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
+	UIPanGestureRecognizer::touchesBegan_withEvent(_set* touches ,UIEvent* events)
 {
 	UITouch* touch = (UITouch*) touches->anyObject();
 	self->touchStartLocation = touch->locationInView();
 	self->lastTouchTime = touch->gettimestamp();
 }
 void
-	UIPanGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
+	UIPanGestureRecognizer::touchesMoved_withEvent(_set* touches ,UIEvent* events)
 {
 	UITouch* touch = (UITouch*) touches->anyObject();
 	CGPoint loaction  =  touch->locationInView();
@@ -57,7 +57,7 @@ void
 	(m_pListener->*m_pSelector)(nil,self);
 }
 void
-	UIPanGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
+	UIPanGestureRecognizer::touchesEnded_withEvent(_set* touches ,UIEvent* events)
 {
 }
 CGPoint

@@ -95,7 +95,7 @@ void
 	self->recognizerSheet->addObject(gesture);
 }
 void
-	UIView::touchesBegan_withEvent(NSSet* touches ,UIEvent* events) 
+	UIView::touchesBegan_withEvent(_set* touches ,UIEvent* events) 
 {
 	/*if(self->recognizerSheet)
 		For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
@@ -103,7 +103,7 @@ void
 		forCCEnd*/
 }
 void
-	UIView::touchesMoved_withEvent(NSSet* touches ,UIEvent* events) 
+	UIView::touchesMoved_withEvent(_set* touches ,UIEvent* events) 
 {
 	/*if(self->recognizerSheet)
 	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
@@ -111,7 +111,7 @@ void
 	forCCEnd	*/
 }
 void
-	UIView::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
+	UIView::touchesEnded_withEvent(_set* touches ,UIEvent* events)
 {
 	/*if(self->recognizerSheet)
 	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
@@ -151,3 +151,5 @@ UIView*
 	};
 	return (UIView*) match_stack->lastObject();
 }
+void
+	UIView::dealloc(){}

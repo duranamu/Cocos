@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIKITDATA_H
 #define UIKITDATA_H
-#include "../Quartz/Quartz.h"
+#include <QuartzCore\QuartzCore.h>
 typedef enum {
     UIBarStyleDefault          = 0,
     UIBarStyleBlack            = 1,

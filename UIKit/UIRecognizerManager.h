@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIRECOGNIZERMANAGER_H
 #define UIRECOGNIZERMANAGER_H
-#include "..\Cocos\Cocos.h"
+#include <Cocos\Cocos.h>
 class UIRecognizerManager : public NSObject
 {
 	

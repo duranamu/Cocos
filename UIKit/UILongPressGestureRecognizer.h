@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UILONGPRESSGESTURERECOGNIZER_H
 #define UILONGPRESSGESTURERECOGNIZER_H
-#include "../Quartz/Quartz.h"
+#include <QuartzCore\QuartzCore.h>
 #include "UIGestureRecognizer.h"
 #include "UIEvent.h"
 class UILongPressGestureRecognizer : public UIGestureRecognizer
@@ -38,10 +38,10 @@ public:
 		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
 	UILongPressGestureRecognizer();
 	virtual void 
-		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesBegan_withEvent(_set* touches ,UIEvent* events);
 	 virtual void 
-		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesMoved_withEvent(_set* touches ,UIEvent* events);
 	 virtual void 
-		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
+		 touchesEnded_withEvent(_set* touches ,UIEvent* events);
 };
 #endif
