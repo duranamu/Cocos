@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIVIEWCONTROLLER_H
 #define UIVIEWCONTROLLER_H
-#include <Cocos\Cocos.h>
+#include <Cocos/Cocos.h>
 #include "UIView.h"
 #include "UIResponder.h"
 #include "UIImageView.h"
@@ -53,11 +53,11 @@ void
 CCSprite*  
 	renderTargetforHost();
 virtual void 
-	touchesBegan_withEvent(_set* touches ,UIEvent* events);
+	touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
 virtual void 
-	touchesMoved_withEvent(_set* touches ,UIEvent* events);
+	touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
 virtual void 
-	touchesEnded_withEvent(_set* touches ,UIEvent* events) ;
+	touchesEnded_withEvent(CCSet* touches ,UIEvent* events) ;
 virtual void 
 	controller_torsoData(CCNode* ,CCPoint3D*){};
 virtual void 

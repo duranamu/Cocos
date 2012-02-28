@@ -54,9 +54,9 @@ using namespace cocos2d;
 	do{  __DICT__->ref->begin();__VAR__ __INST__;while(__INST__ = (__VAR__) __DICT__->ref->next()){	 
 #define fordictEnd }}while(0);
 
-#define forSet(__var__ , __inst__ , __set__) \
-	do { CCSetIterator __it__ = __set__->begin(); \
-	while( (__it__) != __set__->end()){          \
+#define forSet(__var__ , __inst__ , _CCSet__) \
+	do { CCSetIterator __it__ = _CCSet__->begin(); \
+	while( (__it__) != _CCSet__->end()){          \
 			__var__ __inst__ = (__var__ ) (*__it__); __it__++; if(!__inst__) break;
 
 #define _s(__STR__) new NSString(__STR__)
@@ -69,7 +69,7 @@ using namespace cocos2d;
 #define YES 1
 #define NO  0
 //typedef int BOOL
-typedef CCSet _set;
+typedef CCSet NSSet;
 #define NS_STATIC_ALLOC(__var__) \
 __var__*  __var__::alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(mem);}return mem;}
 #define NS_INSTANCE_INIT(__var__) __var__* __var__::init(){return self;}

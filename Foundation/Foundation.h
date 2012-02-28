@@ -37,4 +37,5 @@ THE SOFTWARE.
 #include <Foundation/NSURLResponse.h>
 #include <Foundation/NSData.h>
 #include <Foundation/NSJSONSerialization.h>
+#include <Foundation/NSOperation.h>
 #endif

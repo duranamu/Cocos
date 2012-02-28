@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef TYPEDEFINITION_H
 #define TYPEDEFINITION_H
-#include <Cocos\Cocos.h>
+#include <Cocos/Cocos.h>
 typedef CCPoint CGPoint;
 typedef CCSize CGSize ;
 typedef CCRect CGRect;

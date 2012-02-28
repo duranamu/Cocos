@@ -20,8 +20,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include <Foundation/NSOperationQueue.h>
+static NSOperationQueue* _mainQueue;
 void
 	NSOperationQueue::dealloc()
 {
 
+}
+NSOperationQueue*
+	NSOperationQueue::initWithDispatchQueue(dispatch_queue_t hd)
+{
+	self->_dispatch_queue = hd;
+	return self;
+}
+NSOperationQueue* 
+	NSOperationQueue::mainQueue()
+{
+	if(_mainQueue == nil)
+	{
+		_mainQueue = alloc()->initWithDispatchQueue(
+			dispatch_get_main_queue());
+	}
+	return _mainQueue;
+}
+void
+	NSOperationQueue::addOperation(NSOperation* operation)
+{
+}
+NSOperationQueue*
+	NSOperationQueue::currentQueue()
+{
+	return alloc()->initWithDispatchQueue(
+		dispatch_get_current_queue());
 }

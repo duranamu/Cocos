@@ -22,8 +22,25 @@ THE SOFTWARE.
 #ifndef NSOperationQueue_H
 #define NSOperationQueue_H
 #include <Foundation/NSObject.h>
+#include <dispatch/dispatch.h>
 #include <Foundation/cocos2dx_framework.h>
+#include <Foundation/NSOperation.h>
+#include <Foundation/NSArray.h>
 _interface( NSOperationQueue ,NSObject )
+	 
+	void
+		addOperation(NSOperation*);
+	static NSOperationQueue* 
+		mainQueue();
+	static NSOperationQueue* 
+		currentQueue();
+	NSOperationQueue*
+		initWithDispatchQueue(dispatch_queue_t);
 	
+protected:
+	dispatch_queue_t _dispatch_queue;
+
+	NSArray *operations;
+
 _end
 #endif

@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #include "UITableView.h"
 #include "UIIndexPath.h"
-#include <Cocos\Cocos.h>
+#include <Cocos/Cocos.h>
 #include "UIGestureRecognizer.h"
 #include "UIColor.h"
 UITableView::UITableView()
@@ -87,7 +87,7 @@ bool
 		return false;
 }
 void 
-	UITableView::touchesBegan_withEvent(_set* touches ,UIEvent* events)
+	UITableView::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
 {
 	For(UITableViewCell*,uiview,self->subviews)
 		uiview->touchesBegan_withEvent(touches,events);
@@ -95,7 +95,7 @@ void
 
 }
 void 
-	UITableView::touchesEnded_withEvent(_set* touches ,UIEvent* events) 
+	UITableView::touchesEnded_withEvent(CCSet* touches ,UIEvent* events) 
 {
 	For(UITableViewCell*,uiview,self->subviews)
 		uiview->touchesEnded_withEvent(touches,events);
@@ -103,7 +103,7 @@ void
 	
 };
 void 
-	UITableView::touchesMoved_withEvent(_set* touches ,UIEvent* events) 
+	UITableView::touchesMoved_withEvent(CCSet* touches ,UIEvent* events) 
 {
 	For(UITableViewCell*,uiview,self->subviews)
 		uiview->touchesMoved_withEvent(touches,events);

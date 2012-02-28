@@ -33,11 +33,11 @@ public:
 	UIPinchGestureRecognizer*
 		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
 	virtual void
-		 touchesBegan_withEvent(_set* touches ,UIEvent* events);
+		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
 	 virtual void 
-		 touchesMoved_withEvent(_set* touches ,UIEvent* events);
+		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
 	 virtual void 
-		 touchesEnded_withEvent(_set* touches ,UIEvent* events);
+		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
 
 	 CGFloat gestureStartDistance;
 };

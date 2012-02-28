@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIRESPONDER_H
 #define UIRESPONDER_H
-#include <Cocos\Cocos.h>
+#include <Cocos/Cocos.h>
 #include "UIEvent.h"
 class UIResponder : public NSObject
 {
@@ -29,11 +29,11 @@ class UIResponder : public NSObject
 		(BOOL ,becomeFirstResponder );
 public:
 	 virtual void 
-		 touchesBegan_withEvent(_set* touches ,UIEvent* events) {};
+		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events) {};
 	 virtual void 
-		 touchesMoved_withEvent(_set* touches ,UIEvent* events) {};
+		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events) {};
 	 virtual void 
-		 touchesEnded_withEvent(_set* touches ,UIEvent* events) {};
+		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events) {};
 	 virtual BOOL
 		 canBecomeFirstResponder(void){ return becomeFirstResponder;};
 };

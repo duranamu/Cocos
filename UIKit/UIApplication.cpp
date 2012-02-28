@@ -47,7 +47,7 @@ void
 		UITouchPhase ability; 
 		ability = touchPhaseforTime_handz(time,m_handz);
 		UITouch* touch = UITouch::touchWithPhase(ability);
-		_set* set = new _set();
+		CCSet* set = new CCSet();
 		if(ability == UITouchPhaseBegan | ability == UITouchPhaseEnded )
 		{
 			 touch->settimestamp(time);

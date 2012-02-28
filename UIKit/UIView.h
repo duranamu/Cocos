@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIVIEW_H
 #define UIVIEW_H
-#include <Cocos\Cocos.h>
+#include <Cocos/Cocos.h>
 #include "UIResponder.h"
 #include "UITouch.h"
 #include  "UIIndexPath.h"
@@ -68,11 +68,11 @@ virtual void
  void 
 	followPlayer(CCPoint3D*);
  void 
-	touchesBegan_withEvent(_set*  ,UIEvent* );
+	touchesBegan_withEvent(CCSet*  ,UIEvent* );
  void
-	 touchesMoved_withEvent(_set*  ,UIEvent* );
+	 touchesMoved_withEvent(CCSet*  ,UIEvent* );
  void
-	 touchesEnded_withEvent(_set*  ,UIEvent* ) ;
+	 touchesEnded_withEvent(CCSet*  ,UIEvent* ) ;
  bool 
 	 canTriggerforTouch(UITouch* );
  bool

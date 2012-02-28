@@ -60,6 +60,8 @@ void
 	NSData::dealloc()
 {
 	free(self->_bytes);
+	if(dataPath)
+		remove(dataPath->description().c_str());
 }
 NSData*
 	NSData::initWithContentsOfFile(NSString* filePath)

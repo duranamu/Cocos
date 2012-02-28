@@ -41,7 +41,7 @@ CCSprite*
 	return view->anyView()->getSprite();
 }
 void 
-	UIViewController::touchesBegan_withEvent(_set* touches ,UIEvent* events)
+	UIViewController::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
 {
 	self->view->touchesBegan_withEvent(touches,events);
 
@@ -59,7 +59,7 @@ void
 	}
 }
 void 
-	UIViewController::touchesEnded_withEvent(_set* touches ,UIEvent* events)
+	UIViewController::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
 {
 	newTouchSession = true;
 
@@ -92,7 +92,7 @@ void
 	cdata->autorelease();
 }
 void 
-	UIViewController::touchesMoved_withEvent(_set* touches ,UIEvent* events)
+	UIViewController::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
 {
 	self->view->touchesMoved_withEvent(touches,events);
 

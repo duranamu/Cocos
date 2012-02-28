@@ -29,7 +29,7 @@ NSDictionary*
 	{
 		CC_SAFE_DELETE(mem);
 	}else{
-		mem->autorelease();
+		//mem->autorelease();
 	}
 	return mem;
 }
@@ -41,13 +41,15 @@ NSDictionary*
 NSDictionary*
 	NSDictionary::dictionary()
 {
-	return alloc()->init();
+	NSDictionary* dict = alloc()->init();
+	dict->autorelease();
+	return dict;
 }
 NSDictionary*
 	NSDictionary::dictionaryWithObjectAndKeys(NSObject* obj,NSString* str,...)
 {
 	NSDictionary* dict; ;
-	if(dict = alloc())
+	if(dict = alloc()->init())
 	{
 		if(obj && str)
 		dict->ref->setObject(obj,str->description());
@@ -69,6 +71,7 @@ NSDictionary*
 		}
 	va_end ( argp);
 	}
+	dict->autorelease();
 	return dict;
 }
 NSDictionary*
@@ -93,5 +96,6 @@ NSDictionary*
 		}
 	}
 	va_end ( argp);
+	self->autorelease();
 	return self;
 }

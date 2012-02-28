@@ -49,7 +49,7 @@ public:
 	inline bool
 		containsObject(NSObject* obj){ return ref->containsObject(obj);}
 	inline void
-		addObject(NSObject* obj){ ref->addObject(obj);}
+		addObject(NSObject* obj){ obj->retain(); ref->addObject(obj);}
 	inline void 
 		retain(){ ref->retain();}
 	inline NSUInteger 

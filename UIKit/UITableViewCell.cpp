@@ -67,7 +67,7 @@ THE SOFTWARE.
 		self->indentationWidth = 10;
 	}
 void 
-	UITableViewCell::touchesBegan_withEvent(_set* touches ,UIEvent* events)
+	UITableViewCell::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
 {
 	UITouch* touch = (UITouch*)touches->anyObject();
 
@@ -85,7 +85,7 @@ void
 	}
 }
 void 
-	UITableViewCell::touchesEnded_withEvent(_set* touches ,UIEvent* events)
+	UITableViewCell::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
 {
 	if(this->canTriggerforTouch((UITouch*)touches->anyObject()))
 	{
@@ -93,7 +93,7 @@ void
 	}
 }
 void 
-	UITableViewCell::touchesMoved_withEvent(_set* touches ,UIEvent* events)
+	UITableViewCell::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
 {
 	UITouch* touch = (UITouch*) touches->anyObject();
 	this->moveByPoint(touch->deltaMove);

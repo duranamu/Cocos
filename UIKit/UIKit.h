@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIKIT_H
 #define UIKIT_H
-#include <QuartzCore\QuartzCore.h>
+#include <QuartzCore/QuartzCore.h>
 #include <UIKit/UITableView.h>
 #include <UIKit/UITableViewCell.h>
 #include <UIKit/UITableViewDataSource.h>

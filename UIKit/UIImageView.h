@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIIMAGEVIEW_H
 #define UIIMAGEVIEW_H
-#include <Cocos\Cocos.h>
+#include <Cocos/Cocos.h>
 #include "UIView.h"
 #include "UIImage.h"
 class UIImageView : public UIView

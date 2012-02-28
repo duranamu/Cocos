@@ -23,9 +23,6 @@ THE SOFTWARE.
 #include <Foundation/NSData.h>
 #include <Foundation/NSURLResponse.h>
 #include <curl/curl.h>
-char* connect_buffer;
-NSUInteger connect_count;
-
 size_t
 	writeData(void *buffer, size_t size, size_t count, void *stream)
 {
@@ -35,12 +32,14 @@ void
 	NSURLConnection::sendAsynchronousRequest_queue_completionHandler
 	(NSURLRequest* request ,NSOperationQueue* queue ,NSCodeBlock block)
 {
+	char uni[20];
+	sprintf(uni,"%d",request);
 
-	connect_count =0 ;
 	FILE *fp;
 	char outfilename[200];
 	strcpy(outfilename,CCFileUtils::fullPathFromRelativePath(""));
-	strcat(outfilename,"tshirt2.png");
+	strcat(outfilename,uni);
+	strcat(outfilename,"DATA.png");
 	fp = fopen(outfilename,"wb");
 	CURL* curl = request->URL()->getcurl();
 

@@ -29,11 +29,14 @@ UIImageView*
 	{
 		CC_SAFE_DELETE(pimageView);
 	}
+	pimageView->autorelease();
 
 	return pimageView;
 }
 	UIImageView::UIImageView(UIImage* image)
 {
+	self->image = image;
+	image->retain();
 	sprite = CCSprite::spriteWithTexture(image->getCCTexture2D());
 };
 UIImageView*

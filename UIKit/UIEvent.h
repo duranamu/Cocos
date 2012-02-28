@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UIEVENT_H
 #define UIEVENT_H
-#include <Cocos\Cocos.h>
+#include <Cocos/Cocos.h>
 typedef enum {
     UIEventTypeTouches,
     UIEventTypeMotion,
@@ -31,7 +31,7 @@ typedef enum {
 class UIEvent : public CCObject
 {
 public:
-	UIEvent(_set* set)
+	UIEvent(CCSet* set)
 	{
 		self->touches = set;
 	}
@@ -39,15 +39,15 @@ public:
 	static UIEvent*
 		alloc();
 	UIEvent*
-		initWithTouches(_set* set);
+		initWithTouches(CCSet* set);
 	static UIEvent*
-		eventWithTouches(_set* set);
+		eventWithTouches(CCSet* set);
 	static UIEvent*
-		eventWithTouches_type(_set* ,UIEventType);
-	_set*
+		eventWithTouches_type(CCSet* ,UIEventType);
+	CCSet*
 		allTouches();
 	ccSynthesize
-		( _set* , touches );
+		( CCSet* , touches );
 	ccSynthesize
 		( UIEventType , type);
 };

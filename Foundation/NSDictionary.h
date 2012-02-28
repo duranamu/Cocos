@@ -44,9 +44,13 @@ public:
 	inline bool
 		setObject_forKey(NSObject* obj  ,NSString* str)
 	{	
+
 		if(obj && str)
+		{
+			obj->retain();
+			str->retain();
 			return ref->setObject(obj,str->description());
-		else
+		}else
 			return false;
 	}
 	inline void

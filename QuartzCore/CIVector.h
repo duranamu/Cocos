@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef CIVECTOR_H
 #define CIVECTOR_H
-#include "../Cocos/Cocos.h"
+#include <Cocos/Cocos.h>
 #include "TypeDefinition.h"
 class CIVector :public NSObject
 {

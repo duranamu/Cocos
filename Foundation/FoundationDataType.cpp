@@ -28,7 +28,7 @@ char* readFileBytes(const char *name)
     fseek(fl, 0, SEEK_END);  
     long len = ftell(fl);  
     char *ret = (char*)malloc(len);  
-    fseek(fl, 0, SEEK_SET);  
+	fseek(fl, 0, SEEK_SET);  
     fread(ret, 1, len, fl);  
     fclose(fl);  
     return ret;  

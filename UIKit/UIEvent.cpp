@@ -20,20 +20,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include "UIEvent.h"
-_set* 
+CCSet* 
 	UIEvent::allTouches()
 {
 	return touches;
 }
 NS_STATIC_ALLOC(UIEvent);
 UIEvent*
-	UIEvent::initWithTouches(_set* set)
+	UIEvent::initWithTouches(CCSet* set)
 {
 	self->touches = set;
 	return self;
 }
 UIEvent*
-	UIEvent::eventWithTouches(_set* set)
+	UIEvent::eventWithTouches(CCSet* set)
 {
 	UIEvent* mem = alloc();
 	if(mem && mem->initWithTouches(set))
@@ -45,7 +45,7 @@ UIEvent*
 	return mem;
 }
 UIEvent*
-	UIEvent::eventWithTouches_type(_set* set ,UIEventType type)
+	UIEvent::eventWithTouches_type(CCSet* set ,UIEventType type)
 {
 	UIEvent* mem ;
 	mem = eventWithTouches(set);

@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include "UITouch.h"
-#include <Cocos\Cocos.h>
+#include <Cocos/Cocos.h>
 UITouch*
 	UITouch::touchWithPhase(UITouchPhase phase)
 {

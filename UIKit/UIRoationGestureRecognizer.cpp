@@ -35,7 +35,7 @@ UIRotationGestureRecognizer*
 	return self;
 }
 void
-	UIRotationGestureRecognizer::touchesBegan_withEvent(_set* touches ,UIEvent* events)
+	UIRotationGestureRecognizer::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateBegan;
 	bool fistTouch = true;
@@ -53,7 +53,7 @@ void
 		baseRotaion = CGAngleMake ( self->gestureStartOrentaion ,lastOrentaionOfHands );
 }
 void
-	UIRotationGestureRecognizer::touchesMoved_withEvent(_set* touches ,UIEvent* events)
+	UIRotationGestureRecognizer::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateChanged;
 	bool fistTouch = true;
@@ -78,7 +78,7 @@ void
 	(m_pListener->*m_pSelector)(nil,self);
 }
 void
-	UIRotationGestureRecognizer::touchesEnded_withEvent(_set* touches ,UIEvent* events)
+	UIRotationGestureRecognizer::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateEnded;
 	bool fistTouch = true;
