@@ -1,4 +1,4 @@
 git add *
-git remove *.sh
+git rm *.sh
 git commit -m $(date +%d)
 git push origin master
