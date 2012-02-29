@@ -76,5 +76,7 @@ NSData*
 NSData*
 	NSData::dataWithContentsOfFile(NSString* filePath)
 {
-	return alloc()->initWithContentsOfFile(filePath);
+	NSData* inst =  alloc()->initWithContentsOfFile(filePath);
+	inst->autorelease();
+	return inst;
 }

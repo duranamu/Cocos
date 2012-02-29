@@ -19,13 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIVIEW_H
-#define UIVIEW_H
+#pragma once
 #include <Cocos/Cocos.h>
-#include "UIResponder.h"
-#include "UITouch.h"
-#include  "UIIndexPath.h"
-#include "UITapGestureRecognizer.h"
+#include <UIKit/UIResponder.h>
+#include <UIKit/UITouch.h>
+#include <UIKit/UIIndexPath.h>
+#include <UIKit/UITapGestureRecognizer.h>
 _interface( UIView , UIResponder )
 public:
 	UIView()
@@ -64,7 +63,7 @@ virtual void
 		sprite = i_sprite;
 	}
 virtual void 
-	reloadData(NSArray* toShow) { /*if(sprite) toShow->addObject(sprite);*/};
+	reloadData(NSArray* toShow) { };
  void 
 	followPlayer(CCPoint3D*);
  void 
@@ -85,6 +84,7 @@ virtual void
 	hitTest_withEvent(CGPoint, UIEvent *);
  virtual void
 	addGestureRecognizer(UIGestureRecognizer*);
+
  	NSArray* subviews;
 	CCSprite* sprite;
 	NSActionTarget* listener;
@@ -96,4 +96,3 @@ virtual void
 	BOOL hidden;
 	ccSynthesize(UIView*,superview);
 };
-#endif

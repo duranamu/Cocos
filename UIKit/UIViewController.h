@@ -38,7 +38,6 @@ public:
 		self->view = new UIView();
 		followView = new UIView();
 		movableView = new UIView();
-	//	righthand_clicked_marker = UIImageView::viewWithFile(_s("stars.png"));
 	}
 virtual void 
 	viewDidLoad(void){}
