@@ -1,4 +1,3 @@
-
 for dir in $*
 do
 git rm -r $dir
