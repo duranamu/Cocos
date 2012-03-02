@@ -26,10 +26,10 @@ THE SOFTWARE.
 #include <Foundation/NSOperationQueue.h>
 //typedef void (*NSCodeBlock)(NSURLResponse*, NSData*, NSError*);
 
-_interface( NSURLConnection,NSObject)
-
+NS_INTERFACE
+	(NSURLConnection,NSObject)
 static void
 	sendAsynchronousRequest_queue_completionHandler
 	(NSURLRequest*,NSOperationQueue*,NSCodeBlock);
 
-_end
+NS_END

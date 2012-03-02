@@ -19,7 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "NSString.h"
+#include <Foundation/NSString.h>
 #include <Foundation/NSData.h>
 NSString::NSString(const char* str)
 {
@@ -35,10 +35,11 @@ NSString*
 {
 	 return self->initWithBytes_length_encoding(data->bytes() ,data->length(),encoding);
 }
-//to do
+//todo enconding
 NSString*
 	NSString::initWithBytes_length_encoding(const vid bytes ,NSUInteger length ,NSStringEncoding enconding)
 {
+	_encoding = enconding;
 	char* _str = (char*) malloc(sizeof(char)*length);
 	if(_str)
 	{
@@ -49,14 +50,37 @@ NSString*
 }
 void
 	NSString::retain()
-{ ref->retain();}
-void
-	NSString::release()
+{ 
+	ref->retain();
+	self->m_uReference++;
+}
+vid
+	NSString::autorelease()
 {
-	ref->release();
+	CCPoolManager::getInstance()->addObject(self);
+	self->m_bManaged = self;
+
+	ref->autorelease();
+
+	return this;
 }
 void
 	NSString::dealloc()
 {
 	ref->release();
+}
+//todo enconding
+NSString*
+	NSString::initWithCString_encoding(const char* nullTerminatedCString,NSStringEncoding encoding)
+{
+	_encoding = encoding ;
+	ref = CCS(nullTerminatedCString);
+	return self;
+}
+NSString*
+	NSString::stringWithCString_encoding(const char* nullTerminatedCString,NSStringEncoding encoding)
+{
+	NSString* mem = alloc()->initWithCString_encoding(nullTerminatedCString,encoding);
+	mem->autorelease();
+	return mem;
 }

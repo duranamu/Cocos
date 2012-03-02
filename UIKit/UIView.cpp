@@ -129,7 +129,7 @@ UIView*
 	UIView::hitTest_withEvent(CGPoint point ,UIEvent* evt)
 {
 	UIView* view = self;
-	NSArray* match_stack = NSArray::array();
+	NSArray* match_stack = NSArray::alloc()->init();
 
 	if(view->subviews->count())
 	{

@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <Foundation/cocos2dx_framework.h>
-#include <Foundation/NSObject.h>
+class NSObject;
 #include <Foundation/NSData.h>
 #include <Foundation/NSErro.h>
 enum {
@@ -30,7 +30,7 @@ enum {
     NSJSONReadingAllowFragments = (1UL << 2)
 };
 typedef NSUInteger NSJSONReadingOptions;
-_interface( NSJSONSerialization ,NSObject)
-	static vid
+NS_INTERFACE( NSJSONSerialization ,NSObject)
+	static NSObject*
 		JSONObjectWithData_options_error(NSData*,NSJSONReadingOptions,NSError **);
 };

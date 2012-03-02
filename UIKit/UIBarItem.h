@@ -31,17 +31,17 @@ class UIBarItem : public NSObject
 {
 	ccSynthesize
 		(BOOL , enabled);
-	ccSynthesize
+	ccSynthesize_retain
 		(UIImage* ,image);
 	ccSynthesize
 		(UIEdgeInsets , imageInsets);
-	ccSynthesize
+	ccSynthesize_retain
 		(UIImage* , landscapeImagePhone);
 	ccSynthesize
 		(UIEdgeInsets , landscapeImagePhoneInsets);
 	ccSynthesize
 		(NSInteger , tag);
-	ccSynthesize
+	ccSynthesize_copy
 		(NSString* , title);
 
 	UIFont* barFont;

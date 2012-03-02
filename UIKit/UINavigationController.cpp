@@ -32,7 +32,7 @@ UINavigationController*
 	UINavigationController::UINavigationController()
 {
 	self->stackPointer = 0;
-	self->viewControllers =NSArray::array();
+	self->viewControllers =NSArray::alloc()->init();
 }
 void 
 	UINavigationController::pushViewController_viewController_animated

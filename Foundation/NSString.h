@@ -19,28 +19,35 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef NSString_H
-#define NSString_H
+#pragma once
 #include <Foundation/NSObject.h>
-#include <Foundation/cocos2dx_framework.h>
 #include <Foundation/NSObjCRuntime.h>
 class NSData;
+typedef NSUInteger NSStringEncoding;
 
-_interface(NSString , NSObject)
+NS_INTERFACE
+	(NSString , NSObject)
 	CCString* ref;
 public:
 	NSString(const char*);
 	NSString(){};
+	
 	std::string
 		description();
 	NSString*
 		initWithData_encoding(NSData * ,NSStringEncoding);
 	NSString*
 		initWithBytes_length_encoding(const vid  ,NSUInteger ,NSStringEncoding);
+	NSString*
+		initWithCString_encoding(const char*,NSStringEncoding);
+	static NSString*
+		stringWithCString_encoding(const char*,NSStringEncoding);
 	void
 		retain();
-	void
-		release();
+	vid 
+		autorelease();
+	protected:
+		NSStringEncoding _encoding;
 };
 enum {
     NSASCIIStringEncoding = 1,
@@ -67,5 +74,4 @@ enum {
     NSUTF32BigEndianStringEncoding = 0x98000100,
     NSUTF32LittleEndianStringEncoding = 0x9c000100,
     NSProprietaryStringEncoding = 65536
-};
-#endif
+NS_END

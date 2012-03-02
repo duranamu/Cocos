@@ -31,7 +31,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithBool(BOOL value)
 {
-	return alloc()->initWithBool(value);
+	return (NSNumber*)alloc()->initWithBool(value)->autorelease();
 }
 char
 	NSNumber::charValue(){return self->data._char;}
@@ -44,7 +44,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithChar(char value)
 {
-	return alloc()->initWithChar(value);
+	return (NSNumber*)alloc()->initWithChar(value)->autorelease();
 }
 short
 	NSNumber::shortValue(){return self->data._short;}
@@ -57,7 +57,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithShort(short value)
 {
-	return alloc()->initWithShort(value);
+	return (NSNumber*)alloc()->initWithShort(value)->autorelease();
 }
 int
 	NSNumber::intValue(){return self->data._int;}
@@ -70,7 +70,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithInt(int value)
 {
-	return alloc()->initWithInt(value);
+	return (NSNumber*)alloc()->initWithInt(value)->autorelease();
 }
 
 long
@@ -84,7 +84,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithLong(long value)
 {
-	return alloc()->initWithLong(value);
+	return (NSNumber*)alloc()->initWithLong(value)->autorelease();
 }
 
 long long 
@@ -98,7 +98,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithLongLong(long long value)
 {
-	return alloc()->initWithLongLong(value);
+	return (NSNumber*)alloc()->initWithLongLong(value)->autorelease();
 }
 
 float 
@@ -112,7 +112,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithFloat(float value)
 {
-	return alloc()->initWithFloat(value);
+	return (NSNumber*)alloc()->initWithFloat(value)->autorelease();
 }
 
 double
@@ -126,7 +126,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithDouble(double value)
 {
-	return alloc()->initWithDouble(value);
+	return (NSNumber*)alloc()->initWithDouble(value)->autorelease();
 }
 
 NSInteger
@@ -140,7 +140,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithInteger(NSInteger value)
 {
-	return alloc()->initWithInteger(value);
+	return (NSNumber*)alloc()->initWithInteger(value)->autorelease();
 }
 
 unsigned char 
@@ -154,7 +154,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithUnsignedChar(unsigned char value)
 {
-	return alloc()->initWithUnsignedChar(value);
+	return (NSNumber*)alloc()->initWithUnsignedChar(value)->autorelease();
 }
 
 unsigned int
@@ -168,7 +168,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithUnsignedInt(unsigned int value)
 {
-	return alloc()->initWithUnsignedInt(value);
+	return (NSNumber*)alloc()->initWithUnsignedInt(value)->autorelease();
 }
 
 
@@ -183,7 +183,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithUnsignedShort(unsigned short value)
 {
-	return alloc()->initWithUnsignedShort(value);
+	return (NSNumber*)alloc()->initWithUnsignedShort(value)->autorelease();
 }
 
 unsigned long 
@@ -197,7 +197,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithUnsignedLong(unsigned long value)
 {
-	return alloc()->initWithUnsignedLong(value);
+	return (NSNumber*)alloc()->initWithUnsignedLong(value)->autorelease();
 }
 
 unsigned long long
@@ -211,7 +211,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithUnsignedLongLong(unsigned long long value)
 {
-	return alloc()->initWithUnsignedLongLong(value);
+	return (NSNumber*)alloc()->initWithUnsignedLongLong(value)->autorelease();
 }
 NSUInteger 
 	NSNumber::unsignedIntegerValue(){return self->data.unsignedInteger;}
@@ -224,7 +224,7 @@ NSNumber*
 NSNumber*
 	NSNumber::numberWithUnsignedInteger(NSUInteger value)
 {
-	return alloc()->initWithUnsignedInteger(value);
+	return (NSNumber*)alloc()->initWithUnsignedInteger(value)->autorelease();
 }
 
 void

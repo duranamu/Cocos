@@ -19,26 +19,29 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UITouch.h"
-#include <Cocos/Cocos.h>
+#include <UIKit/UITouch.h>
 UITouch*
 	UITouch::touchWithPhase(UITouchPhase phase)
 {
-	UITouch* touch = new UITouch();
-	if(touch)
-	{
-		touch->phase = phase;
-	}else
-	{
-		CC_SAFE_DELETE(touch);
-	}
-		return touch;
+	return (UITouch*) alloc()->initWithPhase(phase)->autorelease();
 }
 	UITouch::UITouch()
 {
-	self->gestureRecognizers = NSArray::array();
+	self->gestureRecognizers = NSArray::alloc()->init();
 }
-	UITouch::~UITouch()
+CGPoint
+	UITouch::locationInView()
+{
+	return location;
+}
+UITouch*
+	UITouch::initWithPhase(UITouchPhase pphase)
+{
+	phase = pphase;
+	return self;
+}
+void
+	UITouch::dealloc()
 {
 	self->gestureRecognizers->release();
 }

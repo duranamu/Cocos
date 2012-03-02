@@ -19,8 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UITOUCH_H
-#define UITOUCH_H
+#pragma once
 #include <QuartzCore\QuartzCore.h>
 typedef enum {
     UITouchPhaseBegan,
@@ -30,9 +29,15 @@ typedef enum {
     UITouchPhaseCancelled,
 	UITouchPhasePending,
 } UITouchPhase;
-class UITouch : public CCObject
-{
-public :
+NS_INTERFACE( UITouch , CCObject )
+	static UITouch* 
+		touchWithPhase(UITouchPhase);
+	UITouch*
+		initWithPhase(UITouchPhase );
+	CGPoint
+		locationInView();
+protected:
+	UITouch();
 	ccSynthesize
 		(CGPoint, location);
 	ccSynthesize
@@ -42,11 +47,4 @@ public :
 	CGPoint deltaMove;
 	NSArray* gestureRecognizers;
 
-	static UITouch* 
-		touchWithPhase(UITouchPhase phase);
-	inline CGPoint
-		locationInView(){return location;};
-	UITouch();
-	~UITouch();
-};
-#endif
+NS_END

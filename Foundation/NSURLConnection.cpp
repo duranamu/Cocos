@@ -41,19 +41,17 @@ void
 	strcat(outfilename,uni);
 	strcat(outfilename,"DATA.png");
 	fp = fopen(outfilename,"wb");
-	CURL* curl = request->URL()->getcurl();
 
+	CURL* curl = request->URL()->getcurl();
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeData);
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
 	CURLcode code = curl_easy_perform(curl);
-	//clean consideration
-	curl_easy_cleanup(curl);
+	
 	fclose(fp);
 
 	NSData* data = NSData::dataWithContentsOfFile(_s(outfilename));
-	NSURLResponse* response = NSURLResponse::alloc()->init();
 	//todo NSErro class for nil
-	block(response,data,nil);
+	block(nil,data,nil);
 }
 void
 	NSURLConnection::dealloc()

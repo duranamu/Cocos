@@ -19,7 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIApplication.h"
+#include <UIKit/UIApplication.h>
 #include "../AppDelegate.h"
 int
    UIApplicationMain (int argc,char *argv[],NSString *principalClassName,NSString *delegateClassName
@@ -33,6 +33,7 @@ NS_SINGLETON (UIApplication,sharedApplication);
 void
 	UIApplication::senEvent(UIEvent* evt)
 {
+	evt->autorelease();
 	self->keyWindow->sendEvent(evt);
 }
 NS_STATIC_ALLOC 
@@ -46,8 +47,8 @@ void
 	{
 		UITouchPhase ability; 
 		ability = touchPhaseforTime_handz(time,m_handz);
-		UITouch* touch = UITouch::touchWithPhase(ability);
-		CCSet* set = new CCSet();
+		UITouch* touch = UITouch::alloc()->initWithPhase(ability);
+		CCSet* set = new CCSet(); 
 		if(ability == UITouchPhaseBegan | ability == UITouchPhaseEnded )
 		{
 			 touch->settimestamp(time);
@@ -63,7 +64,7 @@ void
 				 touchStarty = m_handy;
 				 touchStartTime = time;
 			 }
-			UIEvent* events = UIEvent::eventWithTouches_type(set ,UIEventTypeTouches);
+			UIEvent* events = UIEvent::alloc()->initWithTouches_type(set ,UIEventTypeTouches);
 			self->senEvent(events);
 			events->release();
 			set->release();
@@ -71,13 +72,13 @@ void
 	    {
 			 touch->settimestamp(time);
 			 touch->setlocation (ccp(m_handx , m_handy ));
-			 UITouch* lefthand_touch = UITouch::touchWithPhase(ability);
+			 UITouch* lefthand_touch = UITouch::alloc()->initWithPhase(ability);
 			 lefthand_touch->settimestamp(time);
 			 lefthand_touch->setlocation ( ccp( ml_handx , ml_handy ));
 			 set->addObject(touch);
 			 set->addObject(lefthand_touch);
 
-			 UIEvent* events = UIEvent::eventWithTouches_type(set ,UIEventTypeTouches);
+			UIEvent* events = UIEvent::alloc()->initWithTouches_type(set ,UIEventTypeTouches);
 			self->senEvent(events);
 			events->release();
 			set->release();
@@ -99,7 +100,7 @@ void
 		trackerManager->addTracker(righthandTracker);
 		trackerManager->addTracker(lefthandTracker);
 
-		self->windows = NSArray::array();
+		self->windows = NSArray::alloc()->init();
 
 		isRighthandTracked = NO;
 		menuTouchPhase = UITouchPhasePending;

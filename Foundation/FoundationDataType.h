@@ -28,8 +28,6 @@ typedef struct _NSRange {
 } 
 	NSRange;
 typedef double NSTimeInterval ;
-typedef NSUInteger 
-	NSStringEncoding;
 
 typedef NSInteger NSComparisonResult;
 

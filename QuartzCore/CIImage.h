@@ -20,14 +20,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Foundation/NSObject.h>
-#include <Foundation/NSData.h>
-#include <Foundation/NSDictionary.h>
-_interface(CIImage , NSObject)
+#include <Cocos/Cocos.h>
+NS_CLASS NSData;
+NS_CLASS NSDictionary;
+NS_INTERFACE(CIImage , NSObject)
 	static	CIImage*
 		imageWithData_option(NSData*,NSDictionary*);
 	CIImage*
 		initWithData_option(NSData*,NSDictionary*);
 	protected:
 		CCSprite* _sprite;
-_end
+NS_END

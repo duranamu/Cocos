@@ -19,13 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef NSNULL_H
-#define NSNULL_H
+#pragma once
 #include <Foundation/NSObject.h>
 #include <Foundation/cocos2dx_framework.h>
 using namespace cocos2d;
-class NSNull :public NSObject
-{
+NS_INTERFACE
+	( NSNull , NSObject)
 private:
 	NSNull(){};
 public:
@@ -40,4 +39,3 @@ public:
 		 return singleton;
 	 }
 };
-#endif

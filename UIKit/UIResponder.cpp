@@ -19,26 +19,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "NSURLRequest.h"
-NSURLRequest*
-	NSURLRequest::initWithURL(NSURL* URL)
+#include <UIKit/UIResponder.h>
+BOOL
+	UIResponder::canBecomeFirstResponder()
 {
-	URL->retain();
-	self->_url = URL;
-	curl_easy_setopt(self->_url->getcurl(), CURLOPT_URL,self->_url->absoluteString()->description().c_str());
-	return self;
-}
-NSURLRequest*
-	NSURLRequest::requestWithURL(NSURL* URL)
-{
-	return alloc()->initWithURL(URL);
-}
-NSURL* NSURLRequest::URL()
-{
-	return self->_url;
+	return self->becomeFirstResponder;
 }
 void
-	NSURLRequest::dealloc()
+	UIResponder::dealloc()
 {
-	self->_url->release();
 }

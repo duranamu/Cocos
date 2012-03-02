@@ -19,14 +19,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef NSOBJECT_H
-#define NSOBJECT_H
+#pragma once
 #include <Foundation/cocos2dx_framework.h>
-class NSObject : public CCObject
-{
-public:
-	static NSObject*
-		alloc();
+NS_INTERFACE
+	(NSObject , CCObject)
 
-};
-#endif
+NS_END

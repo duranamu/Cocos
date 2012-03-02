@@ -19,8 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "CIVector.h"
-NS_STATIC_ALLOC(CIVector);
+#include <QuartzCore/CIVector.h>
 CIVector*
 	CIVector::vectorFrom_to(CGPoint pa , CGPoint pb)
 {
@@ -38,9 +37,7 @@ CIVector*
 CIVector*
 	CIVector::vectorWithCGPoint(CGPoint pa)
 {
-	CIVector* mem = alloc();
-	mem->initWithCGPoint(pa);
-	return mem;
+	return alloc()->initWithCGPoint(pa);
 }
 CIVector*
 	CIVector::initWithCGPoint(CGPoint pa )
@@ -55,4 +52,8 @@ CIVector*
 	self->X += vec->getX();
 	self->Y += vec->getY();
 	return self;
+}
+void
+	CIVector::dealloc()
+{
 }

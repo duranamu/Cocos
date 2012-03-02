@@ -23,7 +23,8 @@ THE SOFTWARE.
 #include <Foundation/cocos2dx_framework.h>
 #include <Foundation/NSObject.h>
 #include <Foundation/NSString.h>
-_interface(NSURLResponse , NSObject)
+NS_INTERFACE
+	(NSURLResponse , NSObject)
 	NSURLResponse*
 		initWithURL_MIMEType_expectedContentLength_textEncodingName
 		(NSString*,NSString*,long long,NSString*);
@@ -37,4 +38,4 @@ protected:
 	NSString* _mimeType;
 	long long _expectedContentLength;
 	NSString* _encoding;
-_end
+NS_END

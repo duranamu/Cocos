@@ -19,31 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "NSDictionary.h"
+#include <Foundation/NSDictionary.h>
 #include <stdarg.h>
-NSDictionary*
-	NSDictionary::alloc()
-{
-	NSDictionary* mem = new NSDictionary();
-	if(!mem)
-	{
-		CC_SAFE_DELETE(mem);
-	}else{
-		//mem->autorelease();
-	}
-	return mem;
-}
-NSDictionary*
-	NSDictionary::init()
-{
-	return self;
-}
 NSDictionary*
 	NSDictionary::dictionary()
 {
-	NSDictionary* dict = alloc()->init();
-	dict->autorelease();
-	return dict;
+	return (NSDictionary*) alloc()->init()->autorelease();
 }
 NSDictionary*
 	NSDictionary::dictionaryWithObjectAndKeys(NSObject* obj,NSString* str,...)
@@ -98,4 +79,28 @@ NSDictionary*
 	va_end ( argp);
 	self->autorelease();
 	return self;
+}
+vid
+	NSDictionary::autorelease()
+{
+		CCPoolManager::getInstance()->addObject(this);
+		m_bManaged = true;
+
+		ref->autorelease();
+		return self;
+}
+void
+	NSDictionary::retain()
+{
+	self->m_uReference++;
+	ref->retain();
+}
+void
+	NSDictionary::dealloc()
+{
+	ref->release();
+}
+NSDictionary::NSDictionary()
+{
+	 ref = new CCDictionary<std::string,NSObject*>();
 }

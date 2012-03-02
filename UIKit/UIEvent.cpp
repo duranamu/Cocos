@@ -19,36 +19,39 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIEvent.h"
+#include <UIKit/UIEvent.h>
 CCSet* 
 	UIEvent::allTouches()
 {
 	return touches;
 }
-NS_STATIC_ALLOC(UIEvent);
 UIEvent*
-	UIEvent::initWithTouches(CCSet* set)
+	UIEvent::initWithTouches(CCSet* ptouches)
 {
-	self->touches = set;
+	ptouches->retain();
+	touches = ptouches;
 	return self;
 }
 UIEvent*
-	UIEvent::eventWithTouches(CCSet* set)
+	UIEvent::eventWithTouches(CCSet* touches)
 {
-	UIEvent* mem = alloc();
-	if(mem && mem->initWithTouches(set))
-	{
-
-	}else{
-		NS_SAFE_DELETE(mem);
-	}
-	return mem;
+	return (UIEvent*)alloc()->initWithTouches(touches)->autorelease();
 }
 UIEvent*
-	UIEvent::eventWithTouches_type(CCSet* set ,UIEventType type)
+	UIEvent::eventWithTouches_type(CCSet* touches ,UIEventType type)
 {
-	UIEvent* mem ;
-	mem = eventWithTouches(set);
-	mem->settype(type);
-	return mem;
+	return (UIEvent*)alloc()->initWithTouches_type(touches,type)->autorelease();
+}
+UIEvent*
+	UIEvent::initWithTouches_type(CCSet* ptouches ,UIEventType ptype)
+{
+	type = ptype;
+	ptouches->retain();
+	touches = ptouches;
+	return self;
+}
+void
+	UIEvent::dealloc()
+{
+	self->touches->release();
 }

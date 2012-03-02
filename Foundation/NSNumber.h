@@ -21,7 +21,8 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <Foundation/NSObject.h>
-_interface (NSNumber , NSObject)
+NS_INTERFACE 
+	(NSNumber , NSObject)
 union{
  char _char;
  short _short;
@@ -124,4 +125,4 @@ static NSNumber *
  unsigned long long unsignedLongLongValue();
  NSUInteger unsignedIntegerValue();
 
-_end
+NS_END

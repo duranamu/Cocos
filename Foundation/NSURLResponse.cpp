@@ -36,9 +36,9 @@ NSURLResponse*
 void
 	NSURLResponse::dealloc()
 {
-	self->_url->release();
-	self->_mimeType->release();
-	self->_encoding->release();
+	//	self->_url->release();
+		self->_mimeType->release();
+		self->_encoding->release();
 }
 NSString*
 	NSURLResponse::URL()

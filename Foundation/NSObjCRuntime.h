@@ -25,6 +25,7 @@ THE SOFTWARE.
 #include <stdint.h>
 #include <limits.h>
 
+#include <CCAutoreleasePool.h>
 #ifdef __cplusplus
 
 #if defined(__WIN32__)

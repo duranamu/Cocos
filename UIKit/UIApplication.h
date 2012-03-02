@@ -19,11 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIAPPLICATION_H
-#define UIAPPLICATION_H
-#include "../Cocos/Cocos.h"
-#include "UIWindow.h"
-#include "UIEvent.h"
+#pragma once
+#include <Cocos/Cocos.h>
+#include <UIKit/UIWindow.h>
+NS_CLASS UIEvent;
 class UIApplication : public CCLayerColor ,public UIView
 {
 public:
@@ -52,6 +51,7 @@ public:
 	void
 		applicationDidUpdate(CGFloat);
 
+protected:
 	NITrackerManager* trackerManager;
 	NITracker* torsoTracker;
 	NITracker* righthandTracker;
@@ -100,14 +100,6 @@ public:
 		(NSArray* , windows);
 	ccSynthesize
 		(vid , scene);
-	/*ccSynthesize
-	 (NITrackerManager* , trackerManager);
-	ccSynthesize
-	 (NITracker* ,torsoTracker);
-	ccSynthesize
-	 (NITracker* ,righthandTracker);
-	ccSynthesize
-	  (NITracker* ,lefthandTracker);*/
 };
 int UIApplicationMain (
    int argc,
@@ -115,4 +107,3 @@ int UIApplicationMain (
    NSString *principalClassName,
    NSString *delegateClassName
 );
-#endif

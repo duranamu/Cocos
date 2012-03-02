@@ -19,15 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIRESPONDER_H
-#define UIRESPONDER_H
+#pragma once
 #include <Cocos/Cocos.h>
-#include "UIEvent.h"
-class UIResponder : public NSObject
-{
-	ccSynthesize
-		(BOOL ,becomeFirstResponder );
-public:
+#include <UIKit/UIEvent.h>
+NS_INTERFACE( UIResponder , NSObject )
 	 virtual void 
 		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events) {};
 	 virtual void 
@@ -35,6 +30,8 @@ public:
 	 virtual void 
 		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events) {};
 	 virtual BOOL
-		 canBecomeFirstResponder(void){ return becomeFirstResponder;};
-};
-#endif
+		 canBecomeFirstResponder(void);
+	 protected:
+		 	ccSynthesize
+		(BOOL ,becomeFirstResponder );
+NS_END

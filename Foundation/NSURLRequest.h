@@ -25,7 +25,7 @@ THE SOFTWARE.
 #include <Foundation/NSObject.h>
 #include <Foundation/NSString.h>
 #include <Foundation/NSURL.h>
-_interface( NSURLRequest , NSObject)
+NS_INTERFACE( NSURLRequest , NSObject)
 
 	NSURLRequest*
 		initWithURL(NSURL*);

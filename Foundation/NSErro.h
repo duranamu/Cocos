@@ -21,6 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <Foundation/NSObject.h>
-_interface(NSError,NSObject)
+NS_INTERFACE
+	(NSError,NSObject)
 
-_end
+NS_END

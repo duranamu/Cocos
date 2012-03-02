@@ -19,12 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef CIVECTOR_H
-#define CIVECTOR_H
+#pragma once
 #include <Cocos/Cocos.h>
-#include "TypeDefinition.h"
-class CIVector :public NSObject
-{
+#include <QuartzCore/TypeDefinition.h>
+NS_INTERFACE(CIVector , NSObject )
 	ccSynthesize
 		(CGFloat , X);
 	ccSynthesize
@@ -32,8 +30,6 @@ class CIVector :public NSObject
 	ccSynthesize
 		(CGFloat , Z);
 public:
-	static CIVector*
-		alloc();
 	static CIVector*
 		vectorWithCGPoint(CGPoint );
 	static CIVector*
@@ -46,5 +42,4 @@ public:
 		normOfVector2D(){return (CGFloat) sqrt(X * X + Y*Y);}
 	CIVector*
 		addVector(CIVector*);
-};
-#endif
+NS_END

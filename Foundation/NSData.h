@@ -44,7 +44,7 @@ NSDataSearchBackwards = 1UL << 0,
 NSDataSearchAnchored = 1UL << 1
 };
 typedef NSUInteger NSDataSearchOptions;
-_interface(NSData,NSObject)
+NS_INTERFACE(NSData,NSObject)
 	ccSynthesize( NSString* ,dataPath);
 	NSData*
 		initWithBytes_length(vid ,NSUInteger );

@@ -22,16 +22,6 @@ THE SOFTWARE.
 #include "NSArray.h"
 #include "Foundation.h"
 NSArray*
-	NSArray::alloc()
-{
-	NSArray* parray =  new NSArray();
-	if(!parray )
-	{
-		CC_SAFE_DELETE(parray);
-	}
-	return parray;
-}
-NSArray*
 	NSArray::initWithObjects(NSObject* msg , ...)
 {
 	if(msg)
@@ -96,7 +86,7 @@ NSObject*
 NSArray*
 	NSArray::array()
 {
-	return alloc();
+	return (NSArray*) alloc()->init();
 }
 BOOL
 	NSArray::removeObject(NSObject* obj)
@@ -118,4 +108,27 @@ void
 	NSArray::removeAllObjects()
 {
 	self->ref->removeAllObjects();
+}
+void
+	NSArray::dealloc()
+{
+	ref->release();
+}
+void
+	NSArray::release()
+{
+	if(--self->m_uReference == 0)
+	{
+		delete self;
+	}
+}
+vid
+	NSArray::autorelease()
+{
+	CCPoolManager::getInstance()->addObject(self);
+	m_bManaged = true;
+
+	ref->autorelease();
+
+	return self;
 }

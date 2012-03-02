@@ -67,7 +67,7 @@ void
 	{
 		if(value[i].isArray())
 		{
-			NSArray* arr = NSArray::array();
+			NSArray* arr = NSArray::alloc()->init();
 			arr->retain();
 			parseJSArray(value[i],arr);
 			array->addObject(arr);
@@ -80,7 +80,7 @@ void
 	}
 }
 
-vid
+NSObject*
 	NSJSONSerialization::JSONObjectWithData_options_error
 		(NSData* data ,NSJSONReadingOptions option ,NSError** erro)
 {
@@ -98,7 +98,7 @@ vid
 	{
 		if(root.isArray())
 		{
-			NSArray* jsonObject = NSArray::array();
+			NSArray* jsonObject = NSArray::alloc()->init();
 			jsonObject->retain();
 			parseJSArray(root,jsonObject);
 			return jsonObject;
@@ -110,4 +110,9 @@ vid
 		}
 		
 	}
+	content->release();
+}
+void
+	NSJSONSerialization::dealloc()
+{
 }

@@ -19,8 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef cocos2dx_framework_h
-#define cocos2dx_framework_h
+#pragma once
 #include <cocos2d.h>
 using namespace cocos2d;
 #include <libxml\xpath.h>
@@ -32,6 +31,18 @@ using namespace cocos2d;
 #define fetchCCObject(__VAR__ ,__INST__)  CCWrapper* __wrapper__ = (CCWrapper*)__object__; \
 	__VAR__ __INST__ =  __wrapper__->data.__VAR__##Val
 #define ccSynthesize(varType, varName)  CC_SYNTHESIZE(varType, varName, varName)  
+
+#define ccSynthesize_retain(varType,varName) \
+protected: varType varName;\
+public: inline varType get##varName(void) const { return varName; }\
+public: inline void set##varName(varType var){var->retain(); varName->release();varName = var; }
+
+#define ccSynthesize_copy(varType,varName) \
+protected: varType varName;\
+public: inline varType get##varName(void) const { return varName; }\
+public: inline void set##varName(varType var){ varType cp = (varType)var->copy(); varName->release();varName = cp; }
+
+
 #define ccProperty(varType, varName)  CC_PROPERTY(varType, varName, varName)  
 #define forCCEnd  }}while(0);
 #define CCS(__STR__) new CCString(__STR__)
@@ -59,7 +70,7 @@ using namespace cocos2d;
 	while( (__it__) != _CCSet__->end()){          \
 			__var__ __inst__ = (__var__ ) (*__it__); __it__++; if(!__inst__) break;
 
-#define _s(__STR__) new NSString(__STR__)
+#define _s(__STR__)  NSString::stringWithCString_encoding(__STR__,NSASCIIStringEncoding)//new NSString(__STR__)
 #define self this
 
 #define NS_SAFE_DELETE(__PTR__) CC_SAFE_DELETE(__PTR__)
@@ -87,13 +98,11 @@ static __var__* alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(mem
 #define SEL SEL_CallFuncND
 #define NSActionTarget SelectorProtocol
 
-#define _interface(__class__,__super__)\
+#define NS_INTERFACE(__class__,__super__)\
 class __class__ : public __super__{ public:  NS_ALLOC_FULL(__class__) NS_INIT_FULL(__class__) NS_DEALLOCATE(__class__)
-//#define _interface(__class__) _interface(__class__,NSObject)
-#define _end };
+#define NS_END };
 
 
 typedef void (*NSCodeBlock)(vid, vid , vid); 
 
-
-#endif
+#define NS_CLASS class

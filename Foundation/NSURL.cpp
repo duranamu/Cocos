@@ -23,22 +23,24 @@ THE SOFTWARE.
 NSURL*
 	NSURL::initWithString(NSString* URLString)
 {
-	self->URLString = URLString;
+	URLString->retain();
+	_URLString = URLString;
 	self->curl = curl_easy_init();
 	return self;
 }
 NSURL*
 	NSURL::URLWithString(NSString* URLString)
 {
-	return alloc()->initWithString(URLString);
+	return (NSURL*)alloc()->initWithString(URLString)->autorelease();;
 }
 NSString*
 	NSURL::absoluteString()
 {
-	return self->URLString;
+	return self->_URLString;
 }
 void
 	NSURL::dealloc()
 {
-	self->URLString->release();
+	self->_URLString->release();
+	curl_easy_cleanup(curl);
 }

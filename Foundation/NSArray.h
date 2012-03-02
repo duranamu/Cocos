@@ -19,17 +19,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef NSARRAY_H
-#define NSARRAY_H
+#pragma once
 #include <Foundation/NSObject.h>
 #include <Foundation/cocos2dx_framework.h>
 #include <stdarg.h>
-class NSArray : public NSObject
-{
+NS_INTERFACE( NSArray , NSObject)
 public:
 	CCArray* ref;
-	static NSArray*
-		alloc ();
+	/*static NSArray*
+		alloc ();*/
 	NSArray* 
 		initWithObjects (NSObject* , ...);
 	NSArray*
@@ -58,11 +56,15 @@ public:
 		lastObject(){ return (NSObject* )ref->lastObject();}
 	inline NSUInteger
 		indexOfObject(NSObject* obj){return ref->indexOfObject(obj);}
+	inline void
+		release();
 	BOOL
 		removeObject(NSObject* );
 	inline void
 		removeLastObject();
 	inline void
 		removeAllObjects();
+	vid 
+		autorelease();
+
 };
-#endif

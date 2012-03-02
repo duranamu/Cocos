@@ -19,8 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIEVENT_H
-#define UIEVENT_H
+#pragma once
 #include <Cocos/Cocos.h>
 typedef enum {
     UIEventTypeTouches,
@@ -28,27 +27,26 @@ typedef enum {
     UIEventTypeRemoteControl,
 	UIEventTypeTraces
 } UIEventType;
-class UIEvent : public CCObject
-{
-public:
+NS_INTERFACE( UIEvent , CCObject)
 	UIEvent(CCSet* set)
 	{
 		self->touches = set;
 	}
 	UIEvent(){};
-	static UIEvent*
-		alloc();
+	
 	UIEvent*
 		initWithTouches(CCSet* set);
 	static UIEvent*
 		eventWithTouches(CCSet* set);
 	static UIEvent*
 		eventWithTouches_type(CCSet* ,UIEventType);
+	UIEvent*
+		initWithTouches_type(CCSet* set ,UIEventType type);
 	CCSet*
 		allTouches();
+protected:
 	ccSynthesize
 		( CCSet* , touches );
 	ccSynthesize
 		( UIEventType , type);
-};
-#endif
+NS_END

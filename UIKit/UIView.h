@@ -25,12 +25,12 @@ THE SOFTWARE.
 #include <UIKit/UITouch.h>
 #include <UIKit/UIIndexPath.h>
 #include <UIKit/UITapGestureRecognizer.h>
-_interface( UIView , UIResponder )
+NS_INTERFACE( UIView , UIResponder )
 public:
 	UIView()
 	{
 		self->becomeFirstResponder = NO;
-		subviews =  NSArray::array();
+		subviews =  NSArray::alloc()->init();
 		subviews->retain();
 		self->recognizerSheet = nil;
 	}

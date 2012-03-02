@@ -19,13 +19,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef NSURL_H
-#define NSURL_H
+#pragma once
 #include <Foundation/cocos2dx_framework.h>
 #include <curl/curl.h>
 #include <Foundation/NSString.h>
 #include <Foundation/NSNumber.h>
-_interface(NSURL , NSObject)
+NS_INTERFACE
+	(NSURL , NSObject)
 	NSURL*
 		initWithString(NSString* );
 	static NSURL*
@@ -35,7 +35,6 @@ _interface(NSURL , NSObject)
 	ccSynthesize
 		(CURL*, curl);
 protected:
-	NSString* URLString;
+	NSString* _URLString;
 	CURLcode res;
-_end
-#endif
+NS_END

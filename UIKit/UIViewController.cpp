@@ -88,7 +88,6 @@ void
 		m_view->followPlayer(cdata);
 	forCCEnd
 
-	//controller_torsoData(sender,cdata);
 	cdata->autorelease();
 }
 void 
@@ -128,6 +127,5 @@ void
 				gr->touchesMoved_withEvent(touches , events);
 			forCCEnd
 		}
-		//receiver->touchesMoved_withEvent(touches,events);
 	}
 }

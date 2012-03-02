@@ -19,14 +19,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef NSOperationQueue_H
-#define NSOperationQueue_H
+#pragma once
 #include <Foundation/NSObject.h>
 #include <dispatch/dispatch.h>
 #include <Foundation/cocos2dx_framework.h>
 #include <Foundation/NSOperation.h>
 #include <Foundation/NSArray.h>
-_interface( NSOperationQueue ,NSObject )
+NS_INTERFACE
+	( NSOperationQueue ,NSObject )
 	 
 	void
 		addOperation(NSOperation*);
@@ -42,5 +42,4 @@ protected:
 
 	NSArray *operations;
 
-_end
-#endif
+NS_END

@@ -19,28 +19,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef NSDICTIONARY_H
-#define NSDICTIONARY_H
+#pragma once
 #include <Foundation/NSObject.h>
 #include <Foundation/NSString.h>
-#include <Foundation/cocos2dx_framework.h>
-class NSDictionary :public NSObject
-{
+NS_INTERFACE
+	( NSDictionary , NSObject)
 public:
 	CCDictionary<std::string,NSObject*>* ref;
 	static NSDictionary*
-		alloc();
-	static NSDictionary*
 		dictionary();
-	NSDictionary*
-		init();
 	static NSDictionary*
 		dictionaryWithObjectAndKeys(NSObject*,NSString*,...);
 	NSDictionary* 
 		initWithObjectsAndKeys(NSObject*,NSString*,...);
 
-		NSDictionary()
-	{ref = new CCDictionary<std::string,NSObject*>();}
+	NSDictionary();
+
 	inline bool
 		setObject_forKey(NSObject* obj  ,NSString* str)
 	{	
@@ -68,26 +62,9 @@ public:
 	{
 		return ref->objectForKey(str->description());
 	}
-	inline void
-		autorelease()
-	{
-		ref->autorelease();
-	}
-	inline void
-		retain()
-	{
-		ref->retain();
-	}
-	inline void
-		release()
-	{
-		ref->release();
-	}
+	vid
+		autorelease();
+	 void
+		retain();
 
-	~NSDictionary()
-	{
-		ref->release();
-	}
-
-};
-#endif
+NS_END

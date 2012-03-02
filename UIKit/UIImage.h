@@ -21,7 +21,8 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <QuartzCore/QuartzCore.h>
-_interface(UIImage,NSObject)
+NS_INTERFACE
+	(UIImage,NSObject)
 	UIImage(){};
 	UIImage(const void* data ,CCTexture2DPixelFormat format ,CCSize size)
 	{
@@ -42,4 +43,4 @@ _interface(UIImage,NSObject)
 		imageWithData(NSData* );
 	protected:
 		CCTexture2D* ref;
-_end
+NS_END

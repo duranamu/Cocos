@@ -19,8 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIKIT_H
-#define UIKIT_H
+#pragma once
 #include <QuartzCore/QuartzCore.h>
 #include <UIKit/UITableView.h>
 #include <UIKit/UITableViewCell.h>
@@ -52,4 +51,3 @@ THE SOFTWARE.
 #include <UIKit/UINavigationControllerDelegate.h>
 #include <UIKit/UINavigationBar.h>
 #include <UIKit/UIColor.h>
-#endif
