@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef foundation_h
 #define foundation_h
-#include <Foundation/cocos2dx_framework.h>
+#include <Foundation/Cocos2DX_framework.h>
 #include <Foundation/CCPoint3D.h>
 #include <Foundation/NSURLRequest.h>
 #include <Foundation/NSOperationQueue.h>
@@ -38,4 +38,8 @@ THE SOFTWARE.
 #include <Foundation/NSData.h>
 #include <Foundation/NSJSONSerialization.h>
 #include <Foundation/NSOperation.h>
+#include <Foundation/NSSelectorProtocol.h>
+#include <Foundation/NSObjectProtocol.h>
+#include <Foundation/NSCopying.h>
+#include <Foundation/NSZone.h>
 #endif

@@ -19,26 +19,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIPINCHGESTURERECOGNIZER_H
-#define UIPINCHGESTURERECOGNIZER_H
-#include "UIGestureRecognizer.h"
+#pragma once
+#include <UIKit/UIGestureRecognizer.h>
 #include <QuartzCore\QuartzCore.h>
-class UIPinchGestureRecognizer : public UIGestureRecognizer
-{
-	ccSynthesize(CGFloat ,scale);
-	ccSynthesize(CGFloat , velocity);
-public:
-	static UIPinchGestureRecognizer* 
-		alloc();
+NS_INTERFACE( UIPinchGestureRecognizer , UIGestureRecognizer)
 	UIPinchGestureRecognizer*
-		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
+		initWithTarget_action(NSActionTarget* ,SEL_PP);
 	virtual void
 		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
 	 virtual void 
 		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
 	 virtual void 
 		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
-
-	 CGFloat gestureStartDistance;
-};
-#endif
+	protected:
+	NS_SYNTHESIZE(CGFloat ,scale);
+	NS_SYNTHESIZE(CGFloat , velocity);
+	CGFloat gestureStartDistance;
+NS_END

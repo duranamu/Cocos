@@ -30,27 +30,29 @@ using namespace cocos2d;
 #define eachCCObject(__VAR__ ,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
 #define fetchCCObject(__VAR__ ,__INST__)  CCWrapper* __wrapper__ = (CCWrapper*)__object__; \
 	__VAR__ __INST__ =  __wrapper__->data.__VAR__##Val
-#define ccSynthesize(varType, varName)  CC_SYNTHESIZE(varType, varName, varName)  
+#define NS_SYNTHESIZE(varType, varName)  CC_SYNTHESIZE(varType, varName, varName)  
 
-#define ccSynthesize_retain(varType,varName) \
+#define NS_SYNTHESIZE(varType,varName) CC_SYNTHESIZE(varType, varName, varName) 
+#define NS_PROPERTY(varType,varName)  CC_PROPERTY(varType, varName, varName) 
+
+#define NS_SYNTHESIZE_READONLY(varType,varName) CC_SYNTHESIZE_READONLY(varType, varName, varName) 
+
+#define NS_SYNTHESIZE_RETAIN(varType,varName) \
 protected: varType varName;\
-public: inline varType get##varName(void) const { return varName; }\
+public: inline varType get##varName(void)  { return varName; }\
 public: inline void set##varName(varType var){var->retain(); varName->release();varName = var; }
 
-#define ccSynthesize_copy(varType,varName) \
+#define NS_SYNTHESIZE_COPY(varType,varName) \
 protected: varType varName;\
 public: inline varType get##varName(void) const { return varName; }\
 public: inline void set##varName(varType var){ varType cp = (varType)var->copy(); varName->release();varName = cp; }
 
 
-#define ccProperty(varType, varName)  CC_PROPERTY(varType, varName, varName)  
 #define forCCEnd  }}while(0);
 #define CCS(__STR__) new CCString(__STR__)
 #define nil NULL
-#define ccSelector(__FUNC__) (SEL_CallFuncND)(&__FUNC__)
+#define NS_SELECTOR_PP(__FUNC__) (SEL_PP)(&__FUNC__)
 #define _cast(__VAR__,__INST__) __VAR__ c##__INST__ = (__VAR__) __INST__;
-#define _super(__VAR__)  __VAR__ super = (__VAR__) self;
-#define super(__VAR__) ((__VAR__)self)
 #define vid void*
 #define forArray( __nsArray__ ) do { CCArray* __array__ = __nsArray__->ref ; \
 	CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
@@ -95,14 +97,14 @@ static __var__* alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(mem
 
 #define NS_DEALLOCATE(__var__)  void  dealloc(); ~__var__(){ self->dealloc();}
 
-#define SEL SEL_CallFuncND
-#define NSActionTarget SelectorProtocol
+#define NSActionTarget NSSelectorProtocol
 
 #define NS_INTERFACE(__class__,__super__)\
 class __class__ : public __super__{ public:  NS_ALLOC_FULL(__class__) NS_INIT_FULL(__class__) NS_DEALLOCATE(__class__)
 #define NS_END };
 
-
 typedef void (*NSCodeBlock)(vid, vid , vid); 
 
 #define NS_CLASS class
+
+#define NS_PROTOCOL(__name__) class __name__ {

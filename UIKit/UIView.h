@@ -30,11 +30,10 @@ public:
 	UIView()
 	{
 		self->becomeFirstResponder = NO;
-		subviews =  NSArray::alloc()->init();
-		subviews->retain();
-		self->recognizerSheet = nil;
+		subviews = NSArray::alloc()->init();
+		self->gestureRecognizers = nil;
+		self->sprite = new CCSprite();
 	}
-
 UIView*
 	anyView()
 	{
@@ -52,16 +51,7 @@ void
 	}
 virtual void 
 	viewDidRender(CCLayer* hostLayer);
-virtual CCSprite*
-	getSprite()
-	{
-		return sprite;
-	}
-virtual void 
-	setSprite(CCSprite* i_sprite)
-	{
-		sprite = i_sprite;
-	}
+	
 virtual void 
 	reloadData(NSArray* toShow) { };
  void 
@@ -86,13 +76,13 @@ virtual void
 	addGestureRecognizer(UIGestureRecognizer*);
 
  	NSArray* subviews;
-	CCSprite* sprite;
+	NS_SYNTHESIZE_RETAIN (CCSprite* , sprite );
 	NSActionTarget* listener;
-	SEL_CallFuncND  selector;
-	ccSynthesize( UIIndexPath* , indexPath);
+	SEL_PP  selector;
+	NS_SYNTHESIZE( UIIndexPath* , indexPath);
 	UIView* contentView;
 	UIGestureRecognizer* m_pRecognizer;
-	NSArray* recognizerSheet;
+	NSArray* gestureRecognizers;
 	BOOL hidden;
-	ccSynthesize(UIView*,superview);
+	NS_SYNTHESIZE(UIView*,superview);
 };

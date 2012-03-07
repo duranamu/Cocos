@@ -19,13 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIRotationGestureRecognizer.h"
-#include "UITouch.h"
+#include <UIKit/UIRotationGestureRecognizer.h>
+#include <UIKit/UITouch.h>
 CIVector* lastOrentaionOfHands;
 CGFloat baseRotaion;
-NS_STATIC_ALLOC(UIRotationGestureRecognizer);
 UIRotationGestureRecognizer*
-	UIRotationGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget,SEL_CallFuncND cselector)
+	UIRotationGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget,SEL_PP cselector)
 {
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;
@@ -93,3 +92,5 @@ void
 		}
 	forEnd
 }
+void
+	UIRotationGestureRecognizer::dealloc(){}

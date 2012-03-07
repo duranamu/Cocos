@@ -84,3 +84,15 @@ NSString*
 	mem->autorelease();
 	return mem;
 }
+NSString*
+	NSString::initWithString(NSString* aString)
+{
+	self->ref = CCS(aString->description().c_str());
+	self->_encoding = aString->get_encoding();
+	return self;
+}
+NSString*
+	NSString::stringWithString(NSString* aString)
+{
+	return (NSString*) alloc()->initWithString(aString)->autorelease();
+}

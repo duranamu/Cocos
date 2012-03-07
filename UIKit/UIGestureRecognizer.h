@@ -19,10 +19,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIGESTURERECOGNIZER_H
-#define UIGESTURERECOGNIZER_H
+#pragma once
 #include <Cocos/Cocos.h>
-#include "UIResponder.h"
+#include <UIKit/UIResponder.h>
 typedef enum UIGestureRecognizeState
 {
 	UIGestureRecognizeStateBegan = 0,
@@ -35,20 +34,17 @@ typedef enum UIGestureRecognizeState
  
     UIGestureRecognizerStateRecognized 
 };
-class UIGestureRecognizer :public UIResponder
-{
-	ccSynthesize(UIGestureRecognizeState,state);
-public:
+NS_INTERFACE( UIGestureRecognizer , UIResponder)
     virtual void
 		touchesBegan_withEvent(CCSet* touches ,UIEvent* events){};
 	 virtual void 
 		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events){};
 	 virtual void 
 		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events){};
-
+protected:
+	NS_SYNTHESIZE(UIGestureRecognizeState,state);
 	NSActionTarget* m_pListener;
-	SEL_CallFuncND  m_pSelector;
-	ccSynthesize( CCSet* ,touches );
-	ccSynthesize(UIEvent* ,events );
-};
-#endif
+	SEL_PP  m_pSelector;
+	NS_SYNTHESIZE( CCSet* ,touches );
+	NS_SYNTHESIZE(UIEvent* ,events );
+NS_END

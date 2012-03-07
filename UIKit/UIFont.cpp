@@ -20,7 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include "UIFont.h"
-NS_STATIC_ALLOC(UIFont);
 UIFont*
 	UIFont::initWithName_size(NSString* name ,CGFloat size)
 {
@@ -33,3 +32,5 @@ UIFont*
 {
 	return alloc()->initWithName_size(name,size);
 }
+void
+	UIFont::dealloc(){}

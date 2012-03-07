@@ -19,10 +19,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UISWIPEGESTURERECOGNIZER_H
-#define UISWIPEGESTURERECOGNIZER_H
-#include <QuartzCore\QuartzCore.h>
-#include "UIGestureRecognizer.h"
+#include <QuartzCore/QuartzCore.h>
+#include <UIKit/UIGestureRecognizer.h>
 typedef enum {
 	UISwipeGestureRecognizerDirectionZero  = 0 ,
     UISwipeGestureRecognizerDirectionRight = 1 << 0,
@@ -30,17 +28,9 @@ typedef enum {
     UISwipeGestureRecognizerDirectionUp    = 1 << 2,
     UISwipeGestureRecognizerDirectionDown  = 1 << 3
 } UISwipeGestureRecognizerDirection;
-class UISwipeGestureRecognizer : public UIGestureRecognizer
-{
-	ccSynthesize
-		(UISwipeGestureRecognizerDirection ,direction);
-	ccSynthesize
-		(NSUInteger ,numberOfTouchesRequired);
-public:
-	static UISwipeGestureRecognizer* 
-		alloc();
+NS_INTERFACE( UISwipeGestureRecognizer , UIGestureRecognizer)
 	UISwipeGestureRecognizer*
-		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
+		initWithTarget_action(NSActionTarget* ,SEL_PP);
 	virtual void
 		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
 	 virtual void 
@@ -49,7 +39,10 @@ public:
 		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
 	 UISwipeGestureRecognizerDirection
 		 directionFrom_to(CGPoint ,CGPoint);
-
-	 CGPoint gestureStartPoint;
-};
-#endif
+	 protected:
+		NS_SYNTHESIZE
+		(UISwipeGestureRecognizerDirection ,direction);
+		NS_SYNTHESIZE
+		(NSUInteger ,numberOfTouchesRequired);
+		 CGPoint gestureStartPoint;
+NS_END

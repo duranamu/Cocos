@@ -19,16 +19,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UISENSORVIEW_H
-#define UISENSORVIEW_H
-#include "UIImageView.h"
-#include "..\NIKit\NIDevice.h"
-class UISensorView : public UIImageView
-{
-	NIDevice* device;
-public:
+#pragma once
+#include <UIKit/UIImageView.h>
+NS_CLASS NIDevice;
+NS_INTERFACE( UISensorView , UIImageView)
 	UISensorView();
 	void 
 		updateFromDevice();
-};
-#endif
+protected:
+	NIDevice* device;
+NS_END

@@ -87,34 +87,34 @@ void
 void 
 	UIView::addGestureRecognizer(UIGestureRecognizer* gesture)
 {
-	if(!self->recognizerSheet)
+	if(!self->gestureRecognizers)
 	{
-		self->recognizerSheet = NSArray::arrayWithCapacity(2);
-		self->recognizerSheet->retain();
+		self->gestureRecognizers = NSArray::arrayWithCapacity(2);
+		self->gestureRecognizers->retain();
 	}
-	self->recognizerSheet->addObject(gesture);
+	self->gestureRecognizers->addObject(gesture);
 }
 void
 	UIView::touchesBegan_withEvent(CCSet* touches ,UIEvent* events) 
 {
-	/*if(self->recognizerSheet)
-		For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
+	/*if(self->gestureRecognizers)
+		For(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
 			recognizer->touchesBegan_withEvent(touches,events);
 		forCCEnd*/
 }
 void
 	UIView::touchesMoved_withEvent(CCSet* touches ,UIEvent* events) 
 {
-	/*if(self->recognizerSheet)
-	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
+	/*if(self->gestureRecognizers)
+	For(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
 		recognizer->touchesMoved_withEvent(touches,events);
 	forCCEnd	*/
 }
 void
 	UIView::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
 {
-	/*if(self->recognizerSheet)
-	For(UIGestureRecognizer* ,recognizer , self->recognizerSheet)
+	/*if(self->gestureRecognizers)
+	For(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
 		recognizer->touchesEnded_withEvent(touches,events);
 	forCCEnd*/
 }
@@ -152,4 +152,8 @@ UIView*
 	return (UIView*) match_stack->lastObject();
 }
 void
-	UIView::dealloc(){}
+	UIView::dealloc()
+{
+	self->subviews->release();
+	self->sprite->release();
+}

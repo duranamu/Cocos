@@ -21,9 +21,8 @@ THE SOFTWARE.
 ****************************************************************************/
 #include "UIPanGestureRecognizer.h"
 #include "UITouch.h"
-NS_STATIC_ALLOC( UIPanGestureRecognizer );
 UIPanGestureRecognizer*
-	UIPanGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget ,SEL_CallFuncND cselector)
+	UIPanGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget ,SEL_PP cselector)
 {
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;
@@ -70,3 +69,5 @@ CGPoint
 {
 	return self->velocity;
 }
+void
+	UIPanGestureRecognizer::dealloc(){}

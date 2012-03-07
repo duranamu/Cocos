@@ -24,7 +24,6 @@ THE SOFTWARE.
 #include <Foundation/NSObjCRuntime.h>
 class NSData;
 typedef NSUInteger NSStringEncoding;
-
 NS_INTERFACE
 	(NSString , NSObject)
 	CCString* ref;
@@ -46,8 +45,13 @@ public:
 		retain();
 	vid 
 		autorelease();
+	static NSString*
+		stringWithString(NSString*);
+	 NSString*
+		initWithString(NSString*);
 	protected:
-		NSStringEncoding _encoding;
+		NS_SYNTHESIZE
+			(NSStringEncoding ,_encoding);
 };
 enum {
     NSASCIIStringEncoding = 1,

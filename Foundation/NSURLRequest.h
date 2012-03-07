@@ -19,9 +19,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef NSURLREQUEST_H
-#define NSURLREQUEST_H
-#include <Foundation/cocos2dx_framework.h>
+#pragma once
+#include <Foundation/Cocos2DX_framework.h>
 #include <Foundation/NSObject.h>
 #include <Foundation/NSString.h>
 #include <Foundation/NSURL.h>
@@ -35,5 +34,4 @@ NS_INTERFACE( NSURLRequest , NSObject)
 		URL();
 protected:
 		NSURL* _url;
-};
-#endif
+NS_END

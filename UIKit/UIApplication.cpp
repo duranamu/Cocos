@@ -33,13 +33,9 @@ NS_SINGLETON (UIApplication,sharedApplication);
 void
 	UIApplication::senEvent(UIEvent* evt)
 {
-	evt->autorelease();
 	self->keyWindow->sendEvent(evt);
 }
-NS_STATIC_ALLOC 
-	(UIApplication);
-NS_INSTANCE_INIT 
-	(UIApplication);
+
 void
 	UIApplication::applicationDidUpdate(CGFloat time)
 {
@@ -89,19 +85,6 @@ void
 }
 	UIApplication::UIApplication()
 {
-		trackerManager =  NITrackerManager::defaultTrackerManager();
-		torsoTracker =	NITracker::trackerWithTarget_action_joint(self,ccSelector   (UIApplication::predo_controller_torsoData),XN_SKEL_TORSO);
-
-		righthandTracker =	NITracker::trackerWithTarget_action_joint(self,ccSelector   (UIApplication::predo_controller_righthandData),XN_SKEL_RIGHT_HAND);
-
-		lefthandTracker =	NITracker::trackerWithTarget_action_joint(self,ccSelector   (UIApplication::predo_controller_lefthandData),XN_SKEL_LEFT_HAND);
-
-		trackerManager->addTracker(torsoTracker);
-		trackerManager->addTracker(righthandTracker);
-		trackerManager->addTracker(lefthandTracker);
-
-		self->windows = NSArray::alloc()->init();
-
 		isRighthandTracked = NO;
 		menuTouchPhase = UITouchPhasePending;
 		touchStartx = 0;
@@ -109,31 +92,54 @@ void
 		touchStartTime = 0;
 		t_lasthandx = 0;
 		t_lasthandy = 0;
+		self->windows = NSArray::alloc()->init();
 }
-void 
-	UIApplication::predo_controller_torsoData(CCNode* sender,vid data)
-{
-	keyWindow->getrootViewController()->predo_controller_torsoData (sender , data);
-}
-void 
-	UIApplication::predo_controller_righthandData(CCNode* sender,vid data)
-{
-	if(!isRighthandTracked) 
-		isRighthandTracked = true;
-	_cast(CCPoint3D*,data);
-	m_handz = cdata->z;
-	m_handx = cdata->x;
-	m_handy = 480 - cdata->y;
-	cdata->release();
-} 
 void
-	UIApplication::predo_controller_lefthandData(CCNode* sender , vid data)
+	UIApplication::setupTracker()
+{
+		trackerManager =  NITrackerManager::defaultTrackerManager();
+		torsoTracker =	NITracker::trackerWithTarget_action_joint(self,NS_SELECTOR_PP   (UIApplication::predo_controller_torsoData),XN_SKEL_TORSO);
+
+		righthandTracker =	NITracker::trackerWithTarget_action_joint(self,NS_SELECTOR_PP   (UIApplication::predo_controller_righthandData),XN_SKEL_RIGHT_HAND);
+
+		lefthandTracker =	NITracker::trackerWithTarget_action_joint(self,NS_SELECTOR_PP   (UIApplication::predo_controller_lefthandData),XN_SKEL_LEFT_HAND);
+
+		trackerManager->addTracker(torsoTracker);
+		trackerManager->addTracker(righthandTracker);
+		trackerManager->addTracker(lefthandTracker);
+}
+vid 
+	UIApplication::predo_controller_torsoData(void* sender,vid data)
+{
+	_cast(UIApplication*,sender);
+	_cast(CCPoint3D*,data);
+	cdata->x;
+	csender->getkeyWindow()->getrootViewController()->predo_controller_torsoData (sender , data);
+	return nil;
+}
+vid 
+	UIApplication::predo_controller_righthandData(void* sender,vid data)
+{
+	_cast(UIApplication*,sender);
+	if(!csender->isRighthandTracked) 
+		csender->isRighthandTracked = true;
+	_cast(CCPoint3D*,data);
+	csender->m_handz = cdata->z;
+	csender->m_handx = cdata->x;
+	csender->m_handy = 480 - cdata->y;
+	cdata->release();
+
+	return nil;
+} 
+vid
+	UIApplication::predo_controller_lefthandData(void* sender , vid data)
 {
 	_cast(CCPoint3D*,data);
 	ml_handz = cdata->z;
 	ml_handx = cdata->x;
 	ml_handy = 480 - cdata->y;
 	cdata->release();
+	return nil;
 }
 UITouchPhase 
 	UIApplication::touchPhaseforTime_handz(cocos2d::CGFloat time, CGFloat handz)
@@ -189,7 +195,15 @@ void
 	For(UIWindow* ,pWindow,windows)
 		if(pWindow->keyWindow)
 		{
+			pWindow->retain();
 			keyWindow = pWindow;
 		}
 	forCCEnd
+	setupTracker();
+}
+void
+	UIApplication::dealloc()
+{
+	self->keyWindow->release();
+	self->windows->release();
 }

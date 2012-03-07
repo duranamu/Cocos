@@ -19,13 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UITABLEVIEWDATASOURCE_H
-#define UITABLEVIEWDATASOURCE_H
+#pragma once
 #include <Cocos/Cocos.h>
-#include "UIView.h"
-#include "UITableViewCell.h"
-#include "UIIndexPath.h"
-class UITableViewDataSource :public CCObject
+NS_CLASS  UIView;
+NS_CLASS  UITableViewCell;
+NS_CLASS  UIIndexPath;
+class UITableViewDataSource 
 {
 public:
 virtual NSInteger
@@ -35,4 +34,3 @@ virtual UITableViewCell*
 virtual int
 	tableView_numberOfRowsInSection(UIView* view,NSInteger section) = 0;
 };
-#endif

@@ -23,11 +23,11 @@ THE SOFTWARE.
 #include <Cocos/Cocos.h>
 #include <QuartzCore/TypeDefinition.h>
 NS_INTERFACE(CIVector , NSObject )
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat , X);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat  ,Y);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat , Z);
 public:
 	static CIVector*

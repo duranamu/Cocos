@@ -38,11 +38,11 @@ NS_INTERFACE( UITouch , CCObject )
 		locationInView();
 protected:
 	UITouch();
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGPoint, location);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(NSTimeInterval , timestamp);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(UITouchPhase , phase);
 	CGPoint deltaMove;
 	NSArray* gestureRecognizers;

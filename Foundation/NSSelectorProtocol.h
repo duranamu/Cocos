@@ -19,21 +19,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include <UIKit/UIGestureRecognizer.h>
-#include <QuartzCore/QuartzCore.h>
-NS_INTERFACE( UIRotationGestureRecognizer , UIGestureRecognizer )
-	UIRotationGestureRecognizer*
-		initWithTarget_action(NSActionTarget* ,SEL_PP);
-	virtual void
-		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
-protected:
-	NS_SYNTHESIZE(CGFloat ,rotation);
-	NS_SYNTHESIZE(CGFloat ,deltaRotation);
-	NS_SYNTHESIZE(CGFloat , velocity);
-	CIVector* gestureStartOrentaion;
-	 long touchMovedEventCount ;
-NS_END
+#pragma once
+#include <Foundation/Cocos2DX_framework.h>
+class  NSSelectorProtocol
+{
+public:
+		virtual vid callfunc(){return nil;};
+		virtual vid callfunc(void* sender ){return nil;};
+		virtual vid callfunc(void* sender, void* data){return nil;};
+};
+
+typedef vid (NSSelectorProtocol::*SEL)();
+typedef vid (NSSelectorProtocol::*SEL_P)(void*);
+typedef vid (NSSelectorProtocol::*SEL_PP)(void*, void*);
+#define NS_SELECTOR(_SEL_) (SEL)(&_SEL_)
+#define NS_SELECTOR_P(_SEL_) (SEL_P)(&_SEL_)
+#define NS_SELECTOR_PP(_SEL_) (SEL_PP)(&_SEL_)

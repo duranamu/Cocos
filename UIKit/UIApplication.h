@@ -23,15 +23,15 @@ THE SOFTWARE.
 #include <Cocos/Cocos.h>
 #include <UIKit/UIWindow.h>
 NS_CLASS UIEvent;
-class UIApplication : public CCLayerColor ,public UIView
+class UIApplication :public UIView , public NSObjectProtocol
 {
 public:
-	void 
-		predo_controller_torsoData(CCNode*,vid);
-	void 
-		predo_controller_righthandData(CCNode* ,vid);
-	void
-		predo_controller_lefthandData(CCNode*, vid);
+	vid 
+		predo_controller_torsoData(void*,vid);
+	vid 
+		predo_controller_righthandData(void* ,vid);
+	vid
+		predo_controller_lefthandData(void*, vid);
 	UITouchPhase 
 		touchPhaseforTime_handz(CGFloat,CGFloat);
 	void 
@@ -41,64 +41,67 @@ public:
 
 	static UIApplication*
 		sharedApplication();
-	static UIApplication*
-		alloc();
-	UIApplication*
-		init();
+	
+	NS_ALLOC_FULL(UIApplication) 
+	NS_INIT_FULL(UIApplication) 
+	NS_DEALLOCATE(UIApplication)
+
 	UIApplication();
 	void
 		senEvent(UIEvent*);
 	void
 		applicationDidUpdate(CGFloat);
+	void
+		setupTracker();
 
 protected:
 	NITrackerManager* trackerManager;
 	NITracker* torsoTracker;
 	NITracker* righthandTracker;
 	NITracker* lefthandTracker;
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,g_lasthandz);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,g_lasthandzVelocity);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,m_handz);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,m_handx);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,m_handy);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,gl_lasthandz);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,gl_lasthandzVelocity);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,ml_handz);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,ml_handx);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,ml_handy);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,m_torsox);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,m_torsoy);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(BOOL ,isRighthandTracked);
 		
 	UITouchPhase menuTouchPhase;
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,touchStartx);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,touchStarty);
 	CGFloat touchStartTime;
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,t_lasthandx);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,t_lasthandy);
 	bool newTouchSession;
-	ccSynthesize
+	NS_SYNTHESIZE
 		(UIWindow* , keyWindow);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(NSArray* , windows);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(vid , scene);
 };
 int UIApplicationMain (

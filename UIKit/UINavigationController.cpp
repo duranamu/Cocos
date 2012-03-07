@@ -54,7 +54,7 @@ void
 	self->topViewController->viewDidUpdate(time);
 }
 void
-	UINavigationController::predo_controller_torsoData(CCNode * node , vid sender)
+	UINavigationController::predo_controller_torsoData(void * node , vid sender)
 {
 	self->topViewController->predo_controller_torsoData(node ,sender);
 }

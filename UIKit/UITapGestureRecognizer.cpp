@@ -19,11 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UITapGestureRecognizer.h"
-#include "UITouch.h"
-NS_STATIC_ALLOC( UITapGestureRecognizer );
+#include <UIKit/UITapGestureRecognizer.h>
+#include <UIKit/UITouch.h>
 UITapGestureRecognizer*
-	UITapGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget ,SEL_CallFuncND cselector)
+	UITapGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget ,SEL_PP cselector)
 {
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;
@@ -69,3 +68,5 @@ void
 
 	}
 }
+void 
+	UITapGestureRecognizer::dealloc(){}

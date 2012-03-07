@@ -45,8 +45,8 @@ NS_INTERFACE( UIEvent , CCObject)
 	CCSet*
 		allTouches();
 protected:
-	ccSynthesize
+	NS_SYNTHESIZE
 		( CCSet* , touches );
-	ccSynthesize
+	NS_SYNTHESIZE
 		( UIEventType , type);
 NS_END

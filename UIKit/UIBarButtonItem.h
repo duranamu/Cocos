@@ -57,18 +57,18 @@ typedef enum {
 } UIBarButtonItemStyle;
 class UIBarButtonItem : public UIBarItem
 {
-	ccSynthesize
-		(SEL , action);
-	ccSynthesize
+	NS_SYNTHESIZE
+		(SEL_PP , action);
+	NS_SYNTHESIZE
 		(NSActionTarget* , target);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(UIBarButtonItemStyle ,style);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(NSString* , title);
 public:
 	static UIBarButtonItem*
 		alloc();
 	UIBarButtonItem*
-		initWithTitle_style_target_action(NSString* ,UIBarButtonItemStyle, NSActionTarget* ,SEL );
+		initWithTitle_style_target_action(NSString* ,UIBarButtonItemStyle, NSActionTarget* ,SEL_PP );
 };
 #endif

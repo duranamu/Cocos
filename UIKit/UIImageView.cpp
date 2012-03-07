@@ -19,7 +19,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIImageView.h"
+#include <UIKit/UIImageView.h>
+#include <UIKit/UIImage.h>
 UIImageView*
 	UIImageView::viewWithImage(UIImage* image)
 {
@@ -74,8 +75,10 @@ void
 	sprite = CCSprite::spriteWithTexture(cimage->getCCTexture2D());
 	self->image = cimage;
 }
+void 
+	UIImageView::dealloc(){}
 UIImage*
 	UIImageView::getimage()
 {
-	return image;
+	return self->image;
 }

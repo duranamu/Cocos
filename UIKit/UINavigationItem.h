@@ -25,19 +25,19 @@ THE SOFTWARE.
 #include "UIBarButtonItem.h"
 class UINavigationItem : public NSObject
 {
-	ccSynthesize
+	NS_SYNTHESIZE
 		(UIBarButtonItem* ,backBarButtonItem);
-	ccSynthesize
+	NS_SYNTHESIZE
 		( UIBarButtonItem*,leftBarButtonItem);
-	ccSynthesize
+	NS_SYNTHESIZE
 		( UIBarButtonItem*,rightBarButtonItem);
-	ccSynthesize
+	NS_SYNTHESIZE
 		( BOOL , hidesBackButton);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(NSArray * ,leftBarButtonItems);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(NSArray * ,rightBarButtonItems);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(NSString * ,title);
 public:
 	static UINavigationItem*

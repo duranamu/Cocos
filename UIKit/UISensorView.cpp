@@ -19,8 +19,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-
-#include "UISensorView.h"
+#include <UIKit/UISensorView.h>
+#include <NIKit/NIDevice.h>
+#include <UIKit/UIImage.h>
 UISensorView::UISensorView()
 {
 	this->device =  NIDevice::sharedDevice();
@@ -41,4 +42,9 @@ void
 		UIImage::imageWithData_format_pixel_size(
 		device->rawRGBData(),CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,CCSizeMake(640,480));
 	this->sprite->setTexture(image->getCCTexture2D());
+}
+void
+	UISensorView::dealloc()
+{
+	self->sprite->release();
 }

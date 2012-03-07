@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <Foundation/NSObjCRuntime.h>
-#include <Foundation/cocos2dx_framework.h>
+#include <Foundation/Cocos2DX_framework.h>
 #include <Foundation/NSObject.h>
 #include <Foundation/NSString.h>
 enum {
@@ -45,7 +45,7 @@ NSDataSearchAnchored = 1UL << 1
 };
 typedef NSUInteger NSDataSearchOptions;
 NS_INTERFACE(NSData,NSObject)
-	ccSynthesize( NSString* ,dataPath);
+	NS_SYNTHESIZE( NSString* ,dataPath);
 	NSData*
 		initWithBytes_length(vid ,NSUInteger );
 	NSData*

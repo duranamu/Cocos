@@ -19,8 +19,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIViewController.h"
-#include "UITouch.h"
+#include <UIKit/UIViewController.h>
+#include <UIKit/UITouch.h>
 void 
 	UIViewController::viewDidRender(CCLayer* host)
 {
@@ -38,7 +38,7 @@ void
 CCSprite*  
 	UIViewController::renderTargetforHost()
 {
-	return view->anyView()->getSprite();
+	return view->anyView()->getsprite();
 }
 void 
 	UIViewController::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
@@ -49,9 +49,9 @@ void
 	receiver = self->view->hitTest_withEvent(touch->getlocation(),events);
 	if(receiver)
 	{
-		if(receiver->recognizerSheet)
+		if(receiver->gestureRecognizers)
 		{
-			For(UIGestureRecognizer* , gr ,receiver->recognizerSheet)
+			For(UIGestureRecognizer* , gr ,receiver->gestureRecognizers)
 				gr->touchesBegan_withEvent(touches , events);
 			forCCEnd
 		}
@@ -67,9 +67,9 @@ void
 
 	if(receiver)
 	{
-		if(receiver->recognizerSheet)
+		if(receiver->gestureRecognizers)
 		{
-			For(UIGestureRecognizer* , gr ,receiver->recognizerSheet)
+			For(UIGestureRecognizer* , gr ,receiver->gestureRecognizers)
 				gr->touchesEnded_withEvent(touches , events);
 			forCCEnd
 		}
@@ -77,7 +77,7 @@ void
 	}
 }
 void 
-	UIViewController::predo_controller_torsoData(CCNode* sender,vid data)
+	UIViewController::predo_controller_torsoData(void* sender,vid data)
 {
 	_cast(CCPoint3D*,data);
 
@@ -121,11 +121,20 @@ void
 
 	if(receiver)
 	{
-		if(receiver->recognizerSheet)
+		if(receiver->gestureRecognizers)
 		{
-			For(UIGestureRecognizer* , gr ,receiver->recognizerSheet)
+			For(UIGestureRecognizer* , gr ,receiver->gestureRecognizers)
 				gr->touchesMoved_withEvent(touches , events);
 			forCCEnd
 		}
 	}
+}
+void
+	UIViewController::retain()
+{
+}
+void
+	UIViewController::release()
+{
+//	self->NSObject::release();
 }

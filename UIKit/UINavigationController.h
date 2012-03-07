@@ -43,20 +43,20 @@ public:
 	NSArray *
 		popToViewController_viewController_animated(UIViewController *,BOOL);
 	vid delegate ;
-	ccSynthesize
+	NS_SYNTHESIZE
 		(UINavigationBar* , navigationBar);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(BOOL , navigationBarHidden);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(UIViewController* , topViewController);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(NSArray* , viewControllers);
 	virtual void 
 		viewDidLoad(void );
 	virtual void
 		viewDidUpdate(CGFloat);
 	virtual void 
-		predo_controller_torsoData(CCNode* ,vid );
+		predo_controller_torsoData(void* ,vid );
 protected:
 	UIViewController* rootViewController;
 	NSUInteger stackPointer;

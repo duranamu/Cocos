@@ -19,23 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIPinchGestureRecognizer.h"
-#include "UITouch.h"
+#include <UIKit/UIPinchGestureRecognizer.h>
+#include <UIKit/UITouch.h>
 UIPinchGestureRecognizer*
-	UIPinchGestureRecognizer::alloc()
-{
-	UIPinchGestureRecognizer* mem = new UIPinchGestureRecognizer();
-
-	if(mem)
-	{
-		mem->autorelease();
-	}else{
-		NS_SAFE_DELETE(mem);
-	}
-	return mem;
-}
-UIPinchGestureRecognizer*
-	UIPinchGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget,SEL_CallFuncND cselector)
+	UIPinchGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget,SEL_PP cselector)
 {
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;
@@ -81,3 +68,5 @@ void
 {
 	self->state = UIGestureRecognizeStateEnded;
 }
+void
+	UIPinchGestureRecognizer::dealloc(){}

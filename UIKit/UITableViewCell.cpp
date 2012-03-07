@@ -19,38 +19,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include"UITableViewCell.h"
-#include "UITouch.h"
+#include <UIKit/UITableViewCell.h>
+#include <UIKit/UITouch.h>
+#include <UIKit/UIImageView.h>
  UITableViewCell* 
-		UITableViewCell::initWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* uid)
+		UITableViewCell::initWithStyle_reuseIdentifier(UITableViewStyle oneStyle ,NSString* id)
 	{
-		UITableViewCell* probe = new UITableViewCell();
-		if(probe && probe->doInitWithStyle_reuseIdentifier(style,uid))
-		{
-			probe->autorelease();
-			return probe;
-		}
-		CC_SAFE_DELETE(probe);
-		return NULL;
+		style = oneStyle;
+		id->retain();
+		uid = id;
+		return self;
 	}
   UITableViewCell* 
-		UITableViewCell::initWithStyle_reuseIdentifier_target_selector(UITableViewStyle style ,CCString* uid,NSActionTarget* ctarget,SEL_CallFuncND cselector)
+		UITableViewCell::initWithStyle_reuseIdentifier_target_selector(UITableViewStyle oneStyle ,NSString* id,NSActionTarget* target,SEL_PP cselector)
 	{
-		UITableViewCell* probe = new UITableViewCell();
-		if(probe && probe->doInitWithStyle_reuseIdentifier_target_selector(style,uid,ctarget,cselector))
-		{
-			probe->autorelease();
-			return probe;
-		}
-		CC_SAFE_DELETE(probe);
-		return NULL;
-	}
- UITableViewCell* 
-		UITableViewCell::doInitWithStyle_reuseIdentifier(UITableViewStyle cstyle ,CCString* cid)
-	{
-		style = cstyle;
-		uid = new CCString(cid->m_sString.c_str());
-		return this;
+		style = oneStyle;
+		id->retain();
+		uid =  id;
+		listener = target;
+		selector = cselector;
+		return self;
 	}
 	UITableViewCell::UITableViewCell()
 	{
@@ -58,9 +46,9 @@ THE SOFTWARE.
 			textLabel = CCLabelTTF::labelWithString("","Arial",38);
 		else
 			textLabel = CCLabelTTF::labelWithString("","Arial",38);
-		setSprite(textLabel);
-		self->imageView = new UIImageView();
-		self->contentView = new UIView();
+		setsprite(textLabel);
+		self->imageView =  UIImageView::alloc()->init();
+		self->contentView =  UIView::alloc()->init();
 		self->retain();
 		self->accessoryType = UITableViewCellAccessoryDefault;
 		self->indentationLevel = 0;
@@ -81,7 +69,7 @@ void
 
 	if(this->canTriggerforTouch(touch) | isCildTrigger)
 	{
-		(listener->*selector)( (CCNode*)listener , this);
+		(listener->*selector)(listener , this);
 	}
 }
 void 
@@ -97,15 +85,6 @@ void
 {
 	UITouch* touch = (UITouch*) touches->anyObject();
 	this->moveByPoint(touch->deltaMove);
-}
-UITableViewCell* 
-	UITableViewCell::doInitWithStyle_reuseIdentifier_target_selector(UITableViewStyle cstyle ,CCString* cid,NSActionTarget* clistener,SEL_CallFuncND cselector )
-{
-		style = cstyle;
-		uid = new CCString(cid->m_sString.c_str());
-		listener = clistener;
-		selector = cselector;
-		return this;
 }
 void 
 	UITableViewCell::setaccessoryType(UITableViewCellAccessory var)
@@ -137,5 +116,13 @@ UITableViewCellAccessory
 	UITableViewCell::getaccessoryType()
 {
 	return self->accessoryType;
+}
+void
+	UITableViewCell::dealloc()
+{
+	self->uid->release();
+	self->uid = nil;
+	self->imageView->release();
+	self->imageView = nil;
 }
 

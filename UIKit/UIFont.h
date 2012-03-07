@@ -19,21 +19,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIFONT_H
-#define UIFONT_H
-#include "../Cocos/Cocos.h"
-class UIFont : public NSObject
-{
-	ccSynthesize
-		(NSString* , fontName );
-	ccSynthesize
-		(CGFloat , pointSize );
-public:
-	static UIFont*
-		alloc();
+#pragma once
+#include <Cocos/Cocos.h>
+NS_INTERFACE( UIFont , NSObject )
 	static UIFont*
 		fontWithName_size(NSString* , CGFloat);
 	UIFont*
 		initWithName_size(NSString* , CGFloat);
-};
-#endif
+protected:
+	NS_SYNTHESIZE
+		(NSString* , fontName );
+	NS_SYNTHESIZE
+		(CGFloat , pointSize );
+NS_END

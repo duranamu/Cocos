@@ -41,8 +41,6 @@ public:
 
 		if(obj && str)
 		{
-			obj->retain();
-			str->retain();
 			return ref->setObject(obj,str->description());
 		}else
 			return false;

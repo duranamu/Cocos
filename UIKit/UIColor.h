@@ -19,20 +19,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UICOLOR_H
-#define UICOLOR_H
-#include <QuartzCore\QuartzCore.h>
-class UIColor : public NSObject
-{
-	ccSynthesize
-		(ccColor4F , color4f );
-	ccSynthesize
-		(ccColor3B , color3b );
-	ccSynthesize
-		(CGFloat , alpha );
-public:
-	static UIColor*
-		alloc();
+#pragma once
+#include <QuartzCore/QuartzCore.h>
+NS_INTERFACE( UIColor , NSObject)
 	UIColor*
 		initWithRed_blue_green_alpha(CGFloat ,CGFloat, CGFloat,CGFloat);
 	static UIColor*
@@ -57,5 +46,11 @@ public:
 		orangeColor();
 	static const UIColor*
 		whiteColor();
-};
-#endif
+	protected:
+	NS_SYNTHESIZE
+		(ccColor4F , color4f );
+	NS_SYNTHESIZE
+		(ccColor3B , color3b );
+	NS_SYNTHESIZE
+		(CGFloat , alpha );
+NS_END

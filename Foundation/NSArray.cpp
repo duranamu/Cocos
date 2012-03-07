@@ -73,6 +73,7 @@ NSArray::NSArray(NSUInteger num)
 NSArray::NSArray()
 {
 	ref = CCArray::array();
+	ref->retain();
 }
 NSObject* NSArray::objectAtIndex(NSUInteger index)
 {
@@ -112,7 +113,10 @@ void
 void
 	NSArray::dealloc()
 {
-	ref->release();
+	if(self->m_bManaged == false)
+	{
+		ref->release();
+	}
 }
 void
 	NSArray::release()
@@ -131,4 +135,9 @@ vid
 	ref->autorelease();
 
 	return self;
+}
+NSObject*
+	NSArray::copy(NSArray* anA)
+{
+	CCObject
 }

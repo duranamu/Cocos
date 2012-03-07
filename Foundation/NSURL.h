@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Foundation/cocos2dx_framework.h>
+#include <Foundation/Cocos2DX_framework.h>
 #include <curl/curl.h>
 #include <Foundation/NSString.h>
 #include <Foundation/NSNumber.h>
@@ -32,7 +32,7 @@ NS_INTERFACE
 		URLWithString(NSString* );
 	NSString*
 		absoluteString();
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CURL*, curl);
 protected:
 	NSString* _URLString;

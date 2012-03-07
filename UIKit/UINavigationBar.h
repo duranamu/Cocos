@@ -26,7 +26,7 @@ THE SOFTWARE.
 #include "UIResponder.h"
 class UINavigationBar : public UIView , public UIResponder
 {
-	ccSynthesize
+	NS_SYNTHESIZE
 		(NSDictionary * , titleTextAttributes);
 };
 #endif

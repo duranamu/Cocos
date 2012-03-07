@@ -20,8 +20,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Foundation/cocos2dx_framework.h>
-NS_INTERFACE
-	(NSObject , CCObject)
+#include <Foundation/Cocos2DX_framework.h>
+#include <Foundation/NSObjectProtocol.h>
+class NSObject : public CCObject 
+{
+public:  
+	NS_ALLOC_FULL(NSObject) 
+	NS_INIT_FULL(NSObject) 
+	NS_DEALLOCATE(NSObject)
 
-NS_END
+};

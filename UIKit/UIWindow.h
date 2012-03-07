@@ -19,19 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIWINDOW_H
-#define UIWINDOW_H
-#include "UIResponder.h"
-#include "UIViewController.h"
-class UIWindow : public UIView
-{
-	ccSynthesize(UIViewController*,rootViewController);
-	BOOL keyWindow;
-	public:
-		static UIWindow*
-			alloc();
-		UIWindow*
-			init();
+#pragma once
+#include <UIKit/UIViewController.h>
+#include <UIKit/UIView.h>
+NS_INTERFACE( UIWindow , UIView)
 		UIWindow(){ keyWindow = NO;}
 	void
 		becomeKeyWindow();
@@ -39,5 +30,9 @@ class UIWindow : public UIView
 		makeKeyAndVisible();
 	void
 		sendEvent(UIEvent*);
-};
-#endif
+	protected:
+		NS_SYNTHESIZE
+				(UIViewController* ,rootViewController);
+	BOOL keyWindow;
+
+NS_END

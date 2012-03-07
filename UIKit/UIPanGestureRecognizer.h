@@ -19,21 +19,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIPANGESTURERECOGNIZER_H
-#define UIPANGESTURERECOGNIZER_H
+#pragma once 
 #include <QuartzCore\QuartzCore.h>
-#include "UIGestureRecognizer.h"
-#include "UIView.h"
-class UIPanGestureRecognizer : public UIGestureRecognizer
-{
-	CGPoint touchStartLocation ;
-	NSTimeInterval lastTouchTime;
-	CGPoint velocity;
-public:
-	static UIPanGestureRecognizer*
-		alloc();
+#include <UIKit/UIGestureRecognizer.h>
+NS_CLASS UIView;
+NS_INTERFACE( UIPanGestureRecognizer , UIGestureRecognizer)
 	UIPanGestureRecognizer*
-		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
+		initWithTarget_action(NSActionTarget* ,SEL_PP);
 	UIPanGestureRecognizer();
 	virtual void 
 		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
@@ -45,6 +37,8 @@ public:
 		 translationInView(UIView* );
 	 CGPoint
 		 velocityInView(UIView* );
-
-};
-#endif
+protected:
+	CGPoint touchStartLocation ;
+	NSTimeInterval lastTouchTime;
+	CGPoint velocity;
+NS_END

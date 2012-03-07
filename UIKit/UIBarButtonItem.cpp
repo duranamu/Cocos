@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "UIKitAddition.h"
 NS_STATIC_ALLOC( UIBarButtonItem );
 UIBarButtonItem*
-	UIBarButtonItem::initWithTitle_style_target_action(NSString* ctitle ,UIBarButtonItemStyle cstyle, NSActionTarget* ctarget,SEL caction)
+	UIBarButtonItem::initWithTitle_style_target_action(NSString* ctitle ,UIBarButtonItemStyle cstyle, NSActionTarget* ctarget,SEL_PP caction)
 {
 	self->action = caction;
 	self->target = ctarget;

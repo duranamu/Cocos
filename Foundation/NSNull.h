@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <Foundation/NSObject.h>
-#include <Foundation/cocos2dx_framework.h>
+#include <Foundation/Cocos2DX_framework.h>
 using namespace cocos2d;
 NS_INTERFACE
 	( NSNull , NSObject)
@@ -38,4 +38,4 @@ public:
 		 }
 		 return singleton;
 	 }
-};
+NS_END

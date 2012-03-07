@@ -19,11 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UILongPressGestureRecognizer.h"
-#include "UITouch.h"
-NS_STATIC_ALLOC( UILongPressGestureRecognizer );
+#include <UIKit/UILongPressGestureRecognizer.h>
+#include <UIKit/UITouch.h>
 UILongPressGestureRecognizer*
-	UILongPressGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget ,SEL_CallFuncND cselector)
+	UILongPressGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget ,SEL_PP cselector)
 {
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;
@@ -55,4 +54,8 @@ void
 	{
 		(self->m_pListener->*m_pSelector)(nil,self);
 	}
+}
+void
+	UILongPressGestureRecognizer::dealloc()
+{
 }

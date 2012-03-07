@@ -19,15 +19,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIIMAGEVIEW_H
-#define UIIMAGEVIEW_H
+#pragma once;
 #include <Cocos/Cocos.h>
-#include "UIView.h"
-#include "UIImage.h"
-class UIImageView : public UIView
-{
-	ccProperty( UIImage* ,image);
-public :
+#include <UIKit/UIView.h>
+NS_CLASS UIImage ;
+NS_INTERFACE( UIImageView , UIView)
 	static 
 		UIImageView* viewWithImage(UIImage* image);
 	UIImageView(UIImage* image);
@@ -37,5 +33,6 @@ public :
 		UIImageView(CCTexture2D* texture);
 	static
 		UIImageView* viewWithFile(NSString* str);
-};
-#endif
+protected:
+	NS_PROPERTY(UIImage*,image);
+NS_END

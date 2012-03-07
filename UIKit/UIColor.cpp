@@ -19,18 +19,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIColor.h"
-NS_STATIC_ALLOC(UIColor);
-const UIColor*	UIRedColor = UIColor::colorWithRed_blue_green_alpha(1.0f ,0.0f , 0.0f ,1.0f);
-const UIColor*  UICyanColor = UIColor::colorWithRed_blue_green_alpha(0.0f ,1.0f , 1.0f ,1.0f);
-const UIColor*  UIPurpleColor = UIColor::colorWithRed_blue_green_alpha(0.5f ,0.0f , 0.5f ,1.0f);
-const UIColor*  UIBlackColor = UIColor::colorWithRed_blue_green_alpha(0.0f ,0.0f , 0.0f ,1.0f);
-const UIColor*  UIBrownColor = UIColor::colorWithRed_blue_green_alpha(0.6f ,0.4f , 0.2f ,1.0f);
-const UIColor*  UIGreenColor = UIColor::colorWithRed_blue_green_alpha(0.0f ,1.0f , 0.0f ,1.0f);
-const UIColor*  UIMagentaColor = UIColor::colorWithRed_blue_green_alpha(1.0f ,0.0f , 1.0f ,1.0f);
-const UIColor*  UIOrangeColor = UIColor::colorWithRed_blue_green_alpha(1.0f ,0.5f , 0.0f ,1.0f);
-const UIColor*  UIWhiteColor = UIColor::colorWithRed_blue_green_alpha(1.0f ,1.0f , 1.0f ,1.0f);
-const UIColor*  UIYellowColor = UIColor::colorWithRed_blue_green_alpha(1.0f ,1.0f , 0.0f ,1.0f);
+#include <UIKit/UIColor.h>
+const UIColor*	UIRedColor = UIColor::alloc()->initWithRed_blue_green_alpha(1.0f ,0.0f , 0.0f ,1.0f);
+const UIColor*  UICyanColor = UIColor::alloc()->initWithRed_blue_green_alpha(0.0f ,1.0f , 1.0f ,1.0f);
+const UIColor*  UIPurpleColor = UIColor::alloc()->initWithRed_blue_green_alpha(0.5f ,0.0f , 0.5f ,1.0f);
+const UIColor*  UIBlackColor = UIColor::alloc()->initWithRed_blue_green_alpha(0.0f ,0.0f , 0.0f ,1.0f);
+const UIColor*  UIBrownColor = UIColor::alloc()->initWithRed_blue_green_alpha(0.6f ,0.4f , 0.2f ,1.0f);
+const UIColor*  UIGreenColor = UIColor::alloc()->initWithRed_blue_green_alpha(0.0f ,1.0f , 0.0f ,1.0f);
+const UIColor*  UIMagentaColor = UIColor::alloc()->initWithRed_blue_green_alpha(1.0f ,0.0f , 1.0f ,1.0f);
+const UIColor*  UIOrangeColor = UIColor::alloc()->initWithRed_blue_green_alpha(1.0f ,0.5f , 0.0f ,1.0f);
+const UIColor*  UIWhiteColor = UIColor::alloc()->initWithRed_blue_green_alpha(1.0f ,1.0f , 1.0f ,1.0f);
+const UIColor*  UIYellowColor = UIColor::alloc()->initWithRed_blue_green_alpha(1.0f ,1.0f , 0.0f ,1.0f);
 UIColor*
 	UIColor::initWithRed_blue_green_alpha(CGFloat redf ,CGFloat bluef, CGFloat greenf, CGFloat alphaf)
 {
@@ -95,5 +94,6 @@ const UIColor*
 {
 	return UIWhiteColor;
 }
+void UIColor::dealloc(){}
 
 

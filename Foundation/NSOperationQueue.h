@@ -22,7 +22,7 @@ THE SOFTWARE.
 #pragma once
 #include <Foundation/NSObject.h>
 #include <dispatch/dispatch.h>
-#include <Foundation/cocos2dx_framework.h>
+#include <Foundation/Cocos2DX_framework.h>
 #include <Foundation/NSOperation.h>
 #include <Foundation/NSArray.h>
 NS_INTERFACE

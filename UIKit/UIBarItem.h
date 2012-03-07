@@ -29,19 +29,19 @@ THE SOFTWARE.
 #include "UIColor.h"
 class UIBarItem : public NSObject
 {
-	ccSynthesize
+	NS_SYNTHESIZE
 		(BOOL , enabled);
-	ccSynthesize_retain
+	NS_SYNTHESIZE_RETAIN
 		(UIImage* ,image);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(UIEdgeInsets , imageInsets);
-	ccSynthesize_retain
+	NS_SYNTHESIZE_RETAIN
 		(UIImage* , landscapeImagePhone);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(UIEdgeInsets , landscapeImagePhoneInsets);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(NSInteger , tag);
-	ccSynthesize_copy
+	NS_SYNTHESIZE_COPY
 		(NSString* , title);
 
 	UIFont* barFont;

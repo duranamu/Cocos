@@ -19,19 +19,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UITableView.h"
-#include "UIIndexPath.h"
-#include <Cocos/Cocos.h>
-#include "UIGestureRecognizer.h"
-#include "UIColor.h"
+#include <UIKit/UITableView.h>
+#include <UIKit/UIIndexPath.h>
+#include <UIKit/UIGestureRecognizer.h>
+#include <UIKit/UIColor.h>
+#include <UIKit/UITableViewCell.h>
+#include <UIKit/UITableViewDataSource.h>
+#include <UIKit/UIImageView.h>
 UITableView::UITableView()
 {
 	m_indexPath = CCArray::array();
-}
-UITableView::~UITableView()
-{
-	//subviews->release();
-	//m_indexPath->release();
 }
 void 
 	UITableView::reloadData(NSArray* toShow)
@@ -53,14 +50,14 @@ void
 		UITableViewCell* member = datasource->tableView_cellForRowAtIndexPath(self,path);
 		member->retain();
 		subviews->addObject(member);
-		CCSprite* cellsprite = member->getSprite();
+		CCSprite* cellsprite = member->getsprite();
 
 	//	cellsprite->setColor(UIColor::redColor()->getcolor3b());
 
 		if(member->imageView)
 		{
-			member->imageView->sprite->setPosition(ccp(-30,0));
-			cellsprite->addChild(member->imageView->sprite);
+			member->imageView->getsprite()->setPosition(ccp(-30,0));
+			cellsprite->addChild(member->imageView->getsprite());
 		}
 		
 		cellsprite ->setPosition(ccp( 260+ member->getindentationLevel()*member->getindentationWidth() ,-60 + offsetsum));
@@ -72,7 +69,7 @@ void
 	subviews->retain();
 }
 UITableViewCell* 
-	UITableView::dequeueReusableCellWithIdentifier(CCString* uid)
+	UITableView::dequeueReusableCellWithIdentifier(NSString* uid)
 {
 	UITableViewCell* cell = nil;
 	return cell;
@@ -115,3 +112,5 @@ BOOL
 {
 	return YES;
 }
+void
+	UITableView::dealloc(){}

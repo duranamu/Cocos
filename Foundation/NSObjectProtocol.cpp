@@ -19,21 +19,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include <UIKit/UIGestureRecognizer.h>
-#include <QuartzCore/QuartzCore.h>
-NS_INTERFACE( UIRotationGestureRecognizer , UIGestureRecognizer )
-	UIRotationGestureRecognizer*
-		initWithTarget_action(NSActionTarget* ,SEL_PP);
-	virtual void
-		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
-	 virtual void 
-		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
-protected:
-	NS_SYNTHESIZE(CGFloat ,rotation);
-	NS_SYNTHESIZE(CGFloat ,deltaRotation);
-	NS_SYNTHESIZE(CGFloat , velocity);
-	CIVector* gestureStartOrentaion;
-	 long touchMovedEventCount ;
-NS_END
+#include <Foundation/NSObjectProtocol.h>
+vid
+	NSObjectProtocol::performSelector(SEL aSelector)
+{
+	return(self->*aSelector)();
+}
+vid
+	NSObjectProtocol::performSelector_withObject(SEL_P aSelector ,vid* anObject)
+{
+	return (self->*aSelector)(anObject);
+}
+vid
+	NSObjectProtocol::performSelector_withObject_withObject(SEL_PP aSelector ,vid* anObject,vid* anotherObject)
+{
+	return (self->*aSelector)(anObject,anotherObject);
+}

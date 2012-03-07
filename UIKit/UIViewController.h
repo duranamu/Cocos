@@ -19,18 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIVIEWCONTROLLER_H
-#define UIVIEWCONTROLLER_H
+#pragma once
 #include <Cocos/Cocos.h>
-#include "UIView.h"
-#include "UIResponder.h"
-#include "UIImageView.h"
-#include "NIKit\NIKit.h"
-#ifndef TOUCH_FUNC
-#define TOUCH_FUNC
-
-#endif
-class UIViewController :public CCNode , public UIResponder ,public UIView ,public NSObject
+#include <UIKit/UIView.h>
+#include <UIKit/UIResponder.h>
+#include <NIKit/NIKit.h>
+class UIViewController :  public  UIView 
 {
 public:
 	UIViewController()
@@ -58,11 +52,15 @@ virtual void
 virtual void 
 	touchesEnded_withEvent(CCSet* touches ,UIEvent* events) ;
 virtual void 
-	controller_torsoData(CCNode* ,CCPoint3D*){};
+	controller_torsoData(void* ,CCPoint3D*){};
 virtual void 
-	controller_righthandData(CCNode* ,CCPoint3D*){};
+	controller_righthandData(void* ,CCPoint3D*){};
 virtual void 
-	predo_controller_torsoData(CCNode* ,void*);
+	predo_controller_torsoData(void* ,void*);
+void
+	retain();
+void 
+	release();
 public:
 	UIView* view;
 	UIView* followView;
@@ -76,9 +74,9 @@ protected:
 	bool isRighthandTracked;
 	UITouchPhase menuTouchPhase;
 
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,m_torsox);
-	ccSynthesize
+	NS_SYNTHESIZE
 		(CGFloat ,m_torsoy);
 	float touchStartx;
 	float touchStarty;
@@ -89,7 +87,6 @@ protected:
 	bool newTouchSession;
 
 	UIView* receiver ;
-	ccSynthesize
+	NS_SYNTHESIZE
 		(NSString*,title);
-};
-#endif
+NS_END

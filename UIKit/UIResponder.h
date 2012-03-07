@@ -32,6 +32,6 @@ NS_INTERFACE( UIResponder , NSObject )
 	 virtual BOOL
 		 canBecomeFirstResponder(void);
 	 protected:
-		 	ccSynthesize
+		 	NS_SYNTHESIZE
 		(BOOL ,becomeFirstResponder );
 NS_END

@@ -19,24 +19,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UITAPGESTURERECOGNIZER_H
-#define UITAPGESTURERECOGNIZER_H
-#include <Cocos/Cocos.h>
-#include "UIEvent.h"
-#include "UIGestureRecognizer.h"
-class UITapGestureRecognizer :public UIGestureRecognizer 
-{
-protected:
-	ccSynthesize (NSUInteger ,numberOfTapsRequired );
-	ccSynthesize (NSUInteger ,numberOfTapsAcquired );
-	ccSynthesize (CGFloat ,tapStartTime );
-	ccSynthesize (CGFloat ,tapStartX );
-	ccSynthesize (CGFloat ,tapStartY );
-public:
-	static UITapGestureRecognizer*
-		alloc();
+#pragma once
+#include <QuartzCore/QuartzCore.h>
+NS_CLASS UIEvent ;
+#include <UIKit/UIGestureRecognizer.h>
+NS_INTERFACE( UITapGestureRecognizer , UIGestureRecognizer )
 	UITapGestureRecognizer*
-		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
+		initWithTarget_action(NSActionTarget* ,SEL_PP);
 	UITapGestureRecognizer();
 	virtual void 
 		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
@@ -44,5 +33,10 @@ public:
 		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
 	 virtual void 
 		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
-};
-#endif
+protected:
+	NS_SYNTHESIZE (NSUInteger ,numberOfTapsRequired );
+	NS_SYNTHESIZE (NSUInteger ,numberOfTapsAcquired );
+	NS_SYNTHESIZE (CGFloat ,tapStartTime );
+	NS_SYNTHESIZE (CGFloat ,tapStartX );
+	NS_SYNTHESIZE (CGFloat ,tapStartY );
+NS_END

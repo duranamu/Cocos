@@ -19,11 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UITABLEVIEWCELL_H
-#define UITABLEVIEWCELL_H
+#pragma once
 #include <Cocos/Cocos.h>
-#include "UIView.h"
-#include "UIImageView.h"
+#include <UIKit/UIView.h>
+NS_CLASS UIImageView;
 typedef enum UITableViewStyle{
 	UITableViewSylePlain = 0
 	,UITableViewSyleDefault
@@ -33,35 +32,28 @@ typedef enum UITableViewCellAccessory{
 	UITableViewCellAccessoryDisclosureIndicator ,
 	UITableViewCellAccessoryDetailDisclosureButton
 };
-class UITableViewCell :public UIView 
-{
-	UITableViewStyle style ;
-	ccProperty 
-		( UITableViewCellAccessory ,accessoryType  );
-	ccSynthesize 
-		( NSInteger , indentationLevel );
-	ccSynthesize
-		( NSInteger , indentationWidth );
-	CCString* uid;
-	CCSprite* accessory ;
-public :
-	CCLabelTTF* textLabel;
-	UIImageView* imageView;
-
+NS_INTERFACE( UITableViewCell , UIView )
 	UITableViewCell();
-	static UITableViewCell* 
-		initWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* uid);
-	static UITableViewCell* 
-		initWithStyle_reuseIdentifier_target_selector(UITableViewStyle ,CCString*,NSActionTarget*,SEL_CallFuncND);
-	UITableViewCell* 
-		doInitWithStyle_reuseIdentifier(UITableViewStyle style ,CCString* uid);	
+	 UITableViewCell* 
+		initWithStyle_reuseIdentifier(UITableViewStyle style ,NSString* uid);
+	 UITableViewCell* 
+		initWithStyle_reuseIdentifier_target_selector(UITableViewStyle ,NSString*,NSActionTarget*,SEL_PP);
 	void
 		touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
 	void
 		touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
 	void
 		touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
-	UITableViewCell* 
-		doInitWithStyle_reuseIdentifier_target_selector(UITableViewStyle  ,CCString* ,NSActionTarget*,SEL_CallFuncND);	
-};
-#endif
+	protected:
+	UITableViewStyle style ;
+	NS_PROPERTY 
+		( UITableViewCellAccessory ,accessoryType  );
+	NS_SYNTHESIZE 
+		( NSInteger , indentationLevel );
+	NS_SYNTHESIZE
+		( NSInteger , indentationWidth );
+	NSString* uid;
+	CCSprite* accessory ;
+	CCLabelTTF* textLabel;
+	UIImageView* imageView;
+NS_END

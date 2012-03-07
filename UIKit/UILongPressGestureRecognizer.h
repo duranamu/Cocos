@@ -19,23 +19,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UILONGPRESSGESTURERECOGNIZER_H
-#define UILONGPRESSGESTURERECOGNIZER_H
-#include <QuartzCore\QuartzCore.h>
-#include "UIGestureRecognizer.h"
-#include "UIEvent.h"
-class UILongPressGestureRecognizer : public UIGestureRecognizer
-{
-	ccSynthesize (NSUInteger ,numberOfTapsRequired );
-	ccSynthesize (NSUInteger ,numberOfTapsAcquired );
-	ccSynthesize (CGFloat ,tapStartTime );
-	ccSynthesize (CGFloat ,tapStartX );
-	ccSynthesize (CGFloat ,tapStartY );
-public:
-	static UILongPressGestureRecognizer*
-		alloc();
+#pragma once
+#include <QuartzCore/QuartzCore.h>
+#include <UIKit/UIGestureRecognizer.h>
+NS_CLASS UIEvent;
+NS_INTERFACE(UILongPressGestureRecognizer , UIGestureRecognizer)
 	UILongPressGestureRecognizer*
-		initWithTarget_action(NSActionTarget* ,SEL_CallFuncND);
+		initWithTarget_action(NSActionTarget* ,SEL_PP);
 	UILongPressGestureRecognizer();
 	virtual void 
 		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
@@ -43,5 +33,10 @@ public:
 		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
 	 virtual void 
 		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
-};
-#endif
+protected:
+	NS_SYNTHESIZE (NSUInteger ,numberOfTapsRequired );
+	NS_SYNTHESIZE (NSUInteger ,numberOfTapsAcquired );
+	NS_SYNTHESIZE (CGFloat ,tapStartTime );
+	NS_SYNTHESIZE (CGFloat ,tapStartX );
+	NS_SYNTHESIZE (CGFloat ,tapStartY );
+NS_END

@@ -19,24 +19,21 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UITABLEVIEW_H
-#define UITABLEVIEW_H
-#include "UITableViewDataSource.h"
-#include "UIView.h"
+#pragma once
+#include <UIKit/UIView.h>
 #include <Cocos/Cocos.h>
-class UITableView :public UIView 
-{
-	CCString* identifier;
+NS_CLASS UITableViewDataSource;
+NS_CLASS UITableViewCell;
+NS_INTERFACE( UITableView , UIView )
 public:
 	UITableViewDataSource* datasource;
 	UITableView();
-	~UITableView();
 	bool 
 		isEqual(UITableView* );
 	CCArray* 
 		m_indexPath;
 	UITableViewCell*
-		dequeueReusableCellWithIdentifier(CCString* );
+		dequeueReusableCellWithIdentifier(NSString* );
 	virtual void 
 		reloadData(NSArray* );
 	void 
@@ -47,5 +44,6 @@ public:
 		touchesMoved_withEvent(CCSet*  ,UIEvent* );
 	BOOL
 		pointInside_withEvent(CGPoint point,UIEvent* evt);
-};
-#endif
+protected:
+	CCString* identifier;
+NS_END
