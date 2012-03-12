@@ -19,8 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UINavigationController.h"
-NS_STATIC_ALLOC(UINavigationController);
+#include <UIKit/UINavigationController.h>
 UINavigationController*
 	UINavigationController::initWithRootViewController
 	(UIViewController* rootViewController)
@@ -57,4 +56,10 @@ void
 	UINavigationController::predo_controller_torsoData(void * node , vid sender)
 {
 	self->topViewController->predo_controller_torsoData(node ,sender);
+}
+void
+	UINavigationController::dealloc()
+{
+	self->viewControllers->release();
+	self->viewControllers = nil;
 }

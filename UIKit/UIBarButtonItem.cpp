@@ -19,9 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIBarButtonItem.h"
-#include "UIKitAddition.h"
-NS_STATIC_ALLOC( UIBarButtonItem );
+#include <UIKit/UIBarButtonItem.h>
+#include <UIKit/UIKitAddition.h>
+#include <UIKit/UIImage.h>
+#include <UIKit/UIBarItem.h>
+#include <UIKit/UIColor.h>
+#include <UIKit/UIFont.h>
 UIBarButtonItem*
 	UIBarButtonItem::initWithTitle_style_target_action(NSString* ctitle ,UIBarButtonItemStyle cstyle, NSActionTarget* ctarget,SEL_PP caction)
 {
@@ -34,7 +37,12 @@ UIBarButtonItem*
 		UIFont::fontWithName_size(_s("Arial"),1.0f),UITextAttributeFont,
 		UIColor::whiteColor(),UITextAttributeTextColor);
 	//nil to be fixed
-	self->setTitleTextAttributes_forState(dict,nil);
-
+	//self->setTitleTextAttributes_forState(dict,nil);
 	return self;
+}
+void
+	UIBarButtonItem::dealloc()
+{
+	self->title->release();
+	self->title = nil;
 }

@@ -20,11 +20,61 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once 
-#include <Foundation/Cocos2DX_framework.h>
+#include <Foundation/NSObject.h>
+#include <Foundation/NSCopying.h>
+#include <Foundation/NSFastEnumeration.h>
 #include <Foundation/NSZone.h>
-NS_PROTOCOL(NSCopying)
-public:
-	virtual vid 
-		copyWithZone(NSZone*);
+#include <stdarg.h>
+NS_CLASS NSArray;
+NS_INTERFACE( NSSet ,NSObject ,NSCopying ,NSFastEnumeration)
+	NSSet*
+		setByAddingObjectsFromArray(NSArray*);
+	NSSet*
+		setByAddingObjectsFromSet(NSSet* );
+	NSSet*
+		setByAddingObject(NSObject*);
+	NSSet*
+		setByAddingArray(NSArray*);
+	static NSSet*
+		setWithObject(NSObject*);
+	NSSet*
+		initWithObject(NSObject*);
+	static NSSet*
+		setWithSet(NSSet*);
+	NSSet*
+		initWithSet(NSSet* );
+	static NSSet*
+		setWithObjects(NSObject* ,...);
+	NSSet*
+		initWithObjects(NSObject*,...);
+	static NSSet*
+		setWithArray(NSArray*);
+	NSSet*
+		initWithArray(NSArray* );
+	void
+		gotoBeginObject();
+	vid
+		nextObject();
+	vid
+		copyWithZone(NSZone* );
+	NSArray*
+		allObjects();
+	NSSet();
+	NSUInteger count();
+	BOOL
+		containsObject(NSObject*);
+	void
+		makeObjectsPerformSelector(SEL);
+	void
+		makeObjectsPerformSelector_withObject(SEL_P,NSObject*);
+	BOOL
+		isSubsetOfSet(NSSet* );
+	BOOL
+		intersectsSet(NSSet*);
+	BOOL
+		isEqualToSet(NSSet*);
 
+	protected:
+		CCSet* ref;
+		CCSetIterator iterator;
 NS_END

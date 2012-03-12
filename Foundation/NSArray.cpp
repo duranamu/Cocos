@@ -73,6 +73,7 @@ NSArray::NSArray(NSUInteger num)
 NSArray::NSArray()
 {
 	ref = CCArray::array();
+	self->copying = self;
 	ref->retain();
 }
 NSObject* NSArray::objectAtIndex(NSUInteger index)
@@ -87,7 +88,7 @@ NSObject*
 NSArray*
 	NSArray::array()
 {
-	return (NSArray*) alloc()->init();
+	return (NSArray*) alloc()->init()->autorelease();
 }
 BOOL
 	NSArray::removeObject(NSObject* obj)
@@ -136,8 +137,31 @@ vid
 
 	return self;
 }
-NSObject*
-	NSArray::copy(NSArray* anA)
+vid
+	NSArray::copyWithZone(NSZone* aZone)
 {
-	CCObject
+	NSArray* newArray  = (NSArray*)NSArray::alloc()->init();
+	nfor(NSObject* ,obj,self)
+		newArray->addObject(obj);
+	forEnd
+
+	return newArray;
+}
+vid
+	NSArray::nextObject()
+{
+	if(indexedObject <= endedObejct && self->ref->data->num)
+	{
+		return *(indexedObject++);
+	}
+		return nil;
+}
+void
+	NSArray::gotoBeginObject()
+{
+	if(self->ref->data->num )
+	{
+		indexedObject = (NSObject**)self->ref->data->arr;
+		endedObejct   = (NSObject**)indexedObject + self->ref->data->num-1;
+	}
 }

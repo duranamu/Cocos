@@ -22,8 +22,11 @@ THE SOFTWARE.
 #pragma once
 #include <Foundation/NSObject.h>
 #include <Foundation/NSString.h>
+#include <Foundation/NSCopying.h>
+#include <Foundation/NSZone.h>
+#include <Foundation/NSFastEnumeration.h>
 NS_INTERFACE
-	( NSDictionary , NSObject)
+	( NSDictionary , NSObject , NSCopying, NSFastEnumeration)
 public:
 	CCDictionary<std::string,NSObject*>* ref;
 	static NSDictionary*
@@ -62,7 +65,14 @@ public:
 	}
 	vid
 		autorelease();
-	 void
+	void
 		retain();
+
+	vid
+		copyWithZone(NSZone*);
+	vid
+		nextObject();
+	void
+		gotoBeginObject();
 
 NS_END

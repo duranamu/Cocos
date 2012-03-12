@@ -100,7 +100,30 @@ void
 {
 	ref->release();
 }
-NSDictionary::NSDictionary()
+	NSDictionary::NSDictionary()
 {
 	 ref = new CCDictionary<std::string,NSObject*>();
+	 self->copying = self;
+}
+vid
+	NSDictionary::copyWithZone(NSZone* aZone)
+{
+	NSDictionary* dict = alloc()->init();
+
+	return dict;
+}
+void
+	NSDictionary::gotoBeginObject()
+{
+	if(self->ref)
+	{
+		ref->begin();
+	}
+}
+vid
+	NSDictionary::nextObject()
+{
+	std::string* str = new std::string();
+	ref->next(str);
+	return str;
 }

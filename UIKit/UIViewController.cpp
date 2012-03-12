@@ -24,21 +24,21 @@ THE SOFTWARE.
 void 
 	UIViewController::viewDidRender(CCLayer* host)
 {
-	For(UIView*,pView,view->subviews)
+	nfor(UIView*,pView,view->subviews)
 		pView->viewDidRender(host);
-	forCCEnd
+	nend
 }
 void 
 	UIViewController::viewReloadData(NSArray* toShow)
 {
-	For(UIView*,pView,view->subviews)
+	nfor(UIView*,pView,view->subviews)
 		pView->reloadData(toShow);
-	forCCEnd
+	nend
 }
-CCSprite*  
+CCNode*  
 	UIViewController::renderTargetforHost()
 {
-	return view->anyView()->getsprite();
+	return view->anyView()->getnode();
 }
 void 
 	UIViewController::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
@@ -51,9 +51,9 @@ void
 	{
 		if(receiver->gestureRecognizers)
 		{
-			For(UIGestureRecognizer* , gr ,receiver->gestureRecognizers)
+			nfor(UIGestureRecognizer* , gr ,receiver->gestureRecognizers)
 				gr->touchesBegan_withEvent(touches , events);
-			forCCEnd
+			nend
 		}
 		receiver->touchesBegan_withEvent(touches,events);
 	}
@@ -69,9 +69,9 @@ void
 	{
 		if(receiver->gestureRecognizers)
 		{
-			For(UIGestureRecognizer* , gr ,receiver->gestureRecognizers)
+			nfor(UIGestureRecognizer* , gr ,receiver->gestureRecognizers)
 				gr->touchesEnded_withEvent(touches , events);
-			forCCEnd
+			nend
 		}
 		receiver->touchesEnded_withEvent(touches,events);
 	}
@@ -84,9 +84,9 @@ void
 	m_torsox = cdata->x;
 	m_torsoy = 480 - cdata->y;
 
-	For(UIView* , m_view , followView->subviews)
+	nfor(UIView* , m_view , followView->subviews)
 		m_view->followPlayer(cdata);
-	forCCEnd
+	nend
 
 	cdata->autorelease();
 }
@@ -115,17 +115,17 @@ void
 			touch->deltaMove = ccp (0 , moveSinceTouchY);
 		}
 	}
-	For(UIView*,uiview,this->movableView->subviews)
+	nfor(UIView*,uiview,this->movableView->subviews)
 		uiview->touchesMoved_withEvent(touches,events);
-	forCCEnd
+	nend
 
 	if(receiver)
 	{
 		if(receiver->gestureRecognizers)
 		{
-			For(UIGestureRecognizer* , gr ,receiver->gestureRecognizers)
+			nfor(UIGestureRecognizer* , gr ,receiver->gestureRecognizers)
 				gr->touchesMoved_withEvent(touches , events);
-			forCCEnd
+			nend
 		}
 	}
 }
@@ -137,4 +137,14 @@ void
 	UIViewController::release()
 {
 //	self->NSObject::release();
+}
+void
+	UIViewController::dealloc()
+{
+	self->followView->release();
+	self->followView = nil;
+	self->view->release();
+	self->view = nil;
+	self->movableView->release();
+	self->movableView = nil;
 }

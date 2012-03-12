@@ -41,7 +41,7 @@ public:
 	static CCArray* ccArrayWithXmlNodesetPtr(xmlNodeSetPtr nodeset)
 	{
 		CCArray* wrapper = CCArray::array();
-		for(int i=0;i< nodeset->nodeNr;i++)
+		nfor(int i=0;i< nodeset->nodeNr;i++)
 		{
 			wrapper->addObject(new CCWrapper(nodeset->nodeTab[i]));
 		}

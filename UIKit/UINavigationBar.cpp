@@ -19,12 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#pragma once 
-#include <Foundation/Cocos2DX_framework.h>
-#include <Foundation/NSZone.h>
-NS_PROTOCOL(NSCopying)
-public:
-	virtual vid 
-		copyWithZone(NSZone*);
-
-NS_END
+#include <UIKit/UINavigationBar.h>
+void
+	UINavigationBar::dealloc()
+{
+	self->titleTextAttributes->release();
+	self->titleTextAttributes = nil;
+}

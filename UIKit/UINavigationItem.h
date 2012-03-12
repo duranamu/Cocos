@@ -19,12 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UINavigationItem_h
-#define UINavigationItem_h
+#pragma once
 #include <QuartzCore\QuartzCore.h>
-#include "UIBarButtonItem.h"
-class UINavigationItem : public NSObject
-{
+NS_CLASS UIBarButtonItem;
+NS_INTERFACE( UINavigationItem , NSObject )
 	NS_SYNTHESIZE
 		(UIBarButtonItem* ,backBarButtonItem);
 	NS_SYNTHESIZE
@@ -40,8 +38,6 @@ class UINavigationItem : public NSObject
 	NS_SYNTHESIZE
 		(NSString * ,title);
 public:
-	static UINavigationItem*
-		alloc();
 	UINavigationItem* 
 		initWithTitle(NSString *);
 	void 
@@ -53,5 +49,4 @@ public:
 	BOOL animatedForLeftBar;
 	BOOL animatedForRightBar;
 	BOOL animatedForBackBar;
-};
-#endif
+NS_END

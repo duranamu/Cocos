@@ -19,18 +19,42 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIINDEXPATH_H
-#define UIINDEXPATH_H
-#include "../Cocos/Cocos.h"
-class UIIndexPath :public CCObject
+#include <Foundation/NSException.h>
+NSString*
+	NSException::name()
 {
-public:
-NSInteger section;
-NSInteger row;
-	UIIndexPath(NSInteger i_section,NSInteger i_row)
-	{
-		section = i_section;
-		row = i_row;
-	}
-};
-#endif
+	return self->_name;
+}
+NSString*
+	NSException::reason()
+{
+	return self->_reason;
+}
+NSDictionary*
+	NSException::userInfo()
+{
+	return self->_useeInfo;
+}
+NSException*
+	NSException::initWithName_reason_userInfo(NSString* aName, NSString* aReason ,NSDictionary* dict)
+{
+	aName->retain();
+	self->_name = aName;
+	aReason->retain();
+	self->_reason = aReason;
+	dict->retain();
+	self->_useeInfo = dict;
+	return self;
+}
+NSException*
+	NSException::exceptionWithName_reason_userInfo(NSString* aName, NSString* aReason ,NSDictionary* dict)
+{
+	return (NSException*)alloc()->initWithName_reason_userInfo(aName,aReason,dict)->autorelease();
+}
+void
+	NSException::dealloc()
+{
+	self->_name->release();
+	self->_reason->release();
+	self->_useeInfo->release();
+}

@@ -192,13 +192,13 @@ void
 void
 	UIApplication::selectKeyWindow()
 {
-	For(UIWindow* ,pWindow,windows)
+	nfor(UIWindow* ,pWindow,windows)
 		if(pWindow->keyWindow)
 		{
 			pWindow->retain();
 			keyWindow = pWindow;
 		}
-	forCCEnd
+	nend
 	setupTracker();
 }
 void

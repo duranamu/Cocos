@@ -19,19 +19,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UINAVIGATIONCONTROLLER_H
-#define UINAVIGATIONCONTROLLER_H
+#pragma once
 #include <QuartzCore\QuartzCore.h>
-#include "UIViewController.h"
-#include "UIResponder.h"
-#include "UINavigationBar.h"
-class UINavigationController : public UIViewController , public UIResponder
-{
-public:
+#include <UIKit/UIViewController.h>
+#include <UIKit/UIResponder.h>
+NS_CLASS UINavigationBar ;
+NS_INTERFACE( UINavigationController , UIViewController ,  UIResponder)
 
 	UINavigationController();
-	static UINavigationController*
-		alloc();
 	UINavigationController* 
 		initWithRootViewController(UIViewController*);
 	void 
@@ -42,15 +37,7 @@ public:
 		popToRootViewControllerAnimated(BOOL );
 	NSArray *
 		popToViewController_viewController_animated(UIViewController *,BOOL);
-	vid delegate ;
-	NS_SYNTHESIZE
-		(UINavigationBar* , navigationBar);
-	NS_SYNTHESIZE
-		(BOOL , navigationBarHidden);
-	NS_SYNTHESIZE
-		(UIViewController* , topViewController);
-	NS_SYNTHESIZE
-		(NSArray* , viewControllers);
+
 	virtual void 
 		viewDidLoad(void );
 	virtual void
@@ -60,5 +47,13 @@ public:
 protected:
 	UIViewController* rootViewController;
 	NSUInteger stackPointer;
-};
-#endif
+	vid delegate ;
+	NS_SYNTHESIZE
+		(UINavigationBar* , navigationBar);
+	NS_SYNTHESIZE
+		(BOOL , navigationBarHidden);
+	NS_SYNTHESIZE
+		(UIViewController* , topViewController);
+	NS_SYNTHESIZE_COPY
+		(NSArray* , viewControllers);
+NS_END

@@ -23,14 +23,14 @@ THE SOFTWARE.
 #include <Cocos/Cocos.h>
 NS_CLASS  UIView;
 NS_CLASS  UITableViewCell;
-NS_CLASS  UIIndexPath;
+NS_CLASS  NSIndexPath;
 class UITableViewDataSource 
 {
 public:
 virtual NSInteger
 	numberOfSectionInTableView(UIView* tableView) = 0;
 virtual UITableViewCell*
-	tableView_cellForRowAtIndexPath(UIView* tableView,UIIndexPath* indexPath=nil) = 0;
+	tableView_cellForRowAtIndexPath(UIView* tableView,NSIndexPath* indexPath=nil) = 0;
 virtual int
 	tableView_numberOfRowsInSection(UIView* view,NSInteger section) = 0;
 };

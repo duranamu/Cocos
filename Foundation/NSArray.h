@@ -22,8 +22,11 @@ THE SOFTWARE.
 #pragma once
 #include <Foundation/NSObject.h>
 #include <Foundation/Cocos2DX_framework.h>
+#include <Foundation/NSCopying.h>
+#include <Foundation/NSZone.h>
+#include <Foundation/NSFastEnumeration.h>
 #include <stdarg.h>
-NS_INTERFACE( NSArray , NSObject)
+NS_INTERFACE( NSArray , NSObject ,NSCopying ,NSFastEnumeration )
 public:
 	CCArray* ref;
 	NSArray* 
@@ -56,8 +59,9 @@ public:
 		indexOfObject(NSObject* obj){return ref->indexOfObject(obj);}
 	 void
 		release();
-	NSObject*
-		 copy(NSArray*);
+	 vid 
+		 copyWithZone(NSZone*);
+	
 	BOOL
 		removeObject(NSObject* );
 	inline void
@@ -66,5 +70,10 @@ public:
 		removeAllObjects();
 	vid 
 		autorelease();
-
+	vid
+		nextObject();
+	void
+		gotoBeginObject();
+	NSObject** indexedObject;
+	NSObject** endedObejct;
 };

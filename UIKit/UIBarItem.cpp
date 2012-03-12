@@ -19,9 +19,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIBarItem.h"
-#include "UIKitAddition.h"
-#include "UIColor.h"
+#include <UIKit/UIBarItem.h>
+#include <UIKit/UIKitAddition.h>
+#include <UIKit/UIColor.h>
 void
 	UIBarItem::setTitleTextAttributes_forState(NSDictionary* dict, UIControlState state)
 {
@@ -34,5 +34,8 @@ void
 	color = (UIColor*) dict->objectForKey(UITextAttributeTextColor);
 	if(color)
 		self->barColor = color;
-
+}
+void
+	UIBarItem::dealloc()
+{
 }

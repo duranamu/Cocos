@@ -19,12 +19,30 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#pragma once 
-#include <Foundation/Cocos2DX_framework.h>
-#include <Foundation/NSZone.h>
-NS_PROTOCOL(NSCopying)
-public:
-	virtual vid 
-		copyWithZone(NSZone*);
-
-NS_END
+#include <Foundation/NSIndexPath.h>
+void
+	NSIndexPath::dealloc()
+{
+}
+NSUInteger
+	NSIndexPath::section()
+{
+	return self->_section;
+}
+NSUInteger
+	NSIndexPath::row()
+{
+	return self->_row;
+}
+NSIndexPath*
+	NSIndexPath::initWithSection_row(NSUInteger section ,NSUInteger row)
+{
+	self->_section = section;
+	self->_row  = row;
+	return self;
+}
+NSIndexPath*
+	NSIndexPath::indexWithSection_row(NSUInteger section ,NSUInteger row)
+{
+	return (NSIndexPath*) alloc()->initWithSection_row(section,row)->autorelease();
+}

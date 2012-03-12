@@ -19,16 +19,18 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIBARITEM_H
-#define UIBARITEM_H
-#include <QuartzCore\QuartzCore.h>
-#include "UIKitData.h"
-#include "UIControl.h"
-#include "UIFont.h"
-#include "UIImage.h"
-#include "UIColor.h"
-class UIBarItem : public NSObject
-{
+#pragma once
+#include <QuartzCore/QuartzCore.h>
+#include <UIKit/UIKitData.h>
+#include <UIKit/UIControl.h>
+NS_CLASS UIColor;
+NS_CLASS  UIFont;
+#include <UIKit/UIImage.h>
+NS_INTERFACE( UIBarItem , NSObject)
+public:
+	void
+		setTitleTextAttributes_forState(NSDictionary* , UIControlState);
+protected:
 	NS_SYNTHESIZE
 		(BOOL , enabled);
 	NS_SYNTHESIZE_RETAIN
@@ -47,8 +49,4 @@ class UIBarItem : public NSObject
 	UIFont* barFont;
 	UIColor* barColor;
 	CCSprite* sprite;
-public:
-	void
-		setTitleTextAttributes_forState(NSDictionary* , UIControlState);
-};
-#endif
+NS_END

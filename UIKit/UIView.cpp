@@ -23,22 +23,23 @@ THE SOFTWARE.
 void 
 	UIView::viewDidRender(CCLayer* host)
 {
-	host->addChild(sprite);
+	host->addChild(self->node);
 }
 void 
 	UIView::followPlayer(CCPoint3D* data)
 {
-	sprite->setPosition(ccp(data->x,480 - data->y));
+	self->node->setPosition(ccp(data->x,480 - data->y));
 }
 bool 
 	UIView::canTriggerforTouch(UITouch* touch)
 {
-	if(!sprite->getParent())
+	if(!node->getParent())
 	{
 	NSInteger touchx = touch->getlocation().x ;
 	NSInteger touchy = touch->getlocation().y;
-	NSInteger spritex =  sprite->getPosition().x ;
+	NSInteger spritex =  node->getPosition().x ;
 	NSInteger offx = touchx - spritex;
+	CCSprite* sprite = (CCSprite*) node;
 	NSInteger halfSpriteWidth = sprite->getTexture()->getPixelsWide()/2;
 	NSInteger halfSpriteHeight = sprite->getTexture()->getPixelsHigh()/2;
 	 if(abs(offx) < halfSpriteWidth)
@@ -52,21 +53,23 @@ bool
 	 }
 		return false;
 	}else{
-		return canTriggerforTouch_parentSprite(touch,(CCSprite*)sprite->getParent());
+
+		return canTriggerforTouch_parentSprite(touch,(CCSprite*)node->getParent());
 	}
 }
 bool
 	UIView::canTriggerforTouch_parentSprite(UITouch* touch , CCSprite* parent)
 {
+	CCSprite* sprite = (CCSprite*) self->node;
 	NSInteger touchx = touch->getlocation().x  ;
 	NSInteger touchy = touch->getlocation().y;
-	NSInteger spritex =  sprite->getPosition().x + parent->getPosition().x;
+	NSInteger spritex =  node->getPosition().x + parent->getPosition().x;
 	NSInteger offx = touchx - spritex;
 	NSInteger halfSpriteWidth = sprite->getTexture()->getPixelsWide()/2;
 	NSInteger halfSpriteHeight = sprite->getTexture()->getPixelsHigh()/2;
 	 if(abs(offx) < halfSpriteWidth)
 	 {
-		NSInteger spritey = sprite->getPosition().y + parent->getPosition().y;
+		NSInteger spritey = node->getPosition().y + parent->getPosition().y;
 		NSInteger offy = touchy - spritey;
 		 if(abs(offy) < halfSpriteHeight )
 		 {
@@ -80,9 +83,9 @@ void
 {
 	/*CCAction* action = CCMoveBy::actionWithDuration(0.01f,point);
 	this->sprite->runAction(action);*/
-	CCPoint position = this->sprite->getPosition();
+	CCPoint position = this->node->getPosition();
 	position.y += point.y;
-	this->sprite->setPosition(position);
+	this->node->setPosition(position);
 }
 void 
 	UIView::addGestureRecognizer(UIGestureRecognizer* gesture)
@@ -98,25 +101,25 @@ void
 	UIView::touchesBegan_withEvent(CCSet* touches ,UIEvent* events) 
 {
 	/*if(self->gestureRecognizers)
-		For(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
+		nfor(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
 			recognizer->touchesBegan_withEvent(touches,events);
-		forCCEnd*/
+		nend*/
 }
 void
 	UIView::touchesMoved_withEvent(CCSet* touches ,UIEvent* events) 
 {
 	/*if(self->gestureRecognizers)
-	For(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
+	nfor(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
 		recognizer->touchesMoved_withEvent(touches,events);
-	forCCEnd	*/
+	nend	*/
 }
 void
 	UIView::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
 {
 	/*if(self->gestureRecognizers)
-	For(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
+	nfor(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
 		recognizer->touchesEnded_withEvent(touches,events);
-	forCCEnd*/
+	nend*/
 }
 BOOL
 	UIView::pointInside_withEvent(CGPoint point,UIEvent* evt)
@@ -133,7 +136,7 @@ UIView*
 
 	if(view->subviews->count())
 	{
-		For(UIView*,dscendant,view->subviews)
+		nfor(UIView*,dscendant,view->subviews)
 			if(dscendant->pointInside_withEvent(point,evt))
 			{
 				if(dscendant->subviews->count())
@@ -155,5 +158,9 @@ void
 	UIView::dealloc()
 {
 	self->subviews->release();
-	self->sprite->release();
+	self->subviews = nil;
+	self->node->release();
+	self->node = nil;
+	self->indexPath->release();
+	self->indexPath = nil;
 }

@@ -20,7 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include "UINavigationItem.h"
-NS_STATIC_ALLOC(UINavigationItem);
 UINavigationItem*
 	UINavigationItem::initWithTitle(NSString* str)
 {
@@ -47,4 +46,9 @@ void
 {
 	self->backBarButtonItem = item;
 	self->animatedForBackBar = animated;
+}
+void
+	UINavigationItem::dealloc()
+{
+
 }

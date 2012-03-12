@@ -25,7 +25,6 @@ THE SOFTWARE.
 #include <UIKit/UITableViewCell.h>
 #include <UIKit/UITableViewDataSource.h>
 #include <UIKit/UIViewController.h>
-#include <UIKit/UIIndexPath.h>
 #include <UIKit/UIResponder.h>
 #include <UIKit/UIView.h>
 #include <UIKit/UITouch.h>

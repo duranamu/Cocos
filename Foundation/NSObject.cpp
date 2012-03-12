@@ -20,7 +20,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include <Foundation/NSObject.h>
+#include <Foundation/NSCopying.h>
+#include <Foundation/NSException.h>
  void
 	 NSObject::dealloc()
  {
+ }
+ vid
+	 NSObject::copy()
+ {
+	 if(copying)
+	 {
+		return copying->copyWithZone(self);
+	 }else{
+		 throw NSException::exceptionWithName_reason_userInfo(
+			 _s("Panic"),_s("Not Implementation for copyWithZone"),nil);
+	 }
  }

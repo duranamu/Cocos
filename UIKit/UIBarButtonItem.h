@@ -19,11 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIBarButtonItem_h
-#define UIBarButtonItem_h
+#pragma once
 #include <QuartzCore\QuartzCore.h>
-#include "UIImage.h"
-#include "UIBarItem.h"
+NS_CLASS UIImage ;
+#include <UIKit/UIBarItem.h>
 typedef enum {
     UIBarButtonSystemItemDone,
     UIBarButtonSystemItemCancel,
@@ -46,17 +45,19 @@ typedef enum {
     UIBarButtonSystemItemPause,
     UIBarButtonSystemItemRewind,
     UIBarButtonSystemItemFastForward,
-    UIBarButtonSystemItemUndo,        // iOS 3.0 and later
-    UIBarButtonSystemItemRedo,        // iOS 3.0 and later
-    UIBarButtonSystemItemPageCurl,    // iOS 4.0 and later
+    UIBarButtonSystemItemUndo,        
+    UIBarButtonSystemItemRedo,        
+    UIBarButtonSystemItemPageCurl,    
 } UIBarButtonSystemItem;
 typedef enum {
     UIBarButtonItemStylePlain,
     UIBarButtonItemStyleBordered,
     UIBarButtonItemStyleDone,
 } UIBarButtonItemStyle;
-class UIBarButtonItem : public UIBarItem
-{
+NS_INTERFACE(UIBarButtonItem , UIBarItem)
+	UIBarButtonItem*
+		initWithTitle_style_target_action(NSString* ,UIBarButtonItemStyle, NSActionTarget* ,SEL_PP );
+protected:
 	NS_SYNTHESIZE
 		(SEL_PP , action);
 	NS_SYNTHESIZE
@@ -65,10 +66,4 @@ class UIBarButtonItem : public UIBarItem
 		(UIBarButtonItemStyle ,style);
 	NS_SYNTHESIZE
 		(NSString* , title);
-public:
-	static UIBarButtonItem*
-		alloc();
-	UIBarButtonItem*
-		initWithTitle_style_target_action(NSString* ,UIBarButtonItemStyle, NSActionTarget* ,SEL_PP );
-};
-#endif
+NS_END

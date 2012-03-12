@@ -46,7 +46,7 @@ THE SOFTWARE.
 			textLabel = CCLabelTTF::labelWithString("","Arial",38);
 		else
 			textLabel = CCLabelTTF::labelWithString("","Arial",38);
-		setsprite(textLabel);
+		setnode(textLabel);
 		self->imageView =  UIImageView::alloc()->init();
 		self->contentView =  UIView::alloc()->init();
 		self->retain();
@@ -60,7 +60,7 @@ void
 	UITouch* touch = (UITouch*)touches->anyObject();
 
 	bool isCildTrigger = false;
-	For(UIView* , child , self->subviews )
+	nfor(UIView* , child , self->subviews )
 		if(child->canTriggerforTouch(touch))
 			isCildTrigger = true;
 	forEnd
@@ -75,9 +75,9 @@ void
 void 
 	UITableViewCell::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
 {
-	if(this->canTriggerforTouch((UITouch*)touches->anyObject()))
+	if(self->canTriggerforTouch((UITouch*)touches->anyObject()))
 	{
-		this->sprite->setScale(1.0f);
+		self->node->setScale(1.0f);
 	}
 }
 void 
@@ -94,14 +94,14 @@ void
 		case UITableViewCellAccessoryDisclosureIndicator:
 		{
 			self->accessory = CCSprite::spriteWithFile("disclosure_indicator.png");
-			self->sprite->addChild(self->accessory);
+			self->node->addChild(self->accessory);
 			self->accessory->setPosition(ccp(240,20));
 			break;
 		}
 		case UITableViewCellAccessoryDetailDisclosureButton:
 		{
 			self->accessory = CCSprite::spriteWithFile("detail_disclosure_button.png");
-			self->sprite->addChild(self->accessory);
+			self->node->addChild(self->accessory);
 			self->accessory->setPosition(ccp(240,20));
 			break;
 		}

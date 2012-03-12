@@ -24,9 +24,7 @@ THE SOFTWARE.
 #include <UIKit/UIView.h>
 #include <UIKit/UIResponder.h>
 #include <NIKit/NIKit.h>
-class UIViewController :  public  UIView 
-{
-public:
+NS_INTERFACE( UIViewController ,  UIView )
 	UIViewController()
 	{
 		self->view = new UIView();
@@ -43,7 +41,7 @@ virtual void
 	viewDidUpdate(cocos2d::CGFloat ){};
 void 
 	viewReloadData(NSArray* toShow);
-CCSprite*  
+CCNode*  
 	renderTargetforHost();
 virtual void 
 	touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
@@ -67,7 +65,6 @@ public:
 	UIView* clickView;
 	UIView* movableView;
 	UIView* watchVariableView;
-
 	UIView* righthand_clicked_marker;
 protected:
 	

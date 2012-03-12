@@ -38,7 +38,7 @@ UIImageView*
 {
 	self->image = image;
 	image->retain();
-	sprite = CCSprite::spriteWithTexture(image->getCCTexture2D());
+	self->node = CCSprite::spriteWithTexture(image->getCCTexture2D());
 };
 UIImageView*
 	UIImageView::viewWithTexture(CCTexture2D* image)
@@ -54,7 +54,7 @@ UIImageView*
 }
 UIImageView::UIImageView(CCTexture2D* image)
 {
-	sprite = CCSprite::spriteWithTexture(image);
+	self->node = CCSprite::spriteWithTexture(image);
 };
 UIImageView*	
 	UIImageView::viewWithFile(NSString* str )
@@ -64,15 +64,15 @@ UIImageView*
 	{
 		CC_SAFE_DELETE(pimageView);
 	}else{
-		pimageView->sprite = CCSprite::spriteWithFile(str->description().c_str());
-		pimageView->sprite->retain();
+		pimageView->node = CCSprite::spriteWithFile(str->description().c_str());
+		pimageView->node->retain();
 	}
 	return pimageView;
 }
 void
 	UIImageView::setimage(UIImage* cimage)
 {		
-	sprite = CCSprite::spriteWithTexture(cimage->getCCTexture2D());
+	self->node = CCSprite::spriteWithTexture(cimage->getCCTexture2D());
 	self->image = cimage;
 }
 void 

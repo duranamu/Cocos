@@ -26,8 +26,8 @@ using namespace cocos2d;
 #include <libxml\parser.h>
 #include <Foundation/NSObjCRuntime.h>
 #include <Foundation/FoundationDataType.h>
-#define forCCArray( __array__)  do { CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
-#define eachCCObject(__VAR__ ,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
+//#define forCCArray( __array__)  do { CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
+//#define eachCCObject(__VAR__ ,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
 #define fetchCCObject(__VAR__ ,__INST__)  CCWrapper* __wrapper__ = (CCWrapper*)__object__; \
 	__VAR__ __INST__ =  __wrapper__->data.__VAR__##Val
 #define NS_SYNTHESIZE(varType, varName)  CC_SYNTHESIZE(varType, varName, varName)  
@@ -48,24 +48,22 @@ public: inline varType get##varName(void) const { return varName; }\
 public: inline void set##varName(varType var){ varType cp = (varType)var->copy(); varName->release();varName = cp; }
 
 
-#define forCCEnd  }}while(0);
+#define nend  }}while(0);
 #define CCS(__STR__) new CCString(__STR__)
 #define nil NULL
 #define NS_SELECTOR_PP(__FUNC__) (SEL_PP)(&__FUNC__)
 #define _cast(__VAR__,__INST__) __VAR__ c##__INST__ = (__VAR__) __INST__;
 #define vid void*
-#define forArray( __nsArray__ ) do { CCArray* __array__ = __nsArray__->ref ; \
-	CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
+//#define forArray( __nsArray__ ) do { CCArray* __array__ = __nsArray__->ref ; \
+//	CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
 #define eachObject(__VAR__,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
 #define forEnd   }}while(0);
 
-#define For(__VAR__,__INST__,__NSARR__) forArray(__NSARR__) eachObject(__VAR__,__INST__)
-#define ccFor( __VAR__,__INST__,__NSARR__) forCCArray(__NSARR__) eachObject(__VAR__,__INST__)
-#define ccForEnd  }}while(0);
+#define nfor(__var__,__inst__,__arr__)  do {NSFastEnumeration* __enu__ = (NSFastEnumeration*) __arr__; __enu__->gotoBeginObject();__var__ __inst__;while( (__inst__ = (__var__) __enu__->nextObject())!= NULL){
+
 
 #define fordict(__VAR__,__INST__,__DICT__) \
 	do{  __DICT__->ref->begin();__VAR__ __INST__;while(__INST__ = (__VAR__) __DICT__->ref->next()){	 
-#define fordictEnd }}while(0);
 
 #define forSet(__var__ , __inst__ , _CCSet__) \
 	do { CCSetIterator __it__ = _CCSet__->begin(); \
@@ -82,7 +80,6 @@ public: inline void set##varName(varType var){ varType cp = (varType)var->copy()
 #define YES 1
 #define NO  0
 //typedef int BOOL
-typedef CCSet NSSet;
 #define NS_STATIC_ALLOC(__var__) \
 __var__*  __var__::alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(mem);}return mem;}
 #define NS_INSTANCE_INIT(__var__) __var__* __var__::init(){return self;}
@@ -99,12 +96,22 @@ static __var__* alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(mem
 
 #define NSActionTarget NSSelectorProtocol
 
-#define NS_INTERFACE(__class__,__super__)\
-class __class__ : public __super__{ public:  NS_ALLOC_FULL(__class__) NS_INIT_FULL(__class__) NS_DEALLOCATE(__class__)
+#define NS_INTERFACE(__class__,...)\
+class __class__ : public __VA_ARGS__{ public:  NS_ALLOC_FULL(__class__) NS_INIT_FULL(__class__) NS_DEALLOCATE(__class__)
+
 #define NS_END };
 
 typedef void (*NSCodeBlock)(vid, vid , vid); 
 
 #define NS_CLASS class
 
-#define NS_PROTOCOL(__name__) class __name__ {
+#define APPEND_CHAR(_root_char_,_extra_char_) _root_char_##,#_extra_char_ 
+
+#define NS_PROTOCOL(__name__)  class __name__ { public:
+
+#define pfor(__type_of_object__ ,__inst__ ,__firstObject__ )  \
+	do{ va_list __var_args_argp__; __type_of_object__ __inst__;va_start(__var_args_argp__ , __firstObject__); \
+	while(1){ __inst__ = va_arg( __var_args_argp__ , __type_of_object__ );if( __inst__ != NULL){     
+	
+
+#define pend  }else{break;}}va_end (__var_args_argp__);}while(0);

@@ -19,14 +19,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UINavigationBar_h
-#define UINavigationBar_h
+#pragma once
 #include <QuartzCore\QuartzCore.h>
-#include "UIView.h"
-#include "UIResponder.h"
-class UINavigationBar : public UIView , public UIResponder
-{
+#include <UIKit/UIView.h>
+#include <UIKit/UIResponder.h>
+NS_INTERFACE( UINavigationBar ,UIView ,UIResponder)
 	NS_SYNTHESIZE
 		(NSDictionary * , titleTextAttributes);
-};
-#endif
+NS_END

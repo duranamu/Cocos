@@ -41,5 +41,8 @@ THE SOFTWARE.
 #include <Foundation/NSSelectorProtocol.h>
 #include <Foundation/NSObjectProtocol.h>
 #include <Foundation/NSCopying.h>
+#include <Foundation/NSException.h>
 #include <Foundation/NSZone.h>
+#include <Foundation/NSSet.h>
+#include <Foundation/NSIndexPath.h>
 #endif

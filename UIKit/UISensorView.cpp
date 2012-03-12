@@ -25,26 +25,26 @@ THE SOFTWARE.
 UISensorView::UISensorView()
 {
 	this->device =  NIDevice::sharedDevice();
-	
 	UIImage* image =  
 		UIImage::imageWithData_format_pixel_size(
 		device->rawRGBData(),CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,CCSizeMake(640,480));
-	this->sprite = CCSprite::spriteWithTexture(image->getCCTexture2D());
-	this->sprite->setPosition(ccp(320,240));
+	self->node = CCSprite::spriteWithTexture(image->getCCTexture2D());
+	self->node->setPosition(ccp(320,240));
 }
 void 
 	UISensorView::updateFromDevice()
 {
 	this->device->update();
-	this->sprite->getTexture()->release();
+	CCSprite* sprite = (CCSprite*) self->node ;
+	sprite->getTexture()->release();
 	CCTextureCache::sharedTextureCache()->removeUnusedTextures();
 	UIImage* image =  
 		UIImage::imageWithData_format_pixel_size(
 		device->rawRGBData(),CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,CCSizeMake(640,480));
-	this->sprite->setTexture(image->getCCTexture2D());
+	sprite->setTexture(image->getCCTexture2D());
 }
 void
 	UISensorView::dealloc()
 {
-	self->sprite->release();
+	self->node->release();
 }

@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include <Cocos/Cocos.h>
 #include <UIKit/UIResponder.h>
 #include <UIKit/UITouch.h>
-#include <UIKit/UIIndexPath.h>
+#include <Foundation/NSIndexPath.h>
 #include <UIKit/UITapGestureRecognizer.h>
 NS_INTERFACE( UIView , UIResponder )
 public:
@@ -32,7 +32,8 @@ public:
 		self->becomeFirstResponder = NO;
 		subviews = NSArray::alloc()->init();
 		self->gestureRecognizers = nil;
-		self->sprite = new CCSprite();
+		self->node = new CCNode();
+		self->indexPath = NSIndexPath::alloc()->init();
 	}
 UIView*
 	anyView()
@@ -76,10 +77,10 @@ virtual void
 	addGestureRecognizer(UIGestureRecognizer*);
 
  	NSArray* subviews;
-	NS_SYNTHESIZE_RETAIN (CCSprite* , sprite );
+	NS_SYNTHESIZE_RETAIN (CCNode* , node );
 	NSActionTarget* listener;
 	SEL_PP  selector;
-	NS_SYNTHESIZE( UIIndexPath* , indexPath);
+	NS_SYNTHESIZE_RETAIN( NSIndexPath* , indexPath);
 	UIView* contentView;
 	UIGestureRecognizer* m_pRecognizer;
 	NSArray* gestureRecognizers;
