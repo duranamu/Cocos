@@ -98,7 +98,6 @@ void
 	nfor(UITableViewCell*,uiview,self->subviews)
 		uiview->touchesEnded_withEvent(touches,events);
 	nend
-	
 };
 void 
 	UITableView::touchesMoved_withEvent(CCSet* touches ,UIEvent* events) 

@@ -25,6 +25,7 @@ CIVector*
 {
 	CIVector* mem = alloc();
 	mem->initFrom_to(pa,pb);
+	mem->autorelease();
 	return mem;
 }
 CIVector*
@@ -56,4 +57,17 @@ CIVector*
 void
 	CIVector::dealloc()
 {
+}
+CIVector*
+	CIVector::initWithFloats(CGFloat x ,CGFloat y ,CGFloat z)
+{
+	self->X = x;
+	self->Y = y;
+	self->Z = z;
+	return self;
+}
+CIVector*
+	CIVector::vectorWithFloats(CGFloat x,CGFloat y ,CGFloat z)
+{
+	return (CIVector*) alloc()->initWithFloats(x,y,z)->autorelease();
 }

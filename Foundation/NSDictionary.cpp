@@ -80,21 +80,6 @@ NSDictionary*
 	self->autorelease();
 	return self;
 }
-vid
-	NSDictionary::autorelease()
-{
-		CCPoolManager::getInstance()->addObject(this);
-		m_bManaged = true;
-
-		ref->autorelease();
-		return self;
-}
-void
-	NSDictionary::retain()
-{
-	self->m_uReference++;
-	ref->retain();
-}
 void
 	NSDictionary::dealloc()
 {

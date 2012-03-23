@@ -24,5 +24,6 @@ THE SOFTWARE.
 //#include <QuartzCore/CoreAnimation.h>
 #pragma once
 #include <QuartzCore/CoreImage.h>
+#include <QuartzCore/CoreAnimation.h>
 #include <QuartzCore/Quartz.h>
 #include <QuartzCore/TypeDefinition.h>

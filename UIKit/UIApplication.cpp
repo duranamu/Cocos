@@ -35,7 +35,6 @@ void
 {
 	self->keyWindow->sendEvent(evt);
 }
-
 void
 	UIApplication::applicationDidUpdate(CGFloat time)
 {
@@ -92,13 +91,14 @@ void
 		touchStartTime = 0;
 		t_lasthandx = 0;
 		t_lasthandy = 0;
+		g_lasthandz = 0;
 		self->windows = NSArray::alloc()->init();
 }
 void
 	UIApplication::setupTracker()
 {
 		trackerManager =  NITrackerManager::defaultTrackerManager();
-		torsoTracker =	NITracker::trackerWithTarget_action_joint(self,NS_SELECTOR_PP   (UIApplication::predo_controller_torsoData),XN_SKEL_TORSO);
+		torsoTracker =	  NITracker::trackerWithTarget_action_joint(self,NS_SELECTOR_PP   (UIApplication::predo_controller_torsoData),XN_SKEL_TORSO);
 
 		righthandTracker =	NITracker::trackerWithTarget_action_joint(self,NS_SELECTOR_PP   (UIApplication::predo_controller_righthandData),XN_SKEL_RIGHT_HAND);
 
@@ -112,9 +112,9 @@ vid
 	UIApplication::predo_controller_torsoData(void* sender,vid data)
 {
 	_cast(UIApplication*,sender);
-	_cast(CCPoint3D*,data);
-	cdata->x;
+	_cast(CIVector*,data);
 	csender->getkeyWindow()->getrootViewController()->predo_controller_torsoData (sender , data);
+	cdata->release();
 	return nil;
 }
 vid 
@@ -123,48 +123,53 @@ vid
 	_cast(UIApplication*,sender);
 	if(!csender->isRighthandTracked) 
 		csender->isRighthandTracked = true;
-	_cast(CCPoint3D*,data);
-	csender->m_handz = cdata->z;
-	csender->m_handx = cdata->x;
-	csender->m_handy = 480 - cdata->y;
+	_cast(CIVector*,data);
+	csender->m_handz = cdata->getZ();
+	csender->m_handx = cdata->getX();
+	csender->m_handy = 480 - cdata->getY();
 	cdata->release();
-
 	return nil;
 } 
 vid
 	UIApplication::predo_controller_lefthandData(void* sender , vid data)
 {
-	_cast(CCPoint3D*,data);
-	ml_handz = cdata->z;
-	ml_handx = cdata->x;
-	ml_handy = 480 - cdata->y;
+	_cast(UIApplication*,sender);
+	_cast(CIVector*,data);
+	csender->ml_handz = cdata->getZ();
+	csender->ml_handx = cdata->getX();
+	csender->ml_handy = 480 - cdata->getY();
 	cdata->release();
 	return nil;
 }
 UITouchPhase 
-	UIApplication::touchPhaseforTime_handz(cocos2d::CGFloat time, CGFloat handz)
+	UIApplication::touchPhaseforTime_handz(CGFloat time, CGFloat handz)
 {
 	float deltahandz;
 	deltahandz = g_lasthandz - handz;
-	g_lasthandz = handz;
 	NSInteger velocity = deltahandz / time;
 	velocity = (velocity >> 5);
 
 	float deltahandzVelocity;
 	deltahandzVelocity = g_lasthandzVelocity - velocity  ;
-	g_lasthandzVelocity = velocity;	
 	NSInteger acceleration = deltahandzVelocity /time;
-	acceleration = (acceleration >>6);
+	acceleration = (acceleration >> 7);
 
-	if(velocity > 30 & acceleration < 5)
-	{		
+	BOOL firstRun = !g_lasthandz ;
+	g_lasthandz = handz;
+	g_lasthandzVelocity = velocity;	
+
+	if(firstRun)
+	{
+		return UITouchPhasePending;
+	}else if( velocity >= 10 )
+	{
 		if( menuTouchPhase ==  UITouchPhasePending )
 		{
 			return menuTouchPhase = UITouchPhaseBegan;
 		}else{
 			return menuTouchPhase;
 		}
-	}else if (velocity < -10 & acceleration > 5){
+	}else if (acceleration < 1 ){
 		if(menuTouchPhase == UITouchPhaseMoved)
 		{
 			return menuTouchPhase = UITouchPhaseEnded;
@@ -183,6 +188,7 @@ UITouchPhase
 			return menuTouchPhase =  UITouchPhasePending;
 		}
 	}
+		
 }
 void
 	UIApplication::addWindow(UIWindow* window)
@@ -205,5 +211,7 @@ void
 	UIApplication::dealloc()
 {
 	self->keyWindow->release();
+	self->keyWindow = nil;
 	self->windows->release();
+	self->windows = nil;
 }

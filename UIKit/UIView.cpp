@@ -26,9 +26,9 @@ void
 	host->addChild(self->node);
 }
 void 
-	UIView::followPlayer(CCPoint3D* data)
+	UIView::followPlayer(CIVector* data)
 {
-	self->node->setPosition(ccp(data->x,480 - data->y));
+	self->node->setPosition(ccp(data->getX(),480 - data->getY()));
 }
 bool 
 	UIView::canTriggerforTouch(UITouch* touch)
@@ -81,8 +81,6 @@ bool
 void
 	UIView::moveByPoint(CCPoint point)
 {
-	/*CCAction* action = CCMoveBy::actionWithDuration(0.01f,point);
-	this->sprite->runAction(action);*/
 	CCPoint position = this->node->getPosition();
 	position.y += point.y;
 	this->node->setPosition(position);

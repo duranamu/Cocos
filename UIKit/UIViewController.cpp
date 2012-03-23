@@ -62,7 +62,8 @@ void
 	UIViewController::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
 {
 	newTouchSession = true;
-
+	t_lasthandx = 0;
+	t_lasthandy = 0;
 	self->view->touchesEnded_withEvent(touches,events);
 
 	if(receiver)
@@ -79,15 +80,10 @@ void
 void 
 	UIViewController::predo_controller_torsoData(void* sender,vid data)
 {
-	_cast(CCPoint3D*,data);
-
-	m_torsox = cdata->x;
-	m_torsoy = 480 - cdata->y;
-
+	_cast(CIVector*,data);
 	nfor(UIView* , m_view , followView->subviews)
 		m_view->followPlayer(cdata);
 	nend
-
 	cdata->autorelease();
 }
 void 
@@ -98,24 +94,26 @@ void
 	UITouch* touch = (UITouch*) touches->anyObject();
 	if(touchStartx && touchStarty)
 	{
-	float x = touch->getlocation().x;
-	float y =  touch->getlocation().y;
-	float moveSinceTouchX = fabsf( x - t_lasthandx );
-	float moveSinceTouchY = 1.5*( y - t_lasthandy);
-	t_lasthandx = x;
-	t_lasthandy = y;
-	/*char var[120];
-	sprintf(var,"%3.0f %3.0f",moveSinceTouchX,moveSinceTouchY);
-	CCLabelTTF* ttf =(CCLabelTTF*)watchVariableView->sprite;
-	ttf->setString(var);*/
-		if(newTouchSession)
+		float x = touch->getlocation().x;
+		float y =  touch->getlocation().y;
+		float moveSinceTouchX = fabsf( x - t_lasthandx );
+		float moveSinceTouchY = 1.5 *( y - t_lasthandy);
+		if(t_lasthandx && t_lasthandy)
 		{
-			newTouchSession = false;
+			t_lasthandx = x;
+			t_lasthandy = y;
+			if(newTouchSession)
+			{
+				newTouchSession = false;
+			}else{
+				touch->deltaMove = ccp (0 , moveSinceTouchY);
+			}
 		}else{
-			touch->deltaMove = ccp (0 , moveSinceTouchY);
+			t_lasthandx = x;
+			t_lasthandy = y;
 		}
 	}
-	nfor(UIView*,uiview,this->movableView->subviews)
+	nfor(UIView*,uiview,self->movableView->subviews)
 		uiview->touchesMoved_withEvent(touches,events);
 	nend
 
@@ -136,7 +134,6 @@ void
 void
 	UIViewController::release()
 {
-//	self->NSObject::release();
 }
 void
 	UIViewController::dealloc()
@@ -147,4 +144,6 @@ void
 	self->view = nil;
 	self->movableView->release();
 	self->movableView = nil;
+	self->clickView->release();
+	self->clickView = nil;
 }

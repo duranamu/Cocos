@@ -28,7 +28,7 @@ THE SOFTWARE.
 #include <stdarg.h>
 NS_INTERFACE( NSArray , NSObject ,NSCopying ,NSFastEnumeration )
 public:
-	CCArray* ref;
+	NS_HAS_REF(CCArray* ref);
 	NSArray* 
 		initWithObjects (NSObject* , ...);
 	NSArray*
@@ -49,8 +49,7 @@ public:
 		containsObject(NSObject* obj){ return ref->containsObject(obj);}
 	inline void
 		addObject(NSObject* obj){ ref->addObject(obj);}
-	inline void 
-		retain(){ ref->retain();}
+	
 	inline NSUInteger 
 		count() { return ref->count();}
 	inline NSObject* 
@@ -68,8 +67,6 @@ public:
 		removeLastObject();
 	inline void
 		removeAllObjects();
-	vid 
-		autorelease();
 	vid
 		nextObject();
 	void

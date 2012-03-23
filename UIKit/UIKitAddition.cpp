@@ -19,7 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIKitAddition.h"
+#include <UIKit/UIKitAddition.h>
 NSString *const UITextAttributeFont = _s("Font");
 NSString *const UITextAttributeTextColor = _s("Color");
 NSString *const UITextAttributeTextShadowColor = _s("SColor");

@@ -84,7 +84,11 @@ void
 	UITableViewCell::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
 {
 	UITouch* touch = (UITouch*) touches->anyObject();
-	this->moveByPoint(touch->deltaMove);
+	/*CGPoint nodePosition = self->node->getPosition();
+	NSUInteger row  =self->indexPath->row();
+	NSUInteger section = self->indexPath->section();
+*/
+	self->moveByPoint(touch->deltaMove);
 }
 void 
 	UITableViewCell::setaccessoryType(UITableViewCellAccessory var)

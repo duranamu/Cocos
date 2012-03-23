@@ -112,6 +112,9 @@ typedef void (*NSCodeBlock)(vid, vid , vid);
 #define pfor(__type_of_object__ ,__inst__ ,__firstObject__ )  \
 	do{ va_list __var_args_argp__; __type_of_object__ __inst__;va_start(__var_args_argp__ , __firstObject__); \
 	while(1){ __inst__ = va_arg( __var_args_argp__ , __type_of_object__ );if( __inst__ != NULL){     
-	
-
 #define pend  }else{break;}}va_end (__var_args_argp__);}while(0);
+
+#define NS_HAS_REF(_ref_class_,_ref_object_) \
+public: _ref_class_ _ref_object_; \
+void retain(){ref->retain();self->m_uReference++;} \
+vid  autorelease(){CCPoolManager::getInstance()->addObject(self);self->m_bManaged = self;ref->autorelease();return self;}

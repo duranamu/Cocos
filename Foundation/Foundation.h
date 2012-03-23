@@ -22,7 +22,6 @@ THE SOFTWARE.
 #ifndef foundation_h
 #define foundation_h
 #include <Foundation/Cocos2DX_framework.h>
-#include <Foundation/CCPoint3D.h>
 #include <Foundation/NSURLRequest.h>
 #include <Foundation/NSOperationQueue.h>
 #include <Foundation/NSURL.h>

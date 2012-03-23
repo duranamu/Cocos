@@ -19,18 +19,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#pragma once
-#include <Foundation/Foundation.h>
-class UIControl : public NSObject
-{
-
-};
-enum {
-    UIControlStateNormal               = 0,
-    UIControlStateHighlighted          = 1 << 0,
-    UIControlStateDisabled             = 1 << 1,
-    UIControlStateSelected             = 1 << 2,
-    UIControlStateApplication          = 0x00FF0000,
-    UIControlStateReserved             = 0xFF000000
-};
-typedef NSUInteger UIControlState;
+#include <UIKit/UIGestureRecognizer.h>
+NS_INTERFACE( UIEmitGestureRecognizer , UIGestureRecognizer )
+	UIEmitGestureRecognizer*
+		initWithTarget_action(NSActionTarget* ,SEL_PP);
+	virtual void
+		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
+protected:
+	NS_SYNTHESIZE(CGFloat ,rotation);
+	NS_SYNTHESIZE(CGFloat ,deltaRotation);
+	NS_SYNTHESIZE(CGFloat , velocity);
+	CIVector* gestureStartOrentaion;
+	long touchMovedEventCount ;
+NS_END

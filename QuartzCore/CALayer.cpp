@@ -19,18 +19,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#pragma once
-#include <Foundation/Foundation.h>
-class UIControl : public NSObject
+#include <QuartzCore/CALayer.h>
+CALayer::CALayer()
 {
-
-};
-enum {
-    UIControlStateNormal               = 0,
-    UIControlStateHighlighted          = 1 << 0,
-    UIControlStateDisabled             = 1 << 1,
-    UIControlStateSelected             = 1 << 2,
-    UIControlStateApplication          = 0x00FF0000,
-    UIControlStateReserved             = 0xFF000000
-};
-typedef NSUInteger UIControlState;
+	self->ref = new CCLayer();
+}
+void
+	CALayer::dealloc()
+{
+	self->ref->release();
+	self->ref = nil;
+}
+	

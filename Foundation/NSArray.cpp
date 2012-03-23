@@ -19,8 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "NSArray.h"
-#include "Foundation.h"
+#include <Foundation/NSArray.h>
 NSArray*
 	NSArray::initWithObjects(NSObject* msg , ...)
 {
@@ -126,16 +125,6 @@ void
 	{
 		delete self;
 	}
-}
-vid
-	NSArray::autorelease()
-{
-	CCPoolManager::getInstance()->addObject(self);
-	m_bManaged = true;
-
-	ref->autorelease();
-
-	return self;
 }
 vid
 	NSArray::copyWithZone(NSZone* aZone)

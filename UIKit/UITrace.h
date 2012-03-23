@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #ifndef UISENSE_H
 #define UISENSE_H
-#include "../Cocos/Cocos.h"
+#include "../Foundation/Foundation.h"
 class UITrace : public NSObject
 {
 	

@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Cocos/Cocos.h>
+#include <Foundation/Foundation.h>
 #include <QuartzCore/TypeDefinition.h>
 NS_INTERFACE(CIVector , NSObject )
 	NS_SYNTHESIZE
@@ -34,8 +34,12 @@ public:
 		vectorWithCGPoint(CGPoint );
 	static CIVector*
 		vectorFrom_to(CGPoint ,CGPoint);
+	static CIVector*
+		vectorWithFloats(CGFloat,CGFloat,CGFloat);
 	CIVector*
 		initFrom_to(CGPoint ,CGPoint);
+	CIVector*
+		initWithFloats(CGFloat ,CGFloat,CGFloat);
 	CIVector*
 		initWithCGPoint(CGPoint);
 	inline CGFloat

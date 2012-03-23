@@ -75,6 +75,6 @@ NS_INTERFACE( NSSet ,NSObject ,NSCopying ,NSFastEnumeration)
 		isEqualToSet(NSSet*);
 
 	protected:
-		CCSet* ref;
+		NS_HAS_REF(CCSet* ,ref);
 		CCSetIterator iterator;
 NS_END

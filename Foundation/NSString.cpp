@@ -48,26 +48,12 @@ NSString*
 	}
 	return self;
 }
-void
-	NSString::retain()
-{ 
-	ref->retain();
-	self->m_uReference++;
-}
-vid
-	NSString::autorelease()
-{
-	CCPoolManager::getInstance()->addObject(self);
-	self->m_bManaged = self;
 
-	ref->autorelease();
-
-	return this;
-}
 void
 	NSString::dealloc()
 {
-	ref->release();
+	self->ref->release();
+	self->ref = nil;
 }
 //todo enconding
 NSString*

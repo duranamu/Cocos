@@ -20,16 +20,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Cocos/Cocos.h>
+#include <Foundation/Foundation.h>
 #include <UIKit/UIView.h>
 #include <UIKit/UIResponder.h>
 #include <NIKit/NIKit.h>
 NS_INTERFACE( UIViewController ,  UIView )
 	UIViewController()
 	{
-		self->view = new UIView();
-		followView = new UIView();
-		movableView = new UIView();
+		self->view		   = UIView::alloc()->init();
+		self->followView   = UIView::alloc()->init();
+		self->movableView  = UIView::alloc()->init();
+		self->clickView    = UIView::alloc()->init();
 	}
 virtual void 
 	viewDidLoad(void){}
@@ -50,9 +51,9 @@ virtual void
 virtual void 
 	touchesEnded_withEvent(CCSet* touches ,UIEvent* events) ;
 virtual void 
-	controller_torsoData(void* ,CCPoint3D*){};
+	controller_torsoData(void* ,vid){};
 virtual void 
-	controller_righthandData(void* ,CCPoint3D*){};
+	controller_righthandData(void* ,vid){};
 virtual void 
 	predo_controller_torsoData(void* ,void*);
 void
@@ -67,7 +68,6 @@ public:
 	UIView* watchVariableView;
 	UIView* righthand_clicked_marker;
 protected:
-	
 	bool isRighthandTracked;
 	UITouchPhase menuTouchPhase;
 

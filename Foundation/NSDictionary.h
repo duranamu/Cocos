@@ -25,10 +25,11 @@ THE SOFTWARE.
 #include <Foundation/NSCopying.h>
 #include <Foundation/NSZone.h>
 #include <Foundation/NSFastEnumeration.h>
+typedef  CCDictionary<std::string,NSObject*> CCStringDictionary;
 NS_INTERFACE
 	( NSDictionary , NSObject , NSCopying, NSFastEnumeration)
 public:
-	CCDictionary<std::string,NSObject*>* ref;
+	NS_HAS_REF( CCStringDictionary * ,ref);
 	static NSDictionary*
 		dictionary();
 	static NSDictionary*
@@ -63,10 +64,6 @@ public:
 	{
 		return ref->objectForKey(str->description());
 	}
-	vid
-		autorelease();
-	void
-		retain();
 
 	vid
 		copyWithZone(NSZone*);

@@ -19,11 +19,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UIKITADDTION_H
-#define UIKITADDDTION_H
-#include "../Cocos/Cocos.h"
+#pragma once
+#include <Foundation/Foundation.h>
 extern NSString *const UITextAttributeFont;
 extern NSString *const UITextAttributeTextColor;
 extern NSString *const UITextAttributeTextShadowColor;
 extern NSString *const UITextAttributeTextShadowOffset;
-#endif

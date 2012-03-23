@@ -22,10 +22,45 @@ THE SOFTWARE.
 #pragma once
 #include <Foundation/Foundation.h>
 #include <QuartzCore/TypeDefinition.h>
-#include <QuartzCore/CoreImage.h>
-#define PI 3.14159265
-CGFloat CGDistanceMake(CGPoint ,CGPoint);
-CGFloat
-	CGDotProduct2D(CIVector* va ,CIVector* vb);
-CGFloat 
-	CGAngleMake(CIVector* va , CIVector* vb);
+typedef enum CAEmitterCellStyle
+{
+	CAEmitterCellStyleExplosion , //CCParticleExplosion
+	CAEmitterCellStyleFire  ,     //CCParticleFire
+	CAEmitterCellStyleFireworks , //CCParticleFireworks
+	CAEmitterCellStyleFlower ,    //CCParticleFlower
+	CAEmitterCellStyleGalaxy ,    //CCParticleGalaxy
+	CAEmitterCellStyleMeteor ,    //CCParticleMeteor
+	CAEmitterCellStyleRain   ,    //CCParticleRain
+	CAEmitterCellStyleSmoke  ,    //CCParticleSmoke
+	CAEmitterCellStyleSnow   ,    //CCParticleSnow
+	CAEmitterCellStyleSpiral ,    //CCParticleSpiral
+	CAEmitterCellStyleSun    ,     //CCParticleSun
+	CAEmitterCellStyleDefault = CAEmitterCellStyleGalaxy
+};
+NS_INTERFACE(CAEmitterCell ,NSObject)
+	NS_HAS_REF(CCParticleSystem*,ref);
+public:
+	CAEmitterCell();
+	 CAEmitterCell*
+		 initWithStyle(CAEmitterCellStyle);
+	static  CAEmitterCell*
+		cellWithStyle(CAEmitterCellStyle);
+	protected:
+		CGImage* content;
+		CGFloat birthRate;
+		CGFloat scale;
+		CAEmitterCellStyle emitterStyle;
+	public:
+	void
+		setscale(CGFloat );
+	CGFloat 
+		getscale(){ self->scale = ref->getScale(); return self->scale;}
+	CGFloat
+		getbirthRate(){self->birthRate = ref->getSpeed(); return self->birthRate;}
+	void
+		setbirthRate(CGFloat);
+	CGImage* 
+		getcontent(){return self->content;}
+	void
+		setcontent(CGImage* );
+NS_END

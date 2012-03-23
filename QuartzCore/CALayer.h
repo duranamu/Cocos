@@ -21,16 +21,8 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <Foundation/Foundation.h>
-class UIControl : public NSObject
-{
-
-};
-enum {
-    UIControlStateNormal               = 0,
-    UIControlStateHighlighted          = 1 << 0,
-    UIControlStateDisabled             = 1 << 1,
-    UIControlStateSelected             = 1 << 2,
-    UIControlStateApplication          = 0x00FF0000,
-    UIControlStateReserved             = 0xFF000000
-};
-typedef NSUInteger UIControlState;
+NS_INTERFACE(CALayer , NSObject)
+	NS_HAS_REF(CCLayer* ,ref);
+	CALayer();
+	virtual void display(){};
+NS_END

@@ -20,17 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Foundation/Foundation.h>
-class UIControl : public NSObject
-{
-
-};
-enum {
-    UIControlStateNormal               = 0,
-    UIControlStateHighlighted          = 1 << 0,
-    UIControlStateDisabled             = 1 << 1,
-    UIControlStateSelected             = 1 << 2,
-    UIControlStateApplication          = 0x00FF0000,
-    UIControlStateReserved             = 0xFF000000
-};
-typedef NSUInteger UIControlState;
+#include <QuartzCore/CALayer.h>
+NS_INTERFACE(CAEmitterLayer ,CALayer)
+	NS_SYNTHESIZE_COPY(NSArray*,emitterCells);
+	void display();
+	CAEmitterLayer();
+NS_END

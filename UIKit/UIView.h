@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Cocos/Cocos.h>
+#include <Foundation/Foundation.h>
 #include <UIKit/UIResponder.h>
 #include <UIKit/UITouch.h>
 #include <Foundation/NSIndexPath.h>
@@ -56,7 +56,7 @@ virtual void
 virtual void 
 	reloadData(NSArray* toShow) { };
  void 
-	followPlayer(CCPoint3D*);
+	followPlayer(CIVector*);
  void 
 	touchesBegan_withEvent(CCSet*  ,UIEvent* );
  void

@@ -29,6 +29,7 @@ NS_INTERFACE
 		ref = new CCTexture2D();
 		ref->initWithData(data ,CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,
 		size.width,size.height,size);
+		self->imagePath = NSString::alloc()->init();
 	};
 	static UIImage*
 		imageWithData_format_pixel_size(const void* ,CCTexture2DPixelFormat,CCSize);
@@ -37,10 +38,13 @@ NS_INTERFACE
 		UIImage(const char *);
 	CCTexture2D*
 		getCCTexture2D(){return ref;}
+	CGImage*
+		CGImage(){ return CCTextureCache::sharedTextureCache()->addImage(imagePath->description().c_str()); }
 	UIImage*
 		initWithData(NSData* );
 	static UIImage*
 		imageWithData(NSData* );
 	protected:
 		CCTexture2D* ref;
+		NSString* imagePath;
 NS_END

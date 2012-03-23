@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Cocos/Cocos.h>
+#include <Foundation/Foundation.h>
 NS_CLASS  UIView;
 NS_CLASS  UITableViewCell;
 NS_CLASS  NSIndexPath;

@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <UIKit/UIView.h>
-#include <Cocos/Cocos.h>
+#include <Foundation/Foundation.h>
 NS_CLASS UITableViewDataSource;
 NS_CLASS UITableViewCell;
 NS_INTERFACE( UITableView , UIView )

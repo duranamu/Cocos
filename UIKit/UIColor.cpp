@@ -21,6 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UIColor.h>
 const UIColor*	UIRedColor = UIColor::alloc()->initWithRed_blue_green_alpha(1.0f ,0.0f , 0.0f ,1.0f);
+const UIColor*	UIBlueColor = UIColor::alloc()->initWithRed_blue_green_alpha(0.0f ,0.0f , 1.0f ,1.0f);
 const UIColor*  UICyanColor = UIColor::alloc()->initWithRed_blue_green_alpha(0.0f ,1.0f , 1.0f ,1.0f);
 const UIColor*  UIPurpleColor = UIColor::alloc()->initWithRed_blue_green_alpha(0.5f ,0.0f , 0.5f ,1.0f);
 const UIColor*  UIBlackColor = UIColor::alloc()->initWithRed_blue_green_alpha(0.0f ,0.0f , 0.0f ,1.0f);
@@ -30,13 +31,13 @@ const UIColor*  UIMagentaColor = UIColor::alloc()->initWithRed_blue_green_alpha(
 const UIColor*  UIOrangeColor = UIColor::alloc()->initWithRed_blue_green_alpha(1.0f ,0.5f , 0.0f ,1.0f);
 const UIColor*  UIWhiteColor = UIColor::alloc()->initWithRed_blue_green_alpha(1.0f ,1.0f , 1.0f ,1.0f);
 const UIColor*  UIYellowColor = UIColor::alloc()->initWithRed_blue_green_alpha(1.0f ,1.0f , 0.0f ,1.0f);
+const UIColor*  UIGoldenColor = UIColor::alloc()->initWithRed_blue_green_alpha(0.851f ,0.851f , 0.074f ,1.0f);
 UIColor*
 	UIColor::initWithRed_blue_green_alpha(CGFloat redf ,CGFloat bluef, CGFloat greenf, CGFloat alphaf)
 {
 	self->color3b = ccc3(redf*255 ,bluef*255 ,greenf*255 );
 	self->alpha = alphaf;
 	self->color4f = ccc4FFromccc4B( ccc4(redf*255 ,bluef*255 ,greenf*255,alphaf*255) );
-
 	return self;
 }
 UIColor*
@@ -48,6 +49,16 @@ const UIColor*
 	UIColor::redColor()
 {
 	return UIRedColor;
+}
+const UIColor*
+	UIColor::goldenColor()
+{
+	return UIGoldenColor;
+}
+const UIColor*
+	UIColor::blueColor()
+{
+	return UIBlueColor;
 }
 const UIColor*
 	UIColor::yellowColor()

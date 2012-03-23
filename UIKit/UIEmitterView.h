@@ -21,40 +21,46 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <QuartzCore/QuartzCore.h>
-NS_INTERFACE( UIColor , NSObject)
-	UIColor*
-		initWithRed_blue_green_alpha(CGFloat ,CGFloat, CGFloat,CGFloat);
-	static UIColor*
-		colorWithRed_blue_green_alpha(CGFloat ,CGFloat, CGFloat,CGFloat);
-	static const UIColor*
-		goldenColor();
-	static const UIColor*
-		redColor();
-	static const UIColor*
-		blueColor();
-	static const UIColor*
-		yellowColor();
-	static const UIColor*
-		cyanColor();
-	static const UIColor*
-		purpleColor();
-	static const UIColor*
-		blackColor();
-	static const UIColor*
-		brownColor();
-	static const UIColor*
-		greenColor();
-	static const UIColor*
-		magentaColor();
-	static const UIColor*
-		orangeColor();
-	static const UIColor*
-		whiteColor();
+#include <UIKit/UIView.h>
+typedef enum UIEmitterViewStyle
+{
+	UIEmitterViewStyleExplosion , //CCParticleExplosion
+	UIEmitterViewStyleFire  ,     //CCParticleFire
+	UIEmitterViewStyleFireworks , //CCParticleFireworks
+	UIEmitterViewStyleFlower ,    //CCParticleFlower
+	UIEmitterViewStyleGalaxy ,    //CCParticleGalaxy
+	UIEmitterViewStyleMeteor ,    //CCParticleMeteor
+	UIEmitterViewStyleRain   ,    //CCParticleRain
+	UIEmitterViewStyleSmoke  ,    //CCParticleSmoke
+	UIEmitterViewStyleSnow   ,    //CCParticleSnow
+	UIEmitterViewStyleSpiral ,    //CCParticleSpiral
+	UIEmitterViewStyleSun    ,     //CCParticleSun
+	UIEmitterViewStyleDefault = UIEmitterViewStyleGalaxy
+};
+NS_INTERFACE(UIEmitterView,UIView)
+	NS_HAS_REF(CCParticleSystem*,ref);
+	public:
+	UIEmitterView();
+	 UIEmitterView*
+		 initWithStyle(UIEmitterViewStyle);
+	static  UIEmitterView*
+		viewWithStyle(UIEmitterViewStyle);
 	protected:
-	NS_SYNTHESIZE
-		(ccColor4F , color4f );
-	NS_SYNTHESIZE
-		(ccColor3B , color3b );
-	NS_SYNTHESIZE
-		(CGFloat , alpha );
+		CGImage* content;
+		CGFloat birthRate;
+		CGFloat scale;
+		UIEmitterViewStyle emitterStyle;
+	public:
+	void
+		setscale(CGFloat );
+	CGFloat 
+		getscale(){ self->scale = ref->getScale(); return self->scale;}
+	CGFloat
+		getbirthRate(){self->birthRate = ref->getSpeed(); return self->birthRate;}
+	void
+		setbirthRate(CGFloat);
+	CGImage* 
+		getcontent(){return self->content;}
+	void
+		setcontent(CGImage* );
 NS_END

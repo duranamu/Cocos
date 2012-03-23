@@ -50,3 +50,4 @@ THE SOFTWARE.
 #include <UIKit/UINavigationControllerDelegate.h>
 #include <UIKit/UINavigationBar.h>
 #include <UIKit/UIColor.h>
+#include <UIKit/UIEmitterView.h>

@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once;
-#include <Cocos/Cocos.h>
+#include <Foundation/Foundation.h>
 #include <UIKit/UIView.h>
 NS_CLASS UIImage ;
 NS_INTERFACE( UIImageView , UIView)

@@ -20,7 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Cocos/Cocos.h>
+#include <Foundation/Foundation.h>
 typedef CCPoint CGPoint;
 typedef CCSize CGSize ;
 typedef CCRect CGRect;
+typedef ccColor4F CGColor;
+typedef CCTexture2D CGImage;

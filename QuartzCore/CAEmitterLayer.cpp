@@ -19,18 +19,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#pragma once
-#include <Foundation/Foundation.h>
-class UIControl : public NSObject
+#include <QuartzCore/CAEmitterLayer.h>
+#include <QuartzCore/CAEmitterCell.h>
+void
+	CAEmitterLayer::display()
 {
-
-};
-enum {
-    UIControlStateNormal               = 0,
-    UIControlStateHighlighted          = 1 << 0,
-    UIControlStateDisabled             = 1 << 1,
-    UIControlStateSelected             = 1 << 2,
-    UIControlStateApplication          = 0x00FF0000,
-    UIControlStateReserved             = 0xFF000000
-};
-typedef NSUInteger UIControlState;
+	nfor(CAEmitterCell*,cell,emitterCells)
+		self->ref->addChild(cell->ref);
+	nend
+}
+void
+	CAEmitterLayer::dealloc()
+{
+	self->emitterCells->release();
+	self->emitterCells = nil;
+}
+CAEmitterLayer::CAEmitterLayer()
+{
+	self->emitterCells = NSArray::alloc()->init();
+}

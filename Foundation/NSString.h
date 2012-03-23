@@ -24,9 +24,8 @@ THE SOFTWARE.
 #include <Foundation/NSObjCRuntime.h>
 class NSData;
 typedef NSUInteger NSStringEncoding;
-NS_INTERFACE
-	(NSString , NSObject)
-	CCString* ref;
+NS_INTERFACE(NSString , NSObject)
+	NS_HAS_REF(CCString* ref);
 public:
 	NSString(const char*);
 	NSString(){};
@@ -41,10 +40,6 @@ public:
 		initWithCString_encoding(const char*,NSStringEncoding);
 	static NSString*
 		stringWithCString_encoding(const char*,NSStringEncoding);
-	void
-		retain();
-	vid 
-		autorelease();
 	static NSString*
 		stringWithString(NSString*);
 	 NSString*
