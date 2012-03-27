@@ -35,18 +35,18 @@ UILongPressGestureRecognizer*
 	self->m_pSelector = nil;
 }
 void
-	UILongPressGestureRecognizer::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
+	UILongPressGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 	CGFloat newStartTime = ((UITouch*) touches->anyObject())->gettimestamp();
 	self->tapStartTime = newStartTime;
 }
 void
-	UILongPressGestureRecognizer::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
+	UILongPressGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
 
 }
 void
-	UILongPressGestureRecognizer::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+	UILongPressGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
 	CGFloat endTime = ((UITouch*) touches->anyObject())->gettimestamp();
 	CGFloat timediff = endTime -  self->tapStartTime ;

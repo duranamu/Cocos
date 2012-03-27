@@ -29,7 +29,7 @@ UISwipeGestureRecognizer*
 	return self;
 }
 void
-	UISwipeGestureRecognizer::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
+	UISwipeGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizerStatePossible;
 	if(touches->count() >= self->numberOfTouchesRequired)
@@ -39,11 +39,11 @@ void
 	}
 }
 void
-	UISwipeGestureRecognizer::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
+	UISwipeGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
 }
 void
-	UISwipeGestureRecognizer::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+	UISwipeGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizerStateRecognized;
 	UITouch* touch = (UITouch*) touches->anyObject();

@@ -39,11 +39,11 @@ NS_INTERFACE( UITableViewCell , UIView )
 	 UITableViewCell* 
 		initWithStyle_reuseIdentifier_target_selector(UITableViewStyle ,NSString*,NSActionTarget*,SEL_PP);
 	void
-		touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
+		touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
 	void
-		touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
+		touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
 	void
-		touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
+		touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
 	protected:
 	UITableViewStyle style ;
 	NS_PROPERTY 

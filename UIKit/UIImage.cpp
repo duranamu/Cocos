@@ -49,7 +49,7 @@ UIImage::UIImage(const char* file)
 	ref = new CCTexture2D();
 	CCImage* ccimage = new CCImage();
 	ccimage->initWithImageFile(file);
-	self->imagePath = _s(file);
+	self->imagePath = NSSTR(file);
 	ref->initWithImage(ccimage);
 }
 void

@@ -29,7 +29,7 @@ typedef enum {
     UITouchPhaseCancelled,
 	UITouchPhasePending,
 } UITouchPhase;
-NS_INTERFACE( UITouch , CCObject )
+NS_INTERFACE( UITouch , NSObject )
 	static UITouch* 
 		touchWithPhase(UITouchPhase);
 	UITouch*
@@ -44,7 +44,8 @@ protected:
 		(NSTimeInterval , timestamp);
 	NS_SYNTHESIZE
 		(UITouchPhase , phase);
-	CGPoint deltaMove;
+	NS_SYNTHESIZE
+		(CGPoint ,deltaMove);
 	NSArray* gestureRecognizers;
 
 NS_END

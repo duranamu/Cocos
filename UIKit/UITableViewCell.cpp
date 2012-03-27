@@ -55,7 +55,7 @@ THE SOFTWARE.
 		self->indentationWidth = 10;
 	}
 void 
-	UITableViewCell::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
+	UITableViewCell::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 	UITouch* touch = (UITouch*)touches->anyObject();
 
@@ -73,7 +73,7 @@ void
 	}
 }
 void 
-	UITableViewCell::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+	UITableViewCell::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
 	if(self->canTriggerforTouch((UITouch*)touches->anyObject()))
 	{
@@ -81,14 +81,10 @@ void
 	}
 }
 void 
-	UITableViewCell::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
+	UITableViewCell::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
 	UITouch* touch = (UITouch*) touches->anyObject();
-	/*CGPoint nodePosition = self->node->getPosition();
-	NSUInteger row  =self->indexPath->row();
-	NSUInteger section = self->indexPath->section();
-*/
-	self->moveByPoint(touch->deltaMove);
+	self->moveByPoint(touch->getdeltaMove());
 }
 void 
 	UITableViewCell::setaccessoryType(UITableViewCellAccessory var)

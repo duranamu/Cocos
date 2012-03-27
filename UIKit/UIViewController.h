@@ -45,11 +45,11 @@ void
 CCNode*  
 	renderTargetforHost();
 virtual void 
-	touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
+	touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
 virtual void 
-	touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
+	touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
 virtual void 
-	touchesEnded_withEvent(CCSet* touches ,UIEvent* events) ;
+	touchesEnded_withEvent(NSSet* touches ,UIEvent* events) ;
 virtual void 
 	controller_torsoData(void* ,vid){};
 virtual void 
@@ -72,9 +72,9 @@ protected:
 	UITouchPhase menuTouchPhase;
 
 	NS_SYNTHESIZE
-		(CGFloat ,m_torsox);
+		(CGFloat ,torsox);
 	NS_SYNTHESIZE
-		(CGFloat ,m_torsoy);
+		(CGFloat ,torsoy);
 	float touchStartx;
 	float touchStarty;
 	CGFloat touchStartTime;

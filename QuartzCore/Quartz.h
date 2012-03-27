@@ -26,6 +26,8 @@ THE SOFTWARE.
 #define PI 3.14159265
 CGFloat CGDistanceMake(CGPoint ,CGPoint);
 CGFloat
-	CGDotProduct2D(CIVector* va ,CIVector* vb);
+	CGDotProduct2D(CIVector*  ,CIVector* );
 CGFloat 
-	CGAngleMake(CIVector* va , CIVector* vb);
+	CGAngleMake(CIVector*  , CIVector* vb);
+CGFloat 
+	CGRadianMake(CIVector* , CIVector* );

@@ -34,12 +34,12 @@ UIRotationGestureRecognizer*
 	return self;
 }
 void
-	UIRotationGestureRecognizer::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
+	UIRotationGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateBegan;
 	bool fistTouch = true;
 	CGPoint touchLoaction;
-	forSet(UITouch* ,touch ,touches)
+	nfor(UITouch* ,touch ,touches)
 		if(fistTouch)
 		{
 			touchLoaction = touch->getlocation();
@@ -52,19 +52,19 @@ void
 		baseRotaion = CGAngleMake ( self->gestureStartOrentaion ,lastOrentaionOfHands );
 }
 void
-	UIRotationGestureRecognizer::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
+	UIRotationGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateChanged;
 	bool fistTouch = true;
 	CGPoint touchLoaction;
-	forSet(UITouch* ,touch ,touches)
+	nfor(UITouch* ,touch ,touches)
 		if(fistTouch)
 	 	{
 			touchLoaction = touch->getlocation();
 			fistTouch= false;
 		}else{
 			CIVector* newVector = CIVector::vectorFrom_to( touch->getlocation() , touchLoaction);
-			CGFloat newRotation = CGAngleMake ( self->gestureStartOrentaion ,newVector);
+			CGFloat newRotation = CGRadianMake ( self->gestureStartOrentaion ,newVector);
 			if(lastOrentaionOfHands == nil)
 			{
 				self->rotation = newRotation * 0.25f;
@@ -77,12 +77,12 @@ void
 	(m_pListener->*m_pSelector)(nil,self);
 }
 void
-	UIRotationGestureRecognizer::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+	UIRotationGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateEnded;
 	bool fistTouch = true;
 	CGPoint touchLoaction;
-	forSet(UITouch* ,touch ,touches)
+	nfor(UITouch* ,touch ,touches)
 		if(fistTouch)
 		{
 			touchLoaction = touch->getlocation();

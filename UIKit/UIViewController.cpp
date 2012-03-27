@@ -41,10 +41,9 @@ CCNode*
 	return view->anyView()->getnode();
 }
 void 
-	UIViewController::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
+	UIViewController::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->view->touchesBegan_withEvent(touches,events);
-
 	UITouch* touch = (UITouch*)touches->anyObject();
 	receiver = self->view->hitTest_withEvent(touch->getlocation(),events);
 	if(receiver)
@@ -59,7 +58,7 @@ void
 	}
 }
 void 
-	UIViewController::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+	UIViewController::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
 	newTouchSession = true;
 	t_lasthandx = 0;
@@ -87,7 +86,7 @@ void
 	cdata->autorelease();
 }
 void 
-	UIViewController::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
+	UIViewController::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->view->touchesMoved_withEvent(touches,events);
 
@@ -106,7 +105,7 @@ void
 			{
 				newTouchSession = false;
 			}else{
-				touch->deltaMove = ccp (0 , moveSinceTouchY);
+				touch->setdeltaMove ( ccp (0 , moveSinceTouchY));
 			}
 		}else{
 			t_lasthandx = x;

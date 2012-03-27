@@ -28,11 +28,11 @@ NS_INTERFACE( UITapGestureRecognizer , UIGestureRecognizer )
 		initWithTarget_action(NSActionTarget* ,SEL_PP);
 	UITapGestureRecognizer();
 	virtual void 
-		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
+		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 
-		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
+		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 
-		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
+		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
 protected:
 	NS_SYNTHESIZE (NSUInteger ,numberOfTapsRequired );
 	NS_SYNTHESIZE (NSUInteger ,numberOfTapsAcquired );

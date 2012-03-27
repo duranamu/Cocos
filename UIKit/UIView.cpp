@@ -96,7 +96,7 @@ void
 	self->gestureRecognizers->addObject(gesture);
 }
 void
-	UIView::touchesBegan_withEvent(CCSet* touches ,UIEvent* events) 
+	UIView::touchesBegan_withEvent(NSSet* touches ,UIEvent* events) 
 {
 	/*if(self->gestureRecognizers)
 		nfor(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
@@ -104,7 +104,7 @@ void
 		nend*/
 }
 void
-	UIView::touchesMoved_withEvent(CCSet* touches ,UIEvent* events) 
+	UIView::touchesMoved_withEvent(NSSet* touches ,UIEvent* events) 
 {
 	/*if(self->gestureRecognizers)
 	nfor(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
@@ -112,7 +112,7 @@ void
 	nend	*/
 }
 void
-	UIView::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+	UIView::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
 	/*if(self->gestureRecognizers)
 	nfor(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)

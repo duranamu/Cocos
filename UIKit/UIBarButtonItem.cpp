@@ -34,7 +34,7 @@ UIBarButtonItem*
 	self->title = ctitle;
 
 	NSDictionary* dict = NSDictionary::dictionaryWithObjectAndKeys(
-		UIFont::fontWithName_size(_s("Arial"),1.0f),UITextAttributeFont,
+		UIFont::fontWithName_size(NSSTR("Arial"),1.0f),UITextAttributeFont,
 		UIColor::whiteColor(),UITextAttributeTextColor);
 	//nil to be fixed
 	//self->setTitleTextAttributes_forState(dict,nil);

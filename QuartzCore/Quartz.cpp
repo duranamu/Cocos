@@ -21,6 +21,8 @@ THE SOFTWARE.
 ****************************************************************************/
 #include "Quartz.h"
 #include <math.h>
+CGFloat PIOverOne = 1 / 3.1415926;
+CGFloat radiantoAngleFactor = PIOverOne * 180.0f;
 CGFloat 
 	CGDistanceMake(CGPoint pa ,CGPoint pb)
 {
@@ -33,8 +35,16 @@ CGFloat
 {
 	CGFloat dimension3 = va->getX()* vb->getY() - va->getY() * vb->getX();
 	CGFloat sign =  dimension3 > 0 ? -1 : 1; 
-	CGFloat angle = acos ((CGDotProduct2D (va , vb) / ( va->normOfVector2D() * vb->normOfVector2D() ) ) ) * sign;
-	return angle;
+	CGFloat radian = acos ((CGDotProduct2D (va , vb) / ( va->normOfVector2D() * vb->normOfVector2D() ) ) ) * sign ;
+	return radian * radiantoAngleFactor;
+}
+CGFloat 
+	CGRadianMake(CIVector* va , CIVector* vb)
+{
+	CGFloat dimension3 = va->getX()* vb->getY() - va->getY() * vb->getX();
+	CGFloat sign =  dimension3 > 0 ? -1 : 1; 
+	CGFloat radian = acos ((CGDotProduct2D (va , vb) / ( va->normOfVector2D() * vb->normOfVector2D() ) ) ) * sign;
+	return radian;
 }
 inline CGFloat
 	CGDotProduct2D(CIVector* va ,CIVector* vb)

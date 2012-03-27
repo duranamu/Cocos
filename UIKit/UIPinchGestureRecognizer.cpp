@@ -30,12 +30,12 @@ UIPinchGestureRecognizer*
 	return self;
 }
 void
-	UIPinchGestureRecognizer::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
+	UIPinchGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateBegan;
 	bool fistTouch = true;
 	CGPoint touchLoaction;
-	forSet(UITouch* ,touch ,touches)
+	nfor(UITouch* ,touch ,touches)
 		if(fistTouch)
 		{
 			touchLoaction = touch->getlocation();
@@ -46,12 +46,12 @@ void
 	forEnd
 }
 void
-	UIPinchGestureRecognizer::touchesMoved_withEvent(CCSet* touches ,UIEvent* events)
+	UIPinchGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateChanged;
 	bool fistTouch = true;
 	CGPoint touchLoaction;
-	forSet(UITouch* ,touch ,touches)
+	nfor(UITouch* ,touch ,touches)
 		if(fistTouch)
 	 	{
 			touchLoaction = touch->getlocation();
@@ -64,7 +64,7 @@ void
 		(m_pListener->*m_pSelector)(nil,self);
 }
 void
-	UIPinchGestureRecognizer::touchesEnded_withEvent(CCSet* touches ,UIEvent* events)
+	UIPinchGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->state = UIGestureRecognizeStateEnded;
 }

@@ -49,7 +49,7 @@ void
 	
 	fclose(fp);
 
-	NSData* data = NSData::dataWithContentsOfFile(_s(outfilename));
+	NSData* data = NSData::dataWithContentsOfFile(NSSTR(outfilename));
 	//todo NSErro class for nil
 	block(nil,data,nil);
 }

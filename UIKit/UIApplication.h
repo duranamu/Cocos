@@ -32,6 +32,12 @@ public:
 		predo_controller_righthandData(void* ,vid);
 	vid
 		predo_controller_lefthandData(void*, vid);
+	vid
+		sender_neckData(vid,vid);
+	vid
+		sender_rightElbowData(vid,vid);
+	vid
+		sender_rightFingertipData(vid,vid);
 	UITouchPhase 
 		touchPhaseforTime_handz(CGFloat,CGFloat);
 	void 
@@ -48,7 +54,7 @@ public:
 
 	UIApplication();
 	void
-		senEvent(UIEvent*);
+		sentEvent(UIEvent*);
 	void
 		applicationDidUpdate(CGFloat);
 	void
@@ -59,30 +65,49 @@ protected:
 	NITracker* torsoTracker;
 	NITracker* righthandTracker;
 	NITracker* lefthandTracker;
+	NITracker* neckTracker;
 	NS_SYNTHESIZE
-		(CGFloat ,g_lasthandz);
+		(CGFloat,rightFingertipz);
 	NS_SYNTHESIZE
-		(CGFloat ,g_lasthandzVelocity);
+		(CGFloat,rightFingertipx);
 	NS_SYNTHESIZE
-		(CGFloat ,m_handz);
+		(CGFloat,rightFingertipy);
 	NS_SYNTHESIZE
-		(CGFloat ,m_handx);
+		(CGFloat,rightElbowx);
 	NS_SYNTHESIZE
-		(CGFloat ,m_handy);
+		(CGFloat,rightElbowy);
 	NS_SYNTHESIZE
-		(CGFloat ,gl_lasthandz);
+		(CGFloat,rightElbowz);
 	NS_SYNTHESIZE
-		(CGFloat ,gl_lasthandzVelocity);
+		(CGFloat , neckx);
 	NS_SYNTHESIZE
-		(CGFloat ,ml_handz);
+		(CGFloat , necky);
 	NS_SYNTHESIZE
-		(CGFloat ,ml_handx);
+		(CGFloat , neckz);
 	NS_SYNTHESIZE
-		(CGFloat ,ml_handy);
+		(CGFloat ,rightHandShadowz);
 	NS_SYNTHESIZE
-		(CGFloat ,m_torsox);
+		(CGFloat ,rightHandShadowzVelocity);
 	NS_SYNTHESIZE
-		(CGFloat ,m_torsoy);
+		(CGFloat ,rightHandz);
+	NS_SYNTHESIZE
+		(CGFloat ,rightHandx);
+	NS_SYNTHESIZE
+		(CGFloat ,rightHandy);
+	NS_SYNTHESIZE
+		(CGFloat ,leftHandShadowz);
+	NS_SYNTHESIZE
+		(CGFloat ,leftHandShadowzVelocity);
+	NS_SYNTHESIZE
+		(CGFloat ,leftHandz);
+	NS_SYNTHESIZE
+		(CGFloat ,leftHandx);
+	NS_SYNTHESIZE
+		(CGFloat ,leftHandy);
+	NS_SYNTHESIZE
+		(CGFloat ,torsox);
+	NS_SYNTHESIZE
+		(CGFloat ,torsoy);
 	NS_SYNTHESIZE
 		(BOOL ,isRighthandTracked);
 		

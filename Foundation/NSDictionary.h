@@ -38,7 +38,6 @@ public:
 		initWithObjectsAndKeys(NSObject*,NSString*,...);
 
 	NSDictionary();
-
 	inline bool
 		setObject_forKey(NSObject* obj  ,NSString* str)
 	{	
@@ -64,7 +63,6 @@ public:
 	{
 		return ref->objectForKey(str->description());
 	}
-
 	vid
 		copyWithZone(NSZone*);
 	vid

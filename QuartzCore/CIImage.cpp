@@ -28,10 +28,10 @@ CIImage*
 	CIImage::initWithData_option(NSData* data,NSDictionary* dict)
 {
 	CCSize size ;
-	NSNumber* number = (NSNumber*)dict->objectForKey(_s("width"));
+	NSNumber* number = (NSNumber*)dict->objectForKey(NSSTR("width"));
 	size.width = number->unsignedIntegerValue();
 
-	NSNumber* number2 = (NSNumber*)dict->objectForKey(_s("height"));
+	NSNumber* number2 = (NSNumber*)dict->objectForKey(NSSTR("height"));
 	size.height = number2->unsignedIntegerValue();
 
 	self->_sprite = CCSprite::spriteWithFile(data->getdataPath()->description().c_str());

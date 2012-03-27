@@ -32,11 +32,11 @@ NS_INTERFACE( UISwipeGestureRecognizer , UIGestureRecognizer)
 	UISwipeGestureRecognizer*
 		initWithTarget_action(NSActionTarget* ,SEL_PP);
 	virtual void
-		 touchesBegan_withEvent(CCSet* touches ,UIEvent* events);
+		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 
-		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events);
+		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 
-		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events);
+		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
 	 UISwipeGestureRecognizerDirection
 		 directionFrom_to(CGPoint ,CGPoint);
 	 protected:

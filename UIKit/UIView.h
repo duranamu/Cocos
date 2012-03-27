@@ -58,11 +58,11 @@ virtual void
  void 
 	followPlayer(CIVector*);
  void 
-	touchesBegan_withEvent(CCSet*  ,UIEvent* );
+	touchesBegan_withEvent(NSSet*  ,UIEvent* );
  void
-	 touchesMoved_withEvent(CCSet*  ,UIEvent* );
+	 touchesMoved_withEvent(NSSet*  ,UIEvent* );
  void
-	 touchesEnded_withEvent(CCSet*  ,UIEvent* ) ;
+	 touchesEnded_withEvent(NSSet*  ,UIEvent* ) ;
  bool 
 	 canTriggerforTouch(UITouch* );
  bool

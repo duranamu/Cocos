@@ -37,15 +37,15 @@ typedef enum UIGestureRecognizeState
 };
 NS_INTERFACE( UIGestureRecognizer , UIResponder)
     virtual void
-		touchesBegan_withEvent(CCSet* touches ,UIEvent* events){};
+		touchesBegan_withEvent(NSSet* touches ,UIEvent* events){};
 	 virtual void 
-		 touchesMoved_withEvent(CCSet* touches ,UIEvent* events){};
+		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events){};
 	 virtual void 
-		 touchesEnded_withEvent(CCSet* touches ,UIEvent* events){};
+		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events){};
 protected:
 	NS_SYNTHESIZE(UIGestureRecognizeState,state);
 	NSActionTarget* m_pListener;
 	SEL_PP  m_pSelector;
-	NS_SYNTHESIZE( CCSet* ,touches );
+	NS_SYNTHESIZE( NSSet* ,touches );
 	NS_SYNTHESIZE(UIEvent* ,events );
 NS_END

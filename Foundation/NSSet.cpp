@@ -216,3 +216,13 @@ BOOL
 {
 	return self->isSubsetOfSet(set) && set->isSubsetOfSet(self);
 }
+NSObject*
+	NSSet::anyObject()
+{
+	return (NSObject*)ref->anyObject();
+}
+void
+	NSSet::addObject(NSObject* anObject)
+{
+	ref->addObject(anObject);
+}

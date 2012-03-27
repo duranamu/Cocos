@@ -46,22 +46,19 @@ void
 
 		for(int row = 0; row < numberOfRow ; row++)
 		{
-			NSIndexPath* path =  NSIndexPath::alloc()->initWithSection_row(section,row);
+		NSIndexPath* path =  NSIndexPath::alloc()->initWithSection_row(section,row);
 		UITableViewCell* member = datasource->tableView_cellForRowAtIndexPath(self,path);
 		member->retain();
 		subviews->addObject(member);
 		CCSprite* cellsprite = (CCSprite*)member->getnode();
 		path->release();
-
 	//	cellsprite->setColor(UIColor::redColor()->getcolor3b());
-
 		if(member->imageView)
 		{
 			member->imageView->getnode()->setPosition(ccp(-30,0));
 			cellsprite->addChild(member->imageView->getnode());
-		}
-		
-		cellsprite ->setPosition(ccp( 260+ member->getindentationLevel()*member->getindentationWidth() ,-60 + offsetsum));
+		}	
+		cellsprite ->setPosition(ccp( 460+ member->getindentationLevel()*member->getindentationWidth() ,-60 + offsetsum));
 		self->node->addChild(cellsprite);
 		offsetsum += 68;
 		toShow->addObject(member);
@@ -85,7 +82,7 @@ bool
 		return false;
 }
 void 
-	UITableView::touchesBegan_withEvent(CCSet* touches ,UIEvent* events)
+	UITableView::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 	nfor(UITableViewCell*,uiview,self->subviews)
 		uiview->touchesBegan_withEvent(touches,events);
@@ -93,14 +90,14 @@ void
 
 }
 void 
-	UITableView::touchesEnded_withEvent(CCSet* touches ,UIEvent* events) 
+	UITableView::touchesEnded_withEvent(NSSet* touches ,UIEvent* events) 
 {
 	nfor(UITableViewCell*,uiview,self->subviews)
 		uiview->touchesEnded_withEvent(touches,events);
 	nend
 };
 void 
-	UITableView::touchesMoved_withEvent(CCSet* touches ,UIEvent* events) 
+	UITableView::touchesMoved_withEvent(NSSet* touches ,UIEvent* events) 
 {
 	nfor(UITableViewCell*,uiview,self->subviews)
 		uiview->touchesMoved_withEvent(touches,events);

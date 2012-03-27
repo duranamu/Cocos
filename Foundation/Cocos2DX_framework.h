@@ -26,8 +26,6 @@ using namespace cocos2d;
 #include <libxml\parser.h>
 #include <Foundation/NSObjCRuntime.h>
 #include <Foundation/FoundationDataType.h>
-//#define forCCArray( __array__)  do { CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
-//#define eachCCObject(__VAR__ ,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
 #define fetchCCObject(__VAR__ ,__INST__)  CCWrapper* __wrapper__ = (CCWrapper*)__object__; \
 	__VAR__ __INST__ =  __wrapper__->data.__VAR__##Val
 #define NS_SYNTHESIZE(varType, varName)  CC_SYNTHESIZE(varType, varName, varName)  
@@ -47,39 +45,34 @@ protected: varType varName;\
 public: inline varType get##varName(void) const { return varName; }\
 public: inline void set##varName(varType var){ varType cp = (varType)var->copy(); varName->release();varName = cp; }
 
-
 #define nend  }}while(0);
 #define CCS(__STR__) new CCString(__STR__)
 #define nil NULL
 #define NS_SELECTOR_PP(__FUNC__) (SEL_PP)(&__FUNC__)
 #define _cast(__VAR__,__INST__) __VAR__ c##__INST__ = (__VAR__) __INST__;
 #define vid void*
-//#define forArray( __nsArray__ ) do { CCArray* __array__ = __nsArray__->ref ; \
-//	CCObject* __object__; CCARRAY_FOREACH(__array__ , __object__){
 #define eachObject(__VAR__,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
 #define forEnd   }}while(0);
 
-#define nfor(__var__,__inst__,__arr__)  do {NSFastEnumeration* __enu__ = (NSFastEnumeration*) __arr__; __enu__->gotoBeginObject();__var__ __inst__;while( (__inst__ = (__var__) __enu__->nextObject())!= NULL){
 
+#define nfor(__var__,__inst__,__arr__)  do {NSFastEnumeration* __enu__ = (NSFastEnumeration*) __arr__; __enu__->gotoBeginObject();__var__ __inst__;while( (__inst__ = (__var__) __enu__->nextObject())!= NULL){
 
 #define fordict(__VAR__,__INST__,__DICT__) \
 	do{  __DICT__->ref->begin();__VAR__ __INST__;while(__INST__ = (__VAR__) __DICT__->ref->next()){	 
 
-#define forSet(__var__ , __inst__ , _CCSet__) \
-	do { CCSetIterator __it__ = _CCSet__->begin(); \
-	while( (__it__) != _CCSet__->end()){          \
+#define nfor_CCSet(__var__ , __inst__ , _NSSet__) \
+	do { CCSetIterator __it__ = _NSSet__->begin(); \
+	while( (__it__) != _NSSet__->end()){          \
 			__var__ __inst__ = (__var__ ) (*__it__); __it__++; if(!__inst__) break;
 
-#define _s(__STR__)  NSString::stringWithCString_encoding(__STR__,NSASCIIStringEncoding)//new NSString(__STR__)
+#define NSSTR(__STR__)  NSString::stringWithCString_encoding(__STR__,NSASCIIStringEncoding)//new NSString(__STR__)
 #define self this
 
 #define NS_SAFE_DELETE(__PTR__) CC_SAFE_DELETE(__PTR__)
 #define NSNotFound UINT_MAX;
 
-
 #define YES 1
 #define NO  0
-//typedef int BOOL
 #define NS_STATIC_ALLOC(__var__) \
 __var__*  __var__::alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(mem);}return mem;}
 #define NS_INSTANCE_INIT(__var__) __var__* __var__::init(){return self;}

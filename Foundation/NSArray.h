@@ -49,7 +49,6 @@ public:
 		containsObject(NSObject* obj){ return ref->containsObject(obj);}
 	inline void
 		addObject(NSObject* obj){ ref->addObject(obj);}
-	
 	inline NSUInteger 
 		count() { return ref->count();}
 	inline NSObject* 
@@ -60,7 +59,6 @@ public:
 		release();
 	 vid 
 		 copyWithZone(NSZone*);
-	
 	BOOL
 		removeObject(NSObject* );
 	inline void

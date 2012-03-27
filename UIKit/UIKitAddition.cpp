@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UIKitAddition.h>
-NSString *const UITextAttributeFont = _s("Font");
-NSString *const UITextAttributeTextColor = _s("Color");
-NSString *const UITextAttributeTextShadowColor = _s("SColor");
-NSString *const UITextAttributeTextShadowOffset = _s("TSOffset");
+NSString *const UITextAttributeFont = NSSTR("Font");
+NSString *const UITextAttributeTextColor = NSSTR("Color");
+NSString *const UITextAttributeTextShadowColor = NSSTR("SColor");
+NSString *const UITextAttributeTextShadowOffset = NSSTR("TSOffset");

@@ -56,7 +56,7 @@ void
 	{
 		const char* key = it.memberName();
 		const char* value_str = value[key].asCString();
-		dict->setObject_forKey(_s(value_str),_s(key));
+		dict->setObject_forKey(NSSTR(value_str),NSSTR(key));
 		it++;
 	}
 }

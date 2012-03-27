@@ -28,25 +28,25 @@ typedef enum {
 	UIEventTypeTraces
 } UIEventType;
 NS_INTERFACE( UIEvent , CCObject)
-	UIEvent(CCSet* set)
+	UIEvent(NSSet* set)
 	{
 		self->touches = set;
 	}
 	UIEvent(){};
 	
 	UIEvent*
-		initWithTouches(CCSet* set);
+		initWithTouches(NSSet* set);
 	static UIEvent*
-		eventWithTouches(CCSet* set);
+		eventWithTouches(NSSet* set);
 	static UIEvent*
-		eventWithTouches_type(CCSet* ,UIEventType);
+		eventWithTouches_type(NSSet* ,UIEventType);
 	UIEvent*
-		initWithTouches_type(CCSet* set ,UIEventType type);
-	CCSet*
+		initWithTouches_type(NSSet* set ,UIEventType type);
+	NSSet*
 		allTouches();
 protected:
 	NS_SYNTHESIZE
-		( CCSet* , touches );
+		( NSSet* , touches );
 	NS_SYNTHESIZE
 		( UIEventType , type);
 NS_END

@@ -34,6 +34,6 @@ THE SOFTWARE.
 		return copying->copyWithZone(self);
 	 }else{
 		 throw NSException::exceptionWithName_reason_userInfo(
-			 _s("Panic"),_s("Not Implementation for copyWithZone"),nil);
+			 NSSTR("Panic"),NSSTR("Not Implementation for copyWithZone"),nil);
 	 }
  }

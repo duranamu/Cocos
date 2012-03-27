@@ -69,7 +69,7 @@ UIEmitterView*
 			particleSystem = CCParticleMeteor::node();
 	}
 	self->ref = particleSystem;
-	UIImage* defaultUIEmitterViewParticle = UIImage::imageNamed(_s("defaultUIEmitterViewParticle.png"));
+	UIImage* defaultUIEmitterViewParticle = UIImage::imageNamed(NSSTR("defaultUIEmitterViewParticle.png"));
 	if(defaultUIEmitterViewParticle)
 	{
 		self->ref->setTexture(defaultUIEmitterViewParticle->CGImage());

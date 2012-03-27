@@ -20,30 +20,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UIEvent.h>
-CCSet* 
+NSSet* 
 	UIEvent::allTouches()
 {
 	return touches;
 }
 UIEvent*
-	UIEvent::initWithTouches(CCSet* ptouches)
+	UIEvent::initWithTouches(NSSet* ptouches)
 {
 	ptouches->retain();
 	touches = ptouches;
 	return self;
 }
 UIEvent*
-	UIEvent::eventWithTouches(CCSet* touches)
+	UIEvent::eventWithTouches(NSSet* touches)
 {
 	return (UIEvent*)alloc()->initWithTouches(touches)->autorelease();
 }
 UIEvent*
-	UIEvent::eventWithTouches_type(CCSet* touches ,UIEventType type)
+	UIEvent::eventWithTouches_type(NSSet* touches ,UIEventType type)
 {
 	return (UIEvent*)alloc()->initWithTouches_type(touches,type)->autorelease();
 }
 UIEvent*
-	UIEvent::initWithTouches_type(CCSet* ptouches ,UIEventType ptype)
+	UIEvent::initWithTouches_type(NSSet* ptouches ,UIEventType ptype)
 {
 	type = ptype;
 	ptouches->retain();

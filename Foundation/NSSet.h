@@ -59,6 +59,10 @@ NS_INTERFACE( NSSet ,NSObject ,NSCopying ,NSFastEnumeration)
 		copyWithZone(NSZone* );
 	NSArray*
 		allObjects();
+	NSObject*
+		anyObject();
+	void
+		addObject(NSObject*);
 	NSSet();
 	NSUInteger count();
 	BOOL
