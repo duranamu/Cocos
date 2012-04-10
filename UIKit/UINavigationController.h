@@ -20,12 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <QuartzCore\QuartzCore.h>
+#include <QuartzCore/QuartzCore.h>
 #include <UIKit/UIViewController.h>
 #include <UIKit/UIResponder.h>
 NS_CLASS UINavigationBar ;
-NS_INTERFACE( UINavigationController , UIViewController ,  UIResponder)
-
+NS_INTERFACE( UINavigationController , UIViewController )
 	UINavigationController();
 	UINavigationController* 
 		initWithRootViewController(UIViewController*);
@@ -33,11 +32,10 @@ NS_INTERFACE( UINavigationController , UIViewController ,  UIResponder)
 		pushViewController_viewController_animated(UIViewController * , BOOL);
 	void 
 		popViewController_viewController_animated(UIViewController * , BOOL);
-	NSArray *
+	NSMutableArray *
 		popToRootViewControllerAnimated(BOOL );
-	NSArray *
+	NSMutableArray *
 		popToViewController_viewController_animated(UIViewController *,BOOL);
-
 	virtual void 
 		viewDidLoad(void );
 	virtual void
@@ -55,5 +53,5 @@ protected:
 	NS_SYNTHESIZE
 		(UIViewController* , topViewController);
 	NS_SYNTHESIZE_COPY
-		(NSArray* , viewControllers);
+		(NSMutableArray* , viewControllers);
 NS_END

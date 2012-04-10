@@ -33,7 +33,7 @@ UIBarButtonItem*
 	self->style = cstyle;
 	self->title = ctitle;
 
-	NSDictionary* dict = NSDictionary::dictionaryWithObjectAndKeys(
+	NSMutableDictionary* dict = NSMutableDictionary::dictionaryWithObjectAndKeys(
 		UIFont::fontWithName_size(NSSTR("Arial"),1.0f),UITextAttributeFont,
 		UIColor::whiteColor(),UITextAttributeTextColor);
 	//nil to be fixed

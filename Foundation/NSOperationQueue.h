@@ -24,7 +24,7 @@ THE SOFTWARE.
 #include <dispatch/dispatch.h>
 #include <Foundation/Cocos2DX_framework.h>
 #include <Foundation/NSOperation.h>
-#include <Foundation/NSArray.h>
+#include <Foundation/NSMutableArray.h>
 NS_INTERFACE
 	( NSOperationQueue ,NSObject )
 	 
@@ -40,6 +40,6 @@ NS_INTERFACE
 protected:
 	dispatch_queue_t _dispatch_queue;
 
-	NSArray *operations;
+	NSMutableArray *operations;
 
 NS_END

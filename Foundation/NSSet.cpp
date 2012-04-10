@@ -20,9 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include <Foundation/NSSet.h>
-#include <Foundation/NSArray.h>
+#include <Foundation/NSMutableArray.h>
 NSSet*
-	NSSet::initWithArray(NSArray* array)
+	NSSet::initWithArray(NSMutableArray* array)
 {
 	nfor(NSObject* ,obj,array)
 		ref->addObject(obj);
@@ -30,7 +30,7 @@ NSSet*
 	return self;
 }
 NSSet*
-	NSSet::setWithArray(NSArray* array)
+	NSSet::setWithArray(NSMutableArray* array)
 {
 	return (NSSet*) alloc()->initWithArray(array)->autorelease();
 }
@@ -93,10 +93,10 @@ vid
 {
 	self->ref = new CCSet();
 }
-NSArray*
+NSMutableArray*
 	NSSet::allObjects()
 {
-	NSArray* allobj = NSArray::array();
+	NSMutableArray* allobj = NSMutableArray::array();
 
 	nfor(NSObject* ,obj,self)
 		allobj->addObject(obj);
@@ -129,7 +129,7 @@ NSSet*
 	return (NSSet*) alloc()->initWithObject(obj)->autorelease();
 }
 NSSet*
-	NSSet::setByAddingArray(NSArray* array)
+	NSSet::setByAddingArray(NSMutableArray* array)
 {
 	NSSet* newSet = NSSet::setWithSet(self);
 	nfor(NSObject*,obj,array)
@@ -154,7 +154,7 @@ NSSet*
 	return newSet;
 }
 NSSet*
-	NSSet::setByAddingObjectsFromArray(NSArray* array)
+	NSSet::setByAddingObjectsFromArray(NSMutableArray* array)
 {
 	NSSet* newSet = NSSet::setWithSet(self);
 	nfor(NSObject*,obj,array)

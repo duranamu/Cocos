@@ -43,7 +43,7 @@ void
 		}else{
 			self->gestureStartDistance = CGDistanceMake(touchLoaction,touch->getlocation());
 		}
-	forEnd
+	nend
 }
 void
 	UIPinchGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
@@ -60,7 +60,7 @@ void
 			CGFloat distance = CGDistanceMake(touchLoaction,touch->getlocation());
 			self->scale = distance / self->gestureStartDistance;
 		}
-	forEnd
+	nend
 		(m_pListener->*m_pSelector)(nil,self);
 }
 void

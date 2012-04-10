@@ -20,7 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UITableView.h>
-#include <Foundation/NSIndexPath.h>
 #include <UIKit/UIGestureRecognizer.h>
 #include <UIKit/UIColor.h>
 #include <UIKit/UITableViewCell.h>
@@ -31,37 +30,35 @@ UITableView::UITableView()
 	m_indexPath = CCArray::array();
 }
 void 
-	UITableView::reloadData(NSArray* toShow)
+	UITableView::reloadData(NSMutableArray* toShow)
 {
 	NSInteger numberOfSection = datasource->numberOfSectionInTableView(self);
 
 	if(self->node)
 		self->node = CCLabelTTF::labelWithString("","Arial",38);
-
-
 	NSInteger offsetsum = 0;
 	for(int section=0; section< numberOfSection ;section++ )
 	{
-	NSInteger numberOfRow = datasource->tableView_numberOfRowsInSection(self,section);
-
+		NSInteger numberOfRow = datasource->tableView_numberOfRowsInSection(self,section);
 		for(int row = 0; row < numberOfRow ; row++)
 		{
 		NSIndexPath* path =  NSIndexPath::alloc()->initWithSection_row(section,row);
 		UITableViewCell* member = datasource->tableView_cellForRowAtIndexPath(self,path);
 		member->retain();
+		member->setindexPath(path);
 		subviews->addObject(member);
+		member->setsuperview(self);
 		CCSprite* cellsprite = (CCSprite*)member->getnode();
 		path->release();
 	//	cellsprite->setColor(UIColor::redColor()->getcolor3b());
-		if(member->imageView)
+		if(member->getimageView())
 		{
-			member->imageView->getnode()->setPosition(ccp(-30,0));
-			cellsprite->addChild(member->imageView->getnode());
+			member->getimageView()->getnode()->setPosition(ccp(-30,0));
+			cellsprite->addChild(member->getimageView()->getnode());
 		}	
 		cellsprite ->setPosition(ccp( 460+ member->getindentationLevel()*member->getindentationWidth() ,-60 + offsetsum));
 		self->node->addChild(cellsprite);
 		offsetsum += 68;
-		toShow->addObject(member);
 		}
 	}
 	subviews->retain();
@@ -84,23 +81,17 @@ bool
 void 
 	UITableView::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
-	nfor(UITableViewCell*,uiview,self->subviews)
-		uiview->touchesBegan_withEvent(touches,events);
-	nend
-
+	
 }
 void 
 	UITableView::touchesEnded_withEvent(NSSet* touches ,UIEvent* events) 
 {
-	nfor(UITableViewCell*,uiview,self->subviews)
-		uiview->touchesEnded_withEvent(touches,events);
-	nend
 };
 void 
 	UITableView::touchesMoved_withEvent(NSSet* touches ,UIEvent* events) 
 {
-	nfor(UITableViewCell*,uiview,self->subviews)
-		uiview->touchesMoved_withEvent(touches,events);
+	nfor(UIView*,aView ,self->subviews)
+		aView->touchesMoved_withEvent(touches,events);
 	nend
 };
 //todo tableview needs sprite while blanck image itself ,but not yet has any ;
@@ -108,6 +99,11 @@ BOOL
 	UITableView::pointInside_withEvent(CGPoint point,UIEvent* evt)
 {
 	return YES;
+}
+void
+	UITableView::tableViewCell_didSelectRowAtIndexPath(UITableViewCell* aCell ,NSIndexPath* indexPath)
+{
+	self->delegate->tableView_didSelectRowAtIndexPath(self,indexPath);
 }
 void
 	UITableView::dealloc()

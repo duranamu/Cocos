@@ -19,55 +19,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#pragma once
-#include <Foundation/NSObject.h>
-#include <Foundation/NSString.h>
-#include <Foundation/NSCopying.h>
-#include <Foundation/NSZone.h>
-#include <Foundation/NSFastEnumeration.h>
-typedef  CCDictionary<std::string,NSObject*> CCStringDictionary;
-NS_INTERFACE
-	( NSDictionary , NSObject , NSCopying, NSFastEnumeration)
-public:
-	NS_HAS_REF( CCStringDictionary * ,ref);
-	static NSDictionary*
-		dictionary();
-	static NSDictionary*
-		dictionaryWithObjectAndKeys(NSObject*,NSString*,...);
-	NSDictionary* 
-		initWithObjectsAndKeys(NSObject*,NSString*,...);
-
-	NSDictionary();
-	inline bool
-		setObject_forKey(NSObject* obj  ,NSString* str)
-	{	
-
-		if(obj && str)
-		{
-			return ref->setObject(obj,str->description());
-		}else
-			return false;
-	}
-	inline void
-		removeObjectForKey(NSString* str)
-	{
-		ref->removeObjectForKey(str->description());
-	}
-	inline void 
-		removeAllObjects()
-	{
-		ref->removeAllObjects();
-	}
-	inline NSObject*
-		objectForKey(NSString* str)
-	{
-		return ref->objectForKey(str->description());
-	}
-	vid
-		copyWithZone(NSZone*);
-	vid
-		nextObject();
-	void
-		gotoBeginObject();
+#pragma once 
+#include <QuartzCore/QuartzCore.h>
+NS_INTERFACE (UIStoryboard ,NSObject )
 
 NS_END

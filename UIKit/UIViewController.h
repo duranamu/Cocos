@@ -24,14 +24,16 @@ THE SOFTWARE.
 #include <UIKit/UIView.h>
 #include <UIKit/UIResponder.h>
 #include <NIKit/NIKit.h>
+#include <UIKit/UIStoryboard.h>
 NS_INTERFACE( UIViewController ,  UIView )
 	UIViewController()
 	{
 		self->view		   = UIView::alloc()->init();
 		self->followView   = UIView::alloc()->init();
-		self->movableView  = UIView::alloc()->init();
 		self->clickView    = UIView::alloc()->init();
 	}
+void
+	loadView();
 virtual void 
 	viewDidLoad(void){}
 void 
@@ -41,7 +43,8 @@ void
 virtual void 
 	viewDidUpdate(cocos2d::CGFloat ){};
 void 
-	viewReloadData(NSArray* toShow);
+	viewReloadData(NSMutableArray* toShow);
+
 CCNode*  
 	renderTargetforHost();
 virtual void 
@@ -64,7 +67,6 @@ public:
 	UIView* view;
 	UIView* followView;
 	UIView* clickView;
-	UIView* movableView;
 	UIView* watchVariableView;
 	UIView* righthand_clicked_marker;
 protected:
@@ -75,6 +77,9 @@ protected:
 		(CGFloat ,torsox);
 	NS_SYNTHESIZE
 		(CGFloat ,torsoy);
+	NS_SYNTHESIZE_RETAIN_READONLY
+		(UIStoryboard* ,storyboard);
+
 	float touchStartx;
 	float touchStarty;
 	CGFloat touchStartTime;

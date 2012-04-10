@@ -22,12 +22,12 @@ THE SOFTWARE.
 #pragma once
 #include <Foundation/Foundation.h>
 NS_CLASS NSData;
-NS_CLASS NSDictionary;
+NS_CLASS NSMutableDictionary;
 NS_INTERFACE(CIImage , NSObject)
 	static	CIImage*
-		imageWithData_option(NSData*,NSDictionary*);
+		imageWithData_option(NSData*,NSMutableDictionary*);
 	CIImage*
-		initWithData_option(NSData*,NSDictionary*);
+		initWithData_option(NSData*,NSMutableDictionary*);
 	protected:
 		CCSprite* _sprite;
 NS_END

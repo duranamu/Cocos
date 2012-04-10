@@ -26,20 +26,20 @@ THE SOFTWARE.
 #include <Foundation/NSZone.h>
 #include <Foundation/NSFastEnumeration.h>
 #include <stdarg.h>
-NS_INTERFACE( NSArray , NSObject ,NSCopying ,NSFastEnumeration )
+NS_INTERFACE( NSMutableArray , NSObject ,NSCopying ,NSFastEnumeration )
 public:
 	NS_HAS_REF(CCArray* ref);
-	NSArray* 
+	NSMutableArray* 
 		initWithObjects (NSObject* , ...);
-	NSArray*
+	NSMutableArray*
 		initWithObject(NSObject* );
-	static NSArray*
+	static NSMutableArray*
 		array();
-	static NSArray*
+	static NSMutableArray*
 		arrayWithCapacity(NSUInteger );
-	    NSArray();
+	    NSMutableArray();
 		 
-		NSArray(NSUInteger num);
+		NSMutableArray(NSUInteger num);
 	NSObject* 
 		objectAtIndex(NSUInteger index);
  

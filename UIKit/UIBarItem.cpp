@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include <UIKit/UIKitAddition.h>
 #include <UIKit/UIColor.h>
 void
-	UIBarItem::setTitleTextAttributes_forState(NSDictionary* dict, UIControlState state)
+	UIBarItem::setTitleTextAttributes_forState(NSMutableDictionary* dict, UIControlState state)
 {
 	UIFont* font ;
 	font = (UIFont*) dict->objectForKey(UITextAttributeFont);

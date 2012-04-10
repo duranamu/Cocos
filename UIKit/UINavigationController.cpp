@@ -25,13 +25,14 @@ UINavigationController*
 	(UIViewController* rootViewController)
 {
 	self->rootViewController = rootViewController;
+	self->rootViewController->retain();
 	self->pushViewController_viewController_animated(rootViewController,YES);
 	return self;
 }
 	UINavigationController::UINavigationController()
 {
 	self->stackPointer = 0;
-	self->viewControllers =NSArray::alloc()->init();
+	self->viewControllers =NSMutableArray::alloc()->init();
 }
 void 
 	UINavigationController::pushViewController_viewController_animated

@@ -19,10 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UITABLEVIEWDELEGATE_H
-#define UITABLEVIEWDELEGATE_H
+#pragma once
 #include <Foundation/Foundation.h>
-class UITableViewDelegate :public NSObject
-{
-};
-#endif
+NS_CLASS UITableView;
+NS_PROTOCOL(UITableViewDelegate)
+ virtual void 
+	tableView_didSelectRowAtIndexPath(UITableView* tableView ,NSIndexPath* indexPath) {};
+NS_END

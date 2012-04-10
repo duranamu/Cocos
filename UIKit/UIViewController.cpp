@@ -29,7 +29,7 @@ void
 	nend
 }
 void 
-	UIViewController::viewReloadData(NSArray* toShow)
+	UIViewController::viewReloadData(NSMutableArray* toShow )
 {
 	nfor(UIView*,pView,view->subviews)
 		pView->reloadData(toShow);
@@ -79,7 +79,7 @@ void
 void 
 	UIViewController::predo_controller_torsoData(void* sender,vid data)
 {
-	_cast(CIVector*,data);
+	NSCAST(CIVector*,data);
 	nfor(UIView* , m_view , followView->subviews)
 		m_view->followPlayer(cdata);
 	nend
@@ -112,9 +112,7 @@ void
 			t_lasthandy = y;
 		}
 	}
-	nfor(UIView*,uiview,self->movableView->subviews)
-		uiview->touchesMoved_withEvent(touches,events);
-	nend
+
 
 	if(receiver)
 	{
@@ -141,8 +139,16 @@ void
 	self->followView = nil;
 	self->view->release();
 	self->view = nil;
-	self->movableView->release();
-	self->movableView = nil;
 	self->clickView->release();
 	self->clickView = nil;
+}
+void
+	UIViewController::loadView()
+{
+	if(self->storyboard == nil)
+	{
+		self->view = UIView::alloc()->init();
+	}else{
+		//todo load UIViewController from associated storyboard
+	}
 }

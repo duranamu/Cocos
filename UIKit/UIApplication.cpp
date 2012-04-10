@@ -22,7 +22,7 @@ THE SOFTWARE.
 #include <UIKit/UIApplication.h>
 #include "../AppDelegate.h"
 int
-   UIApplicationMain (int argc,char *argv[],NSString *principalClassName,NSString *delegateClassName
+   UIApplicationMain (int argc,char *argv[],NSString *principalClassName,NSString* delegateClassName
 ){
 	AppDelegate app;
 	CCApplication::sharedApplication().run();
@@ -80,8 +80,7 @@ void
 		
 	}
 	trackerManager->updateTrackerSheet();
-}
-	
+}	
 	UIApplication::UIApplication()
 {
 		isRighthandTracked = NO;
@@ -92,7 +91,7 @@ void
 		t_lasthandx = 0;
 		t_lasthandy = 0;
 		rightHandShadowz = 0;
-		self->windows = NSArray::alloc()->init();
+		self->windows = NSMutableArray::alloc()->init();
 }
 void
 	UIApplication::setupTracker()
@@ -120,25 +119,25 @@ void
 		));
 	trackerManager->addTracker(
 		NITracker::trackerWithTarget_action_joint(self,
-		NS_SELECTOR_PP(UIApplication::sender_rightFingertipData),XN_SKEL_RIGHT_COLLAR
+		NS_SELECTOR_PP(UIApplication::sender_rightCollarData),XN_SKEL_RIGHT_COLLAR
 		));
 }
 vid
-	UIApplication::sender_rightFingertipData(vid sender,vid data)
+	UIApplication::sender_rightCollarData(vid sender,vid data)
 {
-	_cast(UIApplication*,sender);
-	_cast(CIVector*,data);
-	csender->setrightFingertipx(cdata->getX());
-	csender->setrightFingertipy(480 - cdata->getY());
-	csender->setrightFingertipz(cdata->getZ());
+	NSCAST(UIApplication*,sender);
+	NSCAST(CIVector*,data);
+	csender->setrightCollarx(cdata->getX());
+	csender->setrightCollary(480 - cdata->getY());
+	csender->setrightCollarz(cdata->getZ());
 	cdata->release();
 	return nil;
 }
 vid
 	UIApplication::sender_rightElbowData(vid sender,vid data)
 {
-	_cast(UIApplication*,sender);
-	_cast(CIVector*,data);
+	NSCAST(UIApplication*,sender);
+	NSCAST(CIVector*,data);
 	csender->setrightElbowx(cdata->getX());
 	csender->setrightElbowy(480 - cdata->getY());
 	csender->setrightElbowz(cdata->getZ());
@@ -148,8 +147,8 @@ vid
 vid
 	UIApplication::sender_neckData(vid sender,vid data)
 {
-	_cast(UIApplication*,sender);
-	_cast(CIVector*,data);
+	NSCAST(UIApplication*,sender);
+	NSCAST(CIVector*,data);
 	csender->setneckx(cdata->getX());
 	csender->setnecky(480 - cdata->getY());
 	csender->setneckz(cdata->getZ());
@@ -159,8 +158,8 @@ vid
 vid 
 	UIApplication::predo_controller_torsoData(void* sender,vid data)
 {
-	_cast(UIApplication*,sender);
-	_cast(CIVector*,data);
+	NSCAST(UIApplication*,sender);
+	NSCAST(CIVector*,data);
 	csender->settorsox(cdata->getX());
 	csender->settorsoy(cdata->getY());
 	csender->getkeyWindow()->getrootViewController()->predo_controller_torsoData (sender , data);
@@ -170,10 +169,10 @@ vid
 vid 
 	UIApplication::predo_controller_righthandData(void* sender,vid data)
 {
-	_cast(UIApplication*,sender);
+	NSCAST(UIApplication*,sender);
 	if(!csender->isRighthandTracked) 
 		csender->isRighthandTracked = true;
-	_cast(CIVector*,data);
+	NSCAST(CIVector*,data);
 	csender->rightHandz = cdata->getZ();
 	csender->rightHandx = cdata->getX();
 	csender->rightHandy = 480 - cdata->getY();
@@ -183,8 +182,8 @@ vid
 vid
 	UIApplication::predo_controller_lefthandData(void* sender , vid data)
 {
-	_cast(UIApplication*,sender);
-	_cast(CIVector*,data);
+	NSCAST(UIApplication*,sender);
+	NSCAST(CIVector*,data);
 	csender->leftHandz = cdata->getZ();
 	csender->leftHandx = cdata->getX();
 	csender->leftHandy = 480 - cdata->getY();

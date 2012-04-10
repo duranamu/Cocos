@@ -19,9 +19,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include <Foundation/NSArray.h>
-NSArray*
-	NSArray::initWithObjects(NSObject* msg , ...)
+#include <Foundation/NSMutableArray.h>
+NSMutableArray*
+	NSMutableArray::initWithObjects(NSObject* msg , ...)
 {
 	if(msg)
 		self->ref->addObject(msg);
@@ -45,8 +45,8 @@ NSArray*
 	va_end ( argp);
 	return self;
 }
-NSArray*
-NSArray::initWithObject(NSObject* obj)
+NSMutableArray*
+	NSMutableArray::initWithObject(NSObject* obj)
 {
 	if(obj)
 	{
@@ -55,42 +55,43 @@ NSArray::initWithObject(NSObject* obj)
 	
 	return self;
 }
-NSArray*
-	NSArray::arrayWithCapacity(NSUInteger num)
+NSMutableArray*
+	NSMutableArray::arrayWithCapacity(NSUInteger num)
 {
-	NSArray* mem =  new NSArray(num);
+	NSMutableArray* mem =  new NSMutableArray(num);
 	if(!mem )
 	{
 		CC_SAFE_DELETE(mem);
 	}
 	return mem;
 }
-NSArray::NSArray(NSUInteger num)
+NSMutableArray::NSMutableArray(NSUInteger num)
 {
 	ref = CCArray::arrayWithCapacity(num);
 }
-NSArray::NSArray()
+NSMutableArray::NSMutableArray()
 {
 	ref = CCArray::array();
 	self->copying = self;
 	ref->retain();
 }
-NSObject* NSArray::objectAtIndex(NSUInteger index)
+NSObject* 
+	NSMutableArray::objectAtIndex(NSUInteger index)
 {
 	return (NSObject*) ref->objectAtIndex(index);
 }
 NSObject* 
-	NSArray::randomObject()
+	NSMutableArray::randomObject()
 {
 	return (NSObject*) ref->randomObject();
 }
-NSArray*
-	NSArray::array()
+NSMutableArray*
+	NSMutableArray::array()
 {
-	return (NSArray*) alloc()->init()->autorelease();
+	return (NSMutableArray*) alloc()->init()->autorelease();
 }
 BOOL
-	NSArray::removeObject(NSObject* obj)
+	NSMutableArray::removeObject(NSObject* obj)
 {
 		if(ref->containsObject(obj))
 		{ 
@@ -101,17 +102,17 @@ BOOL
 		}
 }
 void
-	NSArray::removeLastObject()
+	NSMutableArray::removeLastObject()
 {
 	self->ref->removeLastObject();
 }
 void
-	NSArray::removeAllObjects()
+	NSMutableArray::removeAllObjects()
 {
 	self->ref->removeAllObjects();
 }
 void
-	NSArray::dealloc()
+	NSMutableArray::dealloc()
 {
 	if(self->m_bManaged == false)
 	{
@@ -119,7 +120,7 @@ void
 	}
 }
 void
-	NSArray::release()
+	NSMutableArray::release()
 {
 	if(--self->m_uReference == 0)
 	{
@@ -127,17 +128,17 @@ void
 	}
 }
 vid
-	NSArray::copyWithZone(NSZone* aZone)
+	NSMutableArray::copyWithZone(NSZone* aZone)
 {
-	NSArray* newArray  = (NSArray*)NSArray::alloc()->init();
+	NSMutableArray* newArray  = (NSMutableArray*)NSMutableArray::alloc()->init();
 	nfor(NSObject* ,obj,self)
 		newArray->addObject(obj);
-	forEnd
+	nend
 
 	return newArray;
 }
 vid
-	NSArray::nextObject()
+	NSMutableArray::nextObject()
 {
 	if(indexedObject <= endedObejct && self->ref->data->num)
 	{
@@ -146,7 +147,7 @@ vid
 		return nil;
 }
 void
-	NSArray::gotoBeginObject()
+	NSMutableArray::gotoBeginObject()
 {
 	if(self->ref->data->num )
 	{

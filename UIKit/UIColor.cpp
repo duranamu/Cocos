@@ -36,8 +36,9 @@ UIColor*
 	UIColor::initWithRed_blue_green_alpha(CGFloat redf ,CGFloat bluef, CGFloat greenf, CGFloat alphaf)
 {
 	self->color3b = ccc3(redf*255 ,bluef*255 ,greenf*255 );
+	self->color4b = ccc4(redf*255 ,bluef*255 ,greenf*255 ,alphaf*255);
 	self->alpha = alphaf;
-	self->color4f = ccc4FFromccc4B( ccc4(redf*255 ,bluef*255 ,greenf*255,alphaf*255) );
+	self->color4f = ccc4FFromccc4B( self->color4b );
 	return self;
 }
 UIColor*
@@ -105,6 +106,8 @@ const UIColor*
 {
 	return UIWhiteColor;
 }
-void UIColor::dealloc(){}
+void UIColor::dealloc()
+{
 
+}
 

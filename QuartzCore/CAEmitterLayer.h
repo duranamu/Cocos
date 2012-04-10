@@ -22,7 +22,7 @@ THE SOFTWARE.
 #pragma once
 #include <QuartzCore/CALayer.h>
 NS_INTERFACE(CAEmitterLayer ,CALayer)
-	NS_SYNTHESIZE_COPY(NSArray*,emitterCells);
+	NS_SYNTHESIZE_COPY(NSMutableArray*,emitterCells);
 	void display();
 	CAEmitterLayer();
 NS_END

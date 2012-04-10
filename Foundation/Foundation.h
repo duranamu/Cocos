@@ -25,9 +25,9 @@ THE SOFTWARE.
 #include <Foundation/NSURLRequest.h>
 #include <Foundation/NSOperationQueue.h>
 #include <Foundation/NSURL.h>
-#include <Foundation/NSArray.h>
+#include <Foundation/NSMutableArray.h>
 #include <Foundation/NSObject.h>
-#include <Foundation/NSDictionary.h>
+#include <Foundation/NSMutableDictionary.h>
 #include <Foundation/NSNull.h>
 #include <Foundation/NSNumber.h>
 #include <Foundation/NSString.h>

@@ -56,5 +56,7 @@ NS_INTERFACE( UIColor , NSObject)
 	NS_SYNTHESIZE
 		(ccColor3B , color3b );
 	NS_SYNTHESIZE
+		(ccColor4B , color4b );
+	NS_SYNTHESIZE
 		(CGFloat , alpha );
 NS_END

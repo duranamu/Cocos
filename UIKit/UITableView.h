@@ -22,11 +22,12 @@ THE SOFTWARE.
 #pragma once
 #include <UIKit/UIView.h>
 #include <Foundation/Foundation.h>
+#include <UIKit/UITableViewDelegate.h>
+#include <UIKit/UITableViewCell.h>
 NS_CLASS UITableViewDataSource;
 NS_CLASS UITableViewCell;
 NS_INTERFACE( UITableView , UIView )
 public:
-	UITableViewDataSource* datasource;
 	UITableView();
 	bool 
 		isEqual(UITableView* );
@@ -35,7 +36,7 @@ public:
 	UITableViewCell*
 		dequeueReusableCellWithIdentifier(NSString* );
 	virtual void 
-		reloadData(NSArray* );
+		reloadData(NSMutableArray* );
 	void 
 		touchesBegan_withEvent(NSSet*  ,UIEvent* );
 	void 
@@ -44,6 +45,12 @@ public:
 		touchesMoved_withEvent(NSSet*  ,UIEvent* );
 	BOOL
 		pointInside_withEvent(CGPoint point,UIEvent* evt);
+	void
+		tableViewCell_didSelectRowAtIndexPath(UITableViewCell* aCell ,NSIndexPath* indexPath);
 protected:
 	CCString* identifier;
+	NS_SYNTHESIZE
+		(UITableViewDelegate* ,delegate)
+	NS_SYNTHESIZE
+		(UITableViewDataSource* ,datasource);
 NS_END

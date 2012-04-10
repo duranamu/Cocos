@@ -23,8 +23,8 @@ THE SOFTWARE.
 #include <json/json.h>
 #include <iconv/iconv.h>
 #include <Foundation/NSString.h>
-#include <Foundation/NSDictionary.h>
-#include <Foundation/NSArray.h>
+#include <Foundation/NSMutableDictionary.h>
+#include <Foundation/NSMutableArray.h>
 #define JSValue Json::Value 
 #define JSReader Json::Reader
 #define JSWritter Json::Writer
@@ -49,7 +49,7 @@ int code_convert(char* from_charset,char* to_charset,char* inburf,size_t inlen,c
 	return 0;
 }
 void
-	parseJSObject(JSValue value ,NSDictionary* dict)
+	parseJSObject(JSValue value ,NSMutableDictionary* dict)
 {
 	JSValueIterator it = value.begin();
 	while(it != value.end())
@@ -61,18 +61,18 @@ void
 	}
 }
 void
-	parseJSArray(JSValue value ,NSArray* array)
+	parseJSArray(JSValue value ,NSMutableArray* array)
 {
 	for(NSUInteger i =0 ;i< value.size();i++)
 	{
 		if(value[i].isArray())
 		{
-			NSArray* arr = NSArray::alloc()->init();
+			NSMutableArray* arr = NSMutableArray::alloc()->init();
 			arr->retain();
 			parseJSArray(value[i],arr);
 			array->addObject(arr);
 		}else{
-			NSDictionary* dict = NSDictionary::dictionary();
+			NSMutableDictionary* dict = NSMutableDictionary::dictionary();
 			dict->retain();
 			parseJSObject(value[i],dict);
 			array->addObject(dict);
@@ -98,12 +98,12 @@ NSObject*
 	{
 		if(root.isArray())
 		{
-			NSArray* jsonObject = NSArray::alloc()->init();
+			NSMutableArray* jsonObject = NSMutableArray::alloc()->init();
 			jsonObject->retain();
 			parseJSArray(root,jsonObject);
 			return jsonObject;
 		}else{
-			NSDictionary* jsonObject = NSDictionary::dictionary();
+			NSMutableDictionary* jsonObject = NSMutableDictionary::dictionary();
 			jsonObject->retain();
 			parseJSObject(root,jsonObject);
 			return jsonObject;

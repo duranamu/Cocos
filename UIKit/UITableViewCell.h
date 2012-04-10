@@ -22,7 +22,7 @@ THE SOFTWARE.
 #pragma once
 #include <Foundation/Foundation.h>
 #include <UIKit/UIView.h>
-NS_CLASS UIImageView;
+#include <UIKit/UIImageView.h>
 typedef enum UITableViewStyle{
 	UITableViewSylePlain = 0
 	,UITableViewSyleDefault
@@ -47,7 +47,7 @@ NS_INTERFACE( UITableViewCell , UIView )
 	protected:
 	UITableViewStyle style ;
 	NS_PROPERTY 
-		( UITableViewCellAccessory ,accessoryType  );
+		( UITableViewCellAccessory ,accessoryType);
 	NS_SYNTHESIZE 
 		( NSInteger , indentationLevel );
 	NS_SYNTHESIZE
@@ -55,5 +55,8 @@ NS_INTERFACE( UITableViewCell , UIView )
 	NSString* uid;
 	CCSprite* accessory ;
 	CCLabelTTF* textLabel;
-	UIImageView* imageView;
+	NS_SYNTHESIZE_READONLY_RETAIN
+		(UIImageView* ,imageView);
+	NS_SYNTHESIZE_RETAIN
+		(NSIndexPath* ,indexPath);
 NS_END

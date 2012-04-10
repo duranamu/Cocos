@@ -46,6 +46,6 @@ protected:
 		(UITouchPhase , phase);
 	NS_SYNTHESIZE
 		(CGPoint ,deltaMove);
-	NSArray* gestureRecognizers;
+	NSMutableArray* gestureRecognizers;
 
 NS_END

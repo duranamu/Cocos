@@ -20,11 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-//#include <objc/objc.h>
 #include <stdarg.h>
 #include <stdint.h>
 #include <limits.h>
-
+#include <objc/objc.h>
 #include <CCAutoreleasePool.h>
 #ifdef __cplusplus
 
@@ -112,7 +111,7 @@ typedef NSInteger NSComparisonResult;
 //FOUNDATION_EXPORT SEL NSSelectorFromString(NSString *selectorName);
 //FOUNDATION_EXPORT NSString *NSStringFromSelector(SEL selector);
 //
-//FOUNDATION_EXPORT Class NSClassFromString(NSString *className);
+//Class NSClassFromString(NSString *className);
 //FOUNDATION_EXPORT NSString *NSStringFromClass(Class aClass);
 
 

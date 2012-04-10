@@ -23,8 +23,7 @@ THE SOFTWARE.
 #include <Foundation/Foundation.h>
 #include <UIKit/UIWindow.h>
 NS_CLASS UIEvent;
-class UIApplication :public UIView , public NSObjectProtocol
-{
+NS_INTERFACE(UIApplication , UIView ,  NSObjectProtocol)
 public:
 	vid 
 		predo_controller_torsoData(void*,vid);
@@ -37,7 +36,7 @@ public:
 	vid
 		sender_rightElbowData(vid,vid);
 	vid
-		sender_rightFingertipData(vid,vid);
+		sender_rightCollarData(vid,vid);
 	UITouchPhase 
 		touchPhaseforTime_handz(CGFloat,CGFloat);
 	void 
@@ -47,10 +46,6 @@ public:
 
 	static UIApplication*
 		sharedApplication();
-	
-	NS_ALLOC_FULL(UIApplication) 
-	NS_INIT_FULL(UIApplication) 
-	NS_DEALLOCATE(UIApplication)
 
 	UIApplication();
 	void
@@ -61,17 +56,19 @@ public:
 		setupTracker();
 
 protected:
+	/*NS_SYNTHESIZE
+		(UIApplicationDelegate*,delegate);*/
 	NITrackerManager* trackerManager;
 	NITracker* torsoTracker;
 	NITracker* righthandTracker;
 	NITracker* lefthandTracker;
 	NITracker* neckTracker;
 	NS_SYNTHESIZE
-		(CGFloat,rightFingertipz);
+		(CGFloat,rightCollarz);
 	NS_SYNTHESIZE
-		(CGFloat,rightFingertipx);
+		(CGFloat,rightCollarx);
 	NS_SYNTHESIZE
-		(CGFloat,rightFingertipy);
+		(CGFloat,rightCollary);
 	NS_SYNTHESIZE
 		(CGFloat,rightElbowx);
 	NS_SYNTHESIZE
@@ -125,13 +122,13 @@ protected:
 	NS_SYNTHESIZE
 		(UIWindow* , keyWindow);
 	NS_SYNTHESIZE
-		(NSArray* , windows);
+		(NSMutableArray* , windows);
 	NS_SYNTHESIZE
 		(vid , scene);
-};
+NS_END;
 int UIApplicationMain (
    int argc,
    char *argv[],
    NSString *principalClassName,
-   NSString *delegateClassName
+   NSString* delegateClassName
 );

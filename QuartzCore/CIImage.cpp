@@ -25,7 +25,7 @@ void
 {
 }
 CIImage*
-	CIImage::initWithData_option(NSData* data,NSDictionary* dict)
+	CIImage::initWithData_option(NSData* data,NSMutableDictionary* dict)
 {
 	CCSize size ;
 	NSNumber* number = (NSNumber*)dict->objectForKey(NSSTR("width"));
@@ -39,7 +39,7 @@ CIImage*
 	return self;
 }
 CIImage*
-	CIImage::imageWithData_option(NSData* data,NSDictionary* dict)
+	CIImage::imageWithData_option(NSData* data,NSMutableDictionary* dict)
 {
 	return alloc()->initWithData_option(data,dict);
 }

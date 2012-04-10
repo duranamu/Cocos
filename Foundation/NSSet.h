@@ -25,16 +25,16 @@ THE SOFTWARE.
 #include <Foundation/NSFastEnumeration.h>
 #include <Foundation/NSZone.h>
 #include <stdarg.h>
-NS_CLASS NSArray;
+NS_CLASS NSMutableArray;
 NS_INTERFACE( NSSet ,NSObject ,NSCopying ,NSFastEnumeration)
 	NSSet*
-		setByAddingObjectsFromArray(NSArray*);
+		setByAddingObjectsFromArray(NSMutableArray*);
 	NSSet*
 		setByAddingObjectsFromSet(NSSet* );
 	NSSet*
 		setByAddingObject(NSObject*);
 	NSSet*
-		setByAddingArray(NSArray*);
+		setByAddingArray(NSMutableArray*);
 	static NSSet*
 		setWithObject(NSObject*);
 	NSSet*
@@ -48,16 +48,16 @@ NS_INTERFACE( NSSet ,NSObject ,NSCopying ,NSFastEnumeration)
 	NSSet*
 		initWithObjects(NSObject*,...);
 	static NSSet*
-		setWithArray(NSArray*);
+		setWithArray(NSMutableArray*);
 	NSSet*
-		initWithArray(NSArray* );
+		initWithArray(NSMutableArray* );
 	void
 		gotoBeginObject();
 	vid
 		nextObject();
 	vid
 		copyWithZone(NSZone* );
-	NSArray*
+	NSMutableArray*
 		allObjects();
 	NSObject*
 		anyObject();

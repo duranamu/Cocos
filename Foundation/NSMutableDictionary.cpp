@@ -19,17 +19,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include <Foundation/NSDictionary.h>
+#include <Foundation/NSMutableDictionary.h>
 #include <stdarg.h>
-NSDictionary*
-	NSDictionary::dictionary()
+NSMutableDictionary*
+	NSMutableDictionary::dictionary()
 {
-	return (NSDictionary*) alloc()->init()->autorelease();
+	return (NSMutableDictionary*) alloc()->init()->autorelease();
 }
-NSDictionary*
-	NSDictionary::dictionaryWithObjectAndKeys(NSObject* obj,NSString* str,...)
+NSMutableDictionary*
+	NSMutableDictionary::dictionaryWithObjectAndKeys(NSObject* obj,NSString* str,...)
 {
-	NSDictionary* dict; ;
+	NSMutableDictionary* dict; ;
 	if(dict = alloc()->init())
 	{
 		if(obj && str)
@@ -55,8 +55,8 @@ NSDictionary*
 	dict->autorelease();
 	return dict;
 }
-NSDictionary*
-	NSDictionary::initWithObjectsAndKeys(NSObject* obj,NSString* str,...)
+NSMutableDictionary*
+	NSMutableDictionary::initWithObjectsAndKeys(NSObject* obj,NSString* str,...)
 {
 	if(obj && str)
 		self->ref->setObject(obj,str->description());
@@ -81,24 +81,24 @@ NSDictionary*
 	return self;
 }
 void
-	NSDictionary::dealloc()
+	NSMutableDictionary::dealloc()
 {
 	ref->release();
 }
-	NSDictionary::NSDictionary()
+	NSMutableDictionary::NSMutableDictionary()
 {
 	 ref = new CCDictionary<std::string,NSObject*>();
 	 self->copying = self;
 }
 vid
-	NSDictionary::copyWithZone(NSZone* aZone)
+	NSMutableDictionary::copyWithZone(NSZone* aZone)
 {
-	NSDictionary* dict = alloc()->init();
+	NSMutableDictionary* dict = alloc()->init();
 
 	return dict;
 }
 void
-	NSDictionary::gotoBeginObject()
+	NSMutableDictionary::gotoBeginObject()
 {
 	if(self->ref)
 	{
@@ -106,7 +106,7 @@ void
 	}
 }
 vid
-	NSDictionary::nextObject()
+	NSMutableDictionary::nextObject()
 {
 	std::string* str = new std::string();
 	ref->next(str);

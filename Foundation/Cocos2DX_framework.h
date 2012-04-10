@@ -22,16 +22,21 @@ THE SOFTWARE.
 #pragma once
 #include <cocos2d.h>
 using namespace cocos2d;
-#include <libxml\xpath.h>
-#include <libxml\parser.h>
+#include <libxml/xpath.h>
+#include <libxml/parser.h>
 #include <Foundation/NSObjCRuntime.h>
 #include <Foundation/FoundationDataType.h>
-#define fetchCCObject(__VAR__ ,__INST__)  CCWrapper* __wrapper__ = (CCWrapper*)__object__; \
-	__VAR__ __INST__ =  __wrapper__->data.__VAR__##Val
-#define NS_SYNTHESIZE(varType, varName)  CC_SYNTHESIZE(varType, varName, varName)  
 
-#define NS_SYNTHESIZE(varType,varName) CC_SYNTHESIZE(varType, varName, varName) 
-#define NS_PROPERTY(varType,varName)  CC_PROPERTY(varType, varName, varName) 
+#define NS_SYNTHESIZE(varType,varName)  NS_SYNTHESIZE_ASSIGN(varType,varName)
+
+#define NS_SYNTHESIZE_ASSIGN(varType,varName) \
+protected: varType varName;\
+public: inline varType get##varName(void) const { return varName; }\
+public: inline void set##varName(varType var){ varName = var; }
+#define NS_PROPERTY(varType,varName) \
+protected: varType varName;\
+public: virtual varType get##varName(void);\
+public: virtual void set##varName(varType var);
 
 #define NS_SYNTHESIZE_READONLY(varType,varName) CC_SYNTHESIZE_READONLY(varType, varName, varName) 
 
@@ -40,6 +45,16 @@ protected: varType varName;\
 public: inline varType get##varName(void)  { return varName; }\
 public: inline void set##varName(varType var){var->retain(); varName->release();varName = var; }
 
+#define NS_SYNTHESIZE_READONLY_RETAIN(varType,varName) \
+protected: varType varName;\
+public: inline varType get##varName(void)  { return varName; }\
+private: inline void set##varName(varType var){var->retain(); varName->release();varName = var; }
+
+#define NS_SYNTHESIZE_RETAIN_READONLY(varType,varName ) \
+protected: varType varName; \
+public: inline varType get##varName(void)  { return varName; }\
+protected: inline void set##varName(varType var){var->retain(); varName->release();varName = var; }
+
 #define NS_SYNTHESIZE_COPY(varType,varName) \
 protected: varType varName;\
 public: inline varType get##varName(void) const { return varName; }\
@@ -47,18 +62,12 @@ public: inline void set##varName(varType var){ varType cp = (varType)var->copy()
 
 #define nend  }}while(0);
 #define CCS(__STR__) new CCString(__STR__)
-#define nil NULL
 #define NS_SELECTOR_PP(__FUNC__) (SEL_PP)(&__FUNC__)
-#define _cast(__VAR__,__INST__) __VAR__ c##__INST__ = (__VAR__) __INST__;
+#define NSCAST(__VAR__,__INST__) __VAR__ c##__INST__ = (__VAR__) __INST__;
 #define vid void*
-#define eachObject(__VAR__,__INST__)  __VAR__ __INST__ = (__VAR__) __object__;
-#define forEnd   }}while(0);
 
 
 #define nfor(__var__,__inst__,__arr__)  do {NSFastEnumeration* __enu__ = (NSFastEnumeration*) __arr__; __enu__->gotoBeginObject();__var__ __inst__;while( (__inst__ = (__var__) __enu__->nextObject())!= NULL){
-
-#define fordict(__VAR__,__INST__,__DICT__) \
-	do{  __DICT__->ref->begin();__VAR__ __INST__;while(__INST__ = (__VAR__) __DICT__->ref->next()){	 
 
 #define nfor_CCSet(__var__ , __inst__ , _NSSet__) \
 	do { CCSetIterator __it__ = _NSSet__->begin(); \
@@ -71,8 +80,6 @@ public: inline void set##varName(varType var){ varType cp = (varType)var->copy()
 #define NS_SAFE_DELETE(__PTR__) CC_SAFE_DELETE(__PTR__)
 #define NSNotFound UINT_MAX;
 
-#define YES 1
-#define NO  0
 #define NS_STATIC_ALLOC(__var__) \
 __var__*  __var__::alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(mem);}return mem;}
 #define NS_INSTANCE_INIT(__var__) __var__* __var__::init(){return self;}
@@ -92,15 +99,22 @@ static __var__* alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(mem
 #define NS_INTERFACE(__class__,...)\
 class __class__ : public __VA_ARGS__{ public:  NS_ALLOC_FULL(__class__) NS_INIT_FULL(__class__) NS_DEALLOCATE(__class__)
 
+#define NS_INTERFACE_ABSTRACT(__class__,...) class __class__ :  __VA_ARGS__{ public: 
+
 #define NS_END };
+
 
 typedef void (*NSCodeBlock)(vid, vid , vid); 
 
 #define NS_CLASS class
 
+#define NS_PROTOCOL class
+
 #define APPEND_CHAR(_root_char_,_extra_char_) _root_char_##,#_extra_char_ 
 
 #define NS_PROTOCOL(__name__)  class __name__ { public:
+
+#define NS_PROTOCOL_INHERITE(__class__,...) class __class__ : public __VA_ARGS__{ public: 
 
 #define pfor(__type_of_object__ ,__inst__ ,__firstObject__ )  \
 	do{ va_list __var_args_argp__; __type_of_object__ __inst__;va_start(__var_args_argp__ , __firstObject__); \
@@ -111,3 +125,7 @@ typedef void (*NSCodeBlock)(vid, vid , vid);
 public: _ref_class_ _ref_object_; \
 void retain(){ref->retain();self->m_uReference++;} \
 vid  autorelease(){CCPoolManager::getInstance()->addObject(self);self->m_bManaged = self;ref->autorelease();return self;}
+
+//CCMutableDictionary<std::string, void*> * classForNameDictionary();
+#define NS_RUNTIME_INSTANCE(_class_) _class_* _class_##RuntimeInstance = new _class_();
+//#define NS_RUNTIME_INITIATE(_class_) classForNameDictionary->setObject(

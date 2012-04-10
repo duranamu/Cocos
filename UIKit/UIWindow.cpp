@@ -63,4 +63,7 @@ void
 	}
 }
 void
-	UIWindow::dealloc(){}
+	UIWindow::dealloc()
+{
+	
+}

@@ -51,3 +51,6 @@ THE SOFTWARE.
 #include <UIKit/UINavigationBar.h>
 #include <UIKit/UIColor.h>
 #include <UIKit/UIEmitterView.h>
+#include <UIKit/UIStoryboard.h>
+#include <UIKit/UITableViewController.h>
+#include <UIKit/UITableViewDelegate.h>

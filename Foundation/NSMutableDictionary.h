@@ -20,20 +20,53 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Foundation/Cocos2DX_framework.h>
 #include <Foundation/NSObject.h>
 #include <Foundation/NSString.h>
-#include <Foundation/NSMutableDictionary.h>
-NS_INTERFACE(NSException,NSObject)
-	NSException* 
-		initWithName_reason_userInfo(NSString*,NSString*,NSMutableDictionary*);
-	static NSException* 
-		exceptionWithName_reason_userInfo(NSString*,NSString*,NSMutableDictionary*);
-	NSString* name();
-	NSString* reason();
-	NSMutableDictionary* userInfo();
-	protected:
-		NSString* _name;
-		NSString* _reason;
-		NSMutableDictionary* _useeInfo;
+#include <Foundation/NSCopying.h>
+#include <Foundation/NSZone.h>
+#include <Foundation/NSFastEnumeration.h>
+typedef  CCDictionary<std::string,NSObject*> CCStringDictionary;
+NS_INTERFACE
+	( NSMutableDictionary , NSObject , NSCopying, NSFastEnumeration)
+public:
+	NS_HAS_REF( CCStringDictionary * ,ref);
+	static NSMutableDictionary*
+		dictionary();
+	static NSMutableDictionary*
+		dictionaryWithObjectAndKeys(NSObject*,NSString*,...);
+	NSMutableDictionary* 
+		initWithObjectsAndKeys(NSObject*,NSString*,...);
+
+	NSMutableDictionary();
+	inline bool
+		setObject_forKey(NSObject* obj  ,NSString* str)
+	{	
+		if(obj && str)
+		{
+			return ref->setObject(obj,str->description());
+		}else
+			return false;
+	}
+	inline void
+		removeObjectForKey(NSString* str)
+	{
+		ref->removeObjectForKey(str->description());
+	}
+	inline void 
+		removeAllObjects()
+	{
+		ref->removeAllObjects();
+	}
+	inline NSObject*
+		objectForKey(NSString* str)
+	{
+		return ref->objectForKey(str->description());
+	}
+	vid
+		copyWithZone(NSZone*);
+	vid
+		nextObject();
+	void
+		gotoBeginObject();
+
 NS_END

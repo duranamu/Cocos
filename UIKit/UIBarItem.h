@@ -29,7 +29,7 @@ NS_CLASS  UIFont;
 NS_INTERFACE( UIBarItem , NSObject)
 public:
 	void
-		setTitleTextAttributes_forState(NSDictionary* , UIControlState);
+		setTitleTextAttributes_forState(NSMutableDictionary* , UIControlState);
 protected:
 	NS_SYNTHESIZE
 		(BOOL , enabled);

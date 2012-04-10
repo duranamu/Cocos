@@ -22,10 +22,11 @@ THE SOFTWARE.
 #include <UIKit/UITableViewCell.h>
 #include <UIKit/UITouch.h>
 #include <UIKit/UIImageView.h>
+#include <UIKit/UITableView.h>
  UITableViewCell* 
 		UITableViewCell::initWithStyle_reuseIdentifier(UITableViewStyle oneStyle ,NSString* id)
 	{
-		style = oneStyle;
+		self->style = oneStyle;
 		id->retain();
 		uid = id;
 		return self;
@@ -40,7 +41,7 @@ THE SOFTWARE.
 		selector = cselector;
 		return self;
 	}
-	UITableViewCell::UITableViewCell()
+		UITableViewCell::UITableViewCell()
 	{
 		if(style == UITableViewSylePlain)
 			textLabel = CCLabelTTF::labelWithString("","Arial",38);
@@ -53,6 +54,7 @@ THE SOFTWARE.
 		self->accessoryType = UITableViewCellAccessoryDefault;
 		self->indentationLevel = 0;
 		self->indentationWidth = 10;
+		self->indexPath = NSIndexPath::alloc()->init();
 	}
 void 
 	UITableViewCell::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
@@ -63,7 +65,7 @@ void
 	nfor(UIView* , child , self->subviews )
 		if(child->canTriggerforTouch(touch))
 			isCildTrigger = true;
-	forEnd
+	nend
 		if(imageView->canTriggerforTouch(touch))
 			isCildTrigger = true;
 
@@ -71,6 +73,9 @@ void
 	{
 		(listener->*selector)(listener , this);
 	}
+
+	UITableView* tableView = (UITableView*) self->getsuperview();
+	tableView->tableViewCell_didSelectRowAtIndexPath(self,self->indexPath);
 }
 void 
 	UITableViewCell::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)

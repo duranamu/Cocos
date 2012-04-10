@@ -90,7 +90,7 @@ void
 {
 	if(!self->gestureRecognizers)
 	{
-		self->gestureRecognizers = NSArray::arrayWithCapacity(2);
+		self->gestureRecognizers = NSMutableArray::arrayWithCapacity(2);
 		self->gestureRecognizers->retain();
 	}
 	self->gestureRecognizers->addObject(gesture);
@@ -130,7 +130,7 @@ UIView*
 	UIView::hitTest_withEvent(CGPoint point ,UIEvent* evt)
 {
 	UIView* view = self;
-	NSArray* match_stack = NSArray::alloc()->init();
+	NSMutableArray* match_stack = NSMutableArray::alloc()->init();
 
 	if(view->subviews->count())
 	{
@@ -148,7 +148,7 @@ UIView*
 						match_stack->addObject(dscendant);
 				}
 			}
-		forEnd
+		nend
 	};
 	return (UIView*) match_stack->lastObject();
 }

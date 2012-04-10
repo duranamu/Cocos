@@ -20,20 +20,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Foundation/Cocos2DX_framework.h>
-#include <Foundation/NSObject.h>
-#include <Foundation/NSString.h>
-#include <Foundation/NSMutableDictionary.h>
-NS_INTERFACE(NSException,NSObject)
-	NSException* 
-		initWithName_reason_userInfo(NSString*,NSString*,NSMutableDictionary*);
-	static NSException* 
-		exceptionWithName_reason_userInfo(NSString*,NSString*,NSMutableDictionary*);
-	NSString* name();
-	NSString* reason();
-	NSMutableDictionary* userInfo();
-	protected:
-		NSString* _name;
-		NSString* _reason;
-		NSMutableDictionary* _useeInfo;
+#include <UIKit/UIViewController.h>
+#include <UIKit/UITableViewDataSource.h>
+#include <UIKit/UITableViewDelegate.h>
+NS_INTERFACE_ABSTRACT(UITableViewController ,public  UIViewController , public UITableViewDataSource ,public NSObjectProtocol ,public UITableViewDelegate)
+	virtual void 
+		viewDidLoad(void ) 
+	{
+		printf("sdf");
+	}
+	virtual void 
+		viewDidUnload(void) = 0;
+	virtual UITableViewCell* 
+		tableView_cellForRowAtIndexPath(UIView* tableView,NSIndexPath* indexPath) = 0;
+	virtual NSInteger
+		numberOfSectionInTableView(UIView* tableView) = 0;
+	virtual NSInteger
+		tableView_numberOfRowsInSection(UIView* view , NSInteger section) = 0;
+	virtual void
+		tableView_didSelectRowAtIndexPath(UITableView* tableView ,NSIndexPath* indexPath) = 0;
+	virtual void 
+		viewDidUpdate(cocos2d::CGFloat time) {};
+protected:
+	NS_SYNTHESIZE_RETAIN
+	  (UITableView* ,tableView);
+	NS_SYNTHESIZE
+	  (BOOL ,clearsSelectionOnViewWillAppear);
 NS_END

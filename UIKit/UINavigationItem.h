@@ -20,7 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <QuartzCore\QuartzCore.h>
+#include <QuartzCore/QuartzCore.h>
+#include <UIKit/UIView.h>
 NS_CLASS UIBarButtonItem;
 NS_INTERFACE( UINavigationItem , NSObject )
 	NS_SYNTHESIZE
@@ -32,11 +33,13 @@ NS_INTERFACE( UINavigationItem , NSObject )
 	NS_SYNTHESIZE
 		( BOOL , hidesBackButton);
 	NS_SYNTHESIZE
-		(NSArray * ,leftBarButtonItems);
+		(NSMutableArray * ,leftBarButtonItems);
 	NS_SYNTHESIZE
-		(NSArray * ,rightBarButtonItems);
+		(NSMutableArray * ,rightBarButtonItems);
 	NS_SYNTHESIZE
 		(NSString * ,title);
+	NS_SYNTHESIZE_RETAIN
+		(UIView* ,titleView);
 public:
 	UINavigationItem* 
 		initWithTitle(NSString *);

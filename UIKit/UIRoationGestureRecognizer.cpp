@@ -47,7 +47,7 @@ void
 		}else{
 				self->gestureStartOrentaion = CIVector::vectorFrom_to( touch->getlocation() ,touchLoaction);
 		}
-	forEnd
+	nend
 	if(lastOrentaionOfHands)
 		baseRotaion = CGAngleMake ( self->gestureStartOrentaion ,lastOrentaionOfHands );
 }
@@ -73,7 +73,7 @@ void
 			}
 			newVector->release();
 		}
-	forEnd
+	nend
 	(m_pListener->*m_pSelector)(nil,self);
 }
 void
@@ -90,7 +90,7 @@ void
 		}else{
 			lastOrentaionOfHands = CIVector::vectorFrom_to(touch->getlocation(),touchLoaction);
 		}
-	forEnd
+	nend
 }
 void
 	UIRotationGestureRecognizer::dealloc(){}

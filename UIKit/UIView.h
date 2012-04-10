@@ -30,7 +30,7 @@ public:
 	UIView()
 	{
 		self->becomeFirstResponder = NO;
-		subviews = NSArray::alloc()->init();
+		subviews = NSMutableArray::alloc()->init();
 		self->gestureRecognizers = nil;
 		self->node = new CCNode();
 		self->indexPath = NSIndexPath::alloc()->init();
@@ -54,7 +54,7 @@ virtual void
 	viewDidRender(CCLayer* hostLayer);
 	
 virtual void 
-	reloadData(NSArray* toShow) { };
+	reloadData(NSMutableArray* toShow) { };
  void 
 	followPlayer(CIVector*);
  void 
@@ -76,14 +76,14 @@ virtual void
  virtual void
 	addGestureRecognizer(UIGestureRecognizer*);
 
- 	NSArray* subviews;
+ 	NSMutableArray* subviews;
 	NS_SYNTHESIZE_RETAIN (CCNode* , node );
 	NSActionTarget* listener;
 	SEL_PP  selector;
 	NS_SYNTHESIZE_RETAIN( NSIndexPath* , indexPath);
 	UIView* contentView;
 	UIGestureRecognizer* m_pRecognizer;
-	NSArray* gestureRecognizers;
+	NSMutableArray* gestureRecognizers;
 	BOOL hidden;
 	NS_SYNTHESIZE(UIView*,superview);
 };

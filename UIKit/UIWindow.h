@@ -22,8 +22,9 @@ THE SOFTWARE.
 #pragma once
 #include <UIKit/UIViewController.h>
 #include <UIKit/UIView.h>
+#include <UIKit/UIColor.h>
 NS_INTERFACE( UIWindow , UIView)
-		UIWindow(){ keyWindow = NO;}
+	UIWindow(){ keyWindow = NO; self->backgroundColor = UIColor::whiteColor();}
 	void
 		becomeKeyWindow();
 	void
@@ -33,6 +34,8 @@ NS_INTERFACE( UIWindow , UIView)
 	protected:
 		NS_SYNTHESIZE
 				(UIViewController* ,rootViewController);
+		NS_SYNTHESIZE
+				(const UIColor*  ,backgroundColor);
 	BOOL keyWindow;
 
 NS_END

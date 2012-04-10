@@ -30,13 +30,13 @@ NSString*
 {
 	return self->_reason;
 }
-NSDictionary*
+NSMutableDictionary*
 	NSException::userInfo()
 {
 	return self->_useeInfo;
 }
 NSException*
-	NSException::initWithName_reason_userInfo(NSString* aName, NSString* aReason ,NSDictionary* dict)
+	NSException::initWithName_reason_userInfo(NSString* aName, NSString* aReason ,NSMutableDictionary* dict)
 {
 	aName->retain();
 	self->_name = aName;
@@ -47,7 +47,7 @@ NSException*
 	return self;
 }
 NSException*
-	NSException::exceptionWithName_reason_userInfo(NSString* aName, NSString* aReason ,NSDictionary* dict)
+	NSException::exceptionWithName_reason_userInfo(NSString* aName, NSString* aReason ,NSMutableDictionary* dict)
 {
 	return (NSException*)alloc()->initWithName_reason_userInfo(aName,aReason,dict)->autorelease();
 }

@@ -25,5 +25,5 @@ THE SOFTWARE.
 #include <UIKit/UIResponder.h>
 NS_INTERFACE( UINavigationBar ,UIView ,UIResponder)
 	NS_SYNTHESIZE
-		(NSDictionary * , titleTextAttributes);
+		(NSMutableDictionary * , titleTextAttributes);
 NS_END

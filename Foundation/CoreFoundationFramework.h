@@ -20,20 +20,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Foundation/Cocos2DX_framework.h>
-#include <Foundation/NSObject.h>
-#include <Foundation/NSString.h>
-#include <Foundation/NSMutableDictionary.h>
-NS_INTERFACE(NSException,NSObject)
-	NSException* 
-		initWithName_reason_userInfo(NSString*,NSString*,NSMutableDictionary*);
-	static NSException* 
-		exceptionWithName_reason_userInfo(NSString*,NSString*,NSMutableDictionary*);
-	NSString* name();
-	NSString* reason();
-	NSMutableDictionary* userInfo();
-	protected:
-		NSString* _name;
-		NSString* _reason;
-		NSMutableDictionary* _useeInfo;
-NS_END
+#include <CoreFoundation/CoreFoundation.h>
+extern CFMutableDictionaryRef classForNameDictionary;

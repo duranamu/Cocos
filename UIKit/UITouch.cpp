@@ -27,7 +27,7 @@ UITouch*
 }
 	UITouch::UITouch()
 {
-	self->gestureRecognizers = NSArray::alloc()->init();
+	self->gestureRecognizers = NSMutableArray::alloc()->init();
 }
 CGPoint
 	UITouch::locationInView()

@@ -21,6 +21,15 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <Foundation/Foundation.h>
+NS_CLASS UIWindow;
+NS_CLASS NSDictionary;
+NS_CLASS UIApplication;
 NS_PROTOCOL(UIApplicationDelegate)
-
+	CCApplication* ref;
+	/*BOOL 
+		application_didFinishLaunchingWithOptions(UIApplication*,NSDictionary*);*/
+	protected:
+	NS_SYNTHESIZE_RETAIN
+		(UIWindow* ,window);
+	
 NS_END

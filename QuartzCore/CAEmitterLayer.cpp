@@ -36,5 +36,5 @@ void
 }
 CAEmitterLayer::CAEmitterLayer()
 {
-	self->emitterCells = NSArray::alloc()->init();
+	self->emitterCells = NSMutableArray::alloc()->init();
 }
