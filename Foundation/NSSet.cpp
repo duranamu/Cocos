@@ -89,7 +89,6 @@ vid
 	return  alloc()->initWithSet(self);
 }
 	NSSet::NSSet()
-
 {
 	self->ref = new CCSet();
 }

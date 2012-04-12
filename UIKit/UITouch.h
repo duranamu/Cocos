@@ -29,7 +29,7 @@ typedef enum {
     UITouchPhaseCancelled,
 	UITouchPhasePending,
 } UITouchPhase;
-NS_INTERFACE( UITouch , NSObject )
+NS_INTERFACE_CACHE( UITouch , NSObject )
 	static UITouch* 
 		touchWithPhase(UITouchPhase);
 	UITouch*

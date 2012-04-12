@@ -44,4 +44,6 @@ void
 	UITouch::dealloc()
 {
 	self->gestureRecognizers->release();
+	self->gestureRecognizers = nil;
 }
+NS_CACHE_OBJECT_INIT(UITouch)

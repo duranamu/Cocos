@@ -27,7 +27,7 @@ typedef enum {
     UIEventTypeRemoteControl,
 	UIEventTypeTraces
 } UIEventType;
-NS_INTERFACE( UIEvent , CCObject)
+NS_INTERFACE( UIEvent , NSObject)
 	UIEvent(NSSet* set)
 	{
 		self->touches = set;
@@ -45,7 +45,7 @@ NS_INTERFACE( UIEvent , CCObject)
 	NSSet*
 		allTouches();
 protected:
-	NS_SYNTHESIZE
+	NS_SYNTHESIZE_RETAIN
 		( NSSet* , touches );
 	NS_SYNTHESIZE
 		( UIEventType , type);

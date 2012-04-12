@@ -37,6 +37,7 @@ NSUInteger
 NSIndexPath*
 	NSIndexPath::initWithSection_row(NSUInteger section ,NSUInteger row)
 {
+
 	self->_section = section;
 	self->_row  = row;
 	return self;
@@ -46,3 +47,4 @@ NSIndexPath*
 {
 	return (NSIndexPath*) alloc()->initWithSection_row(section,row)->autorelease();
 }
+NS_CACHE_OBJECT_INIT(NSIndexPath)

@@ -116,15 +116,9 @@ void
 {
 	if(self->m_bManaged == false)
 	{
+		ref->removeAllObjects();
 		ref->release();
-	}
-}
-void
-	NSMutableArray::release()
-{
-	if(--self->m_uReference == 0)
-	{
-		delete self;
+		ref = nil;
 	}
 }
 vid
@@ -155,3 +149,4 @@ void
 		endedObejct   = (NSObject**)indexedObject + self->ref->data->num-1;
 	}
 }
+NS_CACHE_OBJECT_INIT(NSMutableArray)

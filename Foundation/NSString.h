@@ -47,6 +47,15 @@ public:
 	protected:
 		NS_SYNTHESIZE
 			(NSStringEncoding ,_encoding);
+	vid  
+		autorelease()
+	{
+		CCPoolManager::getInstance()->addObject(self);
+		self->m_bManaged = true;
+		//ref->autorelease();
+		return self;
+	}
+
 };
 enum {
     NSASCIIStringEncoding = 1,

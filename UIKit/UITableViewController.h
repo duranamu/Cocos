@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include <UIKit/UIViewController.h>
 #include <UIKit/UITableViewDataSource.h>
 #include <UIKit/UITableViewDelegate.h>
-NS_INTERFACE_ABSTRACT(UITableViewController ,public  UIViewController , public UITableViewDataSource ,public NSObjectProtocol ,public UITableViewDelegate)
+NS_PROTOCOL_CONFORM(UITableViewController ,public  UIViewController , public UITableViewDataSource ,public NSObjectProtocol ,public UITableViewDelegate)
 	virtual void 
 		viewDidLoad(void ) 
 	{
