@@ -69,11 +69,9 @@ NSMutableArray::NSMutableArray(NSUInteger num)
 {
 	ref = CCArray::arrayWithCapacity(num);
 }
+
 NSMutableArray::NSMutableArray()
 {
-	ref = CCArray::array();
-	self->copying = self;
-	ref->retain();
 }
 NSObject* 
 	NSMutableArray::objectAtIndex(NSUInteger index)
@@ -107,19 +105,58 @@ void
 	self->ref->removeLastObject();
 }
 void
-	NSMutableArray::removeAllObjects()
+	NSMutableArray::dealloc()
+{
+	//if(self->m_bManaged == false)
+	//{
+	//	ref->removeAllObjects();
+	//	ref->release();
+	//	ref = nil;
+	//}
+}
+void
+	NSMutableArray::objectDidUnload()
 {
 	self->ref->removeAllObjects();
 }
-void
-	NSMutableArray::dealloc()
+/*oid
+	NSMutableArray::objectDidRecycle()
 {
-	if(self->m_bManaged == false)
+	_cache[--_header] = self;
+	_cache_count++;
+	m_uReference++;
+}
+void 
+	NSMutableArray::operator delete(void* pointer)
+{
+	if(_header > 0)
 	{
-		ref->removeAllObjects();
-		ref->release();
-		ref = nil;
+		NSMutableArray* object = (NSMutableArray*) pointer;
+		object->objectDidUnload();
+		object->objectDidRecycle();
+	}else{
+		free(pointer);
 	}
+}
+NSMutableArray*
+	NSMutableArray::alloc()
+{
+	  NSMutableArray* mem ; 
+	if(_cache_count <= 0) 
+	{
+		for (NSUInteger i = 0; i< MAX_CACHE_OBJECT ;i++) _cache[i] = new NSMutableArray();  
+		_cache_count = MAX_CACHE_OBJECT; _header =0;
+	}  
+	mem = _cache[_header]; _header = (_header++) % MAX_CACHE_OBJECT ; --_cache_count;  
+	
+	if(!mem){CC_SAFE_DELETE(mem);}return mem;
+}*/
+void
+	NSMutableArray::objectDidLoad()
+{
+	ref = CCArray::array();
+	self->copying = self;
+	ref->retain();
 }
 vid
 	NSMutableArray::copyWithZone(NSZone* aZone)

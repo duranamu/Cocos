@@ -27,7 +27,7 @@ UITouch*
 }
 	UITouch::UITouch()
 {
-	self->gestureRecognizers = NSMutableArray::alloc()->init();
+	//self->gestureRecognizers = NSMutableArray::alloc()->init();
 }
 CGPoint
 	UITouch::locationInView()
@@ -42,6 +42,20 @@ UITouch*
 }
 void
 	UITouch::dealloc()
+{
+	//if(self->m_bManaged == false)
+	//{
+	//self->gestureRecognizers->release();
+	//self->gestureRecognizers = nil;
+	//}
+}
+void
+	UITouch::objectDidLoad()
+{
+	self->gestureRecognizers = NSMutableArray::alloc()->init();
+}
+void
+	UITouch::objectDidUnload()
 {
 	self->gestureRecognizers->release();
 	self->gestureRecognizers = nil;

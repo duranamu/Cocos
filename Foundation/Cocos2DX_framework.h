@@ -66,7 +66,6 @@ public: inline void set##varName(varType var){ varType cp = (varType)var->copy()
 #define NSCAST(__VAR__,__INST__) __VAR__ c##__INST__ = (__VAR__) __INST__;
 #define vid void*
 
-
 #define nfor(__var__,__inst__,__arr__)  do {NSFastEnumeration* __enu__ = (NSFastEnumeration*) __arr__; __enu__->gotoBeginObject();__var__ __inst__;while( (__inst__ = (__var__) __enu__->nextObject())!= NULL){
 
 #define nfor_CCSet(__var__ , __inst__ , _NSSet__) \
@@ -99,21 +98,29 @@ static __var__* alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(mem
 #define NS_INTERFACE(__class__,...)\
 class __class__ : public __VA_ARGS__{ public:  NS_ALLOC_FULL(__class__) NS_INIT_FULL(__class__) NS_DEALLOCATE(__class__)
 
-#define MAX_CACHE_OBJECT 100
+#define MAX_CACHE_OBJECT 50
 
-#define NS_CACHE_ALLOC_FULL(__var__)  static __var__* alloc(){ __var__* mem ; \
+#define NS_CACHE_ALLOC_FULL(__var__)  void inline objectDidLoad(); static __var__* alloc(){ __var__* mem ; \
 			if(_cache_count <= 0) {for (NSUInteger i = 0; i< MAX_CACHE_OBJECT ;i++) _cache[i] = new __var__(); \
 				_cache_count = MAX_CACHE_OBJECT; _header =0;} \
 			mem = _cache[_header]; _header = (_header++) % MAX_CACHE_OBJECT ; --_cache_count; \
-			if(!mem){CC_SAFE_DELETE(mem);}return mem;}
+			if(!mem){CC_SAFE_DELETE(mem);}else{mem->objectDidLoad();}return mem;}
+
+#define NS_CACHE_OBJECT_RECYCLE(__class__) \
+void inline objectDidUnload(); \
+void inline objectDidRecycle(){_cache[--_header] = self;m_uReference++; _cache_count++; } \
+void operator delete(void* pointer){ if(_header > 0){__class__* object = (__class__*) pointer;object->objectDidUnload();object->objectDidRecycle();}\
+	else{ free(pointer);}}
+
+#define NS_INIT(__var__)  __var__* init(){return self;}
 
 #define NS_INTERFACE_CACHE(__class__,...)\
 class __class__ : public __VA_ARGS__{static __class__** _cache; static NSUInteger _header ; static NSUInteger _cache_count ; \
-public:  NS_CACHE_ALLOC_FULL(__class__) NS_INIT_FULL(__class__) NS_DEALLOCATE(__class__)
+public:  NS_INIT(__class__) NS_CACHE_ALLOC_FULL(__class__)  NS_DEALLOCATE(__class__)
 
 #define NS_INTERFACE_DEBUG(__class__,...)\
 class __class__ : public __VA_ARGS__{static __class__** _cache; static NSUInteger _header ; static NSUInteger _cache_count ; \
-public:   NS_INIT_FULL(__class__) NS_DEALLOCATE(__class__)
+public:  NS_INIT(__class__) NS_DEALLOCATE(__class__) NS_CACHE_ALLOC_FULL(__class__) NS_CACHE_OBJECT_RECYCLE(__class__)
 
 #define NS_CACHE_CLEAR(_class_) 
 
@@ -140,13 +147,8 @@ typedef void (*NSCodeBlock)(vid, vid , vid);
 	while(1){ __inst__ = va_arg( __var_args_argp__ , __type_of_object__ );if( __inst__ != NULL){     
 #define pend  }else{break;}}va_end (__var_args_argp__);}while(0);
 
-//#define NS_HAS_REF(_ref_class_,_ref_object_) \
-//public: _ref_class_ _ref_object_; \
-//void retain(){ref->retain();self->m_uReference++;} \
-//vid  autorelease(){CCPoolManager::getInstance()->addObject(self);self->m_bManaged = true;ref->autorelease();return self;}\
-
 #define NS_HAS_REF(_ref_class_,_ref_object_) \
-public: _ref_class_ _ref_object_; \
+public: _ref_class_ _ref_object_; 
 
 
 //CCMutableDictionary<std::string, void*> * classForNameDictionary();

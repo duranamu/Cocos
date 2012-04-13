@@ -47,4 +47,6 @@ NSIndexPath*
 {
 	return (NSIndexPath*) alloc()->initWithSection_row(section,row)->autorelease();
 }
+void
+	NSIndexPath::objectDidLoad(){}
 NS_CACHE_OBJECT_INIT(NSIndexPath)

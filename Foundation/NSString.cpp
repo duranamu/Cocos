@@ -21,10 +21,6 @@ THE SOFTWARE.
 ****************************************************************************/
 #include <Foundation/NSString.h>
 #include <Foundation/NSData.h>
-NSString::NSString(const char* str)
-{
-	ref = CCS(str);
-}
 std::string
 	NSString::description()
 {
@@ -48,19 +44,18 @@ NSString*
 	}
 	return self;
 }
-
 void
 	NSString::dealloc()
 {
-	self->ref->release();
-	self->ref = nil;
+	/*self->ref->release();
+	self->ref = nil;*/
 }
 //todo enconding
 NSString*
 	NSString::initWithCString_encoding(const char* nullTerminatedCString,NSStringEncoding encoding)
 {
 	_encoding = encoding ;
-	ref = CCS(nullTerminatedCString);
+	self->ref = CCS(nullTerminatedCString);
 	return self;
 }
 NSString*
@@ -73,7 +68,7 @@ NSString*
 NSString*
 	NSString::initWithString(NSString* aString)
 {
-	self->ref = CCS(aString->description().c_str());
+	self->ref= CCS(aString->description().c_str());
 	self->_encoding = aString->get_encoding();
 	return self;
 }
@@ -82,3 +77,20 @@ NSString*
 {
 	return (NSString*) alloc()->initWithString(aString)->autorelease();
 }
+void
+	NSString::objectDidUnload()
+{
+	self->ref->release();
+	self->ref = nil;
+}
+void
+	NSString::objectDidLoad()
+{
+	self->ref = new CCString();
+}
+NSString::NSString()
+{
+	//self->ref = new CCString();
+}
+
+NS_CACHE_OBJECT_INIT(NSString);

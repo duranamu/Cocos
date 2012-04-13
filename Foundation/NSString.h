@@ -24,12 +24,11 @@ THE SOFTWARE.
 #include <Foundation/NSObjCRuntime.h>
 class NSData;
 typedef NSUInteger NSStringEncoding;
-NS_INTERFACE(NSString , NSObject)
+NS_INTERFACE_DEBUG(NSString , NSObject)
 	NS_HAS_REF(CCString* ref);
 public:
-	NSString(const char*);
-	NSString(){};
-	
+	//NSString(const char*);
+	NSString();
 	std::string
 		description();
 	NSString*
@@ -47,16 +46,7 @@ public:
 	protected:
 		NS_SYNTHESIZE
 			(NSStringEncoding ,_encoding);
-	vid  
-		autorelease()
-	{
-		CCPoolManager::getInstance()->addObject(self);
-		self->m_bManaged = true;
-		//ref->autorelease();
-		return self;
-	}
-
-};
+NS_END
 enum {
     NSASCIIStringEncoding = 1,
     NSNEXTSTEPStringEncoding = 2,
@@ -82,4 +72,4 @@ enum {
     NSUTF32BigEndianStringEncoding = 0x98000100,
     NSUTF32LittleEndianStringEncoding = 0x9c000100,
     NSProprietaryStringEncoding = 65536
-NS_END
+};

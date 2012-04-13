@@ -30,22 +30,6 @@ NS_INTERFACE_DEBUG( NSMutableArray , NSObject ,NSCopying ,NSFastEnumeration )
 public:
 	NS_HAS_REF(CCArray* ref);
 
-	static NSMutableArray* 
-		alloc(){ 
-			NSMutableArray* mem ; 
-			if(_cache_count <= 0) {
-				for (NSUInteger i = 0; i< MAX_CACHE_OBJECT ;i++)
-				{
-					_cache[i] = new NSMutableArray(); 
-				//	_cache[i]->retain();
-				}
-				_cache_count = MAX_CACHE_OBJECT; 
-				_header =0;}
-			mem = _cache[_header]; _header = (_header++) % MAX_CACHE_OBJECT ; --_cache_count; 
-			if(!mem){CC_SAFE_DELETE(mem);}
-			return mem;
-		}
-
 	NSMutableArray* 
 		initWithObjects (NSObject* , ...);
 	NSMutableArray*
@@ -59,7 +43,7 @@ public:
 		NSMutableArray(NSUInteger num);
 	NSObject* 
 		objectAtIndex(NSUInteger index);
- 
+
     NSObject* 
 		randomObject();
 	inline bool
@@ -71,15 +55,15 @@ public:
 	inline NSObject* 
 		lastObject(){ return (NSObject* )ref->lastObject();}
 	inline NSUInteger
-		indexOfObject(NSObject* obj){return ref->indexOfObject(obj);}
+		indexOfObject(NSObject* obj){return ref->indexOfObject(obj); }
+	inline void 
+		removeAllObjects(){ref->removeAllObjects();}
 	 vid 
 		 copyWithZone(NSZone*);
 	BOOL
 		removeObject(NSObject* );
 	inline void
 		removeLastObject();
-	inline void
-		removeAllObjects();
 	vid
 		nextObject();
 	void

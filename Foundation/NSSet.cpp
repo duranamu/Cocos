@@ -65,8 +65,20 @@ NSSet*
 void
 	NSSet::dealloc()
 {
-	if(self->ref) self->ref->release();
-	self->ref = nil;
+	/*if(self->ref) self->ref->release();
+	self->ref = nil;*/
+}
+void
+	NSSet::objectDidLoad()
+{
+	
+}
+void
+	NSSet::objectDidUnload()
+{
+	nfor(NSObject*,obj,self)
+		self->ref->removeObject(obj);
+	nend
 }
 void
 	NSSet::gotoBeginObject()
@@ -225,3 +237,4 @@ void
 {
 	ref->addObject(anObject);
 }
+NS_CACHE_OBJECT_INIT(NSSet);

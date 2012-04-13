@@ -26,7 +26,7 @@ THE SOFTWARE.
 #include <Foundation/NSZone.h>
 #include <stdarg.h>
 NS_CLASS NSMutableArray;
-NS_INTERFACE( NSSet ,NSObject ,NSCopying ,NSFastEnumeration)
+NS_INTERFACE_DEBUG( NSSet ,NSObject ,NSCopying ,NSFastEnumeration)
 	NSSet*
 		setByAddingObjectsFromArray(NSMutableArray*);
 	NSSet*
