@@ -25,13 +25,9 @@ THE SOFTWARE.
 #include <UIKit/UIResponder.h>
 #include <NIKit/NIKit.h>
 #include <UIKit/UIStoryboard.h>
-NS_INTERFACE( UIViewController ,  UIView )
-	UIViewController()
-	{
-		self->view		   = UIView::alloc()->init();
-		self->followView   = UIView::alloc()->init();
-		self->clickView    = UIView::alloc()->init();
-	}
+NS_INTERFACE_INIT_SPEC( UIViewController ,  UIView )
+NS_IGNORE UIViewController(){};
+UIViewController* init();
 void
 	loadView();
 virtual void 
@@ -58,7 +54,7 @@ virtual void
 virtual void 
 	controller_righthandData(void* ,vid){};
 virtual void 
-	predo_controller_torsoData(void* ,void*);
+	sender_torsoData(void* ,void*);
 void
 	retain();
 void 

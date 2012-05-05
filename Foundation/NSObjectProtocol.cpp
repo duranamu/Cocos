@@ -20,6 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include <Foundation/NSObjectProtocol.h>
+#include <Foundation/NSString.h>
 vid
 	NSObjectProtocol::performSelector(SEL aSelector)
 {
@@ -35,3 +36,8 @@ vid
 {
 	return (self->*aSelector)(anObject,anotherObject);
 }
+//NSString*
+//	NSObjectProtocol::description()
+//{
+//	return NSSTR("NSObjectProtocol");
+//}

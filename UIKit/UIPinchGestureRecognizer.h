@@ -31,6 +31,7 @@ NS_INTERFACE( UIPinchGestureRecognizer , UIGestureRecognizer)
 		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 
 		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
+	 
 	protected:
 	NS_SYNTHESIZE(CGFloat ,scale);
 	NS_SYNTHESIZE(CGFloat , velocity);

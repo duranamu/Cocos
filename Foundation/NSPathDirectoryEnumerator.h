@@ -20,5 +20,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <CoreFoundation/CoreFoundation.h>
-extern CFMutableDictionaryRef classForNameDictionary;
+#include <Foundation/NSDirectoryEnumerator.h>
+NS_CLASS NSFileManager;
+NS_CLASS NSMutableArray;
+NS_CLASS NSString;
+NS_CLASS NSDictionary;
+NS_INTERFACE(NSPathDirectoryEnumerator , NSDirectoryEnumerator )
+	NSPathDirectoryEnumerator*
+		initWithPath(NSString * path);
+	static NSPathDirectoryEnumerator*
+		enumeratorWithPath(NSString * path);
+	virtual void
+		gotoBeginObject();
+	virtual vid
+		nextObject();
+	virtual NSDictionary *
+		fileAttributes();
+	NS_PRIVATE
+		
+	NSString* startPath;
+	BOOL skipDescendents;
+	NSString* lastFilePath;
+	NSDictionary* lastFileAttributes;
+	NSFileManager* fm;
+	NSDictionary* currentObject;
+
+NS_END

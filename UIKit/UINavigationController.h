@@ -24,8 +24,9 @@ THE SOFTWARE.
 #include <UIKit/UIViewController.h>
 #include <UIKit/UIResponder.h>
 NS_CLASS UINavigationBar ;
-NS_INTERFACE( UINavigationController , UIViewController )
-	UINavigationController();
+NS_INTERFACE_INIT_SPEC( UINavigationController , UIViewController )
+	NS_IGNORE UINavigationController(){};
+	UINavigationController* init();
 	UINavigationController* 
 		initWithRootViewController(UIViewController*);
 	void 
@@ -41,7 +42,13 @@ NS_INTERFACE( UINavigationController , UIViewController )
 	virtual void
 		viewDidUpdate(CGFloat);
 	virtual void 
-		predo_controller_torsoData(void* ,vid );
+		sender_torsoData(void* ,vid );
+	virtual void 
+		touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+	virtual void 
+		touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+	virtual void 
+		touchesEnded_withEvent(NSSet* touches ,UIEvent* events) ;
 protected:
 	UIViewController* rootViewController;
 	NSUInteger stackPointer;

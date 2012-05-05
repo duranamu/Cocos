@@ -24,3 +24,28 @@ void
 	UIGestureRecognizer::dealloc()
 {
 }
+void
+	UIGestureRecognizer::requireGestureRecognizerToFail(UIGestureRecognizer* otherGestureRecognizer)
+{
+	if(! self->recognizersRequiredFailed->containsObject(otherGestureRecognizer))
+	{
+		self->recognizersRequiredFailed->addObject(otherGestureRecognizer);
+	}
+}
+UIGestureRecognizer*
+	UIGestureRecognizer::init()
+{
+	self->recognizersRequiredFailed = NSMutableArray::alloc()->init();
+	return self;
+}
+BOOL
+	UIGestureRecognizer::dependenceCheck()
+{
+	nfor(UIGestureRecognizer* , gestureRecognizerRequiringFailed ,recognizersRequiredFailed)
+		if(gestureRecognizerRequiringFailed->getstate() != UIGestureRecognizerStateFailed)
+		{
+			return NO;
+		}
+	nend
+	return YES;
+}

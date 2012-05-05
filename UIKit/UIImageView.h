@@ -26,13 +26,17 @@ NS_CLASS UIImage ;
 NS_INTERFACE( UIImageView , UIView)
 	static 
 		UIImageView* viewWithImage(UIImage* image);
+	UIImageView*
+		initWithImage(UIImage* image);
+	UIImageView*
+		initWithFile(NSString* fileName);
 	UIImageView(UIImage* image);
-	UIImageView(){};
+	NS_IGNORE UIImageView(){};
 	static 
 		UIImageView* viewWithTexture(CCTexture2D* texture);
 		UIImageView(CCTexture2D* texture);
 	static
-		UIImageView* viewWithFile(NSString* str);
+		UIImageView* viewWithFile(NSString* fileName);
 protected:
 	NS_PROPERTY(UIImage*,image);
 NS_END

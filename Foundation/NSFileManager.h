@@ -22,51 +22,39 @@ THE SOFTWARE.
 #pragma once
 #include <Foundation/NSObject.h>
 #include <Foundation/NSString.h>
-#include <Foundation/NSCopying.h>
-#include <Foundation/NSZone.h>
-#include <Foundation/NSFastEnumeration.h>
-typedef  CCDictionary<std::string,NSObject*> CCStringDictionary;
-NS_INTERFACE
-	(NSMutableDictionary , NSObject , NSCopying, NSFastEnumeration)
-public:
-	NS_HAS_REF(CCStringDictionary * ,ref);
-	static NSMutableDictionary*
-		dictionary();
-	static NSMutableDictionary*
-		dictionaryWithObjectAndKeys(NSObject*,NSString*,...);
-	NSMutableDictionary* 
-		initWithObjectsAndKeys(NSObject*,NSString*,...);
-
-	NS_IGNORE NSMutableDictionary();
-	inline bool
-		setObject_forKey(NSObject* obj  ,NSString* str)
-	{	
-		if(obj && str)
-		{
-			return ref->setObject(obj,str->ref->m_sString);
-		}else
-			return false;
-	}
-	inline void
-		removeObjectForKey(NSString* str)
-	{
-		ref->removeObjectForKey(str->ref->m_sString);
-	}
-	inline void 
-		removeAllObjects()
-	{
-		ref->removeAllObjects();
-	}
-	inline NSObject*
-		objectForKey(NSString* str)
-	{
-		return ref->objectForKey(str->ref->m_sString);
-	}
-	vid
-		copyWithZone(NSZone*);
-	vid
-		nextObject();
-	void
-		gotoBeginObject();
-
+NS_CLASS NSDirectoryEnumerator;
+NS_INTERFACE(NSFileManager ,NSObject)
+	static NSFileManager*
+		defaultManager();
+	NSDirectoryEnumerator* 
+		enumeratorAtPath(NSString* path);
+	 NSString * currentDirectoryPath();
+protected:	
 NS_END
+NS_DROP_EXTERN NSString * const NSFileEntry;
+
+NS_DROP_EXTERN NSString * const NSFileType;
+NS_DROP_EXTERN NSString * const NSFileTypeRegular;
+NS_DROP_EXTERN NSString * const NSFileTypeDirectory;
+NS_DROP_EXTERN NSString * const NSFileTypeSymbolicLink;
+
+NS_DROP_EXTERN NSString * const NSFileTypeCharacterSpecial;
+NS_DROP_EXTERN NSString * const NSFileTypeBlockSpecial;
+
+NS_DROP_EXTERN NSString * const NSFileTypeSocket;
+
+NS_DROP_EXTERN NSString * const NSFileTypeUnknown;
+
+NS_DROP_EXTERN NSString * const NSFileSize;
+NS_DROP_EXTERN NSString * const NSFileModificationDate;
+NS_DROP_EXTERN NSString * const NSFileOwnerAccountName;
+NS_DROP_EXTERN NSString * const NSFileGroupOwnerAccountName;
+
+NS_DROP_EXTERN NSString * const NSFilePosixPermissions;
+NS_DROP_EXTERN NSString * const NSFileReferenceCount;
+NS_DROP_EXTERN NSString * const NSFileIdentifier;
+NS_DROP_EXTERN NSString * const NSFileDeviceIdentifier;
+
+NS_DROP_EXTERN NSString * const NSFileSystemNumber;
+NS_DROP_EXTERN NSString * const NSFileSystemSize;
+NS_DROP_EXTERN NSString * const NSFileSystemFreeSize;

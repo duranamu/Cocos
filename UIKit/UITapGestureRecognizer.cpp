@@ -21,40 +21,45 @@ THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UITapGestureRecognizer.h>
 #include <UIKit/UITouch.h>
+#define super UIGestureRecognizer
 UITapGestureRecognizer*
-	UITapGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget ,SEL_PP cselector)
+	UITapGestureRecognizer::initWithTarget_action(NSActionTarget* theTarget ,SEL_PP theSelector)
 {
-	self->m_pListener = ctarget;
-	self->m_pSelector = cselector;
+	if(super::init())
+	{
+		self->numberOfTapsRequired = 1;
+	    self->numberOfTapsAcquired = 0;
+		self->tapStartTime = 0;
+		self->m_pListener = nil;
+		self->m_pSelector = nil;
+		self->m_pListener = theTarget;
+		self->m_pSelector = theSelector;
+	}
 	return self;
-}
-	UITapGestureRecognizer::UITapGestureRecognizer()
-{
-	self->numberOfTapsRequired = 1;
-	self->numberOfTapsAcquired = 0;
-	self->tapStartTime = 0;
-	self->m_pListener = nil;
-	self->m_pSelector = nil;
 }
 void
 	UITapGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
-	CGFloat newStartTime = ((UITouch*) touches->anyObject())->gettimestamp();
-	if( newStartTime - self->tapStartTime  > 0.005f)
-	{
-		self->numberOfTapsAcquired = 0;
-	}
-	self->tapStartTime = newStartTime;
+		self->state = UIGestureRecognizerStatePossible;
+		if(super::dependenceCheck())
+		{
+			CGFloat newStartTime = ((UITouch*) touches->anyObject())->gettimeMark();
+			if( newStartTime - self->tapStartTime  > 0.005f)
+			{
+				self->numberOfTapsAcquired = 0;
+			}
+			self->tapStartTime = newStartTime;
+		}
 }
 void
 	UITapGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
-
+		
 }
 void
 	UITapGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
-	CGFloat endTime = ((UITouch*) touches->anyObject())->gettimestamp();
+	CGFloat endTime = ((UITouch*) touches->anyObject())->gettimeMark();
 	CGFloat timediff = endTime -  self->tapStartTime ;
 	if( timediff < 0.1f && timediff > 0.002f)
 	{
@@ -64,6 +69,9 @@ void
 		{
 			self->numberOfTapsAcquired = 0;
 			(self->m_pListener->*m_pSelector)(nil,self);
+			self->state = UIGestureRecognizerStateRecognized;
+		}else{
+			self->state = UIGestureRecognizerStateFailed;
 		}
 
 	}

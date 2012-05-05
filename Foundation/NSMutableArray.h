@@ -25,49 +25,22 @@ THE SOFTWARE.
 #include <Foundation/NSCopying.h>
 #include <Foundation/NSZone.h>
 #include <Foundation/NSFastEnumeration.h>
-#include <stdarg.h>
-NS_INTERFACE_DEBUG( NSMutableArray , NSObject ,NSCopying ,NSFastEnumeration )
-public:
-	NS_HAS_REF(CCArray* ref);
+#include <Foundation/NSArray.h>
+NS_INTERFACE_ALLOC_SPEC(NSMutableArray , NSArray )
 
-	NSMutableArray* 
-		initWithObjects (NSObject* , ...);
+	static NSMutableArray*
+		arrayWithCapacity(NSUInteger capacity);
 	NSMutableArray*
-		initWithObject(NSObject* );
-	static NSMutableArray*
-		array();
-	static NSMutableArray*
-		arrayWithCapacity(NSUInteger );
-	    NSMutableArray();
+		initWithCapacity(NSUInteger capacity);
+	NS_IGNORE NSMutableArray();
 		 
-		NSMutableArray(NSUInteger num);
-	NSObject* 
-		objectAtIndex(NSUInteger index);
-
-    NSObject* 
-		randomObject();
-	inline bool
-		containsObject(NSObject* obj){ return ref->containsObject(obj);}
+	NSMutableArray(NSUInteger num);
 	inline void
-		addObject(NSObject* obj){ ref->addObject(obj);}
-	inline NSUInteger 
-		count() { return ref->count();}
-	inline NSObject* 
-		lastObject(){ return (NSObject* )ref->lastObject();}
-	inline NSUInteger
-		indexOfObject(NSObject* obj){return ref->indexOfObject(obj); }
+		addObject(NSObject* object){ref->addObject(object);}
 	inline void 
 		removeAllObjects(){ref->removeAllObjects();}
-	 vid 
-		 copyWithZone(NSZone*);
 	BOOL
-		removeObject(NSObject* );
+		removeObject(NSObject* objectRemoving );
 	inline void
 		removeLastObject();
-	vid
-		nextObject();
-	void
-		gotoBeginObject();
-	NSObject** indexedObject;
-	NSObject** endedObejct;
-};
+NS_END

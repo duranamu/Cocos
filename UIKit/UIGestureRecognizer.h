@@ -23,29 +23,44 @@ THE SOFTWARE.
 #include <Foundation/Foundation.h>
 #include <QuartzCore/QuartzCore.h>
 #include <UIKit/UIResponder.h>
+#include <UIKit/UITouch.h>
+#include <UIKit/UIGestureRecognizerDelegate.h>
 typedef enum UIGestureRecognizeState
 {
-	UIGestureRecognizeStateBegan = 0,
-	UIGestureRecognizeStateChanged ,
-	UIGestureRecognizeStateEnded  ,
+	UIGestureRecognizeStateBegan = 0 ,
+	UIGestureRecognizeStateChanged   ,
+	UIGestureRecognizeStateEnded     ,
 	UIGestureRecognizerStatePossible ,
 	UIGestureRecognizerStateCancelled,
  
     UIGestureRecognizerStateFailed,
  
-    UIGestureRecognizerStateRecognized 
+    UIGestureRecognizerStateRecognized = UIGestureRecognizeStateEnded
 };
-NS_INTERFACE( UIGestureRecognizer , UIResponder)
+NS_INTERFACE_INIT_SPEC( UIGestureRecognizer , UIResponder )
     virtual void
 		touchesBegan_withEvent(NSSet* touches ,UIEvent* events){};
 	 virtual void 
 		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events){};
 	 virtual void 
 		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events){};
+	 virtual void
+		 requireGestureRecognizerToFail(UIGestureRecognizer * otherGestureRecognizer);
+	 virtual BOOL
+		 canPreventGestureRecognizer(UIGestureRecognizer * preventingGestureRecognizer ){ return NO;};
+	 virtual BOOL
+		 canBePreventedGestureRecognizer(UIGestureRecognizer * preventedGestureRecognizer) { return NO;};
+	 virtual BOOL
+		 dependenceCheck();
+	 UIGestureRecognizer* init();
 protected:
-	NS_SYNTHESIZE(UIGestureRecognizeState,state);
+	NS_SYNTHESIZE
+		(UIGestureRecognizeState , state);
+	NSMutableArray* recognizersRequiredFailed;
 	NSActionTarget* m_pListener;
 	SEL_PP  m_pSelector;
-	NS_SYNTHESIZE( NSSet* ,touches );
-	NS_SYNTHESIZE(UIEvent* ,events );
+	NS_SYNTHESIZE
+		(UITouchSource ,touchesSource );
+	NS_SYNTHESIZE
+		(UIGestureRecognizerDelegate* ,delegate);
 NS_END

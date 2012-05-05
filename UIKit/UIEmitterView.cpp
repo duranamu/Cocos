@@ -21,13 +21,13 @@ THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UIEmitterView.h>
 #include <UIKit/UIImage.h>
-	UIEmitterView::UIEmitterView()
-{
-	self->content = new CCTexture2D();
-}
+#define super UIView
 UIEmitterView*
 	UIEmitterView::initWithStyle(UIEmitterViewStyle style)
 {
+	if(super::init())
+	{
+	self->content = new CCTexture2D();
 	self->emitterStyle = style;
 	CCParticleSystem* particleSystem ;
 		switch(self->emitterStyle)
@@ -75,6 +75,7 @@ UIEmitterView*
 		self->ref->setTexture(defaultUIEmitterViewParticle->CGImage());
 	}
 	self->node = self->ref;
+	}
 	return self;
 }
 UIEmitterView*

@@ -23,8 +23,9 @@ THE SOFTWARE.
 #include <UIKit/UIViewController.h>
 #include <UIKit/UIView.h>
 #include <UIKit/UIColor.h>
-NS_INTERFACE( UIWindow , UIView)
-	UIWindow(){ keyWindow = NO; self->backgroundColor = UIColor::whiteColor();}
+NS_INTERFACE_INIT_SPEC( UIWindow , UIView)
+	UIWindow* 
+		init();
 	void
 		becomeKeyWindow();
 	void
@@ -32,9 +33,9 @@ NS_INTERFACE( UIWindow , UIView)
 	void
 		sendEvent(UIEvent*);
 	protected:
-		NS_SYNTHESIZE
+	NS_SYNTHESIZE
 				(UIViewController* ,rootViewController);
-		NS_SYNTHESIZE
+	NS_SYNTHESIZE
 				(const UIColor*  ,backgroundColor);
 	BOOL keyWindow;
 

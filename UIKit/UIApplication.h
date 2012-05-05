@@ -22,15 +22,17 @@ THE SOFTWARE.
 #pragma once
 #include <Foundation/Foundation.h>
 #include <UIKit/UIWindow.h>
+#include <NIKit/NIKit.h>
+#include <UIKit/UIResponder.h>
 NS_CLASS UIEvent;
-NS_INTERFACE(UIApplication , UIView ,  NSObjectProtocol)
+NS_INTERFACE_INIT_SPEC(UIApplication , UIResponder , public NSObjectProtocol)
 public:
 	vid 
-		predo_controller_torsoData(void*,vid);
+		sender_torsoData(void*,vid);
 	vid 
-		predo_controller_righthandData(void* ,vid);
+		sender_righthandData(void* ,vid);
 	vid
-		predo_controller_lefthandData(void*, vid);
+		sender_lefthandData(void*, vid);
 	vid
 		sender_neckData(vid,vid);
 	vid
@@ -38,7 +40,7 @@ public:
 	vid
 		sender_rightCollarData(vid,vid);
 	UITouchPhase 
-		touchPhaseforTime_handz(CGFloat,CGFloat);
+		touchPhaseforTime_handz(CGFloat time,CGFloat handz);
 	void 
 		addWindow(UIWindow*);
 	void
@@ -47,7 +49,8 @@ public:
 	static UIApplication*
 		sharedApplication();
 
-	UIApplication();
+	UIApplication* init();
+	NS_IGNORE UIApplication(){};
 	void
 		sentEvent(UIEvent*);
 	void
@@ -60,8 +63,8 @@ protected:
 		(UIApplicationDelegate*,delegate);*/
 	NITrackerManager* trackerManager;
 	NITracker* torsoTracker;
-	NITracker* righthandTracker;
-	NITracker* lefthandTracker;
+	NITraceTracker* righthandTracker;
+	NITraceTracker* lefthandTracker;
 	NITracker* neckTracker;
 	NS_SYNTHESIZE
 		(CGFloat,rightCollarz);
@@ -82,9 +85,9 @@ protected:
 	NS_SYNTHESIZE
 		(CGFloat , neckz);
 	NS_SYNTHESIZE
-		(CGFloat ,rightHandShadowz);
+		(CGFloat ,shadowz);
 	NS_SYNTHESIZE
-		(CGFloat ,rightHandShadowzVelocity);
+		(CGFloat ,shadowzVelocity);
 	NS_SYNTHESIZE
 		(CGFloat ,rightHandz);
 	NS_SYNTHESIZE
@@ -109,11 +112,6 @@ protected:
 		(BOOL ,isRighthandTracked);
 		
 	UITouchPhase menuTouchPhase;
-	NS_SYNTHESIZE
-		(CGFloat ,touchStartx);
-	NS_SYNTHESIZE
-		(CGFloat ,touchStarty);
-	CGFloat touchStartTime;
 	NS_SYNTHESIZE
 		(CGFloat ,t_lasthandx);
 	NS_SYNTHESIZE

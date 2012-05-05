@@ -19,6 +19,35 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include<Foundation/CoreFoundationFramework.h>
-CFMutableDictionaryRef classForNameDictionary = CFDictionaryCreateMutable(0,100,0,0);
-
+#pragma once
+#include <Foundation/NSObject.h>
+#include <Foundation/NSObjCRuntime.h>
+#include <Foundation/NSString.h>
+NS_CLASS NSData;
+NS_INTERFACE_ALLOC_SPEC(NSMutableString , NSString)
+	NS_IGNORE NSMutableString(){};
+	void
+		setString(NSString* aString);
+	virtual NSString*
+		description();
+	void
+		appendFormat(NSString *format ,...);
+	static NSMutableString*
+		stringWithCapacity(NSUInteger capacity);
+	 NSMutableString*
+		initWithCapacity(NSUInteger capacity);
+	 void
+		appendString(NSString* aString);
+	 void
+		insertString_atIndex(NSString *aString ,NSUInteger anIndex);
+	 void
+		deleteCharactersInRange(NSRange aRange);
+	 void
+		replaceCharactersInRange_withString(NSRange aRange , NSString * aString);
+	 NSUInteger
+		replaceOccurrencesOfString_withString_options_range
+		(NSString * target,NSString * replacement , NSStringCompareOptions opts ,NSRange searchRange );
+	protected:
+	NS_SYNTHESIZE
+		(NSStringEncoding ,_encoding);
+NS_END

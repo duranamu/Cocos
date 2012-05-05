@@ -26,10 +26,10 @@ NSSet*
 	return touches;
 }
 UIEvent*
-	UIEvent::initWithTouches(NSSet* ptouches)
+	UIEvent::initWithTouches(NSSet* theTouches)
 {
-	ptouches->retain();
-	touches = ptouches;
+	theTouches->retain();
+	self->touches = theTouches;
 	return self;
 }
 UIEvent*

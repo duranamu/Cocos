@@ -40,9 +40,9 @@ NSSet*
 	if(firstObject)
 		self->ref->addObject(firstObject);
 
-	pfor(NSObject* ,obj,firstObject)
+	afor(NSObject* ,obj,firstObject)
 		self->ref->addObject(obj);
-	pend
+	aend
 
 	return self;
 }
@@ -55,9 +55,9 @@ NSSet*
 	{
 		if(firstObject)
 			set->ref->addObject(firstObject);
-		pfor(NSObject*,obj,firstObject)
+		afor(NSObject*,obj,firstObject)
 			set->ref->addObject(obj);
-		pend
+		aend
 		set->autorelease();
 	}
 	return set;
@@ -107,7 +107,7 @@ vid
 NSMutableArray*
 	NSSet::allObjects()
 {
-	NSMutableArray* allobj = NSMutableArray::array();
+	NSMutableArray* allobj = NSMutableArray::arrayWithCapacity(2);
 
 	nfor(NSObject* ,obj,self)
 		allobj->addObject(obj);

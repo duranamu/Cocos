@@ -21,22 +21,34 @@ THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UISwipeGestureRecognizer.h>
 #include <UIKit/UITouch.h>
+#define super UIGestureRecognizer
 UISwipeGestureRecognizer*
 	UISwipeGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget,SEL_PP cselector)
 {
-	self->m_pListener = ctarget;
-	self->m_pSelector = cselector;
+	if( super::init())
+	{
+		self->m_pListener = ctarget;
+		self->m_pSelector = cselector;
+		self->threshold = 20;
+		self->numberOfTouchesRequired = 1;
+	}
 	return self;
 }
 void
 	UISwipeGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
-	self->state = UIGestureRecognizerStatePossible;
-	if(touches->count() >= self->numberOfTouchesRequired)
-	{
-		UITouch* touch = (UITouch*) touches->anyObject();
-		self->gestureStartPoint = touch->locationInView();
-	}
+		self->state = UIGestureRecognizerStatePossible;
+		if(dependenceCheck())
+		{
+			UITouch* anyTouch = (UITouch*) touches->anyObject();	
+			self->touchesSource = anyTouch->gettouchSource();
+			if(touches->count() >= self->numberOfTouchesRequired)
+			{
+				self->gestureStartPoint = anyTouch->locationInView();
+			}else{
+				self->state = UIGestureRecognizerStateFailed;
+			}
+		}
 }
 void
 	UISwipeGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
@@ -45,18 +57,22 @@ void
 void
 	UISwipeGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
-	self->state = UIGestureRecognizerStateRecognized;
-	UITouch* touch = (UITouch*) touches->anyObject();
-	self->direction =  directionFrom_to(self->gestureStartPoint , touch->locationInView());
-	//if(self->direction != UISwipeGestureRecognizerDirectionZero)
-	(m_pListener->*m_pSelector)(nil ,self);
+	if(super::dependenceCheck())
+	{
+	if(self->state == UIGestureRecognizerStatePossible)
+	{
+		self->state = UIGestureRecognizerStateRecognized;
+		UITouch* touch = (UITouch*) touches->anyObject();
+		self->direction =  directionFrom_to(self->gestureStartPoint , touch->locationInView());
+		(m_pListener->*m_pSelector)(m_pListener ,self);
+	}
+	}
 }
 UISwipeGestureRecognizerDirection
 	UISwipeGestureRecognizer::directionFrom_to(CGPoint pa ,CGPoint pb)
 {
 	UISwipeGestureRecognizerDirection pending = UISwipeGestureRecognizerDirectionZero ;
 	BOOL first = YES;
-	NSInteger threshold = 20;
 	if((pb.x - pa.x) > threshold )
 		pending = (UISwipeGestureRecognizerDirection)( pending |  UISwipeGestureRecognizerDirectionRight);
 	if((pb.x - pa.x) < -threshold  )

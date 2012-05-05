@@ -28,11 +28,8 @@ typedef enum {
 	UIEventTypeTraces
 } UIEventType;
 NS_INTERFACE( UIEvent , NSObject)
-	UIEvent(NSSet* set)
-	{
-		self->touches = set;
-	}
-	UIEvent(){};
+	
+	NS_IGNORE UIEvent(){};
 	
 	UIEvent*
 		initWithTouches(NSSet* set);

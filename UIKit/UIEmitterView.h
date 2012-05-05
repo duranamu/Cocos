@@ -40,7 +40,7 @@ typedef enum UIEmitterViewStyle
 NS_INTERFACE(UIEmitterView,UIView)
 	NS_HAS_REF(CCParticleSystem*,ref);
 	public:
-	UIEmitterView();
+	NS_IGNORE UIEmitterView(){};
 	 UIEmitterView*
 		 initWithStyle(UIEmitterViewStyle);
 	static  UIEmitterView*

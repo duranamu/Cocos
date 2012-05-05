@@ -20,8 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Foundation/Cocos2DX_framework.h>
-class NSObject;
+#include <Foundation/NSObject.h>
 #include <Foundation/NSData.h>
 #include <Foundation/NSErro.h>
 enum {

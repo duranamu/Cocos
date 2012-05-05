@@ -23,13 +23,11 @@ THE SOFTWARE.
 #include <Foundation/Cocos2DX_framework.h>
 #include <Foundation/NSObjectProtocol.h>
 NS_CLASS NSCopying;
-class NSObject : public CCObject 
-{
-public:  
-	NS_ALLOC_FULL(NSObject) 
-	NS_INIT_FULL(NSObject) 
-	NS_DEALLOCATE(NSObject)
+NS_CLASS NSString;
+NS_INTERFACE(NSObject,CCObject )
 	vid copy();
+	virtual NSString *
+		description();
 protected:
 	NSCopying* copying;
-};
+NS_END

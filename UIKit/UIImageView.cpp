@@ -21,17 +21,23 @@ THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UIImageView.h>
 #include <UIKit/UIImage.h>
+#define super UIView
+UIImageView*
+	UIImageView::initWithImage(UIImage* image)
+{
+	if(super::init())
+	{
+	self->image = image;
+	image->retain();
+	self->node = CCSprite::spriteWithTexture(image->getCCTexture2D());
+	}
+	return self;
+}
 UIImageView*
 	UIImageView::viewWithImage(UIImage* image)
 {
-	UIImageView* pimageView = new UIImageView(image);
-
-	if(!pimageView)
-	{
-		CC_SAFE_DELETE(pimageView);
-	}
+	UIImageView* pimageView = alloc()->initWithImage(image);
 	pimageView->autorelease();
-
 	return pimageView;
 }
 	UIImageView::UIImageView(UIImage* image)
@@ -56,18 +62,19 @@ UIImageView::UIImageView(CCTexture2D* image)
 {
 	self->node = CCSprite::spriteWithTexture(image);
 };
-UIImageView*	
-	UIImageView::viewWithFile(NSString* str )
+UIImageView*
+	UIImageView::initWithFile(NSString* fileName)
 {
-	UIImageView* pimageView = new UIImageView();
-	if(!pimageView)
-	{
-		CC_SAFE_DELETE(pimageView);
-	}else{
-		pimageView->node = CCSprite::spriteWithFile(str->description().c_str());
-		pimageView->node->retain();
-	}
-	return pimageView;
+	self->node = CCSprite::spriteWithFile(fileName->cStringUsingEncoding(NSASCIIStringEncoding));
+	self->node->retain();
+	return self;
+}
+UIImageView*	
+	UIImageView::viewWithFile(NSString* fileName )
+{
+	UIImageView* view = alloc()->initWithFile(fileName);
+	view->autorelease();
+	return view;
 }
 void
 	UIImageView::setimage(UIImage* cimage)

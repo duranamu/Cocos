@@ -19,62 +19,59 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include <Foundation/NSData.h>
-const vid 
-	NSData::bytes()
+#include <Foundation/NSDate.h>
+NSDate*
+	NSDate::initWithTimeIntervalSince1970(NSTimeInterval seconds)
 {
-	return self->_bytes;
+	self->timesSeconds = seconds;
+	return self;
 }
-NSUInteger
-	NSData::length()
+NSDate*
+	NSDate::initWithTimeIntervalSinceReferenceDate(NSTimeInterval seconds)
 {
-	return self->_length;
+	self->timesSeconds = seconds - NSTimeIntervalSince1970 ;
+	return self;
 }
-NSData*
-	NSData::initWithBytes_length(vid bytes ,NSUInteger length)
+NSDate*
+	NSDate::init()
 {
-	self->_length = length;
-	self->_bytes = malloc(sizeof(char)*length);
-	memcpy(self->_bytes,bytes,sizeof(char)*length);
+	self->initWithTimeIntervalSince1970((NSTimeInterval)time(nil));
+	return self;
+}
+NSDate*
+	NSDate::dateWithTimeIntervalSince1970(NSTimeInterval seconds)
+{
+	return (NSDate*) alloc()->initWithTimeIntervalSince1970(seconds);
+}
+NSDate*
+	NSDate::dateWithTimeIntervalSinceReferenceDate(NSTimeInterval seconds)
+{
+	return (NSDate*) alloc()->dateWithTimeIntervalSinceReferenceDate(seconds);
+}
+NSDate*
+	NSDate::initWithTimeIntervalSinceNow(NSTimeInterval seconds)
+{
+	self->timesSeconds = time(nil) + seconds;
+	return self;
+}
 
-	return self;
-}
-NSData*
-	NSData::dataWithBytes_length(vid bytes ,NSUInteger length)
+NSDate*
+	NSDate::dateWithTimeIntervalSinceNow(NSTimeInterval seconds)
 {
-	return alloc()->initWithBytes_length(bytes,length);
+	return (NSDate*) alloc()->initWithTimeIntervalSinceNow(seconds);
 }
-NSData*
-	NSData::initWithBytesNoCopy_length(vid bytes ,NSUInteger length)
-{
-	self->_length = length;
-	self->_bytes = bytes;
-	return self;
-}
-NSData*
-	NSData::dataWithBytesNoCopy_length(vid bytes ,NSUInteger length)
-{
-	return alloc()->initWithBytesNoCopy_length(bytes,length);
-}
+
 void
-	NSData::dealloc()
+NSDate::dealloc()
 {
-	free(self->_bytes);
-	if(dataPath)
-		remove(dataPath->cStringUsingEncoding(NSASCIIStringEncoding));
 }
-NSData*
-	NSData::initWithContentsOfFile(NSString* filePath)
+NSDate*
+	NSDate::distantPast()
 {
-	char* dataBytes = readFileBytes(filePath->cStringUsingEncoding(NSASCIIStringEncoding));
-	self->_bytes = dataBytes;
-	self->_length = strlen(dataBytes);
-	self->dataPath = filePath;
-	filePath->retain();
-	return self;
+	return (NSDate*)alloc()->initWithTimeIntervalSinceNow(-100*365*24*36000);
 }
-NSData*
-	NSData::dataWithContentsOfFile(NSString* filePath)
+NSDate*
+	NSDate::distantFuture()
 {
-	return (NSData*) alloc()->initWithContentsOfFile(filePath)->autorelease();
+	return (NSDate*)alloc()->initWithTimeIntervalSinceNow(100*365*24*36000);
 }

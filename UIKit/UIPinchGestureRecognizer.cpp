@@ -21,52 +21,70 @@ THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UIPinchGestureRecognizer.h>
 #include <UIKit/UITouch.h>
+#define super UIGestureRecognizer
 UIPinchGestureRecognizer*
 	UIPinchGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget,SEL_PP cselector)
 {
-	self->m_pListener = ctarget;
-	self->m_pSelector = cselector;
-	self->scale = 1;
+	if(super::init())
+	{
+		self->m_pListener = ctarget;
+		self->m_pSelector = cselector;
+		self->scale = 1;
+	}
 	return self;
 }
 void
 	UIPinchGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
-	self->state = UIGestureRecognizeStateBegan;
-	bool fistTouch = true;
-	CGPoint touchLoaction;
-	nfor(UITouch* ,touch ,touches)
-		if(fistTouch)
+		self->state = UIGestureRecognizerStatePossible;
+		if(super::dependenceCheck())
 		{
-			touchLoaction = touch->getlocation();
-			fistTouch= false;
-		}else{
-			self->gestureStartDistance = CGDistanceMake(touchLoaction,touch->getlocation());
+			if(touches->count() >= 2 )
+			{
+			self->state = UIGestureRecognizeStateBegan;
+			UITouch* anyTouch = (UITouch*)touches->anyObject();
+			self->touchesSource = anyTouch->gettouchSource();
+			CGPoint touchLoaction;
+			nfor(UITouch* ,touch ,touches)
+				if(touch->gettouchSource() == UITouchSourceRightHand)
+				{
+					touchLoaction = touch->getlocation();
+				}else{
+					self->gestureStartDistance = CGDistanceMake(touchLoaction,touch->getlocation());
+				}
+			nend
+			}else{
+			self->state = UIGestureRecognizerStateFailed;
+			}
 		}
-	nend
 }
 void
 	UIPinchGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
+	if(self->state != UIGestureRecognizeStateBegan && self->state != UIGestureRecognizeStateChanged)
+	{
+		return;
+	}
 	self->state = UIGestureRecognizeStateChanged;
-	bool fistTouch = true;
 	CGPoint touchLoaction;
 	nfor(UITouch* ,touch ,touches)
-		if(fistTouch)
+		if(touch->gettouchSource() == UITouchSourceRightHand)
 	 	{
 			touchLoaction = touch->getlocation();
-			fistTouch= false;
 		}else{
 			CGFloat distance = CGDistanceMake(touchLoaction,touch->getlocation());
 			self->scale = distance / self->gestureStartDistance;
 		}
 	nend
-		(m_pListener->*m_pSelector)(nil,self);
 }
 void
 	UIPinchGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
-	self->state = UIGestureRecognizeStateEnded;
+	if(self->state == UIGestureRecognizeStateChanged)
+	{
+		self->state = UIGestureRecognizeStateEnded;
+		(m_pListener->*m_pSelector)(nil,self);
+	}
 }
 void
 	UIPinchGestureRecognizer::dealloc(){}

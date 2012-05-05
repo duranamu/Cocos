@@ -22,14 +22,16 @@ THE SOFTWARE.
 #pragma once
 #include <Foundation/NSObject.h>
 #include <Foundation/NSObjCRuntime.h>
-class NSData;
+#include <Foundation/NSErro.h>
+NS_CLASS NSData;
 typedef NSUInteger NSStringEncoding;
-NS_INTERFACE_DEBUG(NSString , NSObject)
+typedef NSUInteger NSStringCompareOptions;
+NS_INTERFACE_DEBUG(NSString ,NSObject,public NSObjectProtocol)
 	NS_HAS_REF(CCString* ref);
 public:
-	//NSString(const char*);
-	NSString();
-	std::string
+	NS_IGNORE NSString(){};
+
+	virtual NSString*
 		description();
 	NSString*
 		initWithData_encoding(NSData * ,NSStringEncoding);
@@ -42,10 +44,25 @@ public:
 	static NSString*
 		stringWithString(NSString*);
 	 NSString*
+		initWithContentOfFile_encoding_erro(NSString* path ,NSStringEncoding enc , NSError** error);
+	 static NSString*
+		stringWithContentOfFile_encoding_erro(NSString* path ,NSStringEncoding enc , NSError** error);
+	 NSString*
 		initWithString(NSString*);
+	 NSString*
+		 initWIthFormat(NSString* format,...);
+	 NSString*
+		 initWithFormat_locale_arguments(NSString* format ,vid local ,va_list arguments);
+	 NSUInteger
+		 length();
+	 const char *
+		cStringUsingEncoding(NSStringEncoding encoding);
+
+	 NSComparisonResult
+			compare(NSString * aString);
 	protected:
-		NS_SYNTHESIZE
-			(NSStringEncoding ,_encoding);
+	NS_SYNTHESIZE
+		(NSStringEncoding ,_encoding);
 NS_END
 enum {
     NSASCIIStringEncoding = 1,
@@ -72,4 +89,15 @@ enum {
     NSUTF32BigEndianStringEncoding = 0x98000100,
     NSUTF32LittleEndianStringEncoding = 0x9c000100,
     NSProprietaryStringEncoding = 65536
+};
+enum {
+   NSCaseInsensitiveSearch = 1,
+   NSLiteralSearch = 2,
+   NSBackwardsSearch = 4,
+   NSAnchoredSearch = 8,
+   NSNumericSearch = 64,
+   NSDiacriticInsensitiveSearch = 128,
+   NSWidthInsensitiveSearch = 256,
+   NSForcedOrderingSearch = 512,
+   NSRegularExpressionSearch = 1024
 };

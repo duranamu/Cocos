@@ -20,19 +20,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UINavigationController.h>
+#define super UIViewController
 UINavigationController*
 	UINavigationController::initWithRootViewController
 	(UIViewController* rootViewController)
 {
+	if(super::init())
+	{
+	self->stackPointer = 0;
+	self->viewControllers =NSMutableArray::alloc()->init();
 	self->rootViewController = rootViewController;
 	self->rootViewController->retain();
 	self->pushViewController_viewController_animated(rootViewController,YES);
+	}
 	return self;
 }
-	UINavigationController::UINavigationController()
+UINavigationController*
+	UINavigationController::init()
 {
-	self->stackPointer = 0;
-	self->viewControllers =NSMutableArray::alloc()->init();
+	if(super::init())
+	{
+		self->stackPointer = 0;
+		self->viewControllers =NSMutableArray::alloc()->init();
+	}
+	return self;
 }
 void 
 	UINavigationController::pushViewController_viewController_animated
@@ -54,13 +65,28 @@ void
 	self->topViewController->viewDidUpdate(time);
 }
 void
-	UINavigationController::predo_controller_torsoData(void * node , vid sender)
+	UINavigationController::sender_torsoData(void * node , vid sender)
 {
-	self->topViewController->predo_controller_torsoData(node ,sender);
+	self->topViewController->sender_torsoData(node ,sender);
 }
 void
 	UINavigationController::dealloc()
 {
 	self->viewControllers->release();
 	self->viewControllers = nil;
+}
+void
+	UINavigationController::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
+{
+	self->topViewController->touchesBegan_withEvent(touches,events);
+}
+void
+	UINavigationController::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
+{
+	self->topViewController->touchesMoved_withEvent(touches,events);
+}
+void
+	UINavigationController::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
+{
+	self->topViewController->touchesEnded_withEvent(touches,events);
 }

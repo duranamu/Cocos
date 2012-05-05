@@ -19,18 +19,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef UINavigationControllerDelegate_h
-#define UINavigationControllerDelegate_h
+#pragma once
 #include <QuartzCore\QuartzCore.h>
-#include "UINavigationController.h"
-class UINavigationControllerDelegate : public NSObject
-{
-public:
+#include <UIKit/UINavigationController.h>
+NS_PROTOCOL(UINavigationControllerDelegate)
 	virtual void
 		navigationController_willShowViewController_animated(
 			UINavigationController *,UIViewController *,BOOL){};
 	virtual void
 		navigationController_didShowViewController_animated(
 			UINavigationController *,UIViewController *,BOOL){};
-};
-#endif
+NS_END

@@ -19,33 +19,36 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef CCWRAPPER_H
-#define CCWRAPPER_H
-#endif
-#include <cocos2d.h>
-#include <libxml\parser.h>
-#include <libxml\xpath.h>
-using namespace cocos2d;
-class CCWrapper : public CCObject
-{
-public: 
-	union{
-		xmlNodePtr xmlNodePtrVal;
-	}data;
-	
-	CCWrapper(xmlNodePtr nodeset)
-	{
-		data.xmlNodePtrVal = nodeset;
-	}
+#pragma once
+#include <Foundation/NSObject.h>
+#include <Foundation/NSString.h>
+#include <Foundation/NSCopying.h>
+#include <Foundation/NSZone.h>
+#include <Foundation/NSFastEnumeration.h>
+typedef  CCDictionary<std::string,NSObject*> CCStringDictionary;
+NS_INTERFACE
+	( NSDictionary , NSObject , NSCopying, NSFastEnumeration)
+public:
+	NS_HAS_REF( CCStringDictionary * ,ref);
+	static NSDictionary*
+		dictionary();
+	static NSDictionary*
+		dictionaryWithObjectAndKeys(NSObject*,NSString*,...);
+	NSDictionary* 
+		initWithObjectsAndKeys(NSObject*,NSString*,...);
 
-	static CCArray* ccArrayWithXmlNodesetPtr(xmlNodeSetPtr nodeset)
+	NSDictionary();
+	
+	inline NSObject*
+		objectForKey(NSString* str)
 	{
-		CCArray* wrapper = CCArray::array();
-		nfor(int i=0;i< nodeset->nodeNr;i++)
-		{
-			wrapper->addObject(new CCWrapper(nodeset->nodeTab[i]));
-		}
-		wrapper->retain();
-		return wrapper;
+		return ref->objectForKey(str->ref->m_sString);
 	}
-};
+	vid
+		copyWithZone(NSZone*);
+	vid
+		nextObject();
+	void
+		gotoBeginObject();
+
+NS_END

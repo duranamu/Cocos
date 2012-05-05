@@ -41,8 +41,10 @@ NS_INTERFACE( UISwipeGestureRecognizer , UIGestureRecognizer)
 		 directionFrom_to(CGPoint ,CGPoint);
 	 protected:
 		NS_SYNTHESIZE
-		(UISwipeGestureRecognizerDirection ,direction);
+			(UISwipeGestureRecognizerDirection ,direction);
 		NS_SYNTHESIZE
-		(NSUInteger ,numberOfTouchesRequired);
+			(NSUInteger ,numberOfTouchesRequired);
+		NS_SYNTHESIZE
+			(NSInteger ,threshold );
 		 CGPoint gestureStartPoint;
 NS_END

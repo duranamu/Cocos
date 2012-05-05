@@ -19,7 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "UIFont.h"
+#include <UIKit/UIFont.h>
 UIFont*
 	UIFont::initWithName_size(NSString* name ,CGFloat size)
 {

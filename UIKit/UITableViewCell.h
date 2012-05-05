@@ -23,6 +23,7 @@ THE SOFTWARE.
 #include <Foundation/Foundation.h>
 #include <UIKit/UIView.h>
 #include <UIKit/UIImageView.h>
+#include <UIKit/UIPanGestureRecognizer.h>
 typedef enum UITableViewStyle{
 	UITableViewSylePlain = 0
 	,UITableViewSyleDefault
@@ -32,8 +33,9 @@ typedef enum UITableViewCellAccessory{
 	UITableViewCellAccessoryDisclosureIndicator ,
 	UITableViewCellAccessoryDetailDisclosureButton
 };
-NS_INTERFACE( UITableViewCell , UIView )
-	UITableViewCell();
+NS_INTERFACE_INIT_SPEC( UITableViewCell ,UIView , NSObjectProtocol)
+	 NS_IGNORE UITableViewCell(){};
+	UITableViewCell* init();
 	 UITableViewCell* 
 		initWithStyle_reuseIdentifier(UITableViewStyle style ,NSString* uid);
 	 UITableViewCell* 
@@ -44,6 +46,8 @@ NS_INTERFACE( UITableViewCell , UIView )
 		touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
 	void
 		touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+	vid
+		deltaDisplace(vid sender ,vid gestureRecognizer);
 	protected:
 	UITableViewStyle style ;
 	NS_PROPERTY 
@@ -59,4 +63,5 @@ NS_INTERFACE( UITableViewCell , UIView )
 		(UIImageView* ,imageView);
 	NS_SYNTHESIZE_RETAIN
 		(NSIndexPath* ,indexPath);
+	UIPanGestureRecognizer* panGestureRecognizer;
 NS_END

@@ -20,45 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include <Foundation/NSMutableArray.h>
+#define super NSArray
 NSMutableArray*
-	NSMutableArray::initWithObjects(NSObject* msg , ...)
+	NSMutableArray::arrayWithCapacity(NSUInteger capacity)
 {
-	if(msg)
-		self->ref->addObject(msg);
-
-	va_list argp;
-	NSInteger argno = 0;
-	NSObject* para;
-
-	va_start(argp , msg);
-	while(1)
-	{
-		para = va_arg( argp , NSObject * );
-		if( para != nil)
-		{
-			argno++;
-			self->ref->addObject(para);
-		}else{
-			break;
-		}
-	}
-	va_end ( argp);
-	return self;
-}
-NSMutableArray*
-	NSMutableArray::initWithObject(NSObject* obj)
-{
-	if(obj)
-	{
-		self->ref->addObject(obj);
-	}
-	
-	return self;
-}
-NSMutableArray*
-	NSMutableArray::arrayWithCapacity(NSUInteger num)
-{
-	NSMutableArray* mem =  new NSMutableArray(num);
+	NSMutableArray* mem =  new NSMutableArray(capacity);
 	if(!mem )
 	{
 		CC_SAFE_DELETE(mem);
@@ -70,23 +36,8 @@ NSMutableArray::NSMutableArray(NSUInteger num)
 	ref = CCArray::arrayWithCapacity(num);
 }
 
-NSMutableArray::NSMutableArray()
+	NSMutableArray::NSMutableArray()
 {
-}
-NSObject* 
-	NSMutableArray::objectAtIndex(NSUInteger index)
-{
-	return (NSObject*) ref->objectAtIndex(index);
-}
-NSObject* 
-	NSMutableArray::randomObject()
-{
-	return (NSObject*) ref->randomObject();
-}
-NSMutableArray*
-	NSMutableArray::array()
-{
-	return (NSMutableArray*) alloc()->init()->autorelease();
 }
 BOOL
 	NSMutableArray::removeObject(NSObject* obj)
@@ -114,76 +65,18 @@ void
 	//	ref = nil;
 	//}
 }
-void
-	NSMutableArray::objectDidUnload()
+NSMutableArray*
+	NSMutableArray::initWithCapacity(NSUInteger capacity)
 {
-	self->ref->removeAllObjects();
-}
-/*oid
-	NSMutableArray::objectDidRecycle()
-{
-	_cache[--_header] = self;
-	_cache_count++;
-	m_uReference++;
-}
-void 
-	NSMutableArray::operator delete(void* pointer)
-{
-	if(_header > 0)
-	{
-		NSMutableArray* object = (NSMutableArray*) pointer;
-		object->objectDidUnload();
-		object->objectDidRecycle();
-	}else{
-		free(pointer);
-	}
+	return self;
 }
 NSMutableArray*
 	NSMutableArray::alloc()
 {
-	  NSMutableArray* mem ; 
-	if(_cache_count <= 0) 
+	NSArray* newInstance ;
+	if(newInstance = super::alloc())
 	{
-		for (NSUInteger i = 0; i< MAX_CACHE_OBJECT ;i++) _cache[i] = new NSMutableArray();  
-		_cache_count = MAX_CACHE_OBJECT; _header =0;
-	}  
-	mem = _cache[_header]; _header = (_header++) % MAX_CACHE_OBJECT ; --_cache_count;  
-	
-	if(!mem){CC_SAFE_DELETE(mem);}return mem;
-}*/
-void
-	NSMutableArray::objectDidLoad()
-{
-	ref = CCArray::array();
-	self->copying = self;
-	ref->retain();
-}
-vid
-	NSMutableArray::copyWithZone(NSZone* aZone)
-{
-	NSMutableArray* newArray  = (NSMutableArray*)NSMutableArray::alloc()->init();
-	nfor(NSObject* ,obj,self)
-		newArray->addObject(obj);
-	nend
 
-	return newArray;
-}
-vid
-	NSMutableArray::nextObject()
-{
-	if(indexedObject <= endedObejct && self->ref->data->num)
-	{
-		return *(indexedObject++);
 	}
-		return nil;
+	return (NSMutableArray*)newInstance;
 }
-void
-	NSMutableArray::gotoBeginObject()
-{
-	if(self->ref->data->num )
-	{
-		indexedObject = (NSObject**)self->ref->data->arr;
-		endedObejct   = (NSObject**)indexedObject + self->ref->data->num-1;
-	}
-}
-NS_CACHE_OBJECT_INIT(NSMutableArray)

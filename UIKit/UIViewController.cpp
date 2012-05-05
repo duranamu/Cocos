@@ -21,17 +21,18 @@ THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UIViewController.h>
 #include <UIKit/UITouch.h>
+#define super UIView
 void 
 	UIViewController::viewDidRender(CCLayer* host)
 {
-	nfor(UIView*,pView,view->subviews)
+	nfor(UIView*,pView,view->getsubviews())
 		pView->viewDidRender(host);
 	nend
 }
 void 
 	UIViewController::viewReloadData(NSMutableArray* toShow )
 {
-	nfor(UIView*,pView,view->subviews)
+	nfor(UIView*,pView,view->getsubviews())
 		pView->reloadData(toShow);
 	nend
 }
@@ -77,10 +78,10 @@ void
 	}
 }
 void 
-	UIViewController::predo_controller_torsoData(void* sender,vid data)
+	UIViewController::sender_torsoData(void* sender,vid data)
 {
 	NSCAST(CIVector*,data);
-	nfor(UIView* , m_view , followView->subviews)
+	nfor(UIView* , m_view , followView->getsubviews())
 		m_view->followPlayer(cdata);
 	nend
 	cdata->autorelease();
@@ -89,30 +90,6 @@ void
 	UIViewController::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
 	self->view->touchesMoved_withEvent(touches,events);
-
-	UITouch* touch = (UITouch*) touches->anyObject();
-	if(touchStartx && touchStarty)
-	{
-		float x = touch->getlocation().x;
-		float y =  touch->getlocation().y;
-		float moveSinceTouchX = fabsf( x - t_lasthandx );
-		float moveSinceTouchY = 1.5 *( y - t_lasthandy);
-		if(t_lasthandx && t_lasthandy)
-		{
-			t_lasthandx = x;
-			t_lasthandy = y;
-			if(newTouchSession)
-			{
-				newTouchSession = false;
-			}else{
-				touch->setdeltaMove ( ccp (0 , moveSinceTouchY));
-			}
-		}else{
-			t_lasthandx = x;
-			t_lasthandy = y;
-		}
-	}
-
 
 	if(receiver)
 	{
@@ -152,3 +129,15 @@ void
 		//todo load UIViewController from associated storyboard
 	}
 }
+UIViewController*
+	UIViewController::init()
+	{
+		if(super::init())
+		{
+		self->view		   = UIView::alloc()->init();
+		self->followView   = UIView::alloc()->init();
+		self->clickView    = UIView::alloc()->init();
+		self->receiver     = nil;
+		}
+		return self;
+	}

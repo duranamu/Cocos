@@ -25,34 +25,16 @@ THE SOFTWARE.
 #include <UIKit/UITouch.h>
 #include <Foundation/NSIndexPath.h>
 #include <UIKit/UITapGestureRecognizer.h>
-NS_INTERFACE( UIView , UIResponder )
-public:
-	UIView()
-	{
-		self->becomeFirstResponder = NO;
-		subviews = NSMutableArray::alloc()->init();
-		self->gestureRecognizers = nil;
-		self->node = new CCNode();
-		self->indexPath = NSIndexPath::alloc()->init();
-	}
+NS_INTERFACE_INIT_SPEC(UIView , UIResponder )
 UIView*
-	anyView()
-	{
-		if(subviews)
-		{
-			return (UIView*) subviews->objectAtIndex(0);
-		}
-		return nil;
-	}
+	init();
+	UIView();
+UIView*
+	anyView();
 void
-	addSubView(UIView* view)
-	{
-		subviews->addObject(view);
-		view->setsuperview(self);
-	}
+	addSubView(UIView* view);
 virtual void 
 	viewDidRender(CCLayer* hostLayer);
-	
 virtual void 
 	reloadData(NSMutableArray* toShow) { };
  void 
@@ -76,7 +58,7 @@ virtual void
  virtual void
 	addGestureRecognizer(UIGestureRecognizer*);
 
- 	NSMutableArray* subviews;
+	NS_SYNTHESIZE(NSMutableArray* ,subviews);
 	NS_SYNTHESIZE_RETAIN (CCNode* , node );
 	NSActionTarget* listener;
 	SEL_PP  selector;

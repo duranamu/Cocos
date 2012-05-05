@@ -25,9 +25,17 @@ THE SOFTWARE.
 #include <UIKit/UITableViewCell.h>
 #include <UIKit/UITableViewDataSource.h>
 #include <UIKit/UIImageView.h>
-UITableView::UITableView()
+#define super UIView
+UITableView*
+	UITableView::init()
 {
-	m_indexPath = CCArray::array();
+	if(super::init())
+	{
+	self->m_indexPath = NSArray::alloc()->init();
+	self->panGestureRecognizer = UIPanGestureRecognizer::alloc()->init();
+	self->addGestureRecognizer(self->panGestureRecognizer);
+	}
+	return self;
 }
 void 
 	UITableView::reloadData(NSMutableArray* toShow)
@@ -93,6 +101,7 @@ void
 	nfor(UIView*,aView ,self->subviews)
 		aView->touchesMoved_withEvent(touches,events);
 	nend
+	self->moveByPoint(panGestureRecognizer->getdeltaDisplacement());
 };
 //todo tableview needs sprite while blanck image itself ,but not yet has any ;
 BOOL

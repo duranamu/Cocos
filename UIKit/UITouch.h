@@ -29,23 +29,41 @@ typedef enum {
     UITouchPhaseCancelled,
 	UITouchPhasePending,
 } UITouchPhase;
+typedef enum {
+    UITouchSourceRightHand = 1 << 0,
+    UITouchSourceLeftHand  = 1 << 1,
+    UITouchSourceTorso     = 1 << 2,
+    UITouchSourceNeck      = 1 << 3,
+    UITouchSourceRightElbow = 1 << 4,
+	UITouchSourceLeftElbow  = 1 << 5,
+	UITouchSourceRightCollar = 1 << 6,
+	UITouchSourceLeftCollar  = 1 << 7,
+} UITouchSource;
 NS_INTERFACE_DEBUG( UITouch , NSObject )
 	static UITouch* 
 		touchWithPhase(UITouchPhase);
+	static UITouch*
+		touchWithPhase_source(UITouchPhase phase , UITouchSource source);
 	UITouch*
-		initWithPhase(UITouchPhase );
+		initWithPhase(UITouchPhase phase );
+	UITouch*
+		initWithPhase_source(UITouchPhase phase , UITouchSource source);
 	CGPoint
 		locationInView();
 protected:
-	UITouch();
+	NS_IGNORE UITouch(){};
 	NS_SYNTHESIZE
 		(CGPoint, location);
 	NS_SYNTHESIZE
-		(NSTimeInterval , timestamp);
+		(NSTimeInterval , deltaTime);
+	NS_SYNTHESIZE
+		(NSTimeInterval , timeMark);
 	NS_SYNTHESIZE
 		(UITouchPhase , phase);
 	NS_SYNTHESIZE
 		(CGPoint ,deltaMove);
+	NS_SYNTHESIZE
+		(UITouchSource,touchSource);
 	NSMutableArray* gestureRecognizers;
 
 NS_END

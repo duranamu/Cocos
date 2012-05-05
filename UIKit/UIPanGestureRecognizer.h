@@ -20,13 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once 
-#include <QuartzCore\QuartzCore.h>
+#include <QuartzCore/QuartzCore.h>
 #include <UIKit/UIGestureRecognizer.h>
 NS_CLASS UIView;
-NS_INTERFACE( UIPanGestureRecognizer , UIGestureRecognizer)
+NS_INTERFACE(UIPanGestureRecognizer , UIGestureRecognizer)
 	UIPanGestureRecognizer*
 		initWithTarget_action(NSActionTarget* ,SEL_PP);
-	UIPanGestureRecognizer();
 	virtual void 
 		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 
@@ -39,6 +38,10 @@ NS_INTERFACE( UIPanGestureRecognizer , UIGestureRecognizer)
 		 velocityInView(UIView* );
 protected:
 	CGPoint touchStartLocation ;
+	CGPoint recentTouchLocation ;
 	NSTimeInterval lastTouchTime;
-	CGPoint velocity;
+	NS_SYNTHESIZE
+	(CGPoint,deltaDisplacement);
+	NS_SYNTHESIZE
+	(CGPoint,velocity);
 NS_END

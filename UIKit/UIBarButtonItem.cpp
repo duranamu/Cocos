@@ -25,9 +25,12 @@ THE SOFTWARE.
 #include <UIKit/UIBarItem.h>
 #include <UIKit/UIColor.h>
 #include <UIKit/UIFont.h>
+#define super UIBarItem
 UIBarButtonItem*
 	UIBarButtonItem::initWithTitle_style_target_action(NSString* ctitle ,UIBarButtonItemStyle cstyle, NSActionTarget* ctarget,SEL_PP caction)
 {
+	if(super::init())
+	{
 	self->action = caction;
 	self->target = ctarget;
 	self->style = cstyle;
@@ -38,6 +41,7 @@ UIBarButtonItem*
 		UIColor::whiteColor(),UITextAttributeTextColor);
 	//nil to be fixed
 	//self->setTitleTextAttributes_forState(dict,nil);
+	}
 	return self;
 }
 void

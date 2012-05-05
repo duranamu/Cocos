@@ -22,6 +22,7 @@ THE SOFTWARE.
 #include <Foundation/NSObject.h>
 #include <Foundation/NSCopying.h>
 #include <Foundation/NSException.h>
+#include <Foundation/NSString.h>
  void
 	 NSObject::dealloc()
  {
@@ -36,4 +37,9 @@ THE SOFTWARE.
 		 throw NSException::exceptionWithName_reason_userInfo(
 			 NSSTR("Panic"),NSSTR("Not Implementation for copyWithZone"),nil);
 	 }
+ }
+ NSString*
+	 NSObject::description()
+ {
+	 return NSSTR("NSObject");
  }

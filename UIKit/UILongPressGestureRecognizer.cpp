@@ -21,24 +21,27 @@ THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UILongPressGestureRecognizer.h>
 #include <UIKit/UITouch.h>
+#define super UIGestureRecognizer
 UILongPressGestureRecognizer*
 	UILongPressGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget ,SEL_PP cselector)
 {
-	self->m_pListener = ctarget;
-	self->m_pSelector = cselector;
+	if(super::init())
+	{
+		self->m_pListener = ctarget;
+		self->m_pSelector = cselector;
+		self->tapStartTime = 0;
+	}
 	return self;
-}
-	UILongPressGestureRecognizer::UILongPressGestureRecognizer()
-{
-	self->tapStartTime = 0;
-	self->m_pListener = nil;
-	self->m_pSelector = nil;
 }
 void
 	UILongPressGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
-	CGFloat newStartTime = ((UITouch*) touches->anyObject())->gettimestamp();
-	self->tapStartTime = newStartTime;
+	self->state = UIGestureRecognizerStatePossible;
+	if(super::dependenceCheck())
+	{
+		CGFloat newStartTime = ((UITouch*) touches->anyObject())->gettimeMark();
+		self->tapStartTime = newStartTime;
+	}
 }
 void
 	UILongPressGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
@@ -48,11 +51,17 @@ void
 void
 	UILongPressGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
-	CGFloat endTime = ((UITouch*) touches->anyObject())->gettimestamp();
+	if(super::dependenceCheck())
+	{
+	CGFloat endTime = ((UITouch*) touches->anyObject())->gettimeMark();
 	CGFloat timediff = endTime -  self->tapStartTime ;
 	if( timediff > 0.003f && timediff < 5.0f)
 	{
+		self->state = UIGestureRecognizerStateRecognized;
 		(self->m_pListener->*m_pSelector)(nil,self);
+	}else{
+		self->state  = UIGestureRecognizerStateFailed;
+	}
 	}
 }
 void

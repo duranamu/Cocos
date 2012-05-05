@@ -86,7 +86,7 @@ NSObject*
 {
 	//todo fix nil
 	NSString* content = NSString::alloc()->initWithData_encoding(data,nil);
-	char* str = strdup(content->description().c_str());
+	char* str = strdup(content->cStringUsingEncoding(NSASCIIStringEncoding));
 	//NSUInteger inlen = strlen(str);
 	//char* out = new char[300];
 	//NSUInteger oulen =300;

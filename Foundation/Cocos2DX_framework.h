@@ -22,7 +22,7 @@ THE SOFTWARE.
 #pragma once
 #include <cocos2d.h>
 using namespace cocos2d;
-#include <libxml/xpath.h>
+#include  <libxml/xpath.h>
 #include <libxml/parser.h>
 #include <Foundation/NSObjCRuntime.h>
 #include <Foundation/FoundationDataType.h>
@@ -68,16 +68,19 @@ public: inline void set##varName(varType var){ varType cp = (varType)var->copy()
 
 #define nfor(__var__,__inst__,__arr__)  do {NSFastEnumeration* __enu__ = (NSFastEnumeration*) __arr__; __enu__->gotoBeginObject();__var__ __inst__;while( (__inst__ = (__var__) __enu__->nextObject())!= NULL){
 
+#define afor(__type__,__object__,__leading_argument__) do{va_list __argp__;__type__  __object__;va_start(__argp__ , __leading_argument__);while(__object__ = va_arg( __argp__ , __type__ )){
+		
+#define aend }va_end (__argp__);}while(0);
+
 #define nfor_CCSet(__var__ , __inst__ , _NSSet__) \
 	do { CCSetIterator __it__ = _NSSet__->begin(); \
 	while( (__it__) != _NSSet__->end()){          \
 			__var__ __inst__ = (__var__ ) (*__it__); __it__++; if(!__inst__) break;
 
-#define NSSTR(__STR__)  NSString::stringWithCString_encoding(__STR__,NSASCIIStringEncoding)//new NSString(__STR__)
-#define self this
+#define NSSTR(__STR__)  NSString::stringWithCString_encoding(__STR__,NSASCIIStringEncoding)
+
 
 #define NS_SAFE_DELETE(__PTR__) CC_SAFE_DELETE(__PTR__)
-#define NSNotFound UINT_MAX;
 
 #define NS_STATIC_ALLOC(__var__) \
 __var__*  __var__::alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(mem);}return mem;}
@@ -96,12 +99,21 @@ static __var__* alloc(){__var__* mem = new __var__();if(!mem){NS_SAFE_DELETE(mem
 #define NSActionTarget NSSelectorProtocol
 
 #define NS_INTERFACE(__class__,...)\
-class __class__ : public __VA_ARGS__{ public:  NS_ALLOC_FULL(__class__) NS_INIT_FULL(__class__) NS_DEALLOCATE(__class__)
+class __class__ : public __VA_ARGS__{ public: NS_ALLOC_FULL(__class__) NS_INIT_FULL(__class__) NS_DEALLOCATE(__class__)
+
+#define NS_INTERFACE_ALLOC_SPEC(__class__,...)\
+class __class__ : public __VA_ARGS__{ public: static __class__* alloc(); NS_INIT_FULL(__class__) NS_DEALLOCATE(__class__)
+
+#define NS_IGNORE
+
+#define NS_INTERFACE_INIT_SPEC(__class__,...)\
+class __class__ : public __VA_ARGS__{ public:  NS_ALLOC_FULL(__class__)  NS_DEALLOCATE(__class__)
 
 #define MAX_CACHE_OBJECT 50
 
 #define NS_CACHE_ALLOC_FULL(__var__)  void inline objectDidLoad(); static __var__* alloc(){ __var__* mem ; \
-			if(_cache_count <= 0) {for (NSUInteger i = 0; i< MAX_CACHE_OBJECT ;i++) _cache[i] = new __var__(); \
+			if(_cache == nil){return new __var__();} \
+			if(_cache_count <= 0 ) {for (NSUInteger i = 0; i< MAX_CACHE_OBJECT ;i++) _cache[i] = new __var__(); \
 				_cache_count = MAX_CACHE_OBJECT; _header =0;} \
 			mem = _cache[_header]; _header = (_header++) % MAX_CACHE_OBJECT ; --_cache_count; \
 			if(!mem){CC_SAFE_DELETE(mem);}else{mem->objectDidLoad();}return mem;}
@@ -122,9 +134,13 @@ public:  NS_INIT(__class__) NS_CACHE_ALLOC_FULL(__class__)  NS_DEALLOCATE(__clas
 class __class__ : public __VA_ARGS__{static __class__** _cache; static NSUInteger _header ; static NSUInteger _cache_count ; \
 public:  NS_INIT(__class__) NS_DEALLOCATE(__class__) NS_CACHE_ALLOC_FULL(__class__) NS_CACHE_OBJECT_RECYCLE(__class__)
 
+#define NS_ABSRTACT_INTERFACE(__class__,...)\
+	class __class__:public __VA_ARGS__{ public:
+
 #define NS_CACHE_CLEAR(_class_) 
 
 #define NS_END };
+
 #define NS_CACHE_OBJECT_INIT(__class__) \
 	__class__** __class__::_cache = (__class__**) new __class__[MAX_CACHE_OBJECT][1]; \
 	NSUInteger __class__::_header = 0; \
@@ -142,15 +158,13 @@ typedef void (*NSCodeBlock)(vid, vid , vid);
 
 #define NS_PROTOCOL_CONFORM(__class__,...) class __class__ :  __VA_ARGS__{ public: 
 
-#define pfor(__type_of_object__ ,__inst__ ,__firstObject__ )  \
-	do{ va_list __var_args_argp__; __type_of_object__ __inst__;va_start(__var_args_argp__ , __firstObject__); \
-	while(1){ __inst__ = va_arg( __var_args_argp__ , __type_of_object__ );if( __inst__ != NULL){     
-#define pend  }else{break;}}va_end (__var_args_argp__);}while(0);
-
 #define NS_HAS_REF(_ref_class_,_ref_object_) \
 public: _ref_class_ _ref_object_; 
 
+#define self this
 
-//CCMutableDictionary<std::string, void*> * classForNameDictionary();
-#define NS_RUNTIME_INSTANCE(_class_) _class_* _class_##RuntimeInstance = new _class_();
-//#define NS_RUNTIME_INITIATE(_class_) classForNameDictionary->setObject(
+#define NS_PRIVATE private:
+
+#define NS_PLUS static
+
+#define NS_DROP_EXTERN extern

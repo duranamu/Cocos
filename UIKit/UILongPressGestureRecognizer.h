@@ -26,7 +26,6 @@ NS_CLASS UIEvent;
 NS_INTERFACE(UILongPressGestureRecognizer , UIGestureRecognizer)
 	UILongPressGestureRecognizer*
 		initWithTarget_action(NSActionTarget* ,SEL_PP);
-	UILongPressGestureRecognizer();
 	virtual void 
 		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 
@@ -34,9 +33,14 @@ NS_INTERFACE(UILongPressGestureRecognizer , UIGestureRecognizer)
 	 virtual void 
 		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
 protected:
-	NS_SYNTHESIZE (NSUInteger ,numberOfTapsRequired );
-	NS_SYNTHESIZE (NSUInteger ,numberOfTapsAcquired );
-	NS_SYNTHESIZE (CGFloat ,tapStartTime );
-	NS_SYNTHESIZE (CGFloat ,tapStartX );
-	NS_SYNTHESIZE (CGFloat ,tapStartY );
+	NS_SYNTHESIZE 
+		(NSUInteger ,numberOfTapsRequired );
+	NS_SYNTHESIZE 
+		(NSUInteger ,numberOfTapsAcquired );
+	NS_SYNTHESIZE 
+		(CGFloat ,tapStartTime );
+	NS_SYNTHESIZE 
+		(CGFloat ,tapStartX );
+	NS_SYNTHESIZE 
+		(CGFloat ,tapStartY );
 NS_END

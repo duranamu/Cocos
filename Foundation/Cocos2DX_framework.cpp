@@ -20,11 +20,3 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include<Foundation/Cocos2DX_framework.h>
-//CCMutableDictionary<std::string, void*> * _classForNameDictionary_ = new CCMutableDictionary<std::string, void*>();
-
-//CCMutableDictionary<std::string, void*> * 
-//	classForNameDictionary()
-//{
-//	return _classForNameDictionary_;
-//
-//}

@@ -81,43 +81,26 @@ bool
 void
 	UIView::moveByPoint(CCPoint point)
 {
-	CCPoint position = this->node->getPosition();
+	CCPoint position = self->node->getPosition();
 	position.y += point.y;
-	this->node->setPosition(position);
+	self->node->setPosition(position);
 }
 void 
 	UIView::addGestureRecognizer(UIGestureRecognizer* gesture)
 {
-	if(!self->gestureRecognizers)
-	{
-		self->gestureRecognizers = NSMutableArray::arrayWithCapacity(2);
-		self->gestureRecognizers->retain();
-	}
 	self->gestureRecognizers->addObject(gesture);
 }
 void
 	UIView::touchesBegan_withEvent(NSSet* touches ,UIEvent* events) 
 {
-	/*if(self->gestureRecognizers)
-		nfor(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
-			recognizer->touchesBegan_withEvent(touches,events);
-		nend*/
 }
 void
 	UIView::touchesMoved_withEvent(NSSet* touches ,UIEvent* events) 
 {
-	/*if(self->gestureRecognizers)
-	nfor(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
-		recognizer->touchesMoved_withEvent(touches,events);
-	nend	*/
 }
 void
 	UIView::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
-	/*if(self->gestureRecognizers)
-	nfor(UIGestureRecognizer* ,recognizer , self->gestureRecognizers)
-		recognizer->touchesEnded_withEvent(touches,events);
-	nend*/
 }
 BOOL
 	UIView::pointInside_withEvent(CGPoint point,UIEvent* evt)
@@ -161,4 +144,39 @@ void
 	self->node = nil;
 	self->indexPath->release();
 	self->indexPath = nil;
+	self->gestureRecognizers->release();
+	self->gestureRecognizers = nil;
 }
+UIView*
+	UIView::anyView()
+	{
+		if(subviews)
+		{
+			return (UIView*) subviews->objectAtIndex(0);
+		}
+		return nil;
+	}
+	UIView::UIView()
+	{
+		self->becomeFirstResponder = NO;
+		subviews = NSMutableArray::alloc()->init();
+		self->gestureRecognizers = NSMutableArray::alloc()->init();
+		self->node = new CCNode();
+		self->indexPath = NSIndexPath::alloc()->init();
+	}
+UIView*
+	UIView::init()
+	{
+		self->becomeFirstResponder = NO;
+		subviews = NSMutableArray::alloc()->init();
+		self->gestureRecognizers = NSMutableArray::alloc()->init();
+		self->node = new CCNode();
+		self->indexPath = NSIndexPath::alloc()->init();
+		return self;
+	}
+void
+	UIView::addSubView(UIView* view)
+	{
+		subviews->addObject(view);
+		view->setsuperview(self);
+	}

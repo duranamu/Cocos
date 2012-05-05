@@ -27,7 +27,6 @@ NS_CLASS UIColor;
 NS_CLASS  UIFont;
 #include <UIKit/UIImage.h>
 NS_INTERFACE( UIBarItem , NSObject)
-public:
 	void
 		setTitleTextAttributes_forState(NSMutableDictionary* , UIControlState);
 protected:

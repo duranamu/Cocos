@@ -19,12 +19,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef CCCALLBACK_H
-#define CCCALLBACK_H
-class CCCallBack
-{
-	virtual void 
-	 touchesBegin_withEvent(CCSet* touches ,UIEvent* events)
-	{}
-}
-#endif
+#pragma once
+#include <Foundation/NSObject.h>
+#include <Foundation/NSFastEnumeration.h>
+#include <Foundation/NSMutableArray.h>
+NS_CLASS NSDictionary;
+NS_ABSRTACT_INTERFACE(NSDirectoryEnumerator ,NSFastEnumeration ,public NSObject)
+	virtual void
+		gotoBeginObject() = 0;
+	virtual vid
+		nextObject() = 0;
+	virtual NSDictionary *
+		fileAttributes() = 0;
+	protected:
+		NSMutableArray* directory;
+		NSUInteger directoryIndex;
+NS_END

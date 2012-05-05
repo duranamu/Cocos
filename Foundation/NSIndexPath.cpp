@@ -20,6 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include <Foundation/NSIndexPath.h>
+#define super NSObject
 void
 	NSIndexPath::dealloc()
 {
@@ -37,10 +38,13 @@ NSUInteger
 NSIndexPath*
 	NSIndexPath::initWithSection_row(NSUInteger section ,NSUInteger row)
 {
-
 	self->_section = section;
 	self->_row  = row;
 	return self;
+}
+void
+	NSIndexPath::objectDidUnload()
+{
 }
 NSIndexPath*
 	NSIndexPath::indexWithSection_row(NSUInteger section ,NSUInteger row)

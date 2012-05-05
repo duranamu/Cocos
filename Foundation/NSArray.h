@@ -19,5 +19,46 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include <UIKit/UIApplicationDelegate.h>
-NS_RUNTIME_INSTANCE(UIApplicationDelegate)
+#pragma once
+#include <Foundation/NSObject.h>
+#include <Foundation/NSCopying.h>
+#include <Foundation/NSZone.h>
+#include <Foundation/NSFastEnumeration.h>
+#include <stdarg.h>
+NS_INTERFACE_DEBUG( NSArray , NSObject ,public NSCopying ,public NSFastEnumeration )
+public:
+	NS_HAS_REF(CCArray* ref);
+
+	NSArray* 
+		initWithObjects (NSObject* , ...);
+	NSArray*
+		initWithObject(NSObject* );
+	static NSArray*
+		array();
+	static NSArray*
+		arrayWithCapacity(NSUInteger );
+	NS_IGNORE NSArray(){};
+		 
+		NSArray(NSUInteger num);
+	NSObject* 
+		objectAtIndex(NSUInteger index);
+
+    NSObject* 
+		randomObject();
+	BOOL
+		containsObject(NSObject* obj);
+	NSUInteger 
+		count();
+	NSObject* 
+		lastObject();
+	inline NSUInteger
+		indexOfObject(NSObject* obj){return ref->indexOfObject(obj); }
+	 vid 
+		 copyWithZone(NSZone*);
+	vid
+		nextObject();
+	void
+		gotoBeginObject();
+	NSObject** indexedObject;
+	NSObject** endedObejct;
+};

@@ -22,8 +22,8 @@ THE SOFTWARE.
 #pragma once
 #include <UIKit/UIImageView.h>
 NS_CLASS NIDevice;
-NS_INTERFACE( UISensorView , UIImageView)
-	UISensorView();
+NS_INTERFACE_INIT_SPEC( UISensorView , UIImageView)
+	UISensorView* init();
 	void 
 		updateFromDevice();
 protected:

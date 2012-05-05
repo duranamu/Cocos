@@ -21,39 +21,51 @@ THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UIRotationGestureRecognizer.h>
 #include <UIKit/UITouch.h>
+#define super UIGestureRecognizer
 CIVector* lastOrentaionOfHands;
 CGFloat baseRotaion;
 UIRotationGestureRecognizer*
 	UIRotationGestureRecognizer::initWithTarget_action(NSActionTarget* ctarget,SEL_PP cselector)
 {
+	if(super::init())
+	{
 	self->m_pListener = ctarget;
 	self->m_pSelector = cselector;
 	self->deltaRotation = 0;
 	self->touchMovedEventCount = 0;
 	lastOrentaionOfHands = nil;
+	}
 	return self;
 }
 void
 	UIRotationGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
-	self->state = UIGestureRecognizeStateBegan;
-	bool fistTouch = true;
-	CGPoint touchLoaction;
-	nfor(UITouch* ,touch ,touches)
-		if(fistTouch)
+		self->state = UIGestureRecognizerStatePossible;
+		if(super::dependenceCheck())
 		{
-			touchLoaction = touch->getlocation();
-			fistTouch= false;
-		}else{
-				self->gestureStartOrentaion = CIVector::vectorFrom_to( touch->getlocation() ,touchLoaction);
+			self->state = UIGestureRecognizeStateBegan;
+			bool fistTouch = true;
+			CGPoint touchLoaction;
+			nfor(UITouch* ,touch ,touches)
+				if(fistTouch)
+				{
+					touchLoaction = touch->getlocation();
+					fistTouch= false;
+				}else{
+					self->gestureStartOrentaion = CIVector::vectorFrom_to( touch->getlocation() ,touchLoaction);
+			}
+			nend
+		if(lastOrentaionOfHands)
+			baseRotaion = CGAngleMake ( self->gestureStartOrentaion ,lastOrentaionOfHands );
 		}
-	nend
-	if(lastOrentaionOfHands)
-		baseRotaion = CGAngleMake ( self->gestureStartOrentaion ,lastOrentaionOfHands );
 }
 void
 	UIRotationGestureRecognizer::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
+	if(self->state != UIGestureRecognizeStateBegan && self->state != UIGestureRecognizeStateChanged)
+	{
+		return;
+	}
 	self->state = UIGestureRecognizeStateChanged;
 	bool fistTouch = true;
 	CGPoint touchLoaction;
@@ -79,18 +91,21 @@ void
 void
 	UIRotationGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
-	self->state = UIGestureRecognizeStateEnded;
-	bool fistTouch = true;
-	CGPoint touchLoaction;
-	nfor(UITouch* ,touch ,touches)
-		if(fistTouch)
-		{
-			touchLoaction = touch->getlocation();
-			fistTouch= false;
-		}else{
-			lastOrentaionOfHands = CIVector::vectorFrom_to(touch->getlocation(),touchLoaction);
-		}
-	nend
+	if(self->state == UIGestureRecognizeStateChanged)
+	{
+		self->state = UIGestureRecognizeStateEnded;
+		bool fistTouch = true;
+		CGPoint touchLoaction;
+		nfor(UITouch* ,touch ,touches)
+			if(fistTouch)
+			{
+				touchLoaction = touch->getlocation();
+				fistTouch= false;
+			}else{
+				lastOrentaionOfHands = CIVector::vectorFrom_to(touch->getlocation(),touchLoaction);
+			}
+		nend
+	}
 }
 void
 	UIRotationGestureRecognizer::dealloc(){}

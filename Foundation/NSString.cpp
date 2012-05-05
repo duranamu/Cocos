@@ -21,10 +21,11 @@ THE SOFTWARE.
 ****************************************************************************/
 #include <Foundation/NSString.h>
 #include <Foundation/NSData.h>
-std::string
+#include <Foundation/NSObjectProtocol.h>
+NSString*
 	NSString::description()
 {
-	return ref->toStdString();
+	return self;
 }
 NSString*
 	NSString::initWithData_encoding(NSData* data , NSStringEncoding encoding)
@@ -61,14 +62,12 @@ NSString*
 NSString*
 	NSString::stringWithCString_encoding(const char* nullTerminatedCString,NSStringEncoding encoding)
 {
-	NSString* mem = alloc()->initWithCString_encoding(nullTerminatedCString,encoding);
-	mem->autorelease();
-	return mem;
+	return (NSString*)alloc()->initWithCString_encoding(nullTerminatedCString,encoding)->autorelease();
 }
 NSString*
 	NSString::initWithString(NSString* aString)
 {
-	self->ref= CCS(aString->description().c_str());
+	self->ref= CCS(aString->cStringUsingEncoding(NSASCIIStringEncoding));
 	self->_encoding = aString->get_encoding();
 	return self;
 }
@@ -88,9 +87,92 @@ void
 {
 	self->ref = new CCString();
 }
-NSString::NSString()
+NSString*
+	NSString::initWithContentOfFile_encoding_erro(NSString* path ,NSStringEncoding enc , NSError** error)
 {
-	//self->ref = new CCString();
+//	self->ref->release();
+	self->ref->toStdString().append(CCString::stringWithContentsOfFile(path->cStringUsingEncoding(NSASCIIStringEncoding)));
+	return self;
 }
+NSString*
+	NSString::stringWithContentOfFile_encoding_erro(NSString* path ,NSStringEncoding enc , NSError** error)
+{
+	return (NSString*)alloc()->initWithContentOfFile_encoding_erro(path,enc,error)->autorelease();;
+}
+NSUInteger
+	NSString::length()
+{
+	return self->ref->m_sString.length();
+}
+NSString*
+	NSString::initWIthFormat(NSString* format,...)
+{
+   va_list arguments;
+   va_start(arguments,format);
+   initWithFormat_locale_arguments(format,nil,arguments);
+   va_end(arguments);
 
+   return self;
+}
+NSString*
+	NSString::initWithFormat_locale_arguments(NSString* format ,vid local ,va_list arguments)
+{
+   	NSInteger foundPlace= format->ref->m_sString.find("%");
+	while( string::npos != (foundPlace = format->ref->m_sString.find("%")))
+	{
+		char specifier = format->cStringUsingEncoding(NSASCIIStringEncoding)[foundPlace+1];
+		if('c' == specifier){
+			  char para[8];
+			 sprintf(para,"%c",va_arg(arguments,unsigned char));
+			 format->ref->m_sString = format->ref->m_sString.insert(foundPlace+2,para);
+		}else if('d' == specifier | 'D' == specifier | 'i' == specifier){
+			 char para[8];
+			sprintf(para,"%d",va_arg(arguments,int));
+			format->ref->m_sString = format->ref->m_sString.insert(foundPlace+2,para);
+		}else if('s' == specifier) {
+			format->ref->m_sString = format->ref->m_sString.insert(foundPlace+2,va_arg(arguments, char*));
+		}else if('p' == specifier) {
+			 char para[30];
+			sprintf(para,"%p",va_arg(arguments,void*));
+			format->ref->m_sString = format->ref->m_sString.insert(foundPlace+2,para);
+		}else if('f' == specifier){
+			 char para[8];
+			sprintf(para,"%f",va_arg(arguments,double));
+			format->ref->m_sString = format->ref->m_sString.insert(foundPlace+2,para);
+		}else if('u' == specifier | 'U' == specifier){
+			 char para[8];
+			sprintf(para,"%u",va_arg(arguments,unsigned int));
+			format->ref->m_sString = format->ref->m_sString.insert(foundPlace+2,para);
+		}else if('@' == specifier){
+			NSString* descriptionString = va_arg(arguments,NSObject*)->description();
+			format->ref->m_sString = format->ref->m_sString.insert(foundPlace+2,
+				descriptionString->cStringUsingEncoding(NSASCIIStringEncoding));
+		}
+		format->ref->m_sString.erase(foundPlace,2);
+	}
+
+   ref->m_sString.assign(format->ref->m_sString);
+   return self;
+}
+const char *
+	NSString::cStringUsingEncoding(NSStringEncoding encoding)
+{
+	return ref->m_sString.c_str();
+}
 NS_CACHE_OBJECT_INIT(NSString);
+
+NSComparisonResult
+	NSString::compare(NSString* aString)
+{
+	NSInteger result = self->ref->m_sString.compare(aString->ref->m_sString);
+
+	if(result == 0)
+	{
+		return NSOrderedSame;
+	}else if(result > 0)
+	{
+		return NSOrderedAscending;
+	}else {
+		return NSOrderedDescending;
+	}
+}

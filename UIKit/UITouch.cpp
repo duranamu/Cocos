@@ -25,9 +25,10 @@ UITouch*
 {
 	return (UITouch*) alloc()->initWithPhase(phase)->autorelease();
 }
-	UITouch::UITouch()
+UITouch*
+	UITouch::touchWithPhase_source(UITouchPhase phase , UITouchSource theSource)
 {
-	//self->gestureRecognizers = NSMutableArray::alloc()->init();
+	return (UITouch*) alloc()->initWithPhase_source(phase,theSource)->autorelease();
 }
 CGPoint
 	UITouch::locationInView()
@@ -40,14 +41,16 @@ UITouch*
 	phase = pphase;
 	return self;
 }
+UITouch*
+	UITouch::initWithPhase_source(UITouchPhase touchPhase , UITouchSource theSource)
+{
+	self->phase = touchPhase;
+	self->touchSource = theSource;
+	return self;
+}
 void
 	UITouch::dealloc()
 {
-	//if(self->m_bManaged == false)
-	//{
-	//self->gestureRecognizers->release();
-	//self->gestureRecognizers = nil;
-	//}
 }
 void
 	UITouch::objectDidLoad()

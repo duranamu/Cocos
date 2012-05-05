@@ -25,9 +25,7 @@ THE SOFTWARE.
 #include <Foundation/Cocos2DX_framework.h>
 #include <Foundation/NSOperation.h>
 #include <Foundation/NSMutableArray.h>
-NS_INTERFACE
-	( NSOperationQueue ,NSObject )
-	 
+NS_INTERFACE( NSOperationQueue ,NSObject ) 
 	void
 		addOperation(NSOperation*);
 	static NSOperationQueue* 
@@ -36,10 +34,8 @@ NS_INTERFACE
 		currentQueue();
 	NSOperationQueue*
 		initWithDispatchQueue(dispatch_queue_t);
-	
 protected:
 	dispatch_queue_t _dispatch_queue;
 
 	NSMutableArray *operations;
-
 NS_END

@@ -21,9 +21,6 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <Foundation/NSObject.h>
-NS_INTERFACE
-	(NSOperation ,NSObject)
-	
-
+NS_INTERFACE(NSOperation ,NSObject)
 
 NS_END

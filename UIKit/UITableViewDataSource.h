@@ -24,13 +24,11 @@ THE SOFTWARE.
 NS_CLASS  UIView;
 NS_CLASS  UITableViewCell;
 NS_CLASS  NSIndexPath;
-class UITableViewDataSource 
-{
-public:
+NS_PROTOCOL(UITableViewDataSource )
 virtual NSInteger
 	numberOfSectionInTableView(UIView* tableView) = 0;
 virtual UITableViewCell*
 	tableView_cellForRowAtIndexPath(UIView* tableView,NSIndexPath* indexPath=nil) = 0;
 virtual int
 	tableView_numberOfRowsInSection(UIView* view,NSInteger section) = 0;
-};
+NS_END

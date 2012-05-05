@@ -24,17 +24,16 @@ THE SOFTWARE.
 #include <curl/curl.h>
 #include <Foundation/NSString.h>
 #include <Foundation/NSNumber.h>
-NS_INTERFACE
-	(NSURL , NSObject)
+NS_INTERFACE(NSURL , NSObject)
 	NSURL*
 		initWithString(NSString* );
 	static NSURL*
 		URLWithString(NSString* );
 	NSString*
 		absoluteString();
-	NS_SYNTHESIZE
-		(CURL*, curl);
 protected:
 	NSString* _URLString;
 	CURLcode res;
+	NS_SYNTHESIZE
+		(CURL*, curl);
 NS_END

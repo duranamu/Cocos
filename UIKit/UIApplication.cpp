@@ -20,6 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UIApplication.h>
+#include <NIKit/NITraceTracker.h>
 #include "../AppDelegate.h"
 int
    UIApplicationMain (int argc,char *argv[],NSString *principalClassName,NSString* delegateClassName
@@ -35,92 +36,99 @@ void
 	self->keyWindow->sendEvent(evt);
 }
 void
-	UIApplication::applicationDidUpdate(CGFloat time)
+	UIApplication::applicationDidUpdate(CGFloat deltaTime)
 {
-	if(false)
+	trackerManager->updateTrackerSheet();
 	if(isRighthandTracked)
 	{
-		UITouchPhase ability; 
-		ability = touchPhaseforTime_handz(time,rightHandz);
-		UITouch* touch = UITouch::alloc()->initWithPhase(ability);
-		NSSet* set = new NSSet(); 
-		if(ability == UITouchPhaseBegan | ability == UITouchPhaseEnded )
-		{
-			 touch->settimestamp(time);
-			 touch->setlocation (ccp( rightHandx , rightHandy ));
-			 UITouch* lefthand_touch = UITouch::touchWithPhase(ability);
-			 lefthand_touch->settimestamp(time);
-			 lefthand_touch->setlocation ( ccp( leftHandx , leftHandy ));
-			 set->addObject(lefthand_touch);
-			 set->addObject(touch);
-			 if( ability == UITouchPhaseBegan )
-			 {
-				 touchStartx = rightHandx;
-				 touchStarty = rightHandy;
-				 touchStartTime = time;
-			 }
-			UIEvent* events = UIEvent::alloc()->initWithTouches_type(set ,UIEventTypeTouches);
-			self->sentEvent(events);
-			events->release();
-			set->release();
-		}else if (ability == UITouchPhaseMoved )
-	    {
-			 touch->settimestamp(time);
-			 touch->setlocation (ccp(rightHandx , rightHandy ));
-			 UITouch* lefthand_touch = UITouch::alloc()->initWithPhase(ability);
-			 lefthand_touch->settimestamp(time);
-			 lefthand_touch->setlocation(ccp(leftHandx , leftHandy ));
-			 set->addObject(touch);
-			 set->addObject(lefthand_touch);
-			UIEvent* events = UIEvent::alloc()->initWithTouches_type(set ,UIEventTypeTouches);
-			self->sentEvent(events);
-			events->release();
-			set->release();
-		}
+		UITouchPhase ability;
+		UITouchPhase anotherAbility;
+		UITouchSource touchSource ;
+		ability = (UITouchPhase) self->righthandTracker->gettracePhase(); 
+		anotherAbility = (UITouchPhase) self->lefthandTracker->gettracePhase(); 
 		
+		if(ability != UITouchPhasePending && anotherAbility == UITouchPhasePending)
+		{
+			touchSource = UITouchSourceRightHand;
+		}
+		else if(anotherAbility != UITouchPhasePending && ability == UITouchPhasePending)
+		{
+			touchSource = UITouchSourceLeftHand;
+		}
+		else if(ability == UITouchPhasePending && anotherAbility == UITouchPhasePending)
+		{
+			return ;
+		}else if(anotherAbility != UITouchPhasePending && ability != UITouchPhasePending)
+		{
+			touchSource = (UITouchSource)( UITouchSourceLeftHand | UITouchSourceRightHand);
+		}
+		UITouch* touch = UITouch::alloc()->initWithPhase(ability);
+		UITouch* lefthand_touch = UITouch::alloc()->initWithPhase(anotherAbility);
+		NSSet* set =  NSSet::alloc()->init();
+		NSTimeInterval timeMark = time(nil);
+
+		if(touchSource & UITouchSourceRightHand)
+		{
+			touch->setdeltaTime(deltaTime);
+			touch->settimeMark(timeMark);
+			touch->setlocation (ccp( rightHandx , rightHandy ));
+			touch->settouchSource(UITouchSourceRightHand);
+			set->addObject(touch);
+		} 
+		if (touchSource & UITouchSourceLeftHand)
+		{
+			lefthand_touch->setdeltaTime(deltaTime);
+			lefthand_touch->settimeMark(timeMark);
+			lefthand_touch->setlocation ( ccp( leftHandx , leftHandy ));
+			lefthand_touch->settouchSource(UITouchSourceLeftHand);
+			set->addObject(lefthand_touch);
+		}
+	    UIEvent* events = UIEvent::alloc()->initWithTouches_type(set ,UIEventTypeTouches);
+	    self->sentEvent(events);
+		events->release();
+		set->release();
+		touch->release();
+		lefthand_touch->release();
 	}
-	trackerManager->updateTrackerSheet();
+	
 }	
-	UIApplication::UIApplication()
+UIApplication*
+	UIApplication::init()
 {
 		isRighthandTracked = NO;
 		menuTouchPhase = UITouchPhasePending;
-		touchStartx = 0;
-		touchStarty = 0;
-		touchStartTime = 0;
 		t_lasthandx = 0;
 		t_lasthandy = 0;
-		rightHandShadowz = 0;
+		shadowz = 0;
 		self->windows = NSMutableArray::alloc()->init();
+
+		return self;
 }
 void
 	UIApplication::setupTracker()
 {
 		trackerManager =  NITrackerManager::defaultTrackerManager();
+
+		self->lefthandTracker = NITraceTracker::alloc()->initWithTarget_action_joint(self,
+		NS_SELECTOR_PP(UIApplication::sender_lefthandData),XN_SKEL_LEFT_HAND);
+	trackerManager->addTracker(self->lefthandTracker);
+
+		self->righthandTracker = NITraceTracker::alloc()->initWithTarget_action_joint(self,
+		NS_SELECTOR_PP(UIApplication::sender_righthandData),XN_SKEL_RIGHT_HAND);
+	trackerManager->addTracker(self->righthandTracker);
+
 	trackerManager->addTracker(
-		NITracker::trackerWithTarget_action_joint(self,
-		NS_SELECTOR_PP(UIApplication::predo_controller_torsoData),XN_SKEL_TORSO
-		));
+		NITraceTracker::alloc()->initWithTarget_action_joint(self,
+		NS_SELECTOR_PP(UIApplication::sender_torsoData),XN_SKEL_TORSO));
 	trackerManager->addTracker(
-		NITracker::trackerWithTarget_action_joint(self,
-		NS_SELECTOR_PP(UIApplication::predo_controller_righthandData),XN_SKEL_RIGHT_HAND
-		));
+		NITracker::alloc()->initWithTarget_action_joint(self,
+		NS_SELECTOR_PP(UIApplication::sender_neckData),XN_SKEL_NECK));
 	trackerManager->addTracker(
-		NITracker::trackerWithTarget_action_joint(self,
-		NS_SELECTOR_PP(UIApplication::predo_controller_lefthandData),XN_SKEL_LEFT_HAND
-		));
+		NITracker::alloc()->initWithTarget_action_joint(self,
+		NS_SELECTOR_PP(UIApplication::sender_rightElbowData),XN_SKEL_RIGHT_ELBOW));
 	trackerManager->addTracker(
-		NITracker::trackerWithTarget_action_joint(self,
-		NS_SELECTOR_PP(UIApplication::sender_neckData),XN_SKEL_NECK
-		));
-	trackerManager->addTracker(
-		NITracker::trackerWithTarget_action_joint(self,
-		NS_SELECTOR_PP(UIApplication::sender_rightElbowData),XN_SKEL_RIGHT_ELBOW
-		));
-	trackerManager->addTracker(
-		NITracker::trackerWithTarget_action_joint(self,
-		NS_SELECTOR_PP(UIApplication::sender_rightCollarData),XN_SKEL_RIGHT_COLLAR
-		));
+		NITracker::alloc()->initWithTarget_action_joint(self,
+		NS_SELECTOR_PP(UIApplication::sender_rightCollarData),XN_SKEL_RIGHT_COLLAR));
 }
 vid
 	UIApplication::sender_rightCollarData(vid sender,vid data)
@@ -156,18 +164,18 @@ vid
 	return nil;
 }
 vid 
-	UIApplication::predo_controller_torsoData(void* sender,vid data)
+	UIApplication::sender_torsoData(void* sender,vid data)
 {
 	NSCAST(UIApplication*,sender);
 	NSCAST(CIVector*,data);
 	csender->settorsox(cdata->getX());
 	csender->settorsoy(cdata->getY());
-	csender->getkeyWindow()->getrootViewController()->predo_controller_torsoData (sender , data);
+	csender->getkeyWindow()->getrootViewController()->sender_torsoData (sender , data);
 	cdata->release();
 	return nil;
 }
 vid 
-	UIApplication::predo_controller_righthandData(void* sender,vid data)
+	UIApplication::sender_righthandData(void* sender,vid data)
 {
 	NSCAST(UIApplication*,sender);
 	if(!csender->isRighthandTracked) 
@@ -180,7 +188,7 @@ vid
 	return nil;
 } 
 vid
-	UIApplication::predo_controller_lefthandData(void* sender , vid data)
+	UIApplication::sender_lefthandData(void* sender , vid data)
 {
 	NSCAST(UIApplication*,sender);
 	NSCAST(CIVector*,data);
@@ -194,50 +202,37 @@ UITouchPhase
 	UIApplication::touchPhaseforTime_handz(CGFloat time, CGFloat handz)
 {
 	float deltahandz;
-	deltahandz = rightHandShadowz - handz;
+	deltahandz = shadowz - handz;
 	NSInteger velocity = deltahandz / time;
 	velocity = (velocity >> 5);
 
 	float deltahandzVelocity;
-	deltahandzVelocity = rightHandShadowzVelocity - velocity  ;
+	deltahandzVelocity = shadowzVelocity - velocity  ;
 	NSInteger acceleration = deltahandzVelocity /time;
-	acceleration = (acceleration >> 7);
+	acceleration = (acceleration >> 8);
 
-	BOOL firstRun = !rightHandShadowz ;
-	rightHandShadowz = handz;
-	rightHandShadowzVelocity = velocity;	
+	BOOL firstRun;
+		firstRun = !shadowz ;
+	shadowz = handz;
+	shadowzVelocity = velocity;	
 
 	if(firstRun)
 	{
 		return UITouchPhasePending;
-	}else if( velocity >= 10 )
+	}else if( velocity >= 20 && menuTouchPhase != UITouchPhaseBegan && menuTouchPhase != UITouchPhaseMoved )
 	{
-		if( menuTouchPhase ==  UITouchPhasePending )
-		{
-			return menuTouchPhase = UITouchPhaseBegan;
-		}else{
-			return menuTouchPhase;
-		}
-	}else if (acceleration < 1 ){
-		if(menuTouchPhase == UITouchPhaseMoved)
-		{
-			return menuTouchPhase = UITouchPhaseEnded;
-		}else{
-			return menuTouchPhase;
-		}
-	}else{
-		if( menuTouchPhase ==  UITouchPhasePending)
-		{
-			return UITouchPhasePending;
-		}else if (menuTouchPhase ==  UITouchPhaseBegan){
-			return menuTouchPhase =  UITouchPhaseMoved;
-		}else if (menuTouchPhase ==  UITouchPhaseMoved){
-			return menuTouchPhase ;
-		}else{
-			return menuTouchPhase =  UITouchPhasePending;
-		}
+		return menuTouchPhase = UITouchPhaseBegan;
+	}else if (acceleration < 1 && menuTouchPhase == UITouchPhaseMoved){
+		self->shadowz = 0;
+		self->shadowzVelocity = 0;
+		return menuTouchPhase = UITouchPhaseEnded;
+	}else if(menuTouchPhase == UITouchPhaseBegan){
+		return menuTouchPhase = UITouchPhaseMoved;
+	}else if(menuTouchPhase == UITouchPhaseEnded)
+	{
+		return menuTouchPhase = UITouchPhasePending;
 	}
-		
+		return 	menuTouchPhase ;
 }
 void
 	UIApplication::addWindow(UIWindow* window)

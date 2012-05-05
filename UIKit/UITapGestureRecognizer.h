@@ -26,7 +26,7 @@ NS_CLASS UIEvent ;
 NS_INTERFACE( UITapGestureRecognizer , UIGestureRecognizer )
 	UITapGestureRecognizer*
 		initWithTarget_action(NSActionTarget* ,SEL_PP);
-	UITapGestureRecognizer();
+	NS_IGNORE UITapGestureRecognizer(){};
 	virtual void 
 		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 

@@ -26,12 +26,13 @@ THE SOFTWARE.
 #include <UIKit/UITableViewCell.h>
 NS_CLASS UITableViewDataSource;
 NS_CLASS UITableViewCell;
-NS_INTERFACE( UITableView , UIView )
+NS_INTERFACE_INIT_SPEC( UITableView , UIView ,NSObjectProtocol)
 public:
-	UITableView();
+	NS_IGNORE UITableView(){};
+	UITableView* init();
 	bool 
 		isEqual(UITableView* );
-	CCArray* 
+	NSArray* 
 		m_indexPath;
 	UITableViewCell*
 		dequeueReusableCellWithIdentifier(NSString* );
@@ -53,4 +54,6 @@ protected:
 		(UITableViewDelegate* ,delegate)
 	NS_SYNTHESIZE
 		(UITableViewDataSource* ,datasource);
+	UIPanGestureRecognizer* panGestureRecognizer;
+
 NS_END

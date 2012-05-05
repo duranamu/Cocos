@@ -20,8 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <QuartzCore\QuartzCore.h>
-NS_CLASS UIImage ;
+#include <QuartzCore/QuartzCore.h>
+NS_CLASS UIImage;
 #include <UIKit/UIBarItem.h>
 typedef enum {
     UIBarButtonSystemItemDone,

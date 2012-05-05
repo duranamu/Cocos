@@ -19,13 +19,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "NSURLRequest.h"
+#include <Foundation/NSURLRequest.h>
 NSURLRequest*
 	NSURLRequest::initWithURL(NSURL* URL)
 {
 	URL->retain();
 	self->_url = URL;
-	curl_easy_setopt(self->_url->getcurl(), CURLOPT_URL,self->_url->absoluteString()->description().c_str());
+	curl_easy_setopt(self->_url->getcurl(), CURLOPT_URL,self->_url->absoluteString()->cStringUsingEncoding(NSASCIIStringEncoding));
 	return self;
 }
 NSURLRequest*

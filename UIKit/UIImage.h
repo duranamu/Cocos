@@ -21,29 +21,24 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <QuartzCore/QuartzCore.h>
-NS_INTERFACE
-	(UIImage,NSObject)
-	UIImage(){};
-	UIImage(const void* data ,CCTexture2DPixelFormat format ,CCSize size)
-	{
-		ref = new CCTexture2D();
-		ref->initWithData(data ,CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,
-		size.width,size.height,size);
-		self->imagePath = NSString::alloc()->init();
-	};
+NS_INTERFACE(UIImage,NSObject)
+	NS_IGNORE UIImage(){};
 	static UIImage*
 		imageWithData_format_pixel_size(const void* ,CCTexture2DPixelFormat,CCSize);
-	static UIImage*
-		imageNamed(NSString*);
-		UIImage(const char *);
-	CCTexture2D*
-		getCCTexture2D(){return ref;}
-	CGImage*
-		CGImage(){ return CCTextureCache::sharedTextureCache()->addImage(imagePath->description().c_str()); }
 	UIImage*
-		initWithData(NSData* );
+		initWithData_format_pixel_size(const void* ,CCTexture2DPixelFormat,CCSize);
 	static UIImage*
-		imageWithData(NSData* );
+		imageNamed(NSString* fileName);
+	UIImage*
+		initNamed(NSString* fileName);
+	CCTexture2D*
+		getCCTexture2D();
+	CGImage*
+		CGImage();
+	UIImage*
+		initWithData(NSData* data);
+	static UIImage*
+		imageWithData(NSData* data);
 	protected:
 		CCTexture2D* ref;
 		NSString* imagePath;

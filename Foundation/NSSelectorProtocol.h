@@ -21,13 +21,11 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <Foundation/Cocos2DX_framework.h>
-class  NSSelectorProtocol
-{
-public:
+NS_PROTOCOL(  NSSelectorProtocol)
 		virtual vid callfunc(){return nil;};
 		virtual vid callfunc(void* sender ){return nil;};
 		virtual vid callfunc(void* sender, void* data){return nil;};
-};
+NS_END
 
 typedef vid (NSSelectorProtocol::*SEL)();
 typedef vid (NSSelectorProtocol::*SEL_P)(void*);

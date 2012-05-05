@@ -23,6 +23,8 @@ THE SOFTWARE.
 #include <UIKit/UITouch.h>
 #include <UIKit/UIImageView.h>
 #include <UIKit/UITableView.h>
+#include <UIKit/UIPanGestureRecognizer.h>
+#define super UIView
  UITableViewCell* 
 		UITableViewCell::initWithStyle_reuseIdentifier(UITableViewStyle oneStyle ,NSString* id)
 	{
@@ -41,8 +43,11 @@ THE SOFTWARE.
 		selector = cselector;
 		return self;
 	}
-		UITableViewCell::UITableViewCell()
+UITableViewCell*	
+	 UITableViewCell::init()
 	{
+		if(super::init())
+		{
 		if(style == UITableViewSylePlain)
 			textLabel = CCLabelTTF::labelWithString("","Arial",38);
 		else
@@ -55,6 +60,8 @@ THE SOFTWARE.
 		self->indentationLevel = 0;
 		self->indentationWidth = 10;
 		self->indexPath = NSIndexPath::alloc()->init();
+		}
+		return self;
 	}
 void 
 	UITableViewCell::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
@@ -73,23 +80,24 @@ void
 	{
 		(listener->*selector)(listener , this);
 	}
-
 	UITableView* tableView = (UITableView*) self->getsuperview();
 	tableView->tableViewCell_didSelectRowAtIndexPath(self,self->indexPath);
 }
 void 
 	UITableViewCell::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
-	if(self->canTriggerforTouch((UITouch*)touches->anyObject()))
-	{
-		self->node->setScale(1.0f);
-	}
 }
 void 
 	UITableViewCell::touchesMoved_withEvent(NSSet* touches ,UIEvent* events)
 {
-	UITouch* touch = (UITouch*) touches->anyObject();
-	self->moveByPoint(touch->getdeltaMove());
+}
+vid
+	UITableViewCell::deltaDisplace(vid sender ,vid gestureRecognizer)
+{
+	NSCAST(UIPanGestureRecognizer* , gestureRecognizer);
+	NSCAST(UITableViewCell*,sender);
+	
+	return nil;
 }
 void 
 	UITableViewCell::setaccessoryType(UITableViewCellAccessory var)

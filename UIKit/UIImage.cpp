@@ -21,36 +21,36 @@ THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UIImage.h>
 UIImage*
-	UIImage::imageWithData_format_pixel_size(const void* data ,CCTexture2DPixelFormat format,CCSize size)
+	UIImage::initWithData_format_pixel_size(const void* data ,CCTexture2DPixelFormat format,CCSize size)
 {
-	UIImage* pimage = new UIImage(data,format,size);
-	if(pimage)
-	{
-		
-	}else{
-		CC_SAFE_DELETE(pimage);
-	}
-	return pimage; 
+		ref = new CCTexture2D();
+		ref->initWithData(data ,CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,
+		size.width,size.height,size);
+		self->imagePath = NSString::alloc()->init();
+	return self; 
 }
 UIImage*
-	UIImage::imageNamed(NSString* file)
+	UIImage::imageWithData_format_pixel_size(const void* data ,CCTexture2DPixelFormat format,CCSize size)
 {
-	UIImage* pimage = new UIImage(file->description().c_str());
-	if(pimage)
-	{
-
-	}else{
-		CC_SAFE_DELETE(pimage);
-	}
-	return pimage;
+	return alloc()->initWithData_format_pixel_size(data,format,size);
 }
-UIImage::UIImage(const char* file)
+UIImage*
+	UIImage::initNamed(NSString* fileName)
 {
+	char* CStringFileName = (char*)fileName->cStringUsingEncoding(NSASCIIStringEncoding);
 	ref = new CCTexture2D();
 	CCImage* ccimage = new CCImage();
-	ccimage->initWithImageFile(file);
-	self->imagePath = NSSTR(file);
+	ccimage->initWithImageFile(CStringFileName);
+	self->imagePath = fileName;
+	fileName->retain();
 	ref->initWithImage(ccimage);
+	return self;
+}
+UIImage*
+	UIImage::imageNamed(NSString* fileName)	
+{
+	//autorelease to be added
+	return alloc()->initNamed(fileName);
 }
 void
 	UIImage::dealloc()
@@ -63,6 +63,7 @@ void
 UIImage*
 	UIImage::imageWithData(NSData* data)
 {
+	//autorelease to be added
 	return alloc()->initWithData(data);
 }
 UIImage*
@@ -70,7 +71,11 @@ UIImage*
 {
 	ref = new CCTexture2D();
 	CCImage* ccimage = new CCImage();
-	ccimage->initWithImageFile(data->getdataPath()->description().c_str());
+	ccimage->initWithImageFile(data->getdataPath()->cStringUsingEncoding(NSASCIIStringEncoding));
 	ref->initWithImage(ccimage);
 	return self;
 }
+CCTexture2D*
+	UIImage::getCCTexture2D(){return ref;}
+CGImage*
+	UIImage::CGImage(){ return CCTextureCache::sharedTextureCache()->addImage(imagePath->cStringUsingEncoding(NSASCIIStringEncoding)); }

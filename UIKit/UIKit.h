@@ -54,3 +54,4 @@ THE SOFTWARE.
 #include <UIKit/UIStoryboard.h>
 #include <UIKit/UITableViewController.h>
 #include <UIKit/UITableViewDelegate.h>
+#include <UIKit/UIGestureRecognizerDelegate.h>

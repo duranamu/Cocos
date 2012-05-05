@@ -25,10 +25,7 @@ THE SOFTWARE.
 #include <UIKit/UITableViewDelegate.h>
 NS_PROTOCOL_CONFORM(UITableViewController ,public  UIViewController , public UITableViewDataSource ,public NSObjectProtocol ,public UITableViewDelegate)
 	virtual void 
-		viewDidLoad(void ) 
-	{
-		printf("sdf");
-	}
+		viewDidLoad(void ){}
 	virtual void 
 		viewDidUnload(void) = 0;
 	virtual UITableViewCell* 
@@ -40,7 +37,7 @@ NS_PROTOCOL_CONFORM(UITableViewController ,public  UIViewController , public UIT
 	virtual void
 		tableView_didSelectRowAtIndexPath(UITableView* tableView ,NSIndexPath* indexPath) = 0;
 	virtual void 
-		viewDidUpdate(cocos2d::CGFloat time) {};
+		viewDidUpdate(CGFloat time) {};
 protected:
 	NS_SYNTHESIZE_RETAIN
 	  (UITableView* ,tableView);

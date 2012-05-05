@@ -20,10 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <QuartzCore\QuartzCore.h>
+#include <QuartzCore/QuartzCore.h>
 #include <UIKit/UIView.h>
 #include <UIKit/UIResponder.h>
-NS_INTERFACE( UINavigationBar ,UIView ,UIResponder)
+NS_INTERFACE_INIT_SPEC( UINavigationBar ,UIView ,UIResponder)
 	NS_SYNTHESIZE
 		(NSMutableDictionary * , titleTextAttributes);
+	UINavigationBar* init();
 NS_END

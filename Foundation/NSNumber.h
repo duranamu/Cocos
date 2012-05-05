@@ -21,8 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <Foundation/NSObject.h>
-NS_INTERFACE 
-	(NSNumber , NSObject)
+NS_INTERFACE (NSNumber , NSObject)
 union{
  char _char;
  short _short;

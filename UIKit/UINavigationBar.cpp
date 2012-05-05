@@ -20,9 +20,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include <UIKit/UINavigationBar.h>
+#define super UIView
 void
 	UINavigationBar::dealloc()
 {
 	self->titleTextAttributes->release();
 	self->titleTextAttributes = nil;
+}
+UINavigationBar*
+	UINavigationBar::init()
+{
+	if(super::init())
+	{
+	}
+	return self;
 }

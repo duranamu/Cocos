@@ -67,3 +67,10 @@ void
 {
 	
 }
+UIWindow* 
+	UIWindow::init()
+{ 
+	keyWindow = NO; 
+	self->backgroundColor = UIColor::whiteColor();
+	return self;
+}

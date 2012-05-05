@@ -22,19 +22,25 @@ THE SOFTWARE.
 #include <UIKit/UISensorView.h>
 #include <NIKit/NIDevice.h>
 #include <UIKit/UIImage.h>
-UISensorView::UISensorView()
+#define super UIView
+UISensorView*
+	UISensorView::init()
 {
-	this->device =  NIDevice::sharedDevice();
+	if(super::init())
+	{
+	self->device =  NIDevice::sharedDevice();
 	UIImage* image =  
 		UIImage::imageWithData_format_pixel_size(
 		device->rawRGBData(),CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,CCSizeMake(640,480));
 	self->node = CCSprite::spriteWithTexture(image->getCCTexture2D());
 	self->node->setPosition(ccp(320,240));
+	}
+	return self;
 }
 void 
 	UISensorView::updateFromDevice()
 {
-	this->device->update();
+	self->device->update();
 	CCSprite* sprite = (CCSprite*) self->node ;
 	sprite->getTexture()->release();
 	CCTextureCache::sharedTextureCache()->removeUnusedTextures();
@@ -43,8 +49,10 @@ void
 		device->rawRGBData(),CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,CCSizeMake(640,480));
 	sprite->setTexture(image->getCCTexture2D());
 }
+
 void
 	UISensorView::dealloc()
 {
 	self->node->release();
+	self->node = nil;
 }

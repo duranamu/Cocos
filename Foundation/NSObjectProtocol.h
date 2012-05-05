@@ -21,13 +21,14 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once 
 #include <Foundation/NSSelectorProtocol.h>
-class NSObjectProtocol : public NSSelectorProtocol
-{
-public:
+NS_CLASS NSString;
+NS_PROTOCOL_CONFORM( NSObjectProtocol ,public NSSelectorProtocol)
 	vid
 		performSelector(SEL);
 	vid
 		performSelector_withObject(SEL_P,vid*);
 	vid
 		performSelector_withObject_withObject(SEL_PP,vid*,vid*);
-};
+	/*virtual NSString *
+		description();*/
+NS_END

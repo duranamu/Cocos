@@ -20,8 +20,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Foundation/Cocos2DX_framework.h>
-NS_PROTOCOL( NSFastEnumeration )
-	virtual void* nextObject() = 0;
-	virtual void  gotoBeginObject() = 0;
+#include <Foundation/Foundation.h>
+NS_CLASS UIGestureRecognizer;
+NS_CLASS UITouch;
+NS_PROTOCOL_CONFORM(UIGestureRecognizerDelegate,NSObjectProtocol)
+	virtual BOOL
+		gestureRecognizer_shouldReceiveTouch(UIGestureRecognizer * gestureRecognizer ,UITouch * touch) = 0 ;
+	virtual BOOL
+		gestureRecognizer_shouldRecognizeSimultaneouslyWithGestureRecognizer(UIGestureRecognizer* gestureRecognizer,
+			UIGestureRecognizer * otherGestureRecognizer) = 0;
+	virtual BOOL
+		gestureRecognizerShouldBegin(UIGestureRecognizer* gestureRecognizer) = 0;
 NS_END

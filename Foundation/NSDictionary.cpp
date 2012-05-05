@@ -19,21 +19,21 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include <Foundation/NSMutableDictionary.h>
+#include <Foundation/NSDictionary.h>
 #include <stdarg.h>
-NSMutableDictionary*
-	NSMutableDictionary::dictionary()
+NSDictionary*
+	NSDictionary::dictionary()
 {
-	return (NSMutableDictionary*) alloc()->init()->autorelease();
+	return (NSDictionary*) alloc()->init()->autorelease();
 }
-NSMutableDictionary*
-	NSMutableDictionary::dictionaryWithObjectAndKeys(NSObject* obj,NSString* str,...)
+NSDictionary*
+	NSDictionary::dictionaryWithObjectAndKeys(NSObject* obj,NSString* str,...)
 {
-	NSMutableDictionary* dict; ;
+	NSDictionary* dict; ;
 	if(dict = alloc()->init())
 	{
 		if(obj && str)
-			dict->ref->setObject(obj,str->ref->m_sString);
+		dict->ref->setObject(obj,str->ref->m_sString);
 		NSObject* para_obj;
 		NSString* para_str;
 
@@ -55,8 +55,8 @@ NSMutableDictionary*
 	dict->autorelease();
 	return dict;
 }
-NSMutableDictionary*
-	NSMutableDictionary::initWithObjectsAndKeys(NSObject* obj,NSString* str,...)
+NSDictionary*
+	NSDictionary::initWithObjectsAndKeys(NSObject* obj,NSString* str,...)
 {
 	if(obj && str)
 		self->ref->setObject(obj,str->ref->m_sString);
@@ -81,24 +81,24 @@ NSMutableDictionary*
 	return self;
 }
 void
-	NSMutableDictionary::dealloc()
+	NSDictionary::dealloc()
 {
 	ref->release();
 }
-	NSMutableDictionary::NSMutableDictionary()
+	NSDictionary::NSDictionary()
 {
 	 ref = new CCDictionary<std::string,NSObject*>();
 	 self->copying = self;
 }
 vid
-	NSMutableDictionary::copyWithZone(NSZone* aZone)
+	NSDictionary::copyWithZone(NSZone* aZone)
 {
-	NSMutableDictionary* dict = alloc()->init();
+	NSDictionary* dict = alloc()->init();
 
 	return dict;
 }
 void
-	NSMutableDictionary::gotoBeginObject()
+	NSDictionary::gotoBeginObject()
 {
 	if(self->ref)
 	{
@@ -106,7 +106,7 @@ void
 	}
 }
 vid
-	NSMutableDictionary::nextObject()
+	NSDictionary::nextObject()
 {
 	std::string* str = new std::string();
 	ref->next(str);

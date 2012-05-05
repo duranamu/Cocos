@@ -21,10 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <Foundation/NSObject.h>
-#include <Foundation/Cocos2DX_framework.h>
-using namespace cocos2d;
-NS_INTERFACE
-	( NSNull , NSObject)
+NS_INTERFACE(NSNull , NSObject)
 private:
 	NSNull(){};
 public:

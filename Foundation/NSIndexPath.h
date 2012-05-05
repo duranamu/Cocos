@@ -21,7 +21,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #pragma once
 #include <Foundation/Foundation.h>
-NS_INTERFACE_CACHE(NSIndexPath,NSObject)
+NS_INTERFACE_DEBUG(NSIndexPath,NSObject)
 
 	static NSIndexPath*
 		indexWithSection_row(NSUInteger,NSUInteger);
@@ -29,10 +29,7 @@ NS_INTERFACE_CACHE(NSIndexPath,NSObject)
 		initWithSection_row(NSUInteger,NSUInteger);
 	NSUInteger section();
 	NSUInteger row();
-	NSIndexPath()
-	{
-		printf("");
-	}
+	NS_IGNORE NSIndexPath(){}
 
 	protected:
 		NSUInteger _section;

@@ -29,9 +29,11 @@ NS_INTERFACE( UIResponder , NSObject )
 		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events) {};
 	 virtual void 
 		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events) {};
+	 virtual void
+		 touchesCancelled_withEvent(NSSet * touches ,UIEvent * event){};
 	 virtual BOOL
 		 canBecomeFirstResponder(void);
 	 protected:
-		 	NS_SYNTHESIZE
-		(BOOL ,becomeFirstResponder );
+		 NS_SYNTHESIZE
+		  (BOOL ,becomeFirstResponder );
 NS_END

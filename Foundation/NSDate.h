@@ -19,20 +19,30 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef CCPOINT3D_H
-#define CCPOINT3D_H
-#include <cocos2d.h>
-using namespace cocos2d;
-class CCPoint3D:public CCObject
-{
-public:
-	CCPoint3D(float cx,float cy ,float cz){
-		x = cx;
-		y = cy;
-		z = cz;
-	};
-	float x;
-	float y;
-	float z;
-};
-#endif
+#pragma once
+#include <Foundation/NSObject.h>
+#include <time.h>
+#define NSTimeIntervalSince1970  978307200.0
+NS_INTERFACE_INIT_SPEC(NSDate ,NSObject)
+	NSDate*
+		init();
+	NSDate*
+		initWithTimeIntervalSince1970(NSTimeInterval seconds);
+	static NSDate*
+		dateWithTimeIntervalSince1970(NSTimeInterval seconds);
+	NSDate*
+		initWithTimeIntervalSinceReferenceDate(NSTimeInterval seconds);
+	static NSDate*
+		dateWithTimeIntervalSinceReferenceDate(NSTimeInterval seconds);
+	NSDate*
+		initWithTimeIntervalSinceNow(NSTimeInterval seconds);
+	static NSDate*
+		dateWithTimeIntervalSinceNow(NSTimeInterval seconds);
+	static NSDate*
+		distantPast();
+	static NSDate*
+		distantFuture();
+	protected:
+		time_t timesSeconds;
+
+NS_END
