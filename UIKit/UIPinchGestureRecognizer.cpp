@@ -45,8 +45,8 @@ void
 			UITouch* anyTouch = (UITouch*)touches->anyObject();
 			self->touchesSource = anyTouch->gettouchSource();
 			CGPoint touchLoaction;
-			nfor(UITouch* ,touch ,touches)
-				if(touch->gettouchSource() == UITouchSourceRightHand)
+			nfor(UITouch* ,touch ,touches )
+				if(touch->gettouchSource() == UITouchSourceRightHand )
 				{
 					touchLoaction = touch->getlocation();
 				}else{

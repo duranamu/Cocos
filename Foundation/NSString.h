@@ -36,19 +36,21 @@ public:
 	NSString*
 		initWithData_encoding(NSData * ,NSStringEncoding);
 	NSString*
-		initWithBytes_length_encoding(const vid  ,NSUInteger ,NSStringEncoding);
+		initWithBytes_length_encoding(const vid  bytes ,NSUInteger length,NSStringEncoding encoding);
 	NSString*
-		initWithCString_encoding(const char*,NSStringEncoding);
+		initWithCString_encoding(const char* cString ,NSStringEncoding encoding);
 	static NSString*
-		stringWithCString_encoding(const char*,NSStringEncoding);
+		stringWithCString_encoding(const char* cString ,NSStringEncoding encoding);
 	static NSString*
-		stringWithString(NSString*);
+		stringWithString(NSString* string);
+	static NSString*
+		 stringWithFormat(NSString* format,...);
 	 NSString*
 		initWithContentOfFile_encoding_erro(NSString* path ,NSStringEncoding enc , NSError** error);
 	 static NSString*
 		stringWithContentOfFile_encoding_erro(NSString* path ,NSStringEncoding enc , NSError** error);
 	 NSString*
-		initWithString(NSString*);
+		initWithString(NSString* string );
 	 NSString*
 		 initWIthFormat(NSString* format,...);
 	 NSString*
@@ -57,7 +59,6 @@ public:
 		 length();
 	 const char *
 		cStringUsingEncoding(NSStringEncoding encoding);
-
 	 NSComparisonResult
 			compare(NSString * aString);
 	protected:

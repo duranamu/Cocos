@@ -65,8 +65,11 @@ UIImageView::UIImageView(CCTexture2D* image)
 UIImageView*
 	UIImageView::initWithFile(NSString* fileName)
 {
+	if(super::init())
+	{
 	self->node = CCSprite::spriteWithFile(fileName->cStringUsingEncoding(NSASCIIStringEncoding));
 	self->node->retain();
+	}
 	return self;
 }
 UIImageView*	

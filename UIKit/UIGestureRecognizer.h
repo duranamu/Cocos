@@ -52,7 +52,6 @@ NS_INTERFACE_INIT_SPEC( UIGestureRecognizer , UIResponder )
 		 canBePreventedGestureRecognizer(UIGestureRecognizer * preventedGestureRecognizer) { return NO;};
 	 virtual BOOL
 		 dependenceCheck();
-	 UIGestureRecognizer* init();
 protected:
 	NS_SYNTHESIZE
 		(UIGestureRecognizeState , state);

@@ -26,7 +26,6 @@ THE SOFTWARE.
 NS_CLASS UINavigationBar ;
 NS_INTERFACE_INIT_SPEC( UINavigationController , UIViewController )
 	NS_IGNORE UINavigationController(){};
-	UINavigationController* init();
 	UINavigationController* 
 		initWithRootViewController(UIViewController*);
 	void 

@@ -34,15 +34,29 @@ UISwipeGestureRecognizer*
 	}
 	return self;
 }
+UISwipeGestureRecognizer*
+	UISwipeGestureRecognizer::init()
+{
+	// alternative for bitwise operation
+	//self->touchesSource = UITouchSourceRightHand + UITouchSourceLeftHand;
+	self->touchesSource = (UITouchSource) (UITouchSourceRightHand | UITouchSourceLeftHand);
+
+	return self;
+}
 void
 	UISwipeGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
 		self->state = UIGestureRecognizerStatePossible;
-		if(dependenceCheck())
+		if(super::dependenceCheck())
 		{
-			UITouch* anyTouch = (UITouch*) touches->anyObject();	
-			self->touchesSource = anyTouch->gettouchSource();
-			if(touches->count() >= self->numberOfTouchesRequired)
+			UITouch* anyTouch = (UITouch*) touches->anyObject();
+			BOOL isTouchSourceMatch = YES;
+
+			nfor(UITouch* , touch , touches)
+				isTouchSourceMatch &= (self->touchesSource & touch->gettouchSource()) > 0;
+			nend
+
+			if(touches->count() >= self->numberOfTouchesRequired && isTouchSourceMatch)
 			{
 				self->gestureStartPoint = anyTouch->locationInView();
 			}else{
@@ -63,23 +77,23 @@ void
 	{
 		self->state = UIGestureRecognizerStateRecognized;
 		UITouch* touch = (UITouch*) touches->anyObject();
-		self->direction =  directionFrom_to(self->gestureStartPoint , touch->locationInView());
+		self->direction =  directionFrom_to(self->gestureStartPoint , touch->locationInView(),self->threshold);
 		(m_pListener->*m_pSelector)(m_pListener ,self);
 	}
 	}
 }
 UISwipeGestureRecognizerDirection
-	UISwipeGestureRecognizer::directionFrom_to(CGPoint pa ,CGPoint pb)
+	UISwipeGestureRecognizer::directionFrom_to(CGPoint pa ,CGPoint pb , NSInteger theThreshold)
 {
 	UISwipeGestureRecognizerDirection pending = UISwipeGestureRecognizerDirectionZero ;
 	BOOL first = YES;
-	if((pb.x - pa.x) > threshold )
+	if((pb.x - pa.x) > theThreshold )
 		pending = (UISwipeGestureRecognizerDirection)( pending |  UISwipeGestureRecognizerDirectionRight);
-	if((pb.x - pa.x) < -threshold  )
+	if((pb.x - pa.x) < -theThreshold  )
 		pending = (UISwipeGestureRecognizerDirection)( pending |  UISwipeGestureRecognizerDirectionLeft);
-	if((pb.y - pa.y) > threshold )
+	if((pb.y - pa.y) > theThreshold )
 		pending = (UISwipeGestureRecognizerDirection)( pending |  UISwipeGestureRecognizerDirectionUp);
-	if((pb.y - pa.y) < -threshold )
+	if((pb.y - pa.y) < -theThreshold )
 		pending = (UISwipeGestureRecognizerDirection)( pending |  UISwipeGestureRecognizerDirectionDown);
 	return pending;
 }

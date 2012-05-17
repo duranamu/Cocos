@@ -85,7 +85,7 @@ NSUInteger
 void
 	NSMutableString::setString(NSString* aString)
 {
-	ref->m_sString.assign(aString->ref->m_sString);
+	ref->m_sString.assign(string(aString->ref->m_sString.c_str()));
 }
 NSMutableString*
 	NSMutableString::alloc()

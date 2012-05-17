@@ -19,48 +19,21 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#pragma once
-#include <Foundation/NSObject.h>
-#include <Foundation/NSCopying.h>
-#include <Foundation/NSZone.h>
-#include <Foundation/NSFastEnumeration.h>
-#include <stdarg.h>
-NS_INTERFACE_DEBUG( NSArray , NSObject ,public NSCopying ,public NSFastEnumeration )
-public:
-	NS_HAS_REF(CCArray* ref);
-
-	NSArray* 
-		initWithObjects (NSObject* anObject, ...);
-	NSArray*
-		initWithObject(NSObject* anObject);
-	static NSArray* 
-		arrayWithObjects(NSObject* anObject, ...);
-	static NSArray*
-		arrayWithObject(NSObject* anObject);
-	static NSArray*
-		array();
-	NS_IGNORE NSArray(){};
-		 
-		NSArray(NSUInteger num);
-	NSObject* 
-		objectAtIndex(NSUInteger index);
-
-    NSObject* 
-		randomObject();
-	BOOL
-		containsObject(NSObject* obj);
-	NSUInteger 
-		count();
-	NSObject* 
-		lastObject();
-	inline NSUInteger
-		indexOfObject(NSObject* obj){return ref->indexOfObject(obj); }
-	 vid 
-		 copyWithZone(NSZone*);
-	vid
-		nextObject();
-	void
-		gotoBeginObject();
-	NSObject** indexedObject;
-	NSObject** endedObejct;
-};
+#include <UIKit/UIScreen.h>
+UIScreen*
+	UIScreen::initWithBounds(CGRect theBounds)
+{
+	self->bounds = theBounds;
+	return self;
+}
+UIScreen* 
+	UIScreen::singleton = UIScreen::alloc()->initWithBounds(CGRectMake(0,0,640,480));
+void
+	UIScreen::dealloc()
+{
+}
+UIScreen*
+	UIScreen::mainScreen()
+{
+	return singleton;
+}

@@ -159,6 +159,18 @@ const char *
 {
 	return ref->m_sString.c_str();
 }
+
+NSString*
+	NSString::stringWithFormat(NSString* format ,...)
+{
+   va_list arguments;
+   va_start(arguments,format);
+   NSString* string = (NSString*)alloc()->initWithFormat_locale_arguments(format,nil,arguments)->autorelease();
+   va_end(arguments);
+
+   return string;
+}
+
 NS_CACHE_OBJECT_INIT(NSString);
 
 NSComparisonResult

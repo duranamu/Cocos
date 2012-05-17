@@ -24,8 +24,6 @@ THE SOFTWARE.
 #include <UIKit/UIView.h>
 #include <UIKit/UIColor.h>
 NS_INTERFACE_INIT_SPEC( UIWindow , UIView)
-	UIWindow* 
-		init();
 	void
 		becomeKeyWindow();
 	void

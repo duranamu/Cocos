@@ -20,47 +20,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #pragma once
-#include <Foundation/NSObject.h>
-#include <Foundation/NSCopying.h>
-#include <Foundation/NSZone.h>
-#include <Foundation/NSFastEnumeration.h>
-#include <stdarg.h>
-NS_INTERFACE_DEBUG( NSArray , NSObject ,public NSCopying ,public NSFastEnumeration )
-public:
-	NS_HAS_REF(CCArray* ref);
-
-	NSArray* 
-		initWithObjects (NSObject* anObject, ...);
-	NSArray*
-		initWithObject(NSObject* anObject);
-	static NSArray* 
-		arrayWithObjects(NSObject* anObject, ...);
-	static NSArray*
-		arrayWithObject(NSObject* anObject);
-	static NSArray*
-		array();
-	NS_IGNORE NSArray(){};
-		 
-		NSArray(NSUInteger num);
-	NSObject* 
-		objectAtIndex(NSUInteger index);
-
-    NSObject* 
-		randomObject();
-	BOOL
-		containsObject(NSObject* obj);
-	NSUInteger 
-		count();
-	NSObject* 
-		lastObject();
-	inline NSUInteger
-		indexOfObject(NSObject* obj){return ref->indexOfObject(obj); }
-	 vid 
-		 copyWithZone(NSZone*);
-	vid
-		nextObject();
-	void
-		gotoBeginObject();
-	NSObject** indexedObject;
-	NSObject** endedObejct;
-};
+#include <QuartzCore/QuartzCore.h>
+NS_CLASS UIEvent ;
+#include <UIKit/UISwipeGestureRecognizer.h>
+NS_INTERFACE(UIFoldGestureRecognizer , UIGestureRecognizer)
+	UIFoldGestureRecognizer*
+		initWithTarget_action(NSActionTarget* ,SEL_PP);
+	NS_IGNORE UIFoldGestureRecognizer(){};
+	virtual void 
+		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
+	 virtual void 
+		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
+	 void inline
+		 wakeupTargetWithSelector(UIFoldGestureRecognizer* sender);
+protected:
+	NS_SYNTHESIZE (BOOL ,didLeftSwipePass);
+	NS_SYNTHESIZE (BOOL, didRightSwipePass);
+	NS_SYNTHESIZE (CGPoint , leftTouchLocation);
+	NS_SYNTHESIZE (CGPoint , rightTouchLocation);
+NS_END

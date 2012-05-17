@@ -55,3 +55,6 @@ THE SOFTWARE.
 #include <UIKit/UITableViewController.h>
 #include <UIKit/UITableViewDelegate.h>
 #include <UIKit/UIGestureRecognizerDelegate.h>
+#include <UIKit/UIScreen.h>
+#include <UIKit/UIFoldGestureRecognizer.h>
+#include <UIKit/UIDualPushGestureRecognizer.h>

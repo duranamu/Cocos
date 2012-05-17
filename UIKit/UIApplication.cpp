@@ -71,7 +71,7 @@ void
 		{
 			touch->setdeltaTime(deltaTime);
 			touch->settimeMark(timeMark);
-			touch->setlocation (ccp( rightHandx , rightHandy ));
+			touch->setlocation (CGPointMake(rightHandx , rightHandy ));
 			touch->settouchSource(UITouchSourceRightHand);
 			set->addObject(touch);
 		} 
@@ -79,7 +79,7 @@ void
 		{
 			lefthand_touch->setdeltaTime(deltaTime);
 			lefthand_touch->settimeMark(timeMark);
-			lefthand_touch->setlocation ( ccp( leftHandx , leftHandy ));
+			lefthand_touch->setlocation(CGPointMake(leftHandx , leftHandy ));
 			lefthand_touch->settouchSource(UITouchSourceLeftHand);
 			set->addObject(lefthand_touch);
 		}
@@ -89,6 +89,16 @@ void
 		set->release();
 		touch->release();
 		lefthand_touch->release();
+
+		if(ability == UITouchPhaseEnded)
+		{
+			self->righthandTracker->settracePhase((NITracePhase)UITouchPhasePending);
+		}
+		if(anotherAbility == UITouchPhaseEnded)
+		{
+			self->righthandTracker->settracePhase((NITracePhase)UITouchPhasePending);
+		}
+	
 	}
 	
 }	

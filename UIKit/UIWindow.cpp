@@ -22,6 +22,7 @@ THE SOFTWARE.
 #include <UIKit/UIWindow.h>
 #include <UIKit/UIApplication.h>
 #include <UIKit/UIView.h>
+#define super UIView
 void
 	UIWindow::becomeKeyWindow()
 {
@@ -70,7 +71,10 @@ void
 UIWindow* 
 	UIWindow::init()
 { 
-	keyWindow = NO; 
-	self->backgroundColor = UIColor::whiteColor();
+	if(super::init())
+	{
+		keyWindow = NO; 
+		self->backgroundColor = UIColor::whiteColor();
+	}
 	return self;
 }

@@ -19,6 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
+#pragma once
 #include <QuartzCore/QuartzCore.h>
 #include <UIKit/UIGestureRecognizer.h>
 typedef enum {
@@ -28,7 +29,7 @@ typedef enum {
     UISwipeGestureRecognizerDirectionUp    = 1 << 2,
     UISwipeGestureRecognizerDirectionDown  = 1 << 3
 } UISwipeGestureRecognizerDirection;
-NS_INTERFACE( UISwipeGestureRecognizer , UIGestureRecognizer)
+NS_INTERFACE_INIT_SPEC( UISwipeGestureRecognizer , UIGestureRecognizer)
 	UISwipeGestureRecognizer*
 		initWithTarget_action(NSActionTarget* ,SEL_PP);
 	virtual void
@@ -37,8 +38,8 @@ NS_INTERFACE( UISwipeGestureRecognizer , UIGestureRecognizer)
 		 touchesMoved_withEvent(NSSet* touches ,UIEvent* events);
 	 virtual void 
 		 touchesEnded_withEvent(NSSet* touches ,UIEvent* events);
-	 UISwipeGestureRecognizerDirection
-		 directionFrom_to(CGPoint ,CGPoint);
+	 static UISwipeGestureRecognizerDirection
+		 directionFrom_to(CGPoint aPoint ,CGPoint anotherPoint,NSInteger theThreshold);
 	 protected:
 		NS_SYNTHESIZE
 			(UISwipeGestureRecognizerDirection ,direction);

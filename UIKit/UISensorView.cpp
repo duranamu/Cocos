@@ -49,7 +49,6 @@ void
 		device->rawRGBData(),CCTexture2DPixelFormat::kCCTexture2DPixelFormat_RGB888,CCSizeMake(640,480));
 	sprite->setTexture(image->getCCTexture2D());
 }
-
 void
 	UISensorView::dealloc()
 {

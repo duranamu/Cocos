@@ -27,7 +27,6 @@ THE SOFTWARE.
 #include <UIKit/UIStoryboard.h>
 NS_INTERFACE_INIT_SPEC( UIViewController ,  UIView )
 NS_IGNORE UIViewController(){};
-UIViewController* init();
 void
 	loadView();
 virtual void 

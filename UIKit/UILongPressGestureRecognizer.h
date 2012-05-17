@@ -38,7 +38,7 @@ protected:
 	NS_SYNTHESIZE 
 		(NSUInteger ,numberOfTapsAcquired );
 	NS_SYNTHESIZE 
-		(CGFloat ,tapStartTime );
+		(NSTimeInterval ,tapStartTime );
 	NS_SYNTHESIZE 
 		(CGFloat ,tapStartX );
 	NS_SYNTHESIZE 

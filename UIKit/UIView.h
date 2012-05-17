@@ -26,13 +26,15 @@ THE SOFTWARE.
 #include <Foundation/NSIndexPath.h>
 #include <UIKit/UITapGestureRecognizer.h>
 NS_INTERFACE_INIT_SPEC(UIView , UIResponder )
-UIView*
-	init();
-	UIView();
+	NS_IGNORE UIView(){};
 UIView*
 	anyView();
 void
 	addSubView(UIView* view);
+void
+	insertSubView_atIndex(UIView* subview ,NSUInteger index);
+void
+	insertSubView_aboveSubView(UIView* view ,UIView* slibingSubview);
 virtual void 
 	viewDidRender(CCLayer* hostLayer);
 virtual void 

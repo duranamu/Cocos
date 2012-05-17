@@ -25,8 +25,6 @@ THE SOFTWARE.
 #define NSTimeIntervalSince1970  978307200.0
 NS_INTERFACE_INIT_SPEC(NSDate ,NSObject)
 	NSDate*
-		init();
-	NSDate*
 		initWithTimeIntervalSince1970(NSTimeInterval seconds);
 	static NSDate*
 		dateWithTimeIntervalSince1970(NSTimeInterval seconds);

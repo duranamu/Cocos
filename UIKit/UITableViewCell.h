@@ -35,7 +35,6 @@ typedef enum UITableViewCellAccessory{
 };
 NS_INTERFACE_INIT_SPEC( UITableViewCell ,UIView , NSObjectProtocol)
 	 NS_IGNORE UITableViewCell(){};
-	UITableViewCell* init();
 	 UITableViewCell* 
 		initWithStyle_reuseIdentifier(UITableViewStyle style ,NSString* uid);
 	 UITableViewCell* 

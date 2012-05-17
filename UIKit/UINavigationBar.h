@@ -26,5 +26,4 @@ THE SOFTWARE.
 NS_INTERFACE_INIT_SPEC( UINavigationBar ,UIView ,UIResponder)
 	NS_SYNTHESIZE
 		(NSMutableDictionary * , titleTextAttributes);
-	UINavigationBar* init();
 NS_END

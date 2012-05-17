@@ -36,9 +36,6 @@ NSMutableArray::NSMutableArray(NSUInteger num)
 	ref = CCArray::arrayWithCapacity(num);
 }
 
-	NSMutableArray::NSMutableArray()
-{
-}
 BOOL
 	NSMutableArray::removeObject(NSObject* obj)
 {
@@ -79,4 +76,9 @@ NSMutableArray*
 
 	}
 	return (NSMutableArray*)newInstance;
+}
+void
+	NSMutableArray::insertObject_atIndex(NSObject* anObject ,NSUInteger index)
+{
+	ref->insertObject(anObject ,index);
 }

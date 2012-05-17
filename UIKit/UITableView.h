@@ -29,7 +29,6 @@ NS_CLASS UITableViewCell;
 NS_INTERFACE_INIT_SPEC( UITableView , UIView ,NSObjectProtocol)
 public:
 	NS_IGNORE UITableView(){};
-	UITableView* init();
 	bool 
 		isEqual(UITableView* );
 	NSArray* 

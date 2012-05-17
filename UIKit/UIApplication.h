@@ -49,7 +49,6 @@ public:
 	static UIApplication*
 		sharedApplication();
 
-	UIApplication* init();
 	NS_IGNORE UIApplication(){};
 	void
 		sentEvent(UIEvent*);

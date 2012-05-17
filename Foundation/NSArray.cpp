@@ -32,6 +32,26 @@ NSArray*
 	return self;
 }
 NSArray*
+	NSArray::arrayWithObjects(NSObject* firstObject , ...)
+{
+	NSArray* instance = alloc();
+	if(firstObject)
+		instance->ref->addObject(firstObject);
+
+	afor(NSObject* ,obj ,firstObject)
+		instance->ref->addObject(obj);
+	aend
+	
+	instance->autorelease();
+
+	return instance;
+}
+NSArray*
+	NSArray::arrayWithObject(NSObject* anObject)
+{
+	return (NSArray*) alloc()->initWithObject(anObject)->autorelease();
+}
+NSArray*
 	NSArray::initWithObject(NSObject* obj)
 {
 	if(obj)
@@ -40,16 +60,6 @@ NSArray*
 	}
 	
 	return self;
-}
-NSArray*
-	NSArray::arrayWithCapacity(NSUInteger num)
-{
-	NSArray* mem =  new NSArray(num);
-	if(!mem )
-	{
-		CC_SAFE_DELETE(mem);
-	}
-	return mem;
 }
 NSArray::NSArray(NSUInteger num)
 {

@@ -27,18 +27,19 @@ THE SOFTWARE.
 #include <Foundation/NSFastEnumeration.h>
 #include <Foundation/NSArray.h>
 NS_INTERFACE_ALLOC_SPEC(NSMutableArray , NSArray )
-
 	static NSMutableArray*
 		arrayWithCapacity(NSUInteger capacity);
 	NSMutableArray*
 		initWithCapacity(NSUInteger capacity);
-	NS_IGNORE NSMutableArray();
+	NS_IGNORE NSMutableArray(){};
 		 
 	NSMutableArray(NSUInteger num);
 	inline void
 		addObject(NSObject* object){ref->addObject(object);}
 	inline void 
 		removeAllObjects(){ref->removeAllObjects();}
+	void
+		insertObject_atIndex(NSObject* anObject ,NSUInteger index);
 	BOOL
 		removeObject(NSObject* objectRemoving );
 	inline void

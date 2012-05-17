@@ -39,8 +39,9 @@ void
 	self->state = UIGestureRecognizerStatePossible;
 	if(super::dependenceCheck())
 	{
-		CGFloat newStartTime = ((UITouch*) touches->anyObject())->gettimeMark();
-		self->tapStartTime = newStartTime;
+		self->tapStartTime = ((UITouch*) touches->anyObject())->gettimeMark();
+	}else{
+		self->state  = UIGestureRecognizerStateFailed;
 	}
 }
 void
@@ -51,10 +52,15 @@ void
 void
 	UILongPressGestureRecognizer::touchesEnded_withEvent(NSSet* touches ,UIEvent* events)
 {
-	if(super::dependenceCheck())
+	if(super::dependenceCheck() && self->state == UIGestureRecognizerStatePossible )
 	{
-	CGFloat endTime = ((UITouch*) touches->anyObject())->gettimeMark();
-	CGFloat timediff = endTime -  self->tapStartTime ;
+	NSTimeInterval endTime = ((UITouch*) touches->anyObject())->gettimeMark();
+	NSTimeInterval timediff = endTime -  self->tapStartTime ;
+	if(timediff < 0.0001)
+	{
+		self->state  = UIGestureRecognizerStateFailed;
+		return ;
+	}
 	if( timediff > 0.003f && timediff < 5.0f)
 	{
 		self->state = UIGestureRecognizerStateRecognized;

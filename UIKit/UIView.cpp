@@ -156,14 +156,6 @@ UIView*
 		}
 		return nil;
 	}
-	UIView::UIView()
-	{
-		self->becomeFirstResponder = NO;
-		subviews = NSMutableArray::alloc()->init();
-		self->gestureRecognizers = NSMutableArray::alloc()->init();
-		self->node = new CCNode();
-		self->indexPath = NSIndexPath::alloc()->init();
-	}
 UIView*
 	UIView::init()
 	{
@@ -180,3 +172,14 @@ void
 		subviews->addObject(view);
 		view->setsuperview(self);
 	}
+void
+	UIView::insertSubView_atIndex(UIView* subview , NSUInteger index)
+{
+	self->subviews->insertObject_atIndex(subview,index);
+	
+}
+void
+	UIView::insertSubView_aboveSubView(UIView* view ,UIView* sliblingSubview)
+{
+	self->insertSubView_atIndex(view,subviews->indexOfObject(sliblingSubview));
+}
