@@ -29,7 +29,7 @@ typedef enum {
 } UIEventType;
 NS_INTERFACE( UIEvent , NSObject)
 	
-	NS_IGNORE UIEvent(){};
+NS_IGNORE UIEvent(){};
 	
 	UIEvent*
 		initWithTouches(NSSet* set);
