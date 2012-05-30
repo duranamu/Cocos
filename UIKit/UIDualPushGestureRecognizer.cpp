@@ -45,14 +45,14 @@ void
 	{
 		self->state = UIGestureRecognizerStateRecognized;
 		(sender->m_pListener->*sender->m_pSelector)(nil ,sender);
-	}else{
-		self->state = UIGestureRecognizerStateFailed;
+		setdidLeftSwipePass(NO);
+		setdidRightSwipePass(NO);
 	}
+		self->state = UIGestureRecognizerStateFailed;
 }
 void
 	UIDualPushGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
 {
-	self->state = UIGestureRecognizerStatePossible;
 	if(super::dependenceCheck() && touches->count() > 1)
 	{
 		nfor(UITouch* ,touch ,touches)
@@ -64,7 +64,7 @@ void
 				self->rightTouchLocation = touch->getlocation();
 			}
 		nend
-		
+		self->state = UIGestureRecognizerStatePossible;
 	}else{
 		self->state = UIGestureRecognizerStateFailed;
 	}

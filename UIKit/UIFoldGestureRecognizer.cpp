@@ -46,9 +46,8 @@ void
 		(sender->m_pListener->*sender->m_pSelector)(nil ,sender);
 		sender->setdidLeftSwipePass(NO);
 		sender->setdidRightSwipePass(NO);
-	}else{
-		self->state = UIGestureRecognizerStateFailed;
 	}
+		self->state = UIGestureRecognizerStateFailed;
 }
 void
 	UIFoldGestureRecognizer::touchesBegan_withEvent(NSSet* touches ,UIEvent* events)
@@ -85,7 +84,6 @@ void
 {
 	if(self->state == UIGestureRecognizerStatePossible  && touches->count() > 1)
 	{
-
 		nfor(UITouch* ,touch ,touches)
 			if(touch->gettouchSource() & UITouchSourceLeftHand && touch->getphase() == UITouchPhaseEnded)
 			{

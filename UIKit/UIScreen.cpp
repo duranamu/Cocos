@@ -27,7 +27,7 @@ UIScreen*
 	return self;
 }
 UIScreen* 
-	UIScreen::singleton = UIScreen::alloc()->initWithBounds(CGRectMake(0,0,640,480));
+	UIScreen::singleton = UIScreen::alloc()->initWithBounds(CGRectMake(0,0,1600,900));
 void
 	UIScreen::dealloc()
 {

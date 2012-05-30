@@ -22,7 +22,7 @@ THE SOFTWARE.
 #pragma once
 #include <Foundation/Foundation.h>
 #include <UIKit/UIEvent.h>
-NS_INTERFACE( UIResponder , NSObject )
+NS_INTERFACE(UIResponder , NSObject)
 	 virtual void 
 		 touchesBegan_withEvent(NSSet* touches ,UIEvent* events) {};
 	 virtual void 
@@ -35,5 +35,5 @@ NS_INTERFACE( UIResponder , NSObject )
 		 canBecomeFirstResponder(void);
 	 protected:
 		 NS_SYNTHESIZE
-		  (BOOL ,becomeFirstResponder );
+		  (BOOL ,becomeFirstResponder);
 NS_END

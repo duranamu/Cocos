@@ -62,6 +62,8 @@ void
 			}else{
 				self->state = UIGestureRecognizerStateFailed;
 			}
+		}else{
+			self->state = UIGestureRecognizerStateFailed;
 		}
 }
 void

@@ -127,18 +127,21 @@ void
 		NS_SELECTOR_PP(UIApplication::sender_righthandData),XN_SKEL_RIGHT_HAND);
 	trackerManager->addTracker(self->righthandTracker);
 
-	trackerManager->addTracker(
+	/*trackerManager->addTracker(
 		NITraceTracker::alloc()->initWithTarget_action_joint(self,
 		NS_SELECTOR_PP(UIApplication::sender_torsoData),XN_SKEL_TORSO));
+
 	trackerManager->addTracker(
 		NITracker::alloc()->initWithTarget_action_joint(self,
 		NS_SELECTOR_PP(UIApplication::sender_neckData),XN_SKEL_NECK));
+
 	trackerManager->addTracker(
 		NITracker::alloc()->initWithTarget_action_joint(self,
 		NS_SELECTOR_PP(UIApplication::sender_rightElbowData),XN_SKEL_RIGHT_ELBOW));
+
 	trackerManager->addTracker(
 		NITracker::alloc()->initWithTarget_action_joint(self,
-		NS_SELECTOR_PP(UIApplication::sender_rightCollarData),XN_SKEL_RIGHT_COLLAR));
+		NS_SELECTOR_PP(UIApplication::sender_rightCollarData),XN_SKEL_RIGHT_COLLAR));*/
 }
 vid
 	UIApplication::sender_rightCollarData(vid sender,vid data)
